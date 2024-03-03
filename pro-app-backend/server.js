@@ -32,5 +32,3 @@ mongoose.connect(process.env.MONGO_URI).then(() => {
     }
   });
 });
-
-// JOB WELL DONE
