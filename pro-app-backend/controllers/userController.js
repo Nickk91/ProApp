@@ -1,6 +1,6 @@
 import STATUS_CODE from "../constants/statusCodes.js";
 import User from "../models/userModel.js";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 
 export const createUser = async (req, res) => {
   try {
