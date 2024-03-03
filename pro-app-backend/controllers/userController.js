@@ -1,6 +1,35 @@
 import STATUS_CODE from "../constants/statusCodes.js";
 import User from "../models/userModel.js";
 import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+
+export const loginUser = async (req, res) => {
+  const { email, password } = req.body;
+  if (!email || !password) {
+    res.status(STATUS_CODE.BAD_REQUEST);
+    throw new Error("All fields are mandatory!");
+  }
+  const user = await User.findOne({ email });
+  //compare password with hashedpassword
+  if (user && (await bcrypt.compare(password, user.password))) {
+    const accessToken = jwt.sign(
+      {
+        user: {
+          username: user.username,
+          email: user.email,
+          _id: user._id,
+        },
+      },
+      process.env.ACCESS_TOKEN_SECRET,
+      { expiresIn: "1m" }
+    );
+    res.status(STATUS_CODE.OK).json({ accessToken });
+  } else {
+    res.status(STATUS_CODE.UNAUTHORIZED);
+    throw new Error("email or password is not valid");
+  }
+};
 
 export const createUser = async (req, res) => {
   try {
