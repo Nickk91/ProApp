@@ -1,9 +1,20 @@
 import STATUS_CODE from "../constants/statusCodes.js";
 import User from "../models/userModel.js";
+import bcrypt from "bcrypt";
 
+//   username: {
+//   password: {
+//   email: {
+//   isAdmin: {
 export const createUser = async (req, res) => {
   try {
-    const user = await User.create(req.body);
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
+
+    const user = await User.create({
+      username: req.body.username,
+      password: hashedPassword,
+      email: req.body.email,
+    });
     res.status(STATUS_CODE.CREATED).send(user);
   } catch (error) {
     res
@@ -12,6 +23,18 @@ export const createUser = async (req, res) => {
     console.log(STATUS_CODE.INTERNAL_SERVER_ERROR);
   }
 };
+
+// export const createUser = async (req, res) => {
+//   try {
+//     const user = await User.create(req.body);
+//     res.status(STATUS_CODE.CREATED).send(user);
+//   } catch (error) {
+//     res
+//       .status(STATUS_CODE.INTERNAL_SERVER_ERROR)
+//       .json({ message: error.message });
+//     console.log(STATUS_CODE.INTERNAL_SERVER_ERROR);
+//   }
+// };
 
 // @des get all users
 // @route GET / api/n
