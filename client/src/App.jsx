@@ -1,8 +1,8 @@
 import "./App.css";
 import Counter from "./components/Counter/Counter.jsx";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
+import HomePage from "./pages/HomePage/HomePage.jsx";
 import LoggedOutPage from "./pages/LoggedOutPage/LoggedOutPage.jsx";
-import HomePage from "./pages/HomPage/HomePage.jsx";
 function App() {
   return (
     <>
