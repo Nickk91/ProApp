@@ -3,6 +3,7 @@ import {
   createUser,
   getAllUsers,
   getUserById,
+  loginUser,
 } from "../controllers/userController.js";
 
 const router = express.Router();
@@ -15,5 +16,7 @@ router.get("/:id", getUserById);
 
 //Route to create a new account
 router.post("/register", createUser);
+
+router.get("/login", loginUser);
 
 export default router;
