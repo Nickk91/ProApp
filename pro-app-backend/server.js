@@ -27,8 +27,10 @@ mongoose.connect(process.env.MONGO_URI).then(() => {
   app.listen(process.env.PORT, () => {
     if (process.env.ENV === "development") {
       console.log(`LISTENING ON PORT ${process.env.PORT} in development`);
-    } else {
+    } else if (process.env.ENV === "production") {
       console.log(`LISTENING ON PORT ${process.env.PORT} in production`);
+    } else {
+      console.log("Server is running on unknown environment");
     }
   });
 });
