@@ -1,0 +1,11 @@
+.button-container {
+  width: 100%;
+}
+.btn {
+  width: 167px;
+  height: 52px;
+}
+
+.hero {
+  margin: 0 auto;
+}
