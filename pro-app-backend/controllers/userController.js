@@ -2,12 +2,9 @@ import STATUS_CODE from "../constants/statusCodes.js";
 import User from "../models/userModel.js";
 import bcrypt from "bcrypt";
 
-//   username: {
-//   password: {
-//   email: {
-//   isAdmin: {
 export const createUser = async (req, res) => {
   try {
+    console.log("CREATING A USER WITH", req.body);
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
 
     const user = await User.create({
