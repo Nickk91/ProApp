@@ -4,7 +4,6 @@ import { errorHandler } from "./middleware/errorMiddleware.js";
 import usersRoutes from "./routes/usersRoutes.js";
 import cors from "cors";
 import dotenv from "dotenv";
-import bcrypt from "bcrypt";
 
 dotenv.config();
 
