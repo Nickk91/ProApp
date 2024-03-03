@@ -5,7 +5,8 @@ import bcrypt from "bcryptjs";
 export const createUser = async (req, res) => {
   try {
     console.log("CREATING A USER WITH", req.body);
-    const hashedPassword = await bcrypt.hash(req.body.password, 10);
+    const saltRounds = 10;
+    const hashedPassword = await bcrypt.hash(req.body.password, saltRounds);
 
     const user = await User.create({
       username: req.body.username,
