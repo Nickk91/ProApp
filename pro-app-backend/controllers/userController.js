@@ -15,7 +15,9 @@ export const createUser = async (req, res) => {
       password: hashedPassword,
       email: req.body.email,
     });
-    res.status(STATUS_CODE.CREATED).send(user);
+    res
+      .status(STATUS_CODE.CREATED)
+      .send({ username: user.username, email: user.email, _id: user._id });
   } catch (error) {
     res
       .status(STATUS_CODE.INTERNAL_SERVER_ERROR)
