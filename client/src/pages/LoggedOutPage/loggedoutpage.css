@@ -1,11 +1,49 @@
-.button-container {
-  width: 100%;
+.page{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 750px;
+  width: 162px
+  /* justify-content: space-around; */
 }
+
+
+
+.hero {
+margin-top: 321px;
+  background: url("../../assets/images/Group.png");
+  width: 224px ;
+  height: 54px;
+  margin-left: 215px;
+
+}
+
+.button-container {
+  margin-top: 150px;
+  display: flex;
+  flex-direction: row;
+  margin-left: 215px;
+  gap: 10px;
+
+ }
 .btn {
   width: 167px;
   height: 52px;
+  border-radius: 7px;
+  border: 2px solid;
+  font-size: 18px;
+  font-weight: bold;
 }
 
-.hero {
-  margin: 0 auto;
+.btn.login{
+color: black;
+background: white;
 }
+
+.btn.register{
+  background: black;
+  color:white;
+  
+}
+
+

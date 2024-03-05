@@ -22,7 +22,7 @@ export const loginUser = async (req, res) => {
         },
       },
       process.env.ACCESS_TOKEN_SECRET,
-      { expiresIn: "1m" }
+      { expiresIn: "15m" }
     );
     res.status(STATUS_CODE.OK).json({ accessToken });
   } else {
@@ -53,17 +53,7 @@ export const createUser = async (req, res) => {
   }
 };
 
-// export const createUser = async (req, res) => {
-//   try {
-//     const user = await User.create(req.body);
-//     res.status(STATUS_CODE.CREATED).send(user);
-//   } catch (error) {
-//     res
-//       .status(STATUS_CODE.INTERNAL_SERVER_ERROR)
-//       .json({ message: error.message });
-//     console.log(STATUS_CODE.INTERNAL_SERVER_ERROR);
-//   }
-// };
+
 
 // @des get all users
 // @route GET / api/n
@@ -95,3 +85,11 @@ export const getUserById = async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
+
+//@desc Current user info
+//@route POST /api/users/current
+//access private
+
+export const currentUser = async (req, res) =>{
+  res.json(req.user)
+}

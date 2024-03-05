@@ -1,6 +1,7 @@
 import express from "express";
 import {
   createUser,
+  currentUser,
   getAllUsers,
   getUserById,
   loginUser,
@@ -18,5 +19,7 @@ router.get("/:id", getUserById);
 router.post("/register", createUser);
 
 router.get("/login", loginUser);
+
+router.get("/current", currentUser);
 
 export default router;
