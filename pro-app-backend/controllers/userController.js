@@ -5,6 +5,7 @@ import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 
 export const loginUser = async (req, res) => {
+  console.log("img here");
   const { email, password } = req.body;
   if (!email || !password) {
     res.status(STATUS_CODE.BAD_REQUEST);
@@ -53,8 +54,6 @@ export const createUser = async (req, res) => {
   }
 };
 
-
-
 // @des get all users
 // @route GET / api/n
 // @access Public
@@ -73,13 +72,14 @@ export const getAllUsers = async (req, res) => {
 
 export const getUserById = async (req, res) => {
   try {
-    const user = await User.findOne(req.params.userId);
+    const { id } = req.params;
+    const user = await User.findById(id);
     if (!user) {
       res.status(STATUS_CODE.NOT_FOUND);
       throw new Error("User was not found");
     }
-
-    res.send(user);
+    const { username, email, isAdmin, _id } = user;
+    res.send({ username, email, isAdmin, _id });
   } catch (error) {
     console.log("Error fetching user", error);
     res.status(500).json({ error: "Internal Server Error" });
@@ -90,6 +90,7 @@ export const getUserById = async (req, res) => {
 //@route POST /api/users/current
 //access private
 
-export const currentUser = async (req, res) =>{
-  res.json(req.user)
-}
+export const currentUser = async (req, res) => {
+  console.log(req.user);
+  res.json(req.user);
+};

@@ -1,31 +1,27 @@
-.page{
+.page {
   display: flex;
   flex-direction: column;
   align-items: center;
   height: 750px;
-  width: 162px
+  width: 162px;
   /* justify-content: space-around; */
 }
 
-
-
 .hero {
-margin-top: 321px;
+  margin-top: 300px;
   background: url("../../assets/images/Group.png");
-  width: 224px ;
+  width: 224px;
   height: 54px;
   margin-left: 215px;
-
 }
 
 .button-container {
-  margin-top: 150px;
+  margin-top: 270px;
   display: flex;
   flex-direction: row;
   margin-left: 215px;
   gap: 10px;
-
- }
+}
 .btn {
   width: 167px;
   height: 52px;
@@ -33,17 +29,25 @@ margin-top: 321px;
   border: 2px solid;
   font-size: 18px;
   font-weight: bold;
+  transition: background-color 0.3s, color 0.3s; /* Add transition for background-color and color */
 }
 
-.btn.login{
-color: black;
-background: white;
+.btn.login {
+  color: black;
+  background: white;
 }
 
-.btn.register{
+.btn.login:hover {
   background: black;
-  color:white;
-  
+  color: white;
 }
 
+.btn.register {
+  background: black;
+  color: white;
+}
 
+.btn.register:hover {
+  color: black;
+  background: white;
+}
