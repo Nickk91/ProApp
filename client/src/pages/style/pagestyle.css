@@ -2,3 +2,12 @@
   width: 375px;
   height: 812px;
 }
+
+.line {
+  width: 120px;
+  height: 5px;
+  background: black;
+  margin-top: 20px;
+  margin-left: 215px;
+  border-radius: 5px;
+}

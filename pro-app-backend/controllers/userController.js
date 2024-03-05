@@ -5,6 +5,7 @@ import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 
 export const loginUser = async (req, res) => {
+  console.log("img here");
   const { email, password } = req.body;
   if (!email || !password) {
     res.status(STATUS_CODE.BAD_REQUEST);
@@ -22,7 +23,7 @@ export const loginUser = async (req, res) => {
         },
       },
       process.env.ACCESS_TOKEN_SECRET,
-      { expiresIn: "1m" }
+      { expiresIn: "15m" }
     );
     res.status(STATUS_CODE.OK).json({ accessToken });
   } else {
@@ -53,18 +54,6 @@ export const createUser = async (req, res) => {
   }
 };
 
-// export const createUser = async (req, res) => {
-//   try {
-//     const user = await User.create(req.body);
-//     res.status(STATUS_CODE.CREATED).send(user);
-//   } catch (error) {
-//     res
-//       .status(STATUS_CODE.INTERNAL_SERVER_ERROR)
-//       .json({ message: error.message });
-//     console.log(STATUS_CODE.INTERNAL_SERVER_ERROR);
-//   }
-// };
-
 // @des get all users
 // @route GET / api/n
 // @access Public
@@ -83,15 +72,25 @@ export const getAllUsers = async (req, res) => {
 
 export const getUserById = async (req, res) => {
   try {
-    const user = await User.findOne(req.params.userId);
+    const { id } = req.params;
+    const user = await User.findById(id);
     if (!user) {
       res.status(STATUS_CODE.NOT_FOUND);
       throw new Error("User was not found");
     }
-
-    res.send(user);
+    const { username, email, isAdmin, _id } = user;
+    res.send({ username, email, isAdmin, _id });
   } catch (error) {
     console.log("Error fetching user", error);
     res.status(500).json({ error: "Internal Server Error" });
   }
+};
+
+//@desc Current user info
+//@route POST /api/users/current
+//access private
+
+export const currentUser = async (req, res) => {
+  console.log(req.user);
+  res.json(req.user);
 };
