@@ -1,6 +1,9 @@
 .page {
-  width: 375px;
-  height: 812px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  border: solid black 2px;
 }
 
 .line {
@@ -8,6 +11,6 @@
   height: 5px;
   background: black;
   margin-top: 20px;
-  margin-left: 215px;
+
   border-radius: 5px;
 }

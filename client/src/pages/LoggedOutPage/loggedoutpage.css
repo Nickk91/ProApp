@@ -1,34 +1,29 @@
 .page {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 750px;
-  width: 162px;
-  /* justify-content: space-around; */
+  position: relative;
 }
 
 .hero {
-  margin-top: 300px;
   background: url("../../assets/images/Group.png");
   width: 224px;
   height: 54px;
-  margin-left: 215px;
+  margin-top: 300px;
+  margin-left: 10px;
 }
 
 .button-container {
-  margin-top: 270px;
+  position: absolute;
+  bottom: 27px;
   display: flex;
   flex-direction: row;
-  margin-left: 215px;
-  gap: 10px;
+  gap: 7px;
 }
 .btn {
-  width: 167px;
+  width: 170px;
   height: 52px;
   border-radius: 7px;
   border: 2px solid;
-  font-size: 18px;
-  font-weight: bold;
+  font-size: 13px;
+  font-weight: 700;
   transition: background-color 0.3s, color 0.3s; /* Add transition for background-color and color */
 }
 
@@ -50,4 +45,9 @@
 .btn.register:hover {
   color: black;
   background: white;
+}
+.line {
+  position: absolute;
+  bottom: 7px;
+  right: 140px;
 }
