@@ -1,0 +1,70 @@
+.my-form {
+  margin-top: 100px;
+  border: yellow 2px solid;
+  height: 100vh;
+}
+h2 {
+  font-size: 35px;
+}
+
+.inputs-container {
+  border: red solid 2px;
+  height: 400px;
+}
+
+.submit {
+  margin-top: 20px;
+  border-radius: 7px;
+  background: black;
+  color: white;
+  height: 54px;
+  width: 355px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.line {
+  width: 120px;
+  height: 5px;
+  background: black;
+  margin-top: 20px;
+  margin-left: 215px;
+  border-radius: 5px;
+}
+
+.submit-capsule {
+  height: 50px;
+  width: 350px;
+}
+
+.text-inputs-container {
+  border: green solid 2px;
+  margin-top: 27px;
+  height: 220px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+#email {
+  border: 2px solid black;
+  background-color: white;
+}
+
+#password {
+  border: 2px solid black;
+}
+
+/* const loginFormModel = [
+  // { label: "Log In", type: "text", name: "Log In" },
+  { label: "Email", type: "email", name: "email" },
+  {
+    label: "Password",
+    type: "password",
+    name: "password",
+    minLength: "8",
+    required: true,
+    placeholder: "Type your password",
+    className: "password",
+  },
+]; */

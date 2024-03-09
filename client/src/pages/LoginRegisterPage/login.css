@@ -1,0 +1,28 @@
+.inputs-container h1 {
+  padding-bottom: 50px;
+  font-size: 50px;
+}
+
+.inputs-container {
+  margin-left: 0;
+
+  margin-right: 250px;
+}
+
+#login-submit {
+  margin-top: 20px;
+  border-radius: 7px;
+  background: black;
+  color: white;
+  height: 54px;
+  width: 355px;
+}
+
+.line {
+  width: 120px;
+  height: 5px;
+  background: black;
+  margin-top: 20px;
+  margin-left: 215px;
+  border-radius: 5px;
+}

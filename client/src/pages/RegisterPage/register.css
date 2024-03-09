@@ -1,0 +1,44 @@
+h1.login {
+  margin-top: 110px;
+}
+
+.inputs-container {
+  margin-left: 260px;
+  margin-top: 50px;
+  /* margin-left: 0;
+    margin-right: 0; */
+}
+
+input {
+  width: 350px;
+  height: 50px;
+  border: 2px solid black;
+  background: white;
+}
+
+.password {
+  margin-top: 20px;
+  text-indent: 10px;
+}
+
+.email {
+  text-indent: 10px;
+}
+
+#login-submit {
+  margin-top: 20px;
+  border-radius: 7px;
+  background: black;
+  color: white;
+  height: 54px;
+  width: 355px;
+}
+
+.line {
+  width: 120px;
+  height: 5px;
+  background: black;
+  margin-top: 20px;
+  margin-left: 215px;
+  border-radius: 5px;
+}

@@ -1,14 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
-import counterReducer from "../slices/counterSlice.js";
+// import counterReducer from "../slices/counterSlice.js";
+import actionReducer from "../slices/actionSlice.js";
 
 const store = configureStore({
   reducer: {
-    counter: counterReducer,
-    // [apiSlice.reducerPath]: apiSlice.reducer,
+    // counter: counterReducer,
+    actionChoice: actionReducer,
   },
-  // Add the api middleware to the store
-  //   middleware: (getDefaultMiddleware) =>
-  //     getDefaultMiddleware().concat(apiSlice.middleware),
 });
 
 export default store;
