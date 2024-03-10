@@ -1,7 +1,6 @@
 import React from "react";
 import "../style/pagestyle.css";
 import "./login.css";
-// import ActionComponent from "../../components/ActionComponent/ActionComponent";
 import registerFormModel from "../../models/registerFormModel.js";
 import loginFormModel from "../../models/loginFormModel.js";
 import GenericForm from "../../components/GenericForm/GenericForm.jsx";

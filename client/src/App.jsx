@@ -5,6 +5,8 @@ import HomePage from "./pages/HomePage/HomePage.jsx";
 import LoggedOutPage from "./pages/LoggedOutPage/LoggedOutPage.jsx";
 import { Helmet } from "react-helmet";
 import LoginRegisterPage from "./pages/LoginRegisterPage/LoginRegisterPage.jsx";
+import SignupPage from "./pages/SignUp/SignupPage.jsx";
+import AddProjectPage from "./pages/AddProjectPage/AddProjectPage.jsx";
 
 function App() {
   return (
@@ -26,6 +28,8 @@ function App() {
         <Route path="/" exact element={<HomePage />} />
         <Route path="/loggedout" exact element={<LoggedOutPage />} />
         <Route path="/form" element={<LoginRegisterPage />} />
+        <Route path="/signup" element={<SignupPage />} />
+        <Route path="/addproject" element={<AddProjectPage />} />
       </Routes>
     </>
   );

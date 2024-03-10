@@ -1,44 +1,11 @@
 /* eslint-disable react/prop-types */
 import React from "react";
-import "./GenericForm.css";
-
-import styled from "styled-components";
-
-const SubmitButton = styled.button`
-  margin-top: 20px;
-  border-radius: 7px;
-  background: black;
-  color: white;
-  height: 54px;
-  width: 355px;
-  font-size: 11px;
-  font-weight: 700;
-`;
-
-const Input = styled.input`
-  border: 2px solid black;
-  background-color: white;
-`;
-
-const TextInputsContainer = styled.div`
-  border: green solid 2px;
-  margin-top: 27px;
-  height: 220px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-`;
-
-const InputsContainer = styled.div`
-  border: red solid 2px;
-  height: 400px;
-`;
-
-const MyForm = styled.div`
-  margin-top: 100px;
-  border: yellow 2px solid;
-  height: 100vh;
-`;
+// import "./GenericForm.css";
+import SubmitButton from "../StyledComponents/SubmitButton.jsx";
+import Input from "../StyledComponents/Input.jsx";
+import TextInputsContainer from "../StyledComponents/TextInputsContainer.jsx";
+import InputsContainer from "../StyledComponents/InputsContainer.jsx";
+import MyForm from "../StyledComponents/MyForm.jsx";
 
 const GenericForm = ({ buttonTitle, handleSubmit, formTitle, inputs }) => {
   return (
@@ -53,6 +20,7 @@ const GenericForm = ({ buttonTitle, handleSubmit, formTitle, inputs }) => {
                 id={inpt.type}
                 type={inpt.type}
                 name={inpt.name ? inpt.name : ""}
+                placeholder={inpt.name ? inpt.name : ""}
               />
             );
           })}
