@@ -1,9 +1,11 @@
 import styled from "styled-components";
 
 const MyForm = styled.div`
-  margin-top: 100px;
   border: yellow 2px solid;
-  height: 70vh;
+  width: 100%;
+  display: flex;
 `;
+// height: 70vh;
+// margin-top: 100px;
 
 export default MyForm;

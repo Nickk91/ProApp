@@ -2,6 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import { errorHandler } from "./middleware/errorMiddleware.js";
 import usersRoutes from "./routes/usersRoutes.js";
+import projectsRoutes from "./routes/projectsRoutes.js";
 import cors from "cors";
 import dotenv from "dotenv";
 
@@ -9,29 +10,30 @@ dotenv.config();
 
 const app = express();
 
-//cors middleware
+// cors middleware
 app.use(cors());
 
-//middleware for JSON parsing
-
+// middleware for JSON parsing
 app.use(express.json());
 
-//users routes
-
-app.use("/api/pro-app", usersRoutes);
-
-//Error handling Middleware
-
+// Error handling middleware
 app.use(errorHandler);
 
-mongoose.connect(process.env.MONGO_URI).then(() => {
-  app.listen(process.env.PORT, () => {
-    if (process.env.ENV === "development") {
-      console.log(`LISTENING ON PORT ${process.env.PORT} in development`);
-    } else if (process.env.ENV === "production") {
-      console.log(`LISTENING ON PORT ${process.env.PORT} in production`);
-    } else {
-      console.log("Server is running on unknown environment");
-    }
+// users routes
+app.use("/api/pro-app", usersRoutes);
+
+// projects routes
+app.use("/api/pro-app", projectsRoutes);
+
+mongoose
+  .connect(process.env.MONGO_URI)
+  .then(() => {
+    console.log("MongoDB connected successfully");
+    app.listen(process.env.PORT, () => {
+      console.log(`Server is running on PORT ${process.env.PORT}`);
+    });
+  })
+  .catch((err) => {
+    console.error("MongoDB connection failed:", err.message);
+    process.exit(1); // Exit with failure
   });
-});

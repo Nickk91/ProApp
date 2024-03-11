@@ -1,10 +1,10 @@
 /* eslint-disable react/prop-types */
 import React from "react";
 // import "./GenericForm.css";
-import SubmitButton from "../StyledComponents/SubmitButton.jsx";
+import SSubmitButton from "../StyledComponents/SSubmitButton.jsx";
 import Input from "../StyledComponents/Input.jsx";
 import TextInputsContainer from "../StyledComponents/TextInputsContainer.jsx";
-import InputsContainer from "../StyledComponents/InputsContainer.jsx";
+import InputsContainer from "../StyledComponents/SinputsContainer.jsx";
 import MyForm from "../StyledComponents/MyForm.jsx";
 
 const GenericForm = ({ buttonTitle, handleSubmit, formTitle, inputs }) => {
@@ -24,9 +24,9 @@ const GenericForm = ({ buttonTitle, handleSubmit, formTitle, inputs }) => {
               />
             );
           })}
-          <SubmitButton className="submit" type="submit">
+          <SSubmitButton className="submit" type="submit">
             {buttonTitle}
-          </SubmitButton>
+          </SSubmitButton>
         </TextInputsContainer>
       </InputsContainer>
     </MyForm>

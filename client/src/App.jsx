@@ -7,7 +7,7 @@ import { Helmet } from "react-helmet";
 import LoginRegisterPage from "./pages/LoginRegisterPage/LoginRegisterPage.jsx";
 import SignupPage from "./pages/SignUp/SignupPage.jsx";
 import AddProjectPage from "./pages/AddProjectPage/AddProjectPage.jsx";
-
+import TestPage from "./pages/GenericFormPageTest/TestPage.jsx";
 function App() {
   return (
     <>
@@ -30,6 +30,7 @@ function App() {
         <Route path="/form" element={<LoginRegisterPage />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/addproject" element={<AddProjectPage />} />
+        <Route path="/test" element={<TestPage />} />
       </Routes>
     </>
   );

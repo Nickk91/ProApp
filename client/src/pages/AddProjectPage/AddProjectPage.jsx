@@ -1,9 +1,9 @@
 import React from "react";
 import MyForm from "../../components/StyledComponents/MyForm.jsx";
-import InputsContainer from "../../components/StyledComponents/InputsContainer.jsx";
+import InputsContainer from "../../components/StyledComponents/SinputsContainer.jsx";
 import Input from "../../components/StyledComponents/Input.jsx";
 import TextInputsContainer from "../../components/StyledComponents/TextInputsContainer.jsx";
-import SubmitButton from "../../components/StyledComponents/SubmitButton.jsx";
+import SSubmitButton from "../../components/StyledComponents/SSubmitButton.jsx";
 
 const AddProjectPage = () => {
   return (
@@ -20,6 +20,7 @@ const AddProjectPage = () => {
           </label>
           <Input
             type="text"
+            S
             name="Project name"
             placeholder="project description"
           />
@@ -32,7 +33,7 @@ const AddProjectPage = () => {
             name="Project name"
             placeholder="project image URL"
           />
-          <SubmitButton>ADD</SubmitButton>
+          <SSubmitButton>ADD</SSubmitButton>
         </TextInputsContainer>
       </InputsContainer>
     </MyForm>
