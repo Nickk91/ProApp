@@ -1,15 +1,15 @@
 import React from "react";
-import Sinput from "../StyledComponents/Sinput";
+import * as S from "../StyledComponents/styles.jsx";
 
-const GenericInput = ({ label, type, name, attributes = {} }) => {
+const GenericInput = ({ label, type, name, placeholder, attributes = {} }) => {
   return (
     <>
-      {label && <label htmlFor={name} className="generic-input-label"></label>}
-      <Sinput
+      {label && <label htmlFor={name}></label>}
+      <S.input
+        placeholder={placeholder}
         type={type}
         name={name}
         id={name}
-        className="generic-input"
         {...attributes}
       />
     </>

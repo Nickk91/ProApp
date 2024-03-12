@@ -1,10 +1,6 @@
 import React from "react";
 import GenericInput from "../GenericInput/GenericInput.jsx";
-import SformTitle from "../StyledComponents/SformTitle.jsx";
-import Sform from "../StyledComponents/SForm.jsx";
-import SinputsContainer from "../StyledComponents/SinputsContainer.jsx";
-import SSubmitButton from "../StyledComponents/SSubmitButton.jsx";
-SSubmitButton;
+import * as S from "../StyledComponents/styles.jsx";
 
 const GenericFormElad = ({ title, submitButtonText, inputs, onSubmit }) => {
   const handleSubmit = (e) => {
@@ -16,10 +12,11 @@ const GenericFormElad = ({ title, submitButtonText, inputs, onSubmit }) => {
     onSubmit(formProps);
   };
   return (
-    <Sform onSubmit={handleSubmit} className="generic-from-wrapper" action="">
-      <SformTitle>{title}</SformTitle>
+    <S.form onSubmit={handleSubmit} className="generic-from-wrapper" action="">
+      <S.formTitle>{title}</S.formTitle>
+      {/* <SformTitle>{title}</SformTitle> */}
       {/* <h2 className="form-title">{title}</h2> */}
-      <SinputsContainer>
+      <S.inputsContainer>
         {inputs.map((input, index) => (
           <GenericInput
             key={index}
@@ -27,12 +24,12 @@ const GenericFormElad = ({ title, submitButtonText, inputs, onSubmit }) => {
             label={input.label}
             name={input.name}
             attributes={input.attributes}
-            placeholder={input.placeHolder ? input.placeHolder : ""}
+            placeholder={input.placeholder ? input.placeholder : ""}
           />
         ))}
-        <SSubmitButton>{submitButtonText}</SSubmitButton>
-      </SinputsContainer>
-    </Sform>
+        <S.submitButton>{submitButtonText}</S.submitButton>
+      </S.inputsContainer>
+    </S.form>
   );
 };
 

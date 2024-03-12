@@ -1,7 +1,8 @@
 import React from "react";
 import GenericFormElad from "../../components/GenericFormElad/GenericFormElad.jsx";
-import loginFormInputs from "../../models/registerFormInputs.js";
-import SReturn from "../../components/StyledComponents/SReturn.jsx";
+import loginFormInputs from "../../models/loginFormInputs.js";
+import * as S from "../../components/StyledComponents/styles.jsx";
+
 const TestPage = ({ action }) => {
   const handleFormSubmit = (e) => {
     e.preventDefault();
@@ -10,7 +11,7 @@ const TestPage = ({ action }) => {
 
   return (
     <>
-      <SReturn />
+      <S.ReturnIcon />
 
       {action === "Register" ? (
         <GenericFormElad

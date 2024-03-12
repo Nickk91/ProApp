@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import "../style/pagestyle.css";
 import "./loggedoutpage.css";
 import "../../assets/images/Group.png";
-import LoginRegisterPage from "../LoginRegisterPage/LoginRegisterPage";
 import { useDispatch } from "react-redux";
 import { setAction } from "../../slices/actionSlice.js";
 
