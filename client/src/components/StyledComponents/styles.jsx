@@ -52,4 +52,14 @@ const input = styled.input`
   height: 50px;
 `;
 
-export { form, formTitle, inputsContainer, ReturnIcon, submitButton, input };
+const label = styled.label``;
+
+export {
+  form,
+  formTitle,
+  inputsContainer,
+  ReturnIcon,
+  submitButton,
+  input,
+  label,
+};

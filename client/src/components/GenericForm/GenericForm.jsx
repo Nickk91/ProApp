@@ -1,36 +1,39 @@
-// /* eslint-disable react/prop-types */
-// import React from "react";
-// // import "./GenericForm.css";
-// import SSubmitButton from "../StyledComponents/SSubmitButton.jsx";
-// import Input from "../StyledComponents/Input.jsx";
-// // import TextInputsContainer from "../StyledComponents/TextInputsContainer.jsx";
-// import InputsContainer from "../StyledComponents/SinputsContainer.jsx";
-// import MyForm from "../StyledComponents/MyForm.jsx";
+import React from "react";
+import GenericInput from "../GenericInput/GenericInput.jsx";
+import * as S from "../StyledComponents/styles.jsx";
 
-// const GenericForm = ({ buttonTitle, handleSubmit, formTitle, inputs }) => {
-//   return (
-//     <MyForm onSubmit={handleSubmit}>
-//       <InputsContainer>
-//         <h2>{formTitle}</h2>
-//         <TextInputsContainer>
-//           {inputs.map((inpt, index) => {
-//             return (
-//               <Input
-//                 key={index}
-//                 id={inpt.type}
-//                 type={inpt.type}
-//                 name={inpt.name ? inpt.name : ""}
-//                 placeholder={inpt.name ? inpt.name : ""}
-//               />
-//             );
-//           })}
-//           <SSubmitButton className="submit" type="submit">
-//             {buttonTitle}
-//           </SSubmitButton>
-//         </TextInputsContainer>
-//       </InputsContainer>
-//     </MyForm>
-//   );
-// };
+const GenericForm = ({ title, submitButtonText, inputs, onSubmit }) => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Form Element:", e.target);
+    const formData = new FormData(e.target);
+    console.log("Form Data:", formData);
+    const formProps = Object.formEnteries(formData.entries());
+    onSubmit(formProps);
+  };
+  return (
+    <S.form onSubmit={handleSubmit} className="generic-from-wrapper" action="">
+      <S.formTitle>{title}</S.formTitle>
+      {/* <SformTitle>{title}</SformTitle> */}
+      {/* <h2 className="form-title">{title}</h2> */}
+      <S.inputsContainer>
+        {inputs.map((input, index) => (
+          <>
+            {input.label && <label>{input.label}</label>}
+            <GenericInput
+              key={index}
+              type={input.type}
+              label={input.label}
+              name={input.name}
+              attributes={input.attributes}
+              placeholder={input.placeholder ? input.placeholder : ""}
+            />
+          </>
+        ))}
+        <S.submitButton>{submitButtonText}</S.submitButton>
+      </S.inputsContainer>
+    </S.form>
+  );
+};
 
-// export default GenericForm;
+export default GenericForm;

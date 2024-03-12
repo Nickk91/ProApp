@@ -1,9 +1,9 @@
 import React from "react";
 import GenericForm from "../../components/GenericForm/GenericForm.jsx";
-import { RegisterFormInputsPartTwo } from "../../constants/formInputsData.js";
+import { loginAndRegisterFormInputs } from "../../constants/formInputsData.js";
 import * as S from "../../components/StyledComponents/styles.jsx";
 
-const SignupPage = ({ action }) => {
+const LoginPage = ({ action }) => {
   const handleFormSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -13,14 +13,15 @@ const SignupPage = ({ action }) => {
   return (
     <>
       <S.ReturnIcon />
+
       <GenericForm
-        title="Register"
-        inputs={RegisterFormInputsPartTwo}
-        submitButtonText="SIGN UP"
+        title="Log in"
+        inputs={loginAndRegisterFormInputs}
+        submitButtonText="LOG IN"
         onSubmit={handleFormSubmit}
       />
     </>
   );
 };
 
-export default SignupPage;
+export default LoginPage;

@@ -1,4 +1,7 @@
 import React from "react";
+import { addProjectFormInputs } from "../../constants/formInputsData.js";
+import GenericFormElad from "../../components/GenericForm/GenericForm.jsx";
+import * as S from "../../components/StyledComponents/styles.jsx";
 
 const AddProjectPage = () => {
   const handleFormSubmit = (e) => {
@@ -8,10 +11,10 @@ const AddProjectPage = () => {
 
   return (
     <>
-      <SReturn />
+      <S.ReturnIcon />
       <GenericFormElad
         title="Add Project"
-        inputs={registerFormInputs}
+        inputs={addProjectFormInputs}
         submitButtonText="NEXT"
         onSubmit={handleFormSubmit}
       />
