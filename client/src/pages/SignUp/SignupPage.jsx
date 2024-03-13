@@ -11,7 +11,7 @@ const SignupPage = ({ action }) => {
   };
 
   return (
-    <>
+    <section className="page">
       <S.ReturnIcon />
       <GenericForm
         title="Register"
@@ -19,7 +19,11 @@ const SignupPage = ({ action }) => {
         submitButtonText="SIGN UP"
         onSubmit={handleFormSubmit}
       />
-    </>
+      <S.p>
+        By siging up, you agree to Photo's <u>Terms of Service</u> and{" "}
+        <u>Privacy Policy.</u>
+      </S.p>
+    </section>
   );
 };
 

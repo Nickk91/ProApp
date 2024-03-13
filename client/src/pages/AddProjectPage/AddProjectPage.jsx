@@ -1,6 +1,6 @@
 import React from "react";
 import { addProjectFormInputs } from "../../constants/formInputsData.js";
-import GenericFormElad from "../../components/GenericForm/GenericForm.jsx";
+import GenericForm from "../../components/GenericForm/GenericForm.jsx";
 import * as S from "../../components/StyledComponents/styles.jsx";
 
 const AddProjectPage = () => {
@@ -10,15 +10,15 @@ const AddProjectPage = () => {
   };
 
   return (
-    <>
+    <section className="page">
       <S.ReturnIcon />
-      <GenericFormElad
+      <GenericForm
         title="Add Project"
         inputs={addProjectFormInputs}
-        submitButtonText="NEXT"
+        submitButtonText="ADD"
         onSubmit={handleFormSubmit}
       />
-    </>
+    </section>
   );
 };
 

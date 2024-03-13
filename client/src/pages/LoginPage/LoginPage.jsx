@@ -11,7 +11,7 @@ const LoginPage = ({ action }) => {
   };
 
   return (
-    <>
+    <section className="page">
       <S.ReturnIcon />
 
       <GenericForm
@@ -20,7 +20,7 @@ const LoginPage = ({ action }) => {
         submitButtonText="LOG IN"
         onSubmit={handleFormSubmit}
       />
-    </>
+    </section>
   );
 };
 

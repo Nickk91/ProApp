@@ -11,7 +11,7 @@ const RegisterPage = ({ action }) => {
   };
 
   return (
-    <>
+    <section className="page">
       <S.ReturnIcon />
       <GenericForm
         title="Register"
@@ -19,7 +19,7 @@ const RegisterPage = ({ action }) => {
         submitButtonText="NEXT"
         onSubmit={handleFormSubmit}
       />
-    </>
+    </section>
   );
 };
 

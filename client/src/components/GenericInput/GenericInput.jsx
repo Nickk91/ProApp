@@ -4,7 +4,7 @@ import * as S from "../StyledComponents/styles.jsx";
 const GenericInput = ({ label, type, name, placeholder, attributes = {} }) => {
   return (
     <>
-      {label && <label htmlFor={name}></label>}
+      {label && <S.label htmlFor={name}></S.label>}
       <S.input
         placeholder={placeholder}
         type={type}

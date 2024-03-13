@@ -14,12 +14,10 @@ const GenericForm = ({ title, submitButtonText, inputs, onSubmit }) => {
   return (
     <S.form onSubmit={handleSubmit} className="generic-from-wrapper" action="">
       <S.formTitle>{title}</S.formTitle>
-      {/* <SformTitle>{title}</SformTitle> */}
-      {/* <h2 className="form-title">{title}</h2> */}
       <S.inputsContainer>
         {inputs.map((input, index) => (
           <>
-            {input.label && <label>{input.label}</label>}
+            {input.label && <S.label>{input.label}</S.label>}
             <GenericInput
               key={index}
               type={input.type}
@@ -28,6 +26,10 @@ const GenericForm = ({ title, submitButtonText, inputs, onSubmit }) => {
               attributes={input.attributes}
               placeholder={input.placeholder ? input.placeholder : ""}
             />
+
+            {/* {error.email && <p style={{ color: "red" }}>{error.email}</p>}
+            {error.email && <p style={{ color: "red" }}>{error.email}</p>}
+            {error.username && <p style={{ color: "red" }}>{error.username}</p>} */}
           </>
         ))}
         <S.submitButton>{submitButtonText}</S.submitButton>
@@ -35,5 +37,25 @@ const GenericForm = ({ title, submitButtonText, inputs, onSubmit }) => {
     </S.form>
   );
 };
+// const loginAndRegisterFormInputs = [
+//   {
+//     name: "email",
+//     type: "email",
+//     // label: "Username",
+
+//     placeholder: "jane@example.com",
+//     attributes: {
+//       required: true,
+//       minLength: 4,
+//     },
+//   },
+//   {
+//     name: "password",
+//     type: "password",
+//     placeholder: "password",
+//     // label: "Password",
+//     attributes: { required: true, minLength: 8 },
+//   },
+// ];
 
 export default GenericForm;
