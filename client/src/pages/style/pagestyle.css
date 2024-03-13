@@ -1,9 +1,9 @@
 .page {
   display: flex;
   flex-direction: column;
+  border: solid black 2px;
   align-items: center;
   height: 100vh;
-  border: solid black 2px;
 }
 
 .line {
@@ -11,6 +11,10 @@
   height: 5px;
   background: black;
   margin-top: 20px;
-
   border-radius: 5px;
+}
+
+input::placeholder {
+  text-indent: 5px;
+  color: black;
 }

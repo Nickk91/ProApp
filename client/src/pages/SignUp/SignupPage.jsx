@@ -1,9 +1,9 @@
 import React from "react";
 import GenericForm from "../../components/GenericForm/GenericForm.jsx";
-import { loginAndRegisterFormInputs } from "../../constants/formInputsData.js";
+import { RegisterFormInputsPartTwo } from "../../constants/formInputsData.js";
 import * as S from "../../components/StyledComponents/styles.jsx";
 
-const RegisterPage = ({ action }) => {
+const SignupPage = ({ action }) => {
   const handleFormSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -15,12 +15,16 @@ const RegisterPage = ({ action }) => {
       <S.ReturnIcon />
       <GenericForm
         title="Register"
-        inputs={loginAndRegisterFormInputs}
-        submitButtonText="NEXT"
+        inputs={RegisterFormInputsPartTwo}
+        submitButtonText="SIGN UP"
         onSubmit={handleFormSubmit}
       />
+      <S.p>
+        By siging up, you agree to Photo's <u>Terms of Service</u> and{" "}
+        <u>Privacy Policy.</u>
+      </S.p>
     </section>
   );
 };
 
-export default RegisterPage;
+export default SignupPage;

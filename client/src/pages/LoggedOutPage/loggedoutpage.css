@@ -1,15 +1,15 @@
-.page {
+/* .page {
   position: relative;
 }
-
+*/
 .hero {
   background: url("../../assets/images/Group.png");
   width: 224px;
   height: 54px;
-  margin-top: 300px;
-  margin-left: 10px;
+  /* margin-top: 300px;
+  margin-left: 10px; */
 }
-
+/*
 .button-container {
   position: absolute;
   bottom: 27px;
@@ -17,6 +17,8 @@
   flex-direction: row;
   gap: 7px;
 }
+
+
 .btn {
   width: 170px;
   height: 52px;
@@ -25,9 +27,9 @@
   font-size: 13px;
   font-weight: 700;
   transition: background-color 0.3s, color 0.3s; /* Add transition for background-color and color */
-}
+/* } */
 
-.btn.login {
+/* .btn.login {
   color: black;
   background: white;
 }
@@ -50,4 +52,12 @@
   position: absolute;
   bottom: 7px;
   right: 140px;
+} */
+/*
+.bottom-container {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  justify-content: flex-end;
 }
+*/

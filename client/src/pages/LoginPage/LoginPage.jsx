@@ -3,7 +3,7 @@ import GenericForm from "../../components/GenericForm/GenericForm.jsx";
 import { loginAndRegisterFormInputs } from "../../constants/formInputsData.js";
 import * as S from "../../components/StyledComponents/styles.jsx";
 
-const RegisterPage = ({ action }) => {
+const LoginPage = ({ action }) => {
   const handleFormSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -13,14 +13,15 @@ const RegisterPage = ({ action }) => {
   return (
     <section className="page">
       <S.ReturnIcon />
+
       <GenericForm
-        title="Register"
+        title="Log in"
         inputs={loginAndRegisterFormInputs}
-        submitButtonText="NEXT"
+        submitButtonText="LOG IN"
         onSubmit={handleFormSubmit}
       />
     </section>
   );
 };
 
-export default RegisterPage;
+export default LoginPage;

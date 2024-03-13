@@ -2,7 +2,6 @@ import STATUS_CODE from "../constants/statusCodes.js";
 import User from "../models/userModel.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import dotenv from "dotenv";
 
 export const loginUser = async (req, res) => {
   console.log("img here");

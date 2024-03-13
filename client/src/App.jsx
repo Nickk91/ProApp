@@ -1,11 +1,13 @@
 import "./App.css";
 import Counter from "./components/Counter/Counter.jsx";
 import { Routes, Route } from "react-router-dom";
+import { Helmet } from "react-helmet";
 import HomePage from "./pages/HomePage/HomePage.jsx";
 import LoggedOutPage from "./pages/LoggedOutPage/LoggedOutPage.jsx";
-import { Helmet } from "react-helmet";
-import LoginRegisterPage from "./pages/LoginRegisterPage/LoginRegisterPage.jsx";
-
+import SignupPage from "./pages/SignUp/SignupPage.jsx";
+import AddProjectPage from "./pages/AddProjectPage/AddProjectPage.jsx";
+import LoginPage from "./pages/LoginPage/LoginPage.jsx";
+import RegisterPage from "./pages/RegisterPage/RegisterPage.jsx";
 function App() {
   return (
     <>
@@ -25,7 +27,10 @@ function App() {
       <Routes>
         <Route path="/" exact element={<HomePage />} />
         <Route path="/loggedout" exact element={<LoggedOutPage />} />
-        <Route path="/form" element={<LoginRegisterPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/signup" element={<SignupPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/addproject" element={<AddProjectPage />} />
       </Routes>
     </>
   );
