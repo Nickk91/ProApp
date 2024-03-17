@@ -19,8 +19,8 @@ display: flex;
   justify-content: flex-start;
 `;
 
-const hero = styled.div`
-  background: url("../../assets/images/Group.png");
+const hero = styled.img`
+  // background: url("../../assets/images/Group.png");
   width: 224px;
   height: 54px;
 `;

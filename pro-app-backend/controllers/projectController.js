@@ -1,22 +1,6 @@
 import STATUS_CODE from "../constants/statusCodes.js";
 import Project from "../models/projectModel.js";
 
-// @des get all projects
-// @route GET / api/n
-// @access Public
-// export const getAllProjects = async (req, res) => {
-//   try {
-//     const projects = await Project.find();
-//     console.log("IS THIS WORKING?", projects);
-//     res.send(projects);
-//   } catch (error) {
-//     console.log("Error fetching project", error);
-//     res
-//       .status(STATUS_CODE.INTERNAL_SERVER_ERROR)
-//       .json({ error: "Internal Server Error" });
-//   }
-// };
-
 export const getAllProjects = async (req, res) => {
   try {
     const projects = await Project.find();
@@ -38,9 +22,14 @@ export const getProjectById = async (req, res) => {
       res.status(STATUS_CODE.NOT_FOUND);
       throw new Error("Project was not found");
     }
-    const { projectName, projectDescription, projectImageUrl, isCompleted } =
+    const { projectName, projectDescription, projectImageUrl, projectStatus } =
       user;
-    res.send({ projectName, projectDescription, projectImageUrl, isCompleted });
+    res.send({
+      projectName,
+      projectDescription,
+      projectImageUrl,
+      projectStatus,
+    });
   } catch (error) {
     console.log("Error fetching project", error);
     res
@@ -76,6 +65,7 @@ export const addProject = async (req, res) => {
       projectName: req.body.projectName,
       projectDescription: req.body.projectDescription,
       projectImage: req.body.projectImage,
+      projectStatus: req.body.projectStatus,
       user: req.body.user,
     });
 

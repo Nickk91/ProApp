@@ -32,9 +32,14 @@ const projectScheme = new mongoose.Schema({
       message: "Invalid URL address",
     },
   },
-  isCompleted: {
-    type: Boolean,
-    default: false,
+  projectStatus: {
+    type: String,
+    minlength: 1,
+    required: true,
+  },
+  projectTodos: {
+    type: Array,
+    default: [],
   },
 });
 

@@ -4,6 +4,7 @@ import "../style/pagestyle.css";
 import "../../assets/images/Group.png";
 import { useDispatch } from "react-redux";
 // import { setAction } from "../../slices/actionSlice.js";
+import heroImg from "../../assets/images/Group.png";
 
 import * as S from "./styles.js";
 
@@ -21,8 +22,7 @@ const LoggedOutPage = () => {
   return (
     <section className="page">
       <S.topContainer>
-        <div className="hero"></div>
-        <S.hero />
+        <S.hero src={heroImg} alt="Hero Image" />
       </S.topContainer>
       <S.bottomContainer>
         <S.buttonContainer>
