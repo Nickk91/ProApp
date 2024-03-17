@@ -4,16 +4,29 @@ import Project from "../models/projectModel.js";
 // @des get all projects
 // @route GET / api/n
 // @access Public
+// export const getAllProjects = async (req, res) => {
+//   try {
+//     const projects = await Project.find();
+//     console.log("IS THIS WORKING?", projects);
+//     res.send(projects);
+//   } catch (error) {
+//     console.log("Error fetching project", error);
+//     res
+//       .status(STATUS_CODE.INTERNAL_SERVER_ERROR)
+//       .json({ error: "Internal Server Error" });
+//   }
+// };
+
 export const getAllProjects = async (req, res) => {
   try {
     const projects = await Project.find();
-    console.log(projects);
+    console.log("Projects found:", projects);
     res.send(projects);
   } catch (error) {
-    console.log("Error fetching project", error);
+    console.log("Error fetching projects:", error);
     res
       .status(STATUS_CODE.INTERNAL_SERVER_ERROR)
-      .json({ error: "Internal Server Error" });
+      .json({ error: "Internal Server Error ssss" });
   }
 };
 
@@ -62,13 +75,16 @@ export const addProject = async (req, res) => {
     const project = await Project.create({
       projectName: req.body.projectName,
       projectDescription: req.body.projectDescription,
-      projectImageUrl: req.body.projectImageUrl,
+      projectImage: req.body.projectImage,
+      user: req.body.user,
     });
-    res.status(STATUS_CODE.CREATED).send({
-      projectName: project.projectName,
-      projectDescription: project.projectDescription,
-      _id: project._id,
-    });
+
+    const newProject = await Project.findById(project._id).populate(
+      "user",
+      "-password"
+    );
+
+    res.status(STATUS_CODE.CREATED).send(newProject);
   } catch (error) {
     res
       .status(STATUS_CODE.INTERNAL_SERVER_ERROR)
