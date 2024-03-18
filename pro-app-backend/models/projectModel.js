@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const projectScheme = new mongoose.Schema({
-  user: {
+  owner: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
     required: true,
@@ -14,7 +14,7 @@ const projectScheme = new mongoose.Schema({
   },
   projectDescription: {
     type: String,
-    required: true,
+    required: [true,"Description is required!"],
     minlength: 1,
     maxlength: 120,
   },
@@ -34,13 +34,16 @@ const projectScheme = new mongoose.Schema({
   },
   projectStatus: {
     type: String,
-    minlength: 1,
-    required: true,
+    enum: ["todo", "in progress", "done"],
+    required: [true, "Must provide project status"],
   },
-  projectTodos: {
-    type: Array,
-    default: [],
-  },
+  projectTasks: [
+    {
+      name: {type: String, required: true, unique: [true,"This task name already exists"]},
+      description: {type: String, maxlength: 120, minlength:4, required: true, default: "No Description Was added"},
+      statues:{type: String, enum: ["todo", "in progress", "done"], required: true, default: "todo"},
+    }
+  ]
 });
 
 const Project = mongoose.model("Project", projectScheme);
