@@ -8,17 +8,14 @@ import {
 import { validateToken } from "../middleware/validateTokenHandler.js";
 
 const router = express.Router();
+//Route to deleyr a project
+router.delete("/:id", deleteProjectById);
 
-//Route to get all users
-router.get("/project", getAllProjects);
+//Route to get all projects
+router.get("/", getAllProjects);
 
 //Route to create a new account
-router.post("/addProject", addProject);
-
-//Route to create a new account
-router.delete("/projects/:id", deleteProjectById);
-
-// router.get("/current", validateToken, currentUser);
+router.post("/", addProject);
 
 //Route to get single user by ID
 router.get("/:id", getProjectById);

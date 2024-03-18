@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "../style/pagestyle.css";
-import "./loggedoutpage.css";
 import "../../assets/images/Group.png";
 import { useDispatch } from "react-redux";
-import { setAction } from "../../slices/actionSlice.js";
+// import { setAction } from "../../slices/actionSlice.js";
+import heroImg from "../../assets/images/Group.png";
 
 import * as S from "./styles.js";
 
@@ -12,18 +12,17 @@ const LoggedOutPage = () => {
   const dispatch = useDispatch();
 
   const handleLoginClick = () => {
-    dispatch(setAction("Log In"));
+    //   dispatch(setAction("Log In"));
   };
 
   const handleRegisterClick = () => {
-    dispatch(setAction("Register"));
+    //   dispatch(setAction("Register"));
   };
 
   return (
     <section className="page">
       <S.topContainer>
-        <div className="hero"></div>
-        <S.hero />
+        <S.hero src={heroImg} alt="Hero Image" />
       </S.topContainer>
       <S.bottomContainer>
         <S.buttonContainer>

@@ -1,6 +1,7 @@
 import React from "react";
 import GenericInput from "../GenericInput/GenericInput.jsx";
 import * as S from "../StyledComponents/styles.jsx";
+import Validation from "../../Validation/Validation.js";
 
 const GenericForm = ({ title, submitButtonText, inputs, onSubmit }) => {
   const handleSubmit = (e) => {
@@ -11,6 +12,12 @@ const GenericForm = ({ title, submitButtonText, inputs, onSubmit }) => {
     const formProps = Object.formEnteries(formData.entries());
     onSubmit(formProps);
   };
+
+
+
+
+
+
   return (
     <S.form onSubmit={handleSubmit} className="generic-from-wrapper" action="">
       <S.formTitle>{title}</S.formTitle>

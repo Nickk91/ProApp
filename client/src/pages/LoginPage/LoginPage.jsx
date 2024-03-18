@@ -8,6 +8,7 @@ const LoginPage = ({ action }) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     console.log(formData);
+    //to : add logic to receive the token from the backend
   };
 
   return (

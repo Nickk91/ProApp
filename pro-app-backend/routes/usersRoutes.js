@@ -11,7 +11,7 @@ import { validateToken } from "../middleware/validateTokenHandler.js";
 const router = express.Router();
 
 //Route to get all users
-router.get("/users", getAllUsers);
+router.get("/", getAllUsers);
 
 //Route to create a new account
 router.post("/register", createUser);

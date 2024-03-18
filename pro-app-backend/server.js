@@ -19,11 +19,14 @@ app.use(express.json());
 // Error handling middleware
 app.use(errorHandler);
 
-// users routes
-app.use("/api/pro-app", usersRoutes);
-
 // projects routes
-app.use("/api/pro-app", projectsRoutes);
+app.use("/api/pro-app/projects", projectsRoutes);
+
+// // users routes
+// app.use("/api/pro-app/", usersRoutes);
+
+// users routes
+app.use("/api/pro-app/users", usersRoutes);
 
 mongoose
   .connect(process.env.MONGO_URI)

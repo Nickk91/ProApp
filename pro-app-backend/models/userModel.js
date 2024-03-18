@@ -22,6 +22,7 @@ const userScheme = new mongoose.Schema({
       message: "Invalid email address",
     },
   },
+
   isAdmin: {
     type: Boolean,
     required: false,

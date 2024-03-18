@@ -22,7 +22,7 @@ export const loginUser = async (req, res) => {
         },
       },
       process.env.ACCESS_TOKEN_SECRET,
-      { expiresIn: "15m" }
+      { expiresIn: "35m" }
     );
     res.status(STATUS_CODE.OK).json({ accessToken });
   } else {
@@ -65,7 +65,7 @@ export const getAllUsers = async (req, res) => {
     console.log("Error fetching users", error);
     res
       .status(STATUS_CODE.INTERNAL_SERVER_ERROR)
-      .json({ error: "Internal Server Error" });
+      .json({ error: "Internal Server Error FOR REALY BRUV" });
   }
 };
 
