@@ -13,11 +13,6 @@ const GenericForm = ({ title, submitButtonText, inputs, onSubmit }) => {
     onSubmit(formProps);
   };
 
-
-
-
-
-
   return (
     <S.form onSubmit={handleSubmit} className="generic-from-wrapper" action="">
       <S.formTitle>{title}</S.formTitle>
@@ -33,10 +28,6 @@ const GenericForm = ({ title, submitButtonText, inputs, onSubmit }) => {
               attributes={input.attributes}
               placeholder={input.placeholder ? input.placeholder : ""}
             />
-
-            {/* {error.email && <p style={{ color: "red" }}>{error.email}</p>}
-            {error.email && <p style={{ color: "red" }}>{error.email}</p>}
-            {error.username && <p style={{ color: "red" }}>{error.username}</p>} */}
           </>
         ))}
         <S.submitButton>{submitButtonText}</S.submitButton>

@@ -8,6 +8,8 @@ import SignupPage from "./pages/SignUp/SignupPage.jsx";
 import AddProjectPage from "./pages/AddProjectPage/AddProjectPage.jsx";
 import LoginPage from "./pages/LoginPage/LoginPage.jsx";
 import RegisterPage from "./pages/RegisterPage/RegisterPage.jsx";
+import AddTaskPage from "./pages/AddTaskProjectPage/AddTaskPage.jsx";
+
 function App() {
   return (
     <>
@@ -31,6 +33,7 @@ function App() {
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/addproject" element={<AddProjectPage />} />
+        <Route path="/addtask" element={<AddTaskPage />} />
       </Routes>
     </>
   );

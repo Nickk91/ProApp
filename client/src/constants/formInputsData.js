@@ -52,8 +52,25 @@ const RegisterFormInputsPartTwo = [
   },
 ];
 
+const addTaskFormInputs = [
+  {
+    name: "task name",
+    type: "text",
+    placeholder: "Task Name",
+    attributes: { required: true, minLength: 1 },
+  },
+  {
+    name: "task description",
+    type: "text",
+    label: "Task description",
+    placeholder: "Task description",
+    attributes: { required: true, minLength: 1 },
+  },
+];
+
 export {
   addProjectFormInputs,
   loginAndRegisterFormInputs,
   RegisterFormInputsPartTwo,
+  addTaskFormInputs,
 };
