@@ -68,6 +68,13 @@ const input = styled.input`
   margin-bottom: 7px;
 `;
 
+const inputBox = styled.input`
+  border: 2px solid black;
+  background-color: white;
+  height: 150px;
+  margin-bottom: 7px;
+`;
+
 const label = styled.label`
   margin-bottom: 7px;
 `;
@@ -81,4 +88,5 @@ export {
   input,
   label,
   p,
+  inputBox,
 };
