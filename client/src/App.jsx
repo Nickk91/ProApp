@@ -9,6 +9,8 @@ import AddProjectPage from "./pages/AddProjectPage/AddProjectPage.jsx";
 import LoginPage from "./pages/LoginPage/LoginPage.jsx";
 import RegisterPage from "./pages/RegisterPage/RegisterPage.jsx";
 import AddTaskPage from "./pages/AddTaskProjectPage/AddTaskPage.jsx";
+import EditTaskPage from "./pages/EditTaskPage.jsx/EditTaskPage.jsx";
+EditTaskPage;
 
 function App() {
   return (
@@ -34,6 +36,7 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/addproject" element={<AddProjectPage />} />
         <Route path="/addtask" element={<AddTaskPage />} />
+        <Route path="edit-task" element={<EditTaskPage />} />
       </Routes>
     </>
   );

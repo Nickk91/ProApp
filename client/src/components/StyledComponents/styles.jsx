@@ -21,21 +21,13 @@ const inputsContainer = styled.div`
   overflow: visible;
 `;
 
-const IconWrapper = styled.div`
+const ReturnIcon = styled.img`
   position: relative;
-
   left: -160px; /* Adjust this value to move the icon horizontally */
   top: 55px; /* Adjust this value to move the icon vertically */
+  width: 20px;
+  height 20px;
 `;
-
-// const ReturnIcon = styled.div`
-//   position: relative;
-//   background: url("../../assets/images/Union.png");
-//   left: -160px; /* Adjust this value to move the icon horizontally */
-//   top: 55px; /* Adjust this value to move the icon vertically */
-//   width: 20px;
-//   height 20px;
-// `;
 
 const p = styled.p`
   margin-top: 30px;
@@ -43,14 +35,6 @@ const p = styled.p`
   font-size: 11px;
   max-width: 330px;
 `;
-
-const ReturnIcon = () => {
-  return (
-    <IconWrapper>
-      <IoReturnUpBack />
-    </IconWrapper>
-  );
-};
 
 const submitButton = styled.button`
   margin-top: 0px;

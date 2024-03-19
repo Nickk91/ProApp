@@ -3,7 +3,8 @@ import * as S from "../../components/StyledComponents/styles.jsx";
 import GenericTaskForm from "../../components/GenericTaskForm/GenericTaskForm.jsx";
 import { addTaskFormInputs } from "../../constants/formInputsData.js";
 import ReturnIcon from "../../assets/images/back_icon.svg";
-const AddTaskPage = () => {
+
+const EditTaskPage = () => {
   const handleFormSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -13,13 +14,13 @@ const AddTaskPage = () => {
     <section className="page">
       <S.ReturnIcon src={ReturnIcon} />
       <GenericTaskForm
-        title="Add Task"
+        title="Edit Task"
         inputs={addTaskFormInputs}
-        submitButtonText="ADD TASK"
+        submitButtonText="EDIT TASK"
         onSubmit={handleFormSubmit}
       />
     </section>
   );
 };
 
-export default AddTaskPage;
+export default EditTaskPage;
