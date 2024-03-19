@@ -6,6 +6,7 @@ const form = styled.form`
   border: yellow 2px solid;
   width: 360px;
   overflow: visible;
+  position: relative;
 `;
 
 const formTitle = styled.div`
@@ -26,7 +27,7 @@ const ReturnIcon = styled.img`
   left: -160px; /* Adjust this value to move the icon horizontally */
   top: 55px; /* Adjust this value to move the icon vertically */
   width: 20px;
-  height 20px;
+  height: 20px;
 `;
 
 const p = styled.p`
@@ -68,7 +69,7 @@ const label = styled.label`
 const statusesContainer = styled.div`
   display: flex;
   flex-direction: row;
-  aligin-items: center;
+  align-items: center;
   justify-content: space-between;
   margin-bottom: 10px;
 `;
@@ -94,6 +95,19 @@ const topContainer = styled.div`
   flex-direction: row;
   justify-content: space-between;
 `;
+const deleteModal = styled.div`
+  position: absoulute;
+  height: 250px;
+  width: 250px;
+  border: 1px solid gray;
+  border-radius: 6px;
+  background: #ffffff;
+  z-index: 999;
+`;
+const delBigger = styled.img`
+  height: 75px;
+  width: 75px;
+`;
 
 export {
   form,
@@ -110,4 +124,6 @@ export {
   statusButtonCasule,
   del,
   topContainer,
+  deleteModal,
+  delBigger,
 };
