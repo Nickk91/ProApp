@@ -5,6 +5,7 @@ const form = styled.form`
   margin-top: 83px;
   border: yellow 2px solid;
   width: 360px;
+  overflow: visible;
 `;
 
 const formTitle = styled.div`
@@ -17,6 +18,7 @@ const inputsContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 3px;
+  overflow: visible;
 `;
 
 const IconWrapper = styled.div`
@@ -79,6 +81,36 @@ const label = styled.label`
   margin-bottom: 7px;
 `;
 
+const statusesContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  aligin-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+`;
+
+const statusButton = styled.img`
+  // height: 50px;
+`;
+const statusButtonCasule = styled.div`
+  background: #d5ddf8;
+  height: 22px;
+  padding-left: 3px;
+  padding-right: 10px;
+  padding-top: 4px;
+  border-radius: 5px;
+`;
+
+const del = styled.img`
+  margin-top: -30px;
+`;
+const topContainer = styled.div`
+  border: orange 2px solid;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`;
+
 export {
   form,
   formTitle,
@@ -89,4 +121,9 @@ export {
   label,
   p,
   inputBox,
+  statusesContainer,
+  statusButton,
+  statusButtonCasule,
+  del,
+  topContainer,
 };
