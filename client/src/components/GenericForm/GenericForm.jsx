@@ -9,8 +9,8 @@ const GenericForm = ({ title, submitButtonText, inputs, onSubmit }) => {
     console.log("Form Element:", e.target);
     const formData = new FormData(e.target);
     console.log("Form Data:", formData);
-    const formProps = Object.formEnteries(formData.entries());
-    onSubmit(formProps);
+    const formProps = Object.fromEntries(formData.entries());
+    onSubmit(e, formProps);
   };
 
   return (
@@ -35,25 +35,5 @@ const GenericForm = ({ title, submitButtonText, inputs, onSubmit }) => {
     </S.form>
   );
 };
-// const loginAndRegisterFormInputs = [
-//   {
-//     name: "email",
-//     type: "email",
-//     // label: "Username",
-
-//     placeholder: "jane@example.com",
-//     attributes: {
-//       required: true,
-//       minLength: 4,
-//     },
-//   },
-//   {
-//     name: "password",
-//     type: "password",
-//     placeholder: "password",
-//     // label: "Password",
-//     attributes: { required: true, minLength: 8 },
-//   },
-// ];
 
 export default GenericForm;
