@@ -10,9 +10,13 @@ import LoginPage from "./pages/LoginPage/LoginPage.jsx";
 import RegisterPage from "./pages/RegisterPage/RegisterPage.jsx";
 import AddTaskPage from "./pages/AddTaskProjectPage/AddTaskPage.jsx";
 import EditTaskPage from "./pages/EditTaskPage.jsx/EditTaskPage.jsx";
+import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute.jsx";
+
 EditTaskPage;
 
 function App() {
+  const isAuthenticated = false;
+
   return (
     <>
       <Helmet>
@@ -27,7 +31,6 @@ function App() {
           rel="stylesheet"
         />
       </Helmet>
-      {/* <h1>{import.meta.env.VITE_BASEURL}</h1> */}
       <Routes>
         <Route path="/" exact element={<HomePage />} />
         <Route path="/loggedout" exact element={<LoggedOutPage />} />
