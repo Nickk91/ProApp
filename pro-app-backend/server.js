@@ -22,6 +22,9 @@ app.use(errorHandler);
 // projects routes
 app.use("/api/pro-app/projects", projectsRoutes);
 
+app.use("/authGood", (req, res, next) => {
+  res.send({ userLevel: 1 });
+});
 // // users routes
 // app.use("/api/pro-app/", usersRoutes);
 

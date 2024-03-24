@@ -1,3 +1,4 @@
+//userModel.js
 import mongoose from "mongoose";
 
 const userScheme = new mongoose.Schema({
@@ -25,12 +26,9 @@ const userScheme = new mongoose.Schema({
 
   isAdmin: {
     type: Boolean,
-    required: false,
     default: false,
   },
-  projects: [
-    { type: mongoose.Schema.Types.ObjectId, ref: "Project" },
-  ],
+  projects: [{ type: mongoose.Schema.Types.ObjectId, ref: "Project" }],
 });
 
 const User = mongoose.model("User", userScheme);

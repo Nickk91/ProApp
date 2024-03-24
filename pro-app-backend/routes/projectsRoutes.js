@@ -19,4 +19,7 @@ router.post("/", addProject);
 
 //Route to get single user by ID
 router.get("/:id", getProjectById);
+
+//Route to get a project by project ID
+router.get("/:id", getProjectById);
 export default router;

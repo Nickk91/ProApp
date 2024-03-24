@@ -19,7 +19,9 @@ const GenericForm = ({ title, submitButtonText, inputs, onSubmit }) => {
       <S.inputsContainer>
         {inputs.map((input, index) => (
           <>
-            {input.label && <S.label>{input.label}</S.label>}
+            {input.label && (
+              <S.label key={`${index} label`}>{input.label}</S.label>
+            )}
             <GenericInput
               key={index}
               type={input.type}

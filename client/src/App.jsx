@@ -11,12 +11,7 @@ import RegisterPage from "./pages/RegisterPage/RegisterPage.jsx";
 import AddTaskPage from "./pages/AddTaskProjectPage/AddTaskPage.jsx";
 import EditTaskPage from "./pages/EditTaskPage.jsx/EditTaskPage.jsx";
 import PrivateRoutes from "./components/PrivateRoutes/PrivateRoutes.jsx";
-
-// const protectedRoute = (page) => {
-//   localStorage.getItem("token", token);
-//   if (token) {
-//   }
-// };
+import ProtectedRoute from "./components/Auth/ProtectedRoute.jsx";
 
 function App() {
   return (
@@ -44,6 +39,10 @@ function App() {
         </Route>
 
         {/* Public routes */}
+        <Route
+          path="/authtest"
+          element={<ProtectedRoute Page={AddTaskPage} typeOfUser={1} />}
+        />
         <Route path="/loggedout" element={<LoggedOutPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/signup" element={<SignupPage />} />

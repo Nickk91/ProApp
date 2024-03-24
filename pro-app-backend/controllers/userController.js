@@ -92,3 +92,38 @@ export const currentUser = async (req, res) => {
   console.log(req.user);
   res.json(req.user);
 };
+
+export const userValidation = async (req, res, next) => {
+  try {
+    const user = await User.findById(req.user.id);
+    if (!user) {
+      return res
+        .status(STATUS_CODE.NOT_FOUND)
+        .json({ message: "User not found" });
+    }
+
+    if (user.isAdmin) {
+      // Admin has access to all projects
+      return next();
+    }
+
+    // Regular user can only access their projects
+    const projectId = req.params.projectId;
+    if (!projectId) {
+      return res
+        .status(STATUS_CODE.BAD_REQUEST)
+        .json({ message: "Project ID is required" });
+    }
+
+    if (!user.projects.map((p) => p.toString()).includes(projectId)) {
+      return res
+        .status(STATUS_CODE.FORBIDDEN)
+        .json({ message: "Access denied" });
+    }
+
+    next();
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
