@@ -10,13 +10,15 @@ import LoginPage from "./pages/LoginPage/LoginPage.jsx";
 import RegisterPage from "./pages/RegisterPage/RegisterPage.jsx";
 import AddTaskPage from "./pages/AddTaskProjectPage/AddTaskPage.jsx";
 import EditTaskPage from "./pages/EditTaskPage.jsx/EditTaskPage.jsx";
-import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute.jsx";
+import PrivateRoutes from "./components/PrivateRoutes/PrivateRoutes.jsx";
 
-EditTaskPage;
+// const protectedRoute = (page) => {
+//   localStorage.getItem("token", token);
+//   if (token) {
+//   }
+// };
 
 function App() {
-  const isAuthenticated = false;
-
   return (
     <>
       <Helmet>
@@ -31,15 +33,21 @@ function App() {
           rel="stylesheet"
         />
       </Helmet>
+      {/* <h1>{import.meta.env.VITE_BASEURL}</h1> */}
       <Routes>
-        <Route path="/" exact element={<HomePage />} />
-        <Route path="/loggedout" exact element={<LoggedOutPage />} />
+        {/* Private routes */}
+        <Route element={<PrivateRoutes />}>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/addproject" element={<AddProjectPage />} />
+          <Route path="/addtask" element={<AddTaskPage />} />
+          <Route path="/edit-task" element={<EditTaskPage />} />
+        </Route>
+
+        {/* Public routes */}
+        <Route path="/loggedout" element={<LoggedOutPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/addproject" element={<AddProjectPage />} />
-        <Route path="/addtask" element={<AddTaskPage />} />
-        <Route path="edit-task" element={<EditTaskPage />} />
       </Routes>
     </>
   );

@@ -18,13 +18,13 @@ const LoginPage = () => {
     e.preventDefault();
     const formData = new FormData(e.target);
     console.log(formData);
-    //to : add logic to receive the token from the backend
+
     const email = formData.get("email");
     const password = formData.get("password");
 
     try {
       const response = await fetch(
-        "http://localhost:3000/api/pro-app/users/login",
+        `${import.meta.env.VITE_BASEURL}/users/login`,
         {
           method: "POST",
           headers: {
@@ -33,6 +33,7 @@ const LoginPage = () => {
           body: JSON.stringify({ email, password }),
         }
       );
+      //to : add logic to receive the token from the backend
 
       if (response.ok) {
         const data = await response.json();
@@ -40,7 +41,7 @@ const LoginPage = () => {
         console.log("RECEVIED TOKEN:", token);
 
         localStorage.setItem("token", token);
-        navigate("/"); // Use navigate instead of history.push
+        navigate("/");
       } else {
         console.error("Login failed");
         //Handle failed login (e.g. display error message to user)

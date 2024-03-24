@@ -4,7 +4,6 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
 export const loginUser = async (req, res) => {
-  console.log("Login controllers");
   const { email, password } = req.body;
   if (!email || !password) {
     res.status(STATUS_CODE.BAD_REQUEST);
@@ -25,7 +24,6 @@ export const loginUser = async (req, res) => {
       { expiresIn: "35m" }
     );
     res.status(STATUS_CODE.OK).json({ accessToken });
-    console.log(accessToken);
   } else {
     res.status(STATUS_CODE.UNAUTHORIZED);
     throw new Error("email or password is not valid");
