@@ -32,7 +32,6 @@ export const loginUser = async (req, res) => {
 
 export const createUser = async (req, res) => {
   try {
-    console.log("CREATING A USER WITH", req.body);
     const saltRounds = 10;
     const hashedPassword = await bcrypt.hash(req.body.password, saltRounds);
 
