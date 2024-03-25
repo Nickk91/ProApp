@@ -13,10 +13,6 @@ import EditTaskPage from "./pages/EditTaskPage.jsx/EditTaskPage.jsx";
 import PrivateRoutes from "./components/PrivateRoutes/PrivateRoutes.jsx";
 import ProtectedRoute from "./components/Auth/ProtectedRoute.jsx";
 import { userAuthLevels } from "./constants/userAuthLevels.js";
-// const userAuthLevels = {
-//   regularUser: 2,
-//   admin: 2,
-// };
 
 function App() {
   return (
@@ -52,7 +48,12 @@ function App() {
         {/* Public routes */}
         <Route
           path="/authtest"
-          element={<ProtectedRoute Page={AddTaskPage} typeOfUser={1} />}
+          element={
+            <ProtectedRoute
+              Page={AddTaskPage}
+              typeOfUser={userAuthLevels.regularUser}
+            />
+          }
         />
         <Route path="/loggedout" element={<LoggedOutPage />} />
         <Route path="/register" element={<RegisterPage />} />

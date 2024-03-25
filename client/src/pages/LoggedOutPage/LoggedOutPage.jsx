@@ -1,22 +1,15 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "../style/pagestyle.css";
 import "../../assets/images/Group.png";
-import { useDispatch } from "react-redux";
-// import { setAction } from "../../slices/actionSlice.js";
 import heroImg from "../../assets/images/Group.png";
-
 import * as S from "./styles.js";
 
 const LoggedOutPage = () => {
-  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const handleLoginClick = () => {
-    //   dispatch(setAction("Log In"));
-  };
-
-  const handleRegisterClick = () => {
-    //   dispatch(setAction("Register"));
+  const handleClick = (value) => {
+    navigate(`/${value}`);
   };
 
   return (
@@ -26,58 +19,14 @@ const LoggedOutPage = () => {
       </S.topContainer>
       <S.bottomContainer>
         <S.buttonContainer>
-          <S.btnLogin
-            to={{
-              pathname: "/login",
-            }}
-            className="login btn"
-            onClick={handleLoginClick}
-          >
-            LOG IN
-          </S.btnLogin>
-          <S.btnRegister
-            to={{
-              pathname: "/register",
-            }}
-            className="register btn"
-            onClick={handleRegisterClick}
-          >
+          <S.btnLogin onClick={() => handleClick("login")}>LOG IN</S.btnLogin>
+          <S.btnRegister onClick={() => handleClick("register")}>
             REGISTER
           </S.btnRegister>
         </S.buttonContainer>
       </S.bottomContainer>
-
-      {/* <div className="line"></div> */}
     </section>
   );
 };
 
 export default LoggedOutPage;
-
-{
-  /* <S.bottomContainer>
-<S.buttonContainer>
-  <S.btnLogin>
-    <Link
-      to={{
-        pathname: "/login",
-      }}
-      className="login btn"
-      onClick={handleLoginClick}
-    >
-      LOG IN
-    </Link>
-  </S.btnLogin>
-  <S.btnRegister>
-    <Link
-      to={{
-        pathname: "/register",
-      }}
-      className="register btn"
-      onClick={handleRegisterClick}
-    >
-      REGISTER
-    </Link>
-  </S.btnRegister>
-</S.buttonContainer> */
-}

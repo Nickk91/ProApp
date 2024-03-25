@@ -137,3 +137,27 @@ export const userValidation = async (req, res, next) => {
     res.status(500).json({ message: "Server error" });
   }
 };
+
+export const userExist = async (req, res) => {
+  const { email, password } = req.body;
+  if (!email || !password) {
+    return res
+      .status(STATUS_CODE.BAD_REQUEST)
+      .json({ error: "All fields are mandatory!" });
+  }
+  if (email === password) {
+    return res
+      .status(STATUS_CODE.BAD_REQUEST)
+      .json({ error: "Your email and password must be different" });
+  }
+
+  const user = await User.findOne({ email: email.toLowerCase() });
+
+  if (user) {
+    return res
+      .status(STATUS_CODE.BAD_REQUEST)
+      .json({ error: "We already have a user with this email" });
+  } else {
+    return res.status(STATUS_CODE.OK).json({ message: "User does not exist" });
+  }
+};
