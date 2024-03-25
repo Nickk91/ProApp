@@ -82,3 +82,10 @@ export const addProject = async (req, res) => {
     console.log(STATUS_CODE.INTERNAL_SERVER_ERROR);
   }
 };
+
+// export const editProject = async (req, res)=>{
+//   try{
+//     console.log("EDITING A PROJECT WITH", req.body);
+
+//   }
+// }

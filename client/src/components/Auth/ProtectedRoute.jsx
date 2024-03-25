@@ -8,6 +8,8 @@ const ProtectedRoute = ({ Page, typeOfUser }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    const token = localStorage.getItem("token");
+    console.log(`in the Priavte Routes compenent ${token}`);
     const getUserAuth = async () => {
       try {
         const level = await axios.get("http://localhost:3000/authGood");

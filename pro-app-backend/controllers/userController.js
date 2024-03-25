@@ -89,8 +89,19 @@ export const getUserById = async (req, res) => {
 //access private
 
 export const currentUser = async (req, res) => {
-  console.log(req.user);
-  res.json(req.user);
+  try {
+    console.log(req.user);
+    const user = await User.findById(req.user._id);
+    if (!user) {
+      res.status(404);
+      throw new Error("User dosen't exist");
+    }
+    const { _id, email, username, isAdmin } = user;
+    const userAuthLevel = isAdmin ? 2 : 1;
+    res.json({ _id, email, username, userAuthLevel });
+  } catch (error) {
+    next();
+  }
 };
 
 export const userValidation = async (req, res, next) => {
@@ -103,7 +114,6 @@ export const userValidation = async (req, res, next) => {
     }
 
     if (user.isAdmin) {
-      // Admin has access to all projects
       return next();
     }
 
