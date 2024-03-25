@@ -20,16 +20,17 @@ app.use(express.json());
 app.use(errorHandler);
 
 // projects routes
+app.use("/api/pro-app/users", usersRoutes);
 app.use("/api/pro-app/projects", projectsRoutes);
 
 app.use("/authGood", (req, res, next) => {
   res.send({ userLevel: 1 });
 });
-// // users routes
-// app.use("/api/pro-app/", usersRoutes);
+
+// // Apply validateToken middleware to routes that require authentication
+// app.use("/api/pro-app", validateToken);
 
 // users routes
-app.use("/api/pro-app/users", usersRoutes);
 
 mongoose
   .connect(process.env.MONGO_URI)

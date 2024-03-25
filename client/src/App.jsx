@@ -12,6 +12,11 @@ import AddTaskPage from "./pages/AddTaskProjectPage/AddTaskPage.jsx";
 import EditTaskPage from "./pages/EditTaskPage.jsx/EditTaskPage.jsx";
 import PrivateRoutes from "./components/PrivateRoutes/PrivateRoutes.jsx";
 import ProtectedRoute from "./components/Auth/ProtectedRoute.jsx";
+import { userAuthLevels } from "./constants/userAuthLevels.js";
+// const userAuthLevels = {
+//   regularUser: 2,
+//   admin: 2,
+// };
 
 function App() {
   return (
@@ -31,11 +36,17 @@ function App() {
       {/* <h1>{import.meta.env.VITE_BASEURL}</h1> */}
       <Routes>
         {/* Private routes */}
-        <Route element={<PrivateRoutes />}>
+        <Route
+          element={<PrivateRoutes authLevel={userAuthLevels.regularUser} />}
+        >
           <Route path="/" element={<HomePage />} />
           <Route path="/addproject" element={<AddProjectPage />} />
           <Route path="/addtask" element={<AddTaskPage />} />
+        </Route>
+        {/* Private routes for admin */}
+        <Route element={<PrivateRoutes authLevel={userAuthLevels.admin} />}>
           <Route path="/edit-task" element={<EditTaskPage />} />
+          {/*  <Route path="/admin-only" element={<AdminsPage />} /> */}
         </Route>
 
         {/* Public routes */}

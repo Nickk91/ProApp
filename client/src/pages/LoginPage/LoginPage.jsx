@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom"; // Import useNavigate
 import GenericForm from "../../components/GenericForm/GenericForm.jsx";
 import { loginAndRegisterFormInputs } from "../../constants/formInputsData.js";
@@ -6,12 +6,14 @@ import * as S from "../../components/StyledComponents/styles.jsx";
 import ReturnIcon from "../../assets/images/back_icon.svg";
 
 const LoginPage = () => {
+  const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate(); // Initialize useNavigate
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
       navigate("/"); // Use navigate instead of history.push
     }
+    setIsLoading(false);
   }, []);
 
   const handleFormSubmit = async (e) => {
@@ -53,16 +55,22 @@ const LoginPage = () => {
   };
 
   return (
-    <section className="page">
-      <S.ReturnIcon src={ReturnIcon} />
+    <>
+      {isLoading ? (
+        <h1>Loading...</h1>
+      ) : (
+        <section className="page">
+          <S.ReturnIcon src={ReturnIcon} />
 
-      <GenericForm
-        title="Log in"
-        inputs={loginAndRegisterFormInputs}
-        submitButtonText="LOG IN"
-        onSubmit={handleFormSubmit}
-      />
-    </section>
+          <GenericForm
+            title="Log in"
+            inputs={loginAndRegisterFormInputs}
+            submitButtonText="LOG IN"
+            onSubmit={handleFormSubmit}
+          />
+        </section>
+      )}
+    </>
   );
 };
 

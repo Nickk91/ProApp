@@ -17,7 +17,7 @@ router.get("/", getAllProjects);
 //Route to create a new account
 router.post("/", addProject);
 
-//Route to get single user by ID
+//Route to edit a project by project id number
 router.get("/:id", getProjectById);
 
 //Route to get a project by project ID
