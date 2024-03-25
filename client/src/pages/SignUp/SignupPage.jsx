@@ -2,8 +2,12 @@ import React from "react";
 import GenericForm from "../../components/GenericForm/GenericForm.jsx";
 import { RegisterFormInputsPartTwo } from "../../constants/formInputsData.js";
 import * as S from "../../components/StyledComponents/styles.jsx";
+import ReturnIcon from "../../assets/images/back_icon.svg";
 
-const SignupPage = ({ action }) => {
+const SignupPage = () => {
+  const handleClick = () => {
+    navigate("/register");
+  };
   const handleFormSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -12,7 +16,7 @@ const SignupPage = ({ action }) => {
 
   return (
     <section className="page">
-      <S.ReturnIcon />
+      <S.ReturnIcon src={ReturnIcon} onClick={handleClick} />
       <GenericForm
         title="Register"
         inputs={RegisterFormInputsPartTwo}

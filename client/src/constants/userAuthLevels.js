@@ -1,5 +1,5 @@
 const userAuthLevels = {
-  regularUser: 2,
+  regularUser: 1,
   admin: 2,
 };
 

@@ -5,6 +5,7 @@ import {
   getAllUsers,
   getUserById,
   loginUser,
+  userExist,
 } from "../controllers/userController.js";
 import { validateToken } from "../middleware/validateTokenHandler.js";
 
@@ -13,8 +14,11 @@ const router = express.Router();
 //Route to get all users
 router.get("/", getAllUsers);
 
-//Route to create a new account
+//Route to check if user exists
 router.post("/register", createUser);
+
+//Route to create a new account
+router.post("/userexist", userExist);
 
 router.post("/login", loginUser);
 

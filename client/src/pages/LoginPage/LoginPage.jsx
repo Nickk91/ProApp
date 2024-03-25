@@ -7,11 +7,11 @@ import ReturnIcon from "../../assets/images/back_icon.svg";
 
 const LoginPage = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const navigate = useNavigate(); // Initialize useNavigate
+  const navigate = useNavigate();
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
-      navigate("/"); // Use navigate instead of history.push
+      navigate("/");
     }
     setIsLoading(false);
   }, []);
@@ -35,22 +35,18 @@ const LoginPage = () => {
           body: JSON.stringify({ email, password }),
         }
       );
-      //to : add logic to receive the token from the backend
 
       if (response.ok) {
         const data = await response.json();
         const token = data.accessToken;
-        console.log("RECEVIED TOKEN:", token);
 
         localStorage.setItem("token", token);
         navigate("/");
       } else {
         console.error("Login failed");
-        //Handle failed login (e.g. display error message to user)
       }
     } catch (error) {
       console.error("Error;", error);
-      //Handle error (e.g display error mew)
     }
   };
 
