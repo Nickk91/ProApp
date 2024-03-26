@@ -109,6 +109,12 @@ const delBigger = styled.img`
   width: 75px;
 `;
 
+const errorText = styled.p`
+  width: 100%;
+  color: red;
+  font-size: 12px;
+`;
+
 export {
   form,
   formTitle,
@@ -126,4 +132,5 @@ export {
   topContainer,
   deleteModal,
   delBigger,
+  errorText,
 };

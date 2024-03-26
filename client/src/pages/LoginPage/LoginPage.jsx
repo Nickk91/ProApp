@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
+import { useNavigate } from "react-router-dom";
 import GenericForm from "../../components/GenericForm/GenericForm.jsx";
 import { loginAndRegisterFormInputs } from "../../constants/formInputsData.js";
 import * as S from "../../components/StyledComponents/styles.jsx";
@@ -7,6 +7,8 @@ import ReturnIcon from "../../assets/images/back_icon.svg";
 
 const LoginPage = () => {
   const [isLoading, setIsLoading] = useState(true);
+  const [displayError, setDisplayError] = useState(false);
+
   const navigate = useNavigate();
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -47,6 +49,7 @@ const LoginPage = () => {
       }
     } catch (error) {
       console.error("Error;", error);
+      setDisplayError(true);
     }
   };
 
@@ -57,12 +60,12 @@ const LoginPage = () => {
       ) : (
         <section className="page">
           <S.ReturnIcon src={ReturnIcon} />
-
           <GenericForm
             title="Log in"
             inputs={loginAndRegisterFormInputs}
             submitButtonText="LOG IN"
             onSubmit={handleFormSubmit}
+            displayError={displayError}
           />
         </section>
       )}
