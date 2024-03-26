@@ -1,9 +1,15 @@
 import React from "react";
 import GenericInput from "../GenericInput/GenericInput.jsx";
 import * as S from "../StyledComponents/styles.jsx";
-import Validation from "../../Validation/Validation.js";
+import validateForm from "../../Validation/validateForm.js";
 
-const GenericForm = ({ title, submitButtonText, inputs, onSubmit }) => {
+const GenericForm = ({
+  title,
+  submitButtonText,
+  inputs,
+  onSubmit,
+  displayError,
+}) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Form Element:", e.target);
@@ -12,6 +18,8 @@ const GenericForm = ({ title, submitButtonText, inputs, onSubmit }) => {
     const formProps = Object.fromEntries(formData.entries());
     onSubmit(e, formProps);
   };
+
+  const errors = validateForm({});
 
   return (
     <S.form onSubmit={handleSubmit} className="generic-from-wrapper" action="">
@@ -29,6 +37,8 @@ const GenericForm = ({ title, submitButtonText, inputs, onSubmit }) => {
               name={input.name}
               attributes={input.attributes}
               placeholder={input.placeholder ? input.placeholder : ""}
+              error={errors[input.name]}
+              displayError={displayError}
             />
           </>
         ))}
@@ -37,25 +47,5 @@ const GenericForm = ({ title, submitButtonText, inputs, onSubmit }) => {
     </S.form>
   );
 };
-// const loginAndRegisterFormInputs = [
-//   {
-//     name: "email",
-//     type: "email",
-//     // label: "Username",
-
-//     placeholder: "jane@example.com",
-//     attributes: {
-//       required: true,
-//       minLength: 4,
-//     },
-//   },
-//   {
-//     name: "password",
-//     type: "password",
-//     placeholder: "password",
-//     // label: "Password",
-//     attributes: { required: true, minLength: 8 },
-//   },
-// ];
 
 export default GenericForm;

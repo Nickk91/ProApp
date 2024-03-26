@@ -1,7 +1,15 @@
 import React from "react";
 import * as S from "../StyledComponents/styles.jsx";
 
-const GenericInput = ({ label, type, name, placeholder, attributes = {} }) => {
+const GenericInput = ({
+  label,
+  type,
+  name,
+  placeholder,
+  error,
+  displayError,
+  attributes = {},
+}) => {
   return (
     <>
       {label && <S.label htmlFor={name}></S.label>}
@@ -12,6 +20,7 @@ const GenericInput = ({ label, type, name, placeholder, attributes = {} }) => {
         id={name}
         {...attributes}
       />
+      {displayError && <S.errorText>{error}</S.errorText>}
     </>
   );
 };
