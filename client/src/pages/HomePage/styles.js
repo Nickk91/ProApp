@@ -17,8 +17,7 @@ const h2 = styled.h2`
   font-size: 25px;
 `;
 const addLogo = styled.img`
-margin-top: 30px;
-width="60" height="60"
+  margin-top: 30px;
 `;
 
 export { formTitle, hero, h2, addLogo };
