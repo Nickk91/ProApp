@@ -2,7 +2,7 @@ import React from "react";
 import "../style/pagestyle.css";
 import * as S from "./styles.js";
 import heroImg from "../../assets/images/NoProjects.svg";
-import addLogo from "../../assets/images/icon _Plus_Circle_.svg";
+import addLogo from "../../assets/images/icon_Plus_Circle_.svg";
 
 const HomePage = () => {
   return (

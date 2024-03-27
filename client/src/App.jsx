@@ -13,6 +13,7 @@ import EditTaskPage from "./pages/EditTaskPage.jsx/EditTaskPage.jsx";
 import PrivateRoutes from "./components/PrivateRoutes/PrivateRoutes.jsx";
 import ProtectedRoute from "./components/Auth/ProtectedRoute.jsx";
 import { userAuthLevels } from "./constants/userAuthLevels.js";
+import ProjectPage from "./pages/ProjectPage/ProjectPage.jsx";
 
 function App() {
   return (
@@ -59,6 +60,7 @@ function App() {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/project" element={<ProjectPage />} />
       </Routes>
     </>
   );
