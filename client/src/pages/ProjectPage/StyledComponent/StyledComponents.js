@@ -12,21 +12,21 @@ const projectImg = styled.img`
 `;
 
 const statusIconInProg = styled.div`
-  height: 10px;
-  width: 10px;
+  height: 14px;
+  width: 14px;
   background-color: #ff9900;
   border-radius: 50%;
 `;
 const statusIconDone = styled.div`
-  height: 10px;
-  width: 10px;
+  height: 14px;
+  width: 14px;
   background-color: #03d60c;
   border-radius: 50%;
 `;
 
 const statusIconTodo = styled.div`
-  height: 10px;
-  width: 10px;
+  height: 14px;
+  width: 14px;
   background-color: #a1a1a1;
   border-radius: 50%;
 `;
@@ -80,7 +80,10 @@ const container = styled.div`
 const selectDiv = styled.div`
   width: 100%;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
+  border: 1px solid black;
+  justify-content: flex-start;
+  align-items: center;
 `;
 
 const taskStatus = styled.div`
@@ -92,6 +95,20 @@ const taskStatus = styled.div`
   justify-content: space-between;
   padding-top: 5px;
 `;
+
+const taskStatusExpanded = styled.div`
+  display: flex;
+  flex-direction: row;
+  border: 1px solid black;
+  font-size: 13px;
+  font-weight: bold;
+  justify-content: space-between;
+  padding-top: 5px;
+  height: 100px;
+  align-items: flex-end;
+  position: relative;
+`;
+
 const statusWrapper = styled.div`
   display: flex;
   flex-direction: row;
@@ -102,13 +119,26 @@ const taskList = styled.ul`
 `;
 const listItem = styled.li`
   border: 1px solid yellow;
-  padding-top: 10px;
+  padding-top: 15px;
   width: 99%;
 `;
 
 const taskName = styled.h3``;
 
-const arrowIcon = styled.img``;
+const arrowIconUp = styled.img`
+  height: 15px;
+  transform: rotate(180deg);
+`;
+
+const arrowIconDown = styled.img`
+  height: 15px;
+`;
+
+const taskDescription = styled.div`
+  position: absolute;
+  border: solid 1px red;
+  top: 10px;
+`;
 
 export {
   projectTitle,
@@ -126,8 +156,11 @@ export {
   selectDiv,
   taskStatus,
   taskName,
-  arrowIcon,
+  arrowIconUp,
+  arrowIconDown,
   statusWrapper,
   taskList,
   listItem,
+  taskStatusExpanded,
+  taskDescription,
 };

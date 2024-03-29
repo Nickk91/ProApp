@@ -1,53 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import * as S from "./StyledComponent/StyledComponents.js";
 import trash from "../../assets/images/trash_icon.svg";
 import addTask from "../../assets/images/icon_Plus_Circle_.svg";
-import downIcon from "../../assets/images/icon_chevron_down.svg";
+import arrowIcon from "../../assets/images/icon_chevron_up.svg";
+import tasks from "../../constants/data.js";
 
 const ProjectPage = () => {
+  const [selectedValue, setSelectedValue] = useState("IN PROGRESS");
+  const [extendedTaskList, setExtendedTaskList] = useState([]);
+
   const src = "https://cdn-icons-png.flaticon.com/512/4345/4345800.png";
-  const tasks = [
-    {
-      name: "Create HomePage",
-      description: "bla bla bla bla bla bla bla bla",
-      status: "TODO",
-    },
-    {
-      name: "Create Schema",
-      description: "bla bla bla bla bla bla bla bla",
-      status: "TODO",
-    },
-    {
-      name: "Add Button HomePage",
-      description: "In home page add a button with the text 'Add'",
-      status: "TODO",
-    },
-    {
-      name: "Create LoginPage",
-      description: "bla bla bla bla bla bla bla bla",
-      status: "IN PROGRESS",
-    },
-    {
-      name: "Create Login button",
-      description: "bla bla bla bla bla bla bla bla",
-      status: "IN PROGRESS",
-    },
-    {
-      name: "Create Route for login",
-      description: "In the backend bla bla bla bla bla bla'",
-      status: "DONE",
-    },
-    {
-      name: "Start a new node server",
-      description: "bla bla bla bla bla bla bla bla",
-      status: "DONE",
-    },
-    {
-      name: "Create a new Vite Project",
-      description: "bla bla bla bla bla bla bla bla",
-      status: "DONE",
-    },
-  ];
+
+  const handleExtendTask = (i) => {
+    setExtendedTaskList((extendedTaskList) =>
+      extendedTaskList.includes(i)
+        ? extendedTaskList.filter((item) => item !== i)
+        : [...extendedTaskList, i]
+    );
+  };
+
   return (
     <S.page>
       <S.topDiv>
@@ -56,15 +27,21 @@ const ProjectPage = () => {
       </S.topDiv>
       <S.container>
         <S.selectDiv>
+          {selectedValue === "IN PROGRESS" && <S.statusIconInProg />}
+          {selectedValue === "TODO" && <S.statusIconTodo />}
+          {selectedValue === "DONE" && <S.statusIconDone />}
           <select
             style={{
               width: "130px",
               borderWidth: 0,
               fontWeight: "600",
               marginLeft: "6px",
+              fontSize: "14px",
             }}
             name="tasks"
             id="tasks"
+            value={selectedValue}
+            onChange={(e) => setSelectedValue(e.target.value)}
           >
             <option value="IN PROGRESS">IN PROGRESS</option>
             <option value="TODO">TODO</option>
@@ -77,7 +54,7 @@ const ProjectPage = () => {
 
       <S.tasksHeader>
         <h2>TASKS</h2>
-        <S.addTaskIcon src={addTask} />
+        <S.addTaskIcon src={addTask} onClick={addTask} />
       </S.tasksHeader>
 
       <S.tasksContainer>
@@ -85,20 +62,50 @@ const ProjectPage = () => {
           {tasks.map((task, i) => (
             <S.listItem key={i}>
               <p>{task.name}</p>
-              <S.taskStatus>
-                <S.statusWrapper>
-                  {task.status === "IN PROGRESS" ? (
-                    <S.statusIconInProg />
-                  ) : task.status === "TODO" ? (
-                    <S.statusIconTodo />
-                  ) : (
-                    <S.statusIconDone />
-                  )}
-                  {task.status}
-                </S.statusWrapper>
 
-                <S.arrowIcon src={downIcon} />
-              </S.taskStatus>
+              {extendedTaskList.includes(i) ? (
+                <S.taskStatusExpanded key={i}>
+                  <S.statusWrapper>
+                    {task.status === "IN PROGRESS" ? (
+                      <S.statusIconInProg />
+                    ) : task.status === "TODO" ? (
+                      <S.statusIconTodo />
+                    ) : (
+                      <S.statusIconDone />
+                    )}
+                    {task.status}
+                  </S.statusWrapper>
+                  <S.taskDescription> {task.description}</S.taskDescription>
+
+                  <S.arrowIconUp
+                    onClick={() => {
+                      handleExtendTask(i);
+                    }}
+                    src={arrowIcon}
+                  />
+                </S.taskStatusExpanded>
+              ) : (
+                <S.taskStatus key={i}>
+                  <S.statusWrapper>
+                    {task.status === "IN PROGRESS" ? (
+                      <S.statusIconInProg />
+                    ) : task.status === "TODO" ? (
+                      <S.statusIconTodo />
+                    ) : (
+                      <S.statusIconDone />
+                    )}
+
+                    {task.status}
+                  </S.statusWrapper>
+
+                  <S.arrowIconDown
+                    onClick={() => {
+                      handleExtendTask(i);
+                    }}
+                    src={arrowIcon}
+                  />
+                </S.taskStatus>
+              )}
             </S.listItem>
           ))}
         </S.taskList>
@@ -106,9 +113,5 @@ const ProjectPage = () => {
     </S.page>
   );
 };
-
-// statusIconInProg,
-// statusIconDone,
-// statusIconTodo,
 
 export default ProjectPage;
