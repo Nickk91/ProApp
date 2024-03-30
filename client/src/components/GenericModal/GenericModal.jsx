@@ -1,7 +1,13 @@
 import React from "react";
 import * as S from "./GenericModalStyles.js";
 import trash from "../../assets/images/trash_icon.svg";
-export default function GenericModal({ children, isOpen, onRequestClose }) {
+export default function GenericModal({
+  children,
+  isOpen,
+  onRequestClose,
+  toDelete,
+  closeModal,
+}) {
   return (
     <>
       <S.FormContainer>
@@ -11,11 +17,11 @@ export default function GenericModal({ children, isOpen, onRequestClose }) {
               <S.ModalBody onClick={(e) => e.stopPropagation()}>
                 <S.delBigger src={trash} />
                 <S.modalText>
-                  Are you sure you want to delete this task?
+                  Are you sure you want to delete this {toDelete}?
                 </S.modalText>
                 <S.btnsContainer>
                   <S.yesBtn>YES</S.yesBtn>
-                  <S.noBtn>NO</S.noBtn>
+                  <S.noBtn onClick={onRequestClose}>NO</S.noBtn>
                 </S.btnsContainer>{" "}
                 {/* <S.XButton onClick={onRequestClose}>X</S.XButton> */}
               </S.ModalBody>

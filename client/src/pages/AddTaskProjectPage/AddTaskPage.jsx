@@ -14,6 +14,7 @@ const AddTaskPage = () => {
       <S.ReturnIcon src={ReturnIcon} />
       <GenericTaskForm
         title="Add Task"
+        toDelete="task"
         inputs={addTaskFormInputs}
         submitButtonText="ADD TASK"
         onSubmit={handleFormSubmit}

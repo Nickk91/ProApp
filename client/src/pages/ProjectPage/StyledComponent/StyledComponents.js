@@ -138,6 +138,8 @@ const taskDescription = styled.div`
   position: absolute;
   border: solid 1px red;
   top: 10px;
+  color: #a1a1a1;
+  font-size: 15px;
 `;
 
 export {
