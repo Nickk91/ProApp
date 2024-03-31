@@ -3,14 +3,24 @@ import "../style/pagestyle.css";
 import * as S from "./styles.js";
 import heroImg from "../../assets/images/NoProjects.svg";
 import addLogo from "../../assets/images/icon_Plus_Circle_.svg";
+import { useNavigate } from "react-router-dom";
 
 const HomePage = () => {
+  const navigate = useNavigate();
+
+  const handleAddProject = () => {
+    navigate("/addproject");
+  };
   return (
     <section className="page">
       <S.formTitle>My Projects</S.formTitle>
       <S.hero src={heroImg} alt="Hero Image of no projects" />
       <S.h2>Add your first project</S.h2>
-      <S.addLogo src={addLogo} alt="Hero Image of no projects" />
+      <S.addLogo
+        src={addLogo}
+        onClick={handleAddProject}
+        alt="Hero Image of no projects"
+      />
     </section>
   );
 };

@@ -114,6 +114,19 @@ const errorText = styled.p`
   color: red;
   font-size: 12px;
 `;
+const page = styled.div`
+  display: flex;
+  flex-direction: column;
+  border: solid black 2px;
+  align-items: center;
+`;
+
+const projectTitle = styled.div`
+  /* padding-bottom: 22px; */
+  font-size: 35px;
+  margin-left: -150px;
+  margin-top: 50px;
+`;
 
 export {
   form,
@@ -133,4 +146,6 @@ export {
   deleteModal,
   delBigger,
   errorText,
+  page,
+  projectTitle,
 };
