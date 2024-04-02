@@ -7,7 +7,7 @@ const addProjectFormInputs = [
     attributes: { required: true, minLength: 1 },
   },
   {
-    name: "project description",
+    name: "Project description",
     type: "text",
     label: "Project description",
     placeholder: "project description",

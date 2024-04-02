@@ -14,6 +14,21 @@ export const getAllProjects = async (req, res) => {
   }
 };
 
+export const getProjectsByUserId = async (req, res) => {
+  console.log(req.user._id);
+
+  try {
+    const projects = await Project.find({ user: req.user._id });
+    console.log(projects);
+    res.json(projects);
+  } catch (error) {
+    console.log("Error fetching projects:", error);
+    res
+      .status(STATUS_CODE.INTERNAL_SERVER_ERROR)
+      .json({ error: "Internal Server Error ssss" });
+  }
+};
+
 export const getProjectById = async (req, res) => {
   try {
     const { id } = req.params;
@@ -60,19 +75,16 @@ export const deleteProjectById = async (req, res) => {
 export const addProject = async (req, res) => {
   try {
     console.log("CREATING A PROJECT WITH", req.body);
-
+    console.log("ID", req.user._id);
     const project = await Project.create({
       projectName: req.body.projectName,
       projectDescription: req.body.projectDescription,
       projectImage: req.body.projectImage,
-      projectStatus: req.body.projectStatus,
-      user: req.body.user,
+      // projectStatus: req.body.projectStatus,
+      user: req.user._id,
     });
 
-    const newProject = await Project.findById(project._id).populate(
-      "user",
-      "-password"
-    );
+    const newProject = await Project.findById(project._id).populate("user");
 
     res.status(STATUS_CODE.CREATED).send(newProject);
   } catch (error) {
@@ -82,10 +94,3 @@ export const addProject = async (req, res) => {
     console.log(STATUS_CODE.INTERNAL_SERVER_ERROR);
   }
 };
-
-// export const editProject = async (req, res)=>{
-//   try{
-//     console.log("EDITING A PROJECT WITH", req.body);
-
-//   }
-// }

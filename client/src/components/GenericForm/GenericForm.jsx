@@ -1,3 +1,5 @@
+//
+
 import React from "react";
 import GenericInput from "../GenericInput/GenericInput.jsx";
 import * as S from "../StyledComponents/styles.jsx";
@@ -28,10 +30,11 @@ const GenericForm = ({
         {inputs.map((input, index) => (
           <>
             {input.label && (
-              <S.label key={`${index} label`}>{input.label}</S.label>
+              // <S.label key={`${index} label`}>{input.label}</S.label>
+              <S.label>{input.label}</S.label>
             )}
             <GenericInput
-              key={index}
+              // key={index}
               type={input.type}
               label={input.label}
               name={input.name}

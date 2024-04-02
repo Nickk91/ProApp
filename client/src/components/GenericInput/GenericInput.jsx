@@ -1,3 +1,5 @@
+//GenericInput.jsx
+
 import React from "react";
 import * as S from "../StyledComponents/styles.jsx";
 
