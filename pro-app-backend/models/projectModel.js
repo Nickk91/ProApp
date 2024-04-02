@@ -2,7 +2,7 @@
 import mongoose from "mongoose";
 
 const projectScheme = new mongoose.Schema({
-  owner: {
+  user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
     required: true,
@@ -36,7 +36,7 @@ const projectScheme = new mongoose.Schema({
   projectStatus: {
     type: String,
     enum: ["todo", "in progress", "done"],
-    required: [true, "Must provide project status"],
+    default: "todo",
   },
   projectTasks: [
     {
@@ -55,7 +55,7 @@ const projectScheme = new mongoose.Schema({
       statues: {
         type: String,
         enum: ["todo", "in progress", "done"],
-        required: true,
+
         default: "todo",
       },
     },

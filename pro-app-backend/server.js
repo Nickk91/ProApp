@@ -20,8 +20,11 @@ app.use(express.json());
 app.use(errorHandler);
 
 // projects routes
-app.use("/api/pro-app/users", usersRoutes);
+
 app.use("/api/pro-app/projects", projectsRoutes);
+
+// users routes
+app.use("/api/pro-app/users", usersRoutes);
 
 app.use("/authGood", (req, res, next) => {
   res.send({ userLevel: 1 });

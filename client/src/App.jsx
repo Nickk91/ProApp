@@ -1,5 +1,4 @@
 import "./App.css";
-import Counter from "./components/Counter/Counter.jsx";
 import { Routes, Route } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import HomePage from "./pages/HomePage/HomePage.jsx";
@@ -14,6 +13,8 @@ import PrivateRoutes from "./components/PrivateRoutes/PrivateRoutes.jsx";
 import ProtectedRoute from "./components/Auth/ProtectedRoute.jsx";
 import { userAuthLevels } from "./constants/userAuthLevels.js";
 import ProjectPage from "./pages/ProjectPage/ProjectPage.jsx";
+import MyProjects from "./pages/MyProjects/MyProjects.jsx";
+import Userpage from "./pages/UserPage/Userpage.jsx";
 
 function App() {
   return (
@@ -39,10 +40,12 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/addproject" element={<AddProjectPage />} />
           <Route path="/addtask" element={<AddTaskPage />} />
+          {/* <Route path="/projects" element={<ProjectListPage />} /> */}
         </Route>
         {/* Private routes for admin */}
         <Route element={<PrivateRoutes authLevel={userAuthLevels.admin} />}>
           <Route path="/edit-task" element={<EditTaskPage />} />
+          <Route path="/userpage" element={<Userpage />} />
           {/*  <Route path="/admin-only" element={<AdminsPage />} /> */}
         </Route>
 
@@ -61,6 +64,7 @@ function App() {
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/project" element={<ProjectPage />} />
+        <Route path="/myprojects" element={<MyProjects />} />
       </Routes>
     </>
   );

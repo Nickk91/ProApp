@@ -3,11 +3,34 @@ import * as S from "./StyledComponent/StyledComponents.js";
 import trash from "../../assets/images/trash_icon.svg";
 import addTask from "../../assets/images/icon_Plus_Circle_.svg";
 import arrowIcon from "../../assets/images/icon_chevron_up.svg";
-import tasks from "../../constants/data.js";
+import { tasks } from "../../constants/data.js";
+import GenericModal from "../../components/GenericModal/GenericModal.jsx";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const ProjectPage = () => {
   const [selectedValue, setSelectedValue] = useState("IN PROGRESS");
   const [extendedTaskList, setExtendedTaskList] = useState([]);
+  const [userType, setUserType] = useState("Admin");
+  let username = "ELADJMC_82";
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const navigate = useNavigate();
+
+  const addTaskFunc = () => {
+    navigate("/addtask");
+  };
+
+  const handleUser = () => {
+    navigate("/userpage");
+  };
 
   const src = "https://cdn-icons-png.flaticon.com/512/4345/4345800.png";
 
@@ -23,7 +46,13 @@ const ProjectPage = () => {
     <S.page>
       <S.topDiv>
         <S.projectTitle>Harmony</S.projectTitle>
-        <S.trashIcon src={trash} />
+        {userType === "Admin" ? (
+          <S.userNameButton onClick={handleUser}>
+            <strong>{username}</strong>
+          </S.userNameButton>
+        ) : (
+          <S.trashIcon src={trash} onClick={openModal} />
+        )}
       </S.topDiv>
       <S.container>
         <S.selectDiv>
@@ -54,7 +83,7 @@ const ProjectPage = () => {
 
       <S.tasksHeader>
         <h2>TASKS</h2>
-        <S.addTaskIcon src={addTask} onClick={addTask} />
+        <S.addTaskIcon src={addTask} onClick={addTaskFunc} />
       </S.tasksHeader>
 
       <S.tasksContainer>
@@ -110,6 +139,13 @@ const ProjectPage = () => {
           ))}
         </S.taskList>
       </S.tasksContainer>
+      <GenericModal
+        toDelete="project"
+        isOpen={isModalOpen}
+        onRequestClose={closeModal}
+      >
+        <p>something</p>
+      </GenericModal>
     </S.page>
   );
 };

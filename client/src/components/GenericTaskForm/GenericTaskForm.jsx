@@ -8,7 +8,13 @@ import done from "../../assets/images/status_done.svg";
 import trash from "../../assets/images/trash_icon.svg";
 import GenericModal from "../GenericModal/GenericModal.jsx";
 
-const GenericTaskForm = ({ title, submitButtonText, inputs, onSubmit }) => {
+const GenericTaskForm = ({
+  title,
+  toDelete,
+  submitButtonText,
+  inputs,
+  onSubmit,
+}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => {
@@ -71,7 +77,11 @@ const GenericTaskForm = ({ title, submitButtonText, inputs, onSubmit }) => {
           <S.submitButton>{submitButtonText}</S.submitButton>
         </S.inputsContainer>
       </S.form>
-      <GenericModal isOpen={isModalOpen} onRequestClose={closeModal}>
+      <GenericModal
+        toDelete={toDelete}
+        isOpen={isModalOpen}
+        onRequestClose={closeModal}
+      >
         <p>something</p>
       </GenericModal>
     </>

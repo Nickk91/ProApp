@@ -4,8 +4,7 @@ import asyncHandler from "express-async-handler";
 
 export const validateToken = asyncHandler(async (req, res, next) => {
   let token;
-  let authHeader = req.headers.Authorization || req.headers.authorization; // Use 'Authorization' with a capital 'A'
-  console.log("BAMAMAM", authHeader);
+  let authHeader = req.headers.authorization;
 
   if (!authHeader || !authHeader.toLowerCase().startsWith("bearer")) {
     return res
