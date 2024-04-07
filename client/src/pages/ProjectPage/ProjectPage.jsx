@@ -5,7 +5,7 @@ import addTask from "../../assets/images/icon_Plus_Circle_.svg";
 import arrowIcon from "../../assets/images/icon_chevron_up.svg";
 import { tasks } from "../../constants/data.js";
 import GenericModal from "../../components/GenericModal/GenericModal.jsx";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const ProjectPage = () => {
   const [selectedValue, setSelectedValue] = useState("IN PROGRESS");
