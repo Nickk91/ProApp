@@ -43,7 +43,6 @@ const projectScheme = new mongoose.Schema({
       name: {
         type: String,
         required: true,
-        unique: [true, "This task name already exists"],
       },
       description: {
         type: String,

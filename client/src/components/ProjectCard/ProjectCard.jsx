@@ -1,26 +1,26 @@
 import React from "react";
 import * as S from "./Styles.js";
 
-const ProjectCard = ({ project }) => {
+const ProjectCard = ({ project, onClick }) => {
   return (
     <S.cardContainer>
       <S.topLine>
         <p>
-          <strong>{project.name.toUpperCase()}</strong>
+          <strong>{project.projectName.toUpperCase()}</strong>
         </p>
         <S.statusWrapper>
-          {project.status === "IN PROGRESS" ? (
+          {project.projectStatus === "IN PROGRESS" ? (
             <S.statusIconInProg />
-          ) : project.status === "TODO" ? (
+          ) : project.projectStatus === "TODO" ? (
             <S.statusIconTodo />
           ) : (
             <S.statusIconDone />
           )}
-          {project.status}
+          {project.projectStatus}
         </S.statusWrapper>
       </S.topLine>
 
-      <S.projectImg />
+      <S.projectImg src={project.projectImage} />
     </S.cardContainer>
   );
 };
