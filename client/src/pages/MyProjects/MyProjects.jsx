@@ -1,10 +1,21 @@
 //MyProjects.jsx
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ProjectCard from "../../components/ProjectCard/ProjectCard.jsx";
 import * as S from "../../components/StyledComponents/styles.jsx";
+import axios from "axios";
 
 const MyProjects = () => {
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    async(e);
+    try {
+    } catch (error) {
+      const token = localStorage.getItem("token");
+    }
+  }, []);
+
   const projectList = [
     {
       name: "Harmony",
