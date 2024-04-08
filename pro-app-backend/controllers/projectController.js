@@ -15,11 +15,10 @@ export const getAllProjects = async (req, res) => {
 };
 
 export const getProjectsByUserId = async (req, res) => {
-  console.log(req.user._id);
+  console.log("req.user._id:", req.user._id);
 
   try {
     const projects = await Project.find({ user: req.user._id });
-    console.log(projects);
     res.json(projects);
   } catch (error) {
     console.log("Error fetching projects:", error);
@@ -31,22 +30,61 @@ export const getProjectsByUserId = async (req, res) => {
 
 export const getProjectById = async (req, res) => {
   try {
+    console.log("req.params", req.params);
     const { id } = req.params;
+    console.log("ID IS:", id);
     const project = await Project.findById(id);
+    console.log("project IS:", project);
     if (!project) {
       res.status(STATUS_CODE.NOT_FOUND);
       throw new Error("Project was not found");
     }
-    const { projectName, projectDescription, projectImageUrl, projectStatus } =
-      user;
+    const {
+      projectName,
+      projectDescription,
+      projectImage,
+      projectStatus,
+      projectTasks,
+    } = project;
     res.send({
       projectName,
       projectDescription,
-      projectImageUrl,
+      projectImage,
       projectStatus,
+      projectTasks,
     });
   } catch (error) {
     console.log("Error fetching project", error);
+    res
+      .status(STATUS_CODE.INTERNAL_SERVER_ERROR)
+      .json({ error: "Internal Server Error" });
+  }
+};
+
+export const addTask = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const project = await Project.findById(id);
+
+    if (!project) {
+      res.status(STATUS_CODE.NOT_FOUND);
+      throw new Error("Project was not found");
+    }
+
+    const newTask = {
+      name: req.body.name,
+      description: req.body.description,
+      status: "todo",
+    };
+
+    project.projectTasks.push(newTask);
+    await project.save();
+    res.send({
+      message: "Task added successfully",
+    });
+  } catch (error) {
+    console.error("Error adding task", error);
+
     res
       .status(STATUS_CODE.INTERNAL_SERVER_ERROR)
       .json({ error: "Internal Server Error" });
@@ -80,7 +118,6 @@ export const addProject = async (req, res) => {
       projectName: req.body.projectName,
       projectDescription: req.body.projectDescription,
       projectImage: req.body.projectImage,
-      // projectStatus: req.body.projectStatus,
       user: req.user._id,
     });
 

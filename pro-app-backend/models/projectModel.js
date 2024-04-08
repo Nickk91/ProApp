@@ -51,7 +51,7 @@ const projectScheme = new mongoose.Schema({
         required: true,
         default: "No Description Was added",
       },
-      statues: {
+      status: {
         type: String,
         enum: ["todo", "in progress", "done"],
 

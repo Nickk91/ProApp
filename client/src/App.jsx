@@ -39,7 +39,11 @@ function App() {
         >
           <Route path="/" element={<HomePage />} />
           <Route path="/addproject" element={<AddProjectPage />} />
-          <Route path="/addtask" element={<AddTaskPage />} />
+          {/* /addtask */}
+          <Route
+            path="/projects/:projectId/addtask"
+            element={<AddTaskPage />}
+          />
           {/* <Route path="/projects" element={<ProjectListPage />} /> */}
         </Route>
         {/* Private routes for admin */}
@@ -63,7 +67,7 @@ function App() {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/project" element={<ProjectPage />} />
+        <Route path="/projects/:projectId" element={<ProjectPage />} />
         <Route path="/myprojects" element={<MyProjects />} />
       </Routes>
     </>
