@@ -52,15 +52,31 @@ const RegisterFormInputsPartTwo = [
   },
 ];
 
+// const addTaskFormInputs = [
+//   {
+//     name: "task name",
+//     type: "text",
+//     placeholder: "Task Name",
+//     attributes: { required: true, minLength: 1 },
+//   },
+//   {
+//     name: "task description",
+//     type: "text",
+//     label: "Task description",
+//     placeholder: "Task description",
+//     attributes: { required: true, minLength: 1 },
+//   },
+// ];
+
 const addTaskFormInputs = [
   {
-    name: "task name",
+    name: "taskName",
     type: "text",
     placeholder: "Task Name",
     attributes: { required: true, minLength: 1 },
   },
   {
-    name: "task description",
+    name: "taskDescription",
     type: "text",
     label: "Task description",
     placeholder: "Task description",

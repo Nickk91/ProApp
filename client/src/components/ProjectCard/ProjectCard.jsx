@@ -3,7 +3,7 @@ import * as S from "./Styles.js";
 
 const ProjectCard = ({ project, onClick }) => {
   return (
-    <S.cardContainer>
+    <S.cardContainer onClick={onClick}>
       <S.topLine>
         <p>
           <strong>{project.projectName.toUpperCase()}</strong>

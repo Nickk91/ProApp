@@ -26,11 +26,9 @@ const GenericTaskForm = ({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Form Element:", e.target);
     const formData = new FormData(e.target);
-    console.log("Form Data:", formData);
     const formProps = Object.fromEntries(formData.entries());
-    onSubmit(formProps);
+    onSubmit(e, formProps);
   };
 
   return (

@@ -14,9 +14,7 @@ const GenericForm = ({
 }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Form Element:", e.target);
     const formData = new FormData(e.target);
-    console.log("Form Data:", formData);
     const formProps = Object.fromEntries(formData.entries());
     onSubmit(e, formProps);
   };
@@ -34,7 +32,6 @@ const GenericForm = ({
               <S.label>{input.label}</S.label>
             )}
             <GenericInput
-              // key={index}
               type={input.type}
               label={input.label}
               name={input.name}

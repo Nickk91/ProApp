@@ -32,7 +32,6 @@ const MyProjects = () => {
         const data = await response.json();
         setProjects(data);
         setIsLoading(false);
-        console.log(data);
       } catch (error) {
         console.error("Error fetching projects:", error);
       }
@@ -44,7 +43,7 @@ const MyProjects = () => {
   const navigate = useNavigate();
 
   const handleClick = (projectId) => {
-    navigate(`/project/${projectId}`);
+    navigate(`/projects/${projectId}`);
   };
 
   return (
@@ -58,7 +57,7 @@ const MyProjects = () => {
           <ProjectCard
             key={index}
             project={project}
-            onClick={() => handleClick(projects._id)}
+            onClick={() => handleClick(project._id)}
           />
         ))
       )}
