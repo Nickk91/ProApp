@@ -133,7 +133,7 @@ const ProjectPage = ({}) => {
 
           <S.tasksContainer>
             <S.taskList>
-              {tasks.map((task, i) => (
+              {project.projectTasks.map((task, i) => (
                 <S.listItem key={i}>
                   <p>{task.name}</p>
 

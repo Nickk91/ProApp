@@ -11,6 +11,7 @@ const AddTaskPage = () => {
   const navigate = useNavigate();
 
   const handleFormSubmit = async (e) => {
+    e.preventDefault();
     const formData = new FormData(e.target);
 
     const name = formData.get("taskName");
