@@ -94,17 +94,19 @@ export const addTask = async (req, res) => {
 export const deleteProjectById = async (req, res) => {
   try {
     const { id } = req.params;
-    const project = await Project.findById(id);
+
+    const project = await Project.findOneAndDelete({ _id: id });
+
     if (!project) {
-      res.status(STATUS_CODE.NOT_FOUND);
-      throw new Error("Project was not found");
+      return res
+        .status(STATUS_CODE.NOT_FOUND)
+        .json({ error: "Project not found" });
     }
 
-    await project.remove();
-    res.json({ message: "Project deleted successfully" });
+    return res.json({ message: "Project deleted successfully" });
   } catch (error) {
-    console.log("Error deleting project", error);
-    res
+    console.error("Error deleting project:", error);
+    return res
       .status(STATUS_CODE.INTERNAL_SERVER_ERROR)
       .json({ error: "Internal Server Error" });
   }

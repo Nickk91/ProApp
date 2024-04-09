@@ -5,6 +5,7 @@ export default function GenericModal({
   children,
   isOpen,
   onRequestClose,
+  onRequestDelete,
   toDelete,
   closeModal,
 }) {
@@ -20,7 +21,7 @@ export default function GenericModal({
                   Are you sure you want to delete this {toDelete}?
                 </S.modalText>
                 <S.btnsContainer>
-                  <S.yesBtn>YES</S.yesBtn>
+                  <S.yesBtn onClick={onRequestDelete}>YES</S.yesBtn>
                   <S.noBtn onClick={onRequestClose}>NO</S.noBtn>
                 </S.btnsContainer>{" "}
                 {/* <S.XButton onClick={onRequestClose}>X</S.XButton> */}

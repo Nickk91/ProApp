@@ -59,11 +59,38 @@ const ProjectPage = ({}) => {
     setIsModalOpen(false);
   };
 
+  const deleteProject = () => {
+    const deleteProject = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        console.log("TRYING IT!");
+
+        const response = await fetch(
+          // router.delete("/:id", deleteProjectById);
+          `${import.meta.env.VITE_BASEURL}/projects/${projectId}`,
+          {
+            method: "DELETE",
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error("Failed to delete project");
+        }
+      } catch (error) {
+        console.error("Error deleting project:", error);
+      }
+    };
+
+    deleteProject();
+  };
+
   const navigate = useNavigate();
 
   const addTaskFunc = () => {
     navigate(`/projects/${projectId}/addtask`);
-    // path = "/projects/:projectId/addtask";
   };
 
   const handleUser = () => {
@@ -188,6 +215,7 @@ const ProjectPage = ({}) => {
             toDelete="project"
             isOpen={isModalOpen}
             onRequestClose={closeModal}
+            onRequestDelete={deleteProject}
           >
             <p>something</p>
           </GenericModal>

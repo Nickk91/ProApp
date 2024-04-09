@@ -13,7 +13,7 @@ import { validateToken } from "../middleware/validateTokenHandler.js";
 
 const router = express.Router();
 //Route to deleyr a project
-router.delete("/:id", deleteProjectById);
+router.delete("/:id", validateToken, deleteProjectById);
 
 //Route to get all projects
 router.get("/", getAllProjects);
