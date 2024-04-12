@@ -8,6 +8,7 @@ import GenericModal from "../../components/GenericModal/GenericModal.jsx";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import FooterMenu from "../../components/FooterMenu/FooterMenu.jsx";
+import StatusSelection from "../../components/StatusSelection/StatusSelection.jsx";
 
 const ProjectPage = ({}) => {
   const [selectedValue, setSelectedValue] = useState("TODO");
@@ -116,6 +117,8 @@ const ProjectPage = ({}) => {
       if (!response.ok) {
         throw new Error("Failed to update project status");
       }
+
+      setSelectedValue(e.toUpperCase());
       // navigate(`/projects/${projectId}`);
     } catch (error) {
       console.error("Error updating project status:", error);
@@ -150,29 +153,14 @@ const ProjectPage = ({}) => {
           </S.topDiv>
           <S.container>
             <S.selectDiv>
-              {selectedValue === "IN PROGRESS" && <S.statusIconInProg />}
-              {selectedValue === "TODO" && <S.statusIconTodo />}
-              {selectedValue === "DONE" && <S.statusIconDone />}
-              <select
-                style={{
-                  width: "130px",
-                  borderWidth: 0,
-                  fontWeight: "600",
-                  marginLeft: "6px",
-                  fontSize: "14px",
-                }}
-                name="tasks"
-                id="tasks"
-                value={selectedValue}
-                onChange={(e) => {
-                  setSelectedValue(e.target.value);
-                  handleProjectStatus(e.target.value.toLowerCase());
-                }}
-              >
-                <option value="IN PROGRESS">IN PROGRESS</option>
-                <option value="TODO">TODO</option>
-                <option value="DONE">DONE</option>
-              </select>
+              <StatusSelection
+                inProg="IN PROGRESS"
+                todo="TODO"
+                done="DONE"
+                selectedValue={selectedValue}
+                onChange={handleProjectStatus}
+                type="project"
+              />
             </S.selectDiv>
 
             <S.projectImg src={src} alt="" />
@@ -195,9 +183,9 @@ const ProjectPage = ({}) => {
                   {extendedTaskList.includes(i) ? (
                     <S.taskStatusExpanded key={i}>
                       <S.statusWrapper>
-                        {task.status === "IN PROGRESS" ? (
+                        {task.status === "in progress" ? (
                           <S.statusIconInProg />
-                        ) : task.status === "TODO" ? (
+                        ) : task.status === "todo" ? (
                           <S.statusIconTodo />
                         ) : (
                           <S.statusIconDone />

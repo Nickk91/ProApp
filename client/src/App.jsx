@@ -15,6 +15,7 @@ import { userAuthLevels } from "./constants/userAuthLevels.js";
 import ProjectPage from "./pages/ProjectPage/ProjectPage.jsx";
 import MyProjects from "./pages/MyProjects/MyProjects.jsx";
 import Userpage from "./pages/UserPage/Userpage.jsx";
+import TestPage from "./pages/TestPage/TestPage.jsx";
 
 function App() {
   return (
@@ -69,6 +70,7 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/projects/:projectId" element={<ProjectPage />} />
         <Route path="/myprojects" element={<MyProjects />} />
+        <Route path="/test" element={<TestPage />} />
       </Routes>
     </>
   );
