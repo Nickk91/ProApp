@@ -133,3 +133,34 @@ export const addProject = async (req, res) => {
     console.log(STATUS_CODE.INTERNAL_SERVER_ERROR);
   }
 };
+
+export const updateProjectStatusById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { selectedValue } = req.body;
+
+    console.log("id in controller:", id);
+
+    console.log("selectedValue in controller:", selectedValue);
+    const project = await Project.findById(id);
+    console.log("project in controller:", project);
+
+    if (!project) {
+      return res
+        .status(STATUS_CODE.NOT_FOUND)
+        .json({ message: "Project not found" });
+    }
+
+    project.projectStatus = selectedValue;
+    await project.save();
+
+    res
+      .status(STATUS_CODE.OK)
+      .json({ message: "Project status updated successfully", project });
+  } catch (error) {
+    console.error("Error updating project status", error);
+    res
+      .status(STATUS_CODE.INTERNAL_SERVER_ERROR)
+      .json({ message: "Internal Server Error" });
+  }
+};

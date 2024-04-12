@@ -4,6 +4,7 @@ import * as S from "./styles.js";
 import heroImg from "../../assets/images/NoProjects.svg";
 import addLogo from "../../assets/images/icon_Plus_Circle_.svg";
 import { useNavigate } from "react-router-dom";
+import FooterMenu from "../../components/FooterMenu/FooterMenu.jsx";
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -21,6 +22,7 @@ const HomePage = () => {
         onClick={handleAddProject}
         alt="Hero Image of no projects"
       />
+      <FooterMenu />
     </section>
   );
 };

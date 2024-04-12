@@ -3,15 +3,16 @@ import * as S from "./StyledComponent/StyledComponents.js";
 import trash from "../../assets/images/trash_icon.svg";
 import addTask from "../../assets/images/icon_Plus_Circle_.svg";
 import arrowIcon from "../../assets/images/icon_chevron_up.svg";
-import { tasks } from "../../constants/data.js";
+// import { tasks } from "../../constants/data.js";
 import GenericModal from "../../components/GenericModal/GenericModal.jsx";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
+import FooterMenu from "../../components/FooterMenu/FooterMenu.jsx";
 
 const ProjectPage = ({}) => {
-  const [selectedValue, setSelectedValue] = useState("IN PROGRESS");
+  const [selectedValue, setSelectedValue] = useState("TODO");
   const [extendedTaskList, setExtendedTaskList] = useState([]);
-  const [userType, setUserType] = useState("not");
+  const [userType, setUserType] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [project, setProject] = useState(null);
 
@@ -39,7 +40,8 @@ const ProjectPage = ({}) => {
         const data = await response.json();
         setProject(data);
         setIsLoading(false);
-        console.log("THE DATA IS:", data);
+
+        setSelectedValue(data.projectStatus.toUpperCase());
       } catch (error) {
         console.error("Error fetching projects:", error);
       }
@@ -49,6 +51,8 @@ const ProjectPage = ({}) => {
   }, []);
 
   let username = "ELADJMC_82";
+
+  const navigate = useNavigate();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -63,10 +67,8 @@ const ProjectPage = ({}) => {
     const deleteProject = async () => {
       try {
         const token = localStorage.getItem("token");
-        console.log("TRYING IT!");
 
         const response = await fetch(
-          // router.delete("/:id", deleteProjectById);
           `${import.meta.env.VITE_BASEURL}/projects/${projectId}`,
           {
             method: "DELETE",
@@ -79,6 +81,7 @@ const ProjectPage = ({}) => {
         if (!response.ok) {
           throw new Error("Failed to delete project");
         }
+        navigate("/myprojects");
       } catch (error) {
         console.error("Error deleting project:", error);
       }
@@ -87,14 +90,36 @@ const ProjectPage = ({}) => {
     deleteProject();
   };
 
-  const navigate = useNavigate();
-
   const addTaskFunc = () => {
     navigate(`/projects/${projectId}/addtask`);
   };
 
   const handleUser = () => {
     navigate("/userpage");
+  };
+
+  const handleProjectStatus = async (e) => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await fetch(
+        `${import.meta.env.VITE_BASEURL}/projects/${projectId}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ selectedValue: e }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to update project status");
+      }
+      // navigate(`/projects/${projectId}`);
+    } catch (error) {
+      console.error("Error updating project status:", error);
+    }
   };
 
   const src = "https://cdn-icons-png.flaticon.com/512/4345/4345800.png";
@@ -139,7 +164,10 @@ const ProjectPage = ({}) => {
                 name="tasks"
                 id="tasks"
                 value={selectedValue}
-                onChange={(e) => setSelectedValue(e.target.value)}
+                onChange={(e) => {
+                  setSelectedValue(e.target.value);
+                  handleProjectStatus(e.target.value.toLowerCase());
+                }}
               >
                 <option value="IN PROGRESS">IN PROGRESS</option>
                 <option value="TODO">TODO</option>
@@ -188,9 +216,9 @@ const ProjectPage = ({}) => {
                   ) : (
                     <S.taskStatus key={i}>
                       <S.statusWrapper>
-                        {task.status === "IN PROGRESS" ? (
+                        {task.status === "in progress" ? (
                           <S.statusIconInProg />
-                        ) : task.status === "TODO" ? (
+                        ) : task.status === "todo" ? (
                           <S.statusIconTodo />
                         ) : (
                           <S.statusIconDone />
@@ -221,6 +249,7 @@ const ProjectPage = ({}) => {
           </GenericModal>
         </>
       )}
+      <FooterMenu />
     </S.page>
   );
 };

@@ -50,7 +50,7 @@ const AddTaskPage = () => {
   };
 
   const handleBack = () => {
-    navigate("/project");
+    navigate(`/projects/${projectId}`);
   };
 
   return (
