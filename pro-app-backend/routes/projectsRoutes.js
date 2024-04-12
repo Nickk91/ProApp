@@ -8,11 +8,12 @@ import {
   deleteProjectById,
   getProjectsByUserId,
   addTask,
+  updateProjectStatusById,
 } from "../controllers/projectController.js";
 import { validateToken } from "../middleware/validateTokenHandler.js";
 
 const router = express.Router();
-//Route to deleyr a project
+//Route to delete a project
 router.delete("/:id", validateToken, deleteProjectById);
 
 //Route to get all projects
@@ -31,7 +32,9 @@ router.post("/project/:id/addtask", validateToken, addTask);
 //Route to get a project by project ID
 router.get("/project/:id", validateToken, getProjectById);
 
-//Route to edit a project by project id number
-router.patch("/:id", getProjectById);
+// //Route to edit a project by project id number
+// router.patch("/:id", getProjectById);
+
+router.patch("/:id", validateToken, updateProjectStatusById);
 
 export default router;

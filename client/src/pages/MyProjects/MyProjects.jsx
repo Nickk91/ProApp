@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import ProjectCard from "../../components/ProjectCard/ProjectCard.jsx";
 import * as S from "../../components/StyledComponents/styles.jsx";
 import { useNavigate } from "react-router-dom";
+import FooterMenu from "../../components/FooterMenu/FooterMenu.jsx";
 
 const MyProjects = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -61,6 +62,7 @@ const MyProjects = () => {
           />
         ))
       )}
+      <FooterMenu />
     </S.page>
   );
 };

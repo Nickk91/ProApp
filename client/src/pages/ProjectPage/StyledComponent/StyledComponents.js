@@ -57,6 +57,7 @@ const tasksHeader = styled.div`
   justify-content: space-between;
   width: 350px;
   border: 2px solid red;
+  margin-bottom: 30px;
 `;
 
 const addTaskIcon = styled.img`
@@ -66,7 +67,7 @@ const tasksContainer = styled.div`
   border: 2px solid rebeccapurple;
 
   width: 350px;
-  margin-top: 30px;
+  margin-bottom: 100px;
 `;
 
 const container = styled.div`

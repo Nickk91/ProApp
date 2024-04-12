@@ -1,12 +1,14 @@
 import styled from "styled-components";
 
 const menu = styled.div`
-  width: 100%;
+  position: fixed;
+  bottom: 0;
   height: 100px;
   border: 1px solid black;
   z-index: 999;
   display: flex;
-  width: 350px;
+  width: 100%;
+  background-color: rgb(240, 240, 240);
 `;
 
 const ul = styled.ul`
