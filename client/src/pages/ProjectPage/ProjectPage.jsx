@@ -136,9 +136,6 @@ const ProjectPage = ({}) => {
   const handleTaskStatus = async (taskId, newStatus, i) => {
     try {
       const token = localStorage.getItem("token");
-      console.log(taskId);
-      console.log(newStatus);
-      console.log("i is this in handleTaskStatus:", i);
 
       const response = await fetch(
         `${import.meta.env.VITE_BASEURL}/projects/${projectId}/taskstatus`,
@@ -224,14 +221,17 @@ const ProjectPage = ({}) => {
                   {extendedTaskList.includes(i) ? (
                     <S.taskStatusExpanded key={i}>
                       <S.statusWrapper>
-                        {task.status === "in progress" ? (
-                          <S.statusIconInProg />
-                        ) : task.status === "todo" ? (
-                          <S.statusIconTodo />
-                        ) : (
-                          <S.statusIconDone />
-                        )}
-                        {task.status}
+                        {/* {task.status} */}
+                        <TaskStatusSelection
+                          selectedValue={taskStatuses[i]}
+                          onChange={(newStatus) =>
+                            handleTaskStatus(task._id, newStatus, i)
+                          }
+                          type="task"
+                          key={task._id}
+                          taskId={task.id}
+                          handleTaskStatus={handleTaskStatus}
+                        />
                       </S.statusWrapper>
                       <S.taskDescription> {task.description}</S.taskDescription>
 
@@ -255,6 +255,7 @@ const ProjectPage = ({}) => {
                           type="task"
                           key={task._id}
                           taskId={task.id}
+                          handleTaskStatus={handleTaskStatus}
                         />
 
                         {/* {task.status} */}

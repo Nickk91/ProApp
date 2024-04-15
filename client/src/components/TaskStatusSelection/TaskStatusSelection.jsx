@@ -6,7 +6,7 @@ const TaskStatusSelection = ({
   onChange,
   key,
   taskId,
-  // handleTaskStatus,
+  handleTaskStatus,
 }) => {
   return (
     <S.selectDiv>
