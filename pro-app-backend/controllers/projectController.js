@@ -4,7 +4,6 @@ import Project from "../models/projectModel.js";
 export const getAllProjects = async (req, res) => {
   try {
     const projects = await Project.find();
-    console.log("Projects found:", projects);
     res.send(projects);
   } catch (error) {
     console.log("Error fetching projects:", error);
@@ -15,8 +14,6 @@ export const getAllProjects = async (req, res) => {
 };
 
 export const getProjectsByUserId = async (req, res) => {
-  console.log("req.user._id:", req.user._id);
-
   try {
     const projects = await Project.find({ user: req.user._id });
     res.json(projects);
@@ -30,11 +27,8 @@ export const getProjectsByUserId = async (req, res) => {
 
 export const getProjectById = async (req, res) => {
   try {
-    console.log("req.params", req.params);
     const { id } = req.params;
-    console.log("ID IS:", id);
     const project = await Project.findById(id);
-    console.log("project IS:", project);
     if (!project) {
       res.status(STATUS_CODE.NOT_FOUND);
       throw new Error("Project was not found");
@@ -91,6 +85,46 @@ export const addTask = async (req, res) => {
   }
 };
 
+export const updateTaskStatusById = async (req, res) => {
+  try {
+    console.log("updateTaskStatusById controller!!!");
+    const { id } = req.params;
+    const taskId = req.body.taskId;
+    const newStatus = req.body.status;
+
+    console.log("project id:", id);
+    console.log("taskId!!:", taskId);
+    console.log("NEW STATUS!!:", newStatus);
+
+    const project = await Project.findById(id);
+
+    if (!project) {
+      res.status(STATUS_CODE.NOT_FOUND);
+      throw new Error("Project was not found");
+    }
+
+    let taskIndex = project.projectTasks.findIndex(
+      (task) => task._id.toString() === taskId
+    );
+
+    if (taskIndex === -1) {
+      res.status(STATUS_CODE.NOT_FOUND);
+      throw new Error("Task was not found in the project");
+    }
+
+    project.projectTasks[taskIndex].status = newStatus;
+    await project.save();
+    res.send({
+      message: "Task status updated successfully",
+    });
+  } catch (error) {
+    console.error("Error updating task status", error);
+    res
+      .status(STATUS_CODE.INTERNAL_SERVER_ERROR)
+      .json({ error: "Internal Server Error" });
+  }
+};
+
 export const deleteProjectById = async (req, res) => {
   try {
     const { id } = req.params;
@@ -114,8 +148,6 @@ export const deleteProjectById = async (req, res) => {
 
 export const addProject = async (req, res) => {
   try {
-    console.log("CREATING A PROJECT WITH", req.body);
-    console.log("ID", req.user._id);
     const project = await Project.create({
       projectName: req.body.projectName,
       projectDescription: req.body.projectDescription,

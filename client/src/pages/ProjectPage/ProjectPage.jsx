@@ -8,7 +8,8 @@ import GenericModal from "../../components/GenericModal/GenericModal.jsx";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import FooterMenu from "../../components/FooterMenu/FooterMenu.jsx";
-import StatusSelection from "../../components/StatusSelection/StatusSelection.jsx";
+import ProjectStatusSelection from "../../components/ProjectStatusSelection/ProjectStatusSelection.jsx";
+import TaskStatusSelection from "../../components/TaskStatusSelection/TaskStatusSelection.jsx";
 
 const ProjectPage = ({}) => {
   const [selectedValue, setSelectedValue] = useState("TODO");
@@ -16,6 +17,7 @@ const ProjectPage = ({}) => {
   const [userType, setUserType] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [project, setProject] = useState(null);
+  const [taskStatuses, setTaskStatuses] = useState([]);
 
   const { projectId } = useParams();
 
@@ -40,6 +42,12 @@ const ProjectPage = ({}) => {
 
         const data = await response.json();
         setProject(data);
+        console.log(data.projectTasks);
+
+        const arr = data.projectTasks.map((task) => task.status);
+        console.log("Project tasks statuses are:", arr);
+        setTaskStatuses(arr);
+
         setIsLoading(false);
 
         setSelectedValue(data.projectStatus.toUpperCase());
@@ -125,6 +133,42 @@ const ProjectPage = ({}) => {
     }
   };
 
+  const handleTaskStatus = async (taskId, newStatus, i) => {
+    try {
+      const token = localStorage.getItem("token");
+      console.log(taskId);
+      console.log(newStatus);
+      console.log("i is this in handleTaskStatus:", i);
+
+      const response = await fetch(
+        `${import.meta.env.VITE_BASEURL}/projects/${projectId}/taskstatus`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ taskId: taskId, status: newStatus }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to update task status");
+      }
+
+      setTaskStatuses((prevStatuses) => {
+        const updatedStatuses = [...prevStatuses];
+        updatedStatuses[i] = newStatus;
+        return updatedStatuses;
+      });
+      console.log(taskStatuses);
+
+      // taskStatuses, setTaskStatuses
+    } catch (error) {
+      console.error("Error updating task status:", error);
+    }
+  };
+
   const src = "https://cdn-icons-png.flaticon.com/512/4345/4345800.png";
 
   const handleExtendTask = (i) => {
@@ -153,10 +197,7 @@ const ProjectPage = ({}) => {
           </S.topDiv>
           <S.container>
             <S.selectDiv>
-              <StatusSelection
-                inProg="IN PROGRESS"
-                todo="TODO"
-                done="DONE"
+              <ProjectStatusSelection
                 selectedValue={selectedValue}
                 onChange={handleProjectStatus}
                 type="project"
@@ -204,15 +245,19 @@ const ProjectPage = ({}) => {
                   ) : (
                     <S.taskStatus key={i}>
                       <S.statusWrapper>
-                        {task.status === "in progress" ? (
-                          <S.statusIconInProg />
-                        ) : task.status === "todo" ? (
-                          <S.statusIconTodo />
-                        ) : (
-                          <S.statusIconDone />
-                        )}
+                        {/* tasks */}
 
-                        {task.status}
+                        <TaskStatusSelection
+                          selectedValue={taskStatuses[i]}
+                          onChange={(newStatus) =>
+                            handleTaskStatus(task._id, newStatus, i)
+                          }
+                          type="task"
+                          key={task._id}
+                          taskId={task.id}
+                        />
+
+                        {/* {task.status} */}
                       </S.statusWrapper>
 
                       <S.arrowIconDown

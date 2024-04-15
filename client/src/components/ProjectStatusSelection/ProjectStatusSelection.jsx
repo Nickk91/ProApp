@@ -1,20 +1,12 @@
 import React from "react";
 import * as S from "./styled.js";
 
-const StatusSelection = ({
-  inProg,
-  todo,
-  done,
-  selectedValue,
-  onChange,
-  type,
-  key,
-}) => {
+const ProjectStatusSelection = ({ selectedValue, onChange, type, key }) => {
   return (
     <S.selectDiv>
-      {selectedValue === inProg && <S.statusIconInProg />}
-      {selectedValue === todo && <S.statusIconTodo />}
-      {selectedValue === done && <S.statusIconDone />}
+      {selectedValue === "IN PROGRESS" && <S.statusIconInProg />}
+      {selectedValue === "TODO" && <S.statusIconTodo />}
+      {selectedValue === "DONE" && <S.statusIconDone />}
       <S.select
         key={key}
         name={type}
@@ -23,9 +15,7 @@ const StatusSelection = ({
         onChange={(e) => {
           onChange(e.target.value.toLowerCase());
           {
-            type === "project"
-              ? handleProjectStatus(e.target.value)
-              : handleTaskStatus(e.target.value);
+            handleProjectStatus(e.target.value);
           }
         }}
       >
@@ -37,4 +27,4 @@ const StatusSelection = ({
   );
 };
 
-export default StatusSelection;
+export default ProjectStatusSelection;
