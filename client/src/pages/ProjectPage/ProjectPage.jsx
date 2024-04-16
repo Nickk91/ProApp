@@ -3,7 +3,6 @@ import * as S from "./StyledComponent/StyledComponents.js";
 import trash from "../../assets/images/trash_icon.svg";
 import addTask from "../../assets/images/icon_Plus_Circle_.svg";
 import arrowIcon from "../../assets/images/icon_chevron_up.svg";
-// import { tasks } from "../../constants/data.js";
 import GenericModal from "../../components/GenericModal/GenericModal.jsx";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
@@ -63,40 +62,77 @@ const ProjectPage = ({}) => {
 
   const navigate = useNavigate();
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isProjectModalOpen, setProjectIsModalOpen] = useState(false);
+  const [isTaskModalOpen, setTaskIsModalOpen] = useState(false);
+  const [taskToDelete, setTaskToDelete] = useState();
 
-  const openModal = () => {
-    setIsModalOpen(true);
+  const openModal = (item, taskIndex, taskId) => {
+    if (item === "project") {
+      setProjectIsModalOpen(true);
+    }
+    if (item === "task") {
+      console.log("taskIndex in openModal:", taskIndex);
+      console.log("taskId in openModal:", taskId);
+      setTaskToDelete(taskId);
+      setTaskIsModalOpen(true);
+    }
   };
-  const closeModal = () => {
-    setIsModalOpen(false);
+  const closeModal = (item) => {
+    if (item === "project") setProjectIsModalOpen(false);
+    if (item === "task") setTaskIsModalOpen(false);
   };
 
-  const deleteProject = () => {
-    const deleteProject = async () => {
-      try {
-        const token = localStorage.getItem("token");
+  const deleteTask = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      // console.log("i in deleteTask:", i);
+      console.log("taskId in deleteTask:", taskToDelete);
 
-        const response = await fetch(
-          `${import.meta.env.VITE_BASEURL}/projects/${projectId}`,
-          {
-            method: "DELETE",
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-
-        if (!response.ok) {
-          throw new Error("Failed to delete project");
+      const response = await fetch(
+        `${import.meta.env.VITE_BASEURL}/projects/${projectId}/deletetask`,
+        {
+          method: "PUT",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         }
-        navigate("/myprojects");
-      } catch (error) {
-        console.error("Error deleting project:", error);
-      }
-    };
+      );
 
-    deleteProject();
+      if (!response.ok) {
+        throw new Error("Failed to fetch relevant project");
+      }
+      const data = await response.json();
+      let tasksArray = data.projectTasks;
+      console.log("tasksArray in deleteTask ", tasksArray);
+
+      navigate(`/myprojects/${projectId}`);
+    } catch (error) {
+      console.error("Error deleting project:", error);
+    }
+  };
+
+  const deleteProject = async () => {
+    try {
+      const token = localStorage.getItem("token");
+
+      const response = await fetch(
+        `${import.meta.env.VITE_BASEURL}/projects/${projectId}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to delete project");
+      }
+
+      navigate("/myprojects");
+    } catch (error) {
+      console.error("Error deleting project:", error);
+    }
   };
 
   const addTaskFunc = () => {
@@ -189,7 +225,7 @@ const ProjectPage = ({}) => {
                 <strong>{username}</strong>
               </S.userNameButton>
             ) : (
-              <S.trashIcon src={trash} onClick={openModal} />
+              <S.trashIcon src={trash} onClick={() => openModal("project")} />
             )}
           </S.topDiv>
           <S.container>
@@ -232,6 +268,13 @@ const ProjectPage = ({}) => {
                           taskId={task.id}
                           handleTaskStatus={handleTaskStatus}
                         />
+                        <S.smallTrashIcon
+                          src={trash}
+                          onClick={() => {
+                            const taskId = task._id;
+                            openModal("task", i, taskId);
+                          }}
+                        />
                       </S.statusWrapper>
                       <S.taskDescription> {task.description}</S.taskDescription>
 
@@ -246,7 +289,6 @@ const ProjectPage = ({}) => {
                     <S.taskStatus key={i}>
                       <S.statusWrapper>
                         {/* tasks */}
-
                         <TaskStatusSelection
                           selectedValue={taskStatuses[i]}
                           onChange={(newStatus) =>
@@ -254,11 +296,16 @@ const ProjectPage = ({}) => {
                           }
                           type="task"
                           key={task._id}
-                          taskId={task.id}
+                          taskId={task._id}
                           handleTaskStatus={handleTaskStatus}
                         />
-
-                        {/* {task.status} */}
+                        <S.smallTrashIcon
+                          src={trash}
+                          onClick={() => {
+                            const taskId = task._id;
+                            openModal("task", i, taskId);
+                          }}
+                        />
                       </S.statusWrapper>
 
                       <S.arrowIconDown
@@ -275,12 +322,16 @@ const ProjectPage = ({}) => {
           </S.tasksContainer>
           <GenericModal
             toDelete="project"
-            isOpen={isModalOpen}
-            onRequestClose={closeModal}
+            isOpen={isProjectModalOpen}
+            onRequestClose={() => closeModal("project")}
             onRequestDelete={deleteProject}
-          >
-            <p>something</p>
-          </GenericModal>
+          ></GenericModal>
+          <GenericModal
+            toDelete="task"
+            isOpen={isTaskModalOpen}
+            onRequestClose={() => closeModal("task")}
+            onRequestDelete={() => deleteTask(taskToDelete)}
+          ></GenericModal>
         </>
       )}
       <FooterMenu />

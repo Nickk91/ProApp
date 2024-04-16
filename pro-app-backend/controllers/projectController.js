@@ -125,6 +125,43 @@ export const updateTaskStatusById = async (req, res) => {
   }
 };
 
+export const deleteTaskById = async (req, res) => {
+  try {
+    console.log("deleteTask controller!!!");
+    const { id } = req.params;
+    const taskId = req.body.taskId;
+
+    console.log("project id:", id);
+    console.log("taskId!!:", taskId);
+
+    const project = await Project.findById(id);
+
+    if (!project) {
+      res.status(STATUS_CODE.NOT_FOUND);
+      throw new Error("Project was not found");
+    }
+
+    let taskIndex = project.projectTasks.findIndex(
+      (task) => task._id.toString() === taskId
+    );
+
+    if (taskIndex === -1) {
+      res.status(STATUS_CODE.NOT_FOUND);
+      throw new Error("Task was not found in the project");
+    }
+
+    project.projectTasks.splice(taskIndex, 1);
+
+    await project.save();
+    res.status(STATUS_CODE.NO_CONTENT).send();
+  } catch (error) {
+    console.error("Error deleting task status", error);
+    res
+      .status(STATUS_CODE.INTERNAL_SERVER_ERROR)
+      .json({ error: "Internal Server Error" });
+  }
+};
+
 export const deleteProjectById = async (req, res) => {
   try {
     const { id } = req.params;
