@@ -35,7 +35,7 @@ router.post("/project/:id/addtask", validateToken, addTask);
 router.get("/project/:id", validateToken, getProjectById);
 
 //Route to get delete a task by task ID
-router.put("/:id/deletetask", validateToken, deleteTaskById);
+router.patch("/:id/deletetask", validateToken, deleteTaskById);
 
 //Route to get a project by project ID
 router.patch("/:id/taskstatus", validateToken, updateTaskStatusById);

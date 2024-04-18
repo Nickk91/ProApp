@@ -64,7 +64,8 @@ const ProjectPage = ({}) => {
 
   const [isProjectModalOpen, setProjectIsModalOpen] = useState(false);
   const [isTaskModalOpen, setTaskIsModalOpen] = useState(false);
-  const [taskToDelete, setTaskToDelete] = useState();
+  const [taskToDeleteId, setTaskToDeleteId] = useState();
+  const [taskToDeleteIndex, setTaskToDeleteIndex] = useState();
 
   const openModal = (item, taskIndex, taskId) => {
     if (item === "project") {
@@ -73,7 +74,9 @@ const ProjectPage = ({}) => {
     if (item === "task") {
       console.log("taskIndex in openModal:", taskIndex);
       console.log("taskId in openModal:", taskId);
-      setTaskToDelete(taskId);
+      setTaskToDeleteId(taskId);
+      setTaskToDeleteIndex(taskIndex);
+
       setTaskIsModalOpen(true);
     }
   };
@@ -82,32 +85,55 @@ const ProjectPage = ({}) => {
     if (item === "task") setTaskIsModalOpen(false);
   };
 
-  const deleteTask = async () => {
+  const deleteTask = async (taskToDeleteId, taskToDeleteIndex) => {
     try {
       const token = localStorage.getItem("token");
       // console.log("i in deleteTask:", i);
-      console.log("taskId in deleteTask:", taskToDelete);
+      console.log("taskId in deleteTask:", taskToDeleteId);
+      console.log(taskToDeleteIndex);
 
       const response = await fetch(
         `${import.meta.env.VITE_BASEURL}/projects/${projectId}/deletetask`,
         {
-          method: "PUT",
+          method: "PATCH",
           headers: {
+            "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
+          body: JSON.stringify({ taskId: taskToDeleteId }),
         }
       );
 
       if (!response.ok) {
         throw new Error("Failed to fetch relevant project");
       }
+
       const data = await response.json();
       let tasksArray = data.projectTasks;
       console.log("tasksArray in deleteTask ", tasksArray);
 
-      navigate(`/myprojects/${projectId}`);
+      setTaskStatuses((taskStatuses) =>
+        taskStatuses.filter((task, index) => index != taskToDeleteIndex)
+      );
+      console.log("taskStatuses after deleting task:", taskStatuses);
+
+      // setProject(data);
+      // console.log("TASKS AFTER DELETING:", data.projectTasks);
+
+      // const arr = data.projectTasks.map((task) => task.status);
+      // console.log("Project tasks statuses are:", arr);
+      // setTaskStatuses(arr);
+
+      // setIsLoading(false);
+
+      // setSelectedValue(data.projectStatus.toUpperCase());
+
+      setTaskToDeleteId(null);
+      setTaskToDeleteIndex(null);
+      closeModal("task");
+      navigate(`/projects/${projectId}`);
     } catch (error) {
-      console.error("Error deleting project:", error);
+      console.error("Error deleting task:", error);
     }
   };
 
@@ -271,8 +297,8 @@ const ProjectPage = ({}) => {
                         <S.smallTrashIcon
                           src={trash}
                           onClick={() => {
-                            const taskId = task._id;
-                            openModal("task", i, taskId);
+                            openModal("task", i, task._id);
+                            // deleteTask(task._id, i);
                           }}
                         />
                       </S.statusWrapper>
@@ -302,8 +328,8 @@ const ProjectPage = ({}) => {
                         <S.smallTrashIcon
                           src={trash}
                           onClick={() => {
-                            const taskId = task._id;
-                            openModal("task", i, taskId);
+                            openModal("task", i, task._id);
+                            // deleteTask(task._id, i);
                           }}
                         />
                       </S.statusWrapper>
@@ -330,7 +356,7 @@ const ProjectPage = ({}) => {
             toDelete="task"
             isOpen={isTaskModalOpen}
             onRequestClose={() => closeModal("task")}
-            onRequestDelete={() => deleteTask(taskToDelete)}
+            onRequestDelete={() => deleteTask(taskToDeleteId)}
           ></GenericModal>
         </>
       )}

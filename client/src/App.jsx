@@ -69,6 +69,10 @@ function App() {
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/projects/:projectId" element={<ProjectPage />} />
+        <Route
+          path="/projects/:projectId/deletetask/:taskId"
+          element={<ProjectPage />}
+        />
         <Route path="/myprojects" element={<MyProjects />} />
         <Route path="/test" element={<TestPage />} />
       </Routes>

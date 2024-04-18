@@ -153,7 +153,11 @@ export const deleteTaskById = async (req, res) => {
     project.projectTasks.splice(taskIndex, 1);
 
     await project.save();
-    res.status(STATUS_CODE.NO_CONTENT).send();
+
+    const updatedProject = await Project.findById(id);
+    console.log("updatedProject be:", updatedProject);
+
+    res.status(STATUS_CODE.OK).json({ project: updatedProject });
   } catch (error) {
     console.error("Error deleting task status", error);
     res
