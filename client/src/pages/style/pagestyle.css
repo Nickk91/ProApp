@@ -6,6 +6,13 @@
   height: 100vh;
 }
 
+.pagey {
+  display: flex;
+  flex-direction: column;
+  border: solid black 2px;
+  align-items: center;
+}
+
 .line {
   width: 120px;
   height: 5px;

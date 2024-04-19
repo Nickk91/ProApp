@@ -42,6 +42,11 @@ const trashIcon = styled.img`
   height: 24.84px;
   width: 19.05px;
 `;
+const smallTrashIcon = styled.img`
+  height: 12.42px;
+  width: 9.525px;
+  margin-top: 2px;
+`;
 
 const page = styled.div`
   display: flex;
@@ -178,4 +183,5 @@ export {
   taskStatusExpanded,
   taskDescription,
   userNameButton,
+  smallTrashIcon,
 };

@@ -3,11 +3,12 @@ import * as S from "./StyledComponent/StyledComponents.js";
 import trash from "../../assets/images/trash_icon.svg";
 import addTask from "../../assets/images/icon_Plus_Circle_.svg";
 import arrowIcon from "../../assets/images/icon_chevron_up.svg";
-// import { tasks } from "../../constants/data.js";
 import GenericModal from "../../components/GenericModal/GenericModal.jsx";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import FooterMenu from "../../components/FooterMenu/FooterMenu.jsx";
+import ProjectStatusSelection from "../../components/ProjectStatusSelection/ProjectStatusSelection.jsx";
+import TaskStatusSelection from "../../components/TaskStatusSelection/TaskStatusSelection.jsx";
 
 const ProjectPage = ({}) => {
   const [selectedValue, setSelectedValue] = useState("TODO");
@@ -15,6 +16,8 @@ const ProjectPage = ({}) => {
   const [userType, setUserType] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [project, setProject] = useState(null);
+  const [taskStatuses, setTaskStatuses] = useState([]);
+  const [fetchProject, setFetchProject] = useState(false);
 
   const { projectId } = useParams();
 
@@ -39,6 +42,12 @@ const ProjectPage = ({}) => {
 
         const data = await response.json();
         setProject(data);
+        console.log(data.projectTasks);
+
+        const arr = data.projectTasks.map((task) => task.status);
+        console.log("Project tasks statuses are:", arr);
+        setTaskStatuses(arr);
+
         setIsLoading(false);
 
         setSelectedValue(data.projectStatus.toUpperCase());
@@ -48,46 +57,83 @@ const ProjectPage = ({}) => {
     };
 
     fetchProjects();
-  }, []);
+  }, [fetchProject]);
 
   let username = "ELADJMC_82";
 
   const navigate = useNavigate();
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isProjectModalOpen, setProjectIsModalOpen] = useState(false);
+  const [isTaskModalOpen, setTaskIsModalOpen] = useState(false);
+  const [taskToDeleteId, setTaskToDeleteId] = useState();
 
-  const openModal = () => {
-    setIsModalOpen(true);
+  const openModal = (item, taskIndex, taskId) => {
+    if (item === "project") {
+      setProjectIsModalOpen(true);
+    }
+    if (item === "task") {
+      console.log("taskIndex in openModal:", taskIndex);
+      console.log("taskId in openModal:", taskId);
+      setTaskToDeleteId(taskId);
+
+      setTaskIsModalOpen(true);
+    }
   };
-  const closeModal = () => {
-    setIsModalOpen(false);
+  const closeModal = (item) => {
+    if (item === "project") setProjectIsModalOpen(false);
+    if (item === "task") setTaskIsModalOpen(false);
   };
 
-  const deleteProject = () => {
-    const deleteProject = async () => {
-      try {
-        const token = localStorage.getItem("token");
+  const deleteTask = async (taskToDeleteId) => {
+    try {
+      const token = localStorage.getItem("token");
 
-        const response = await fetch(
-          `${import.meta.env.VITE_BASEURL}/projects/${projectId}`,
-          {
-            method: "DELETE",
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-
-        if (!response.ok) {
-          throw new Error("Failed to delete project");
+      const response = await fetch(
+        `${import.meta.env.VITE_BASEURL}/projects/${projectId}/deletetask`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ taskId: taskToDeleteId }),
         }
-        navigate("/myprojects");
-      } catch (error) {
-        console.error("Error deleting project:", error);
-      }
-    };
+      );
 
-    deleteProject();
+      if (!response.ok) {
+        throw new Error("Failed to fetch relevant project");
+      }
+
+      closeModal("task");
+      setIsLoading(true);
+      setFetchProject((fetchProject) => !fetchProject);
+    } catch (error) {
+      console.error("Error deleting task:", error);
+    }
+  };
+
+  const deleteProject = async () => {
+    try {
+      const token = localStorage.getItem("token");
+
+      const response = await fetch(
+        `${import.meta.env.VITE_BASEURL}/projects/${projectId}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to delete project");
+      }
+
+      navigate("/myprojects");
+    } catch (error) {
+      console.error("Error deleting project:", error);
+    }
   };
 
   const addTaskFunc = () => {
@@ -116,9 +162,43 @@ const ProjectPage = ({}) => {
       if (!response.ok) {
         throw new Error("Failed to update project status");
       }
-      // navigate(`/projects/${projectId}`);
+
+      setSelectedValue(e.toUpperCase());
     } catch (error) {
       console.error("Error updating project status:", error);
+    }
+  };
+
+  const handleTaskStatus = async (taskId, newStatus, i) => {
+    try {
+      const token = localStorage.getItem("token");
+
+      const response = await fetch(
+        `${import.meta.env.VITE_BASEURL}/projects/${projectId}/taskstatus`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ taskId: taskId, status: newStatus }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to update task status");
+      }
+
+      setTaskStatuses((prevStatuses) => {
+        const updatedStatuses = [...prevStatuses];
+        updatedStatuses[i] = newStatus;
+        return updatedStatuses;
+      });
+      console.log(taskStatuses);
+
+      // taskStatuses, setTaskStatuses
+    } catch (error) {
+      console.error("Error updating task status:", error);
     }
   };
 
@@ -145,34 +225,16 @@ const ProjectPage = ({}) => {
                 <strong>{username}</strong>
               </S.userNameButton>
             ) : (
-              <S.trashIcon src={trash} onClick={openModal} />
+              <S.trashIcon src={trash} onClick={() => openModal("project")} />
             )}
           </S.topDiv>
           <S.container>
             <S.selectDiv>
-              {selectedValue === "IN PROGRESS" && <S.statusIconInProg />}
-              {selectedValue === "TODO" && <S.statusIconTodo />}
-              {selectedValue === "DONE" && <S.statusIconDone />}
-              <select
-                style={{
-                  width: "130px",
-                  borderWidth: 0,
-                  fontWeight: "600",
-                  marginLeft: "6px",
-                  fontSize: "14px",
-                }}
-                name="tasks"
-                id="tasks"
-                value={selectedValue}
-                onChange={(e) => {
-                  setSelectedValue(e.target.value);
-                  handleProjectStatus(e.target.value.toLowerCase());
-                }}
-              >
-                <option value="IN PROGRESS">IN PROGRESS</option>
-                <option value="TODO">TODO</option>
-                <option value="DONE">DONE</option>
-              </select>
+              <ProjectStatusSelection
+                selectedValue={selectedValue}
+                onChange={handleProjectStatus}
+                type="project"
+              />
             </S.selectDiv>
 
             <S.projectImg src={src} alt="" />
@@ -195,14 +257,24 @@ const ProjectPage = ({}) => {
                   {extendedTaskList.includes(i) ? (
                     <S.taskStatusExpanded key={i}>
                       <S.statusWrapper>
-                        {task.status === "IN PROGRESS" ? (
-                          <S.statusIconInProg />
-                        ) : task.status === "TODO" ? (
-                          <S.statusIconTodo />
-                        ) : (
-                          <S.statusIconDone />
-                        )}
-                        {task.status}
+                        {/* {task.status} */}
+                        <TaskStatusSelection
+                          selectedValue={taskStatuses[i]}
+                          onChange={(newStatus) =>
+                            handleTaskStatus(task._id, newStatus, i)
+                          }
+                          type="task"
+                          key={task._id}
+                          taskId={task.id}
+                          handleTaskStatus={handleTaskStatus}
+                        />
+                        <S.smallTrashIcon
+                          src={trash}
+                          onClick={() => {
+                            openModal("task", i, task._id);
+                            // deleteTask(task._id, i);
+                          }}
+                        />
                       </S.statusWrapper>
                       <S.taskDescription> {task.description}</S.taskDescription>
 
@@ -216,15 +288,24 @@ const ProjectPage = ({}) => {
                   ) : (
                     <S.taskStatus key={i}>
                       <S.statusWrapper>
-                        {task.status === "in progress" ? (
-                          <S.statusIconInProg />
-                        ) : task.status === "todo" ? (
-                          <S.statusIconTodo />
-                        ) : (
-                          <S.statusIconDone />
-                        )}
-
-                        {task.status}
+                        {/* tasks */}
+                        <TaskStatusSelection
+                          selectedValue={taskStatuses[i]}
+                          onChange={(newStatus) =>
+                            handleTaskStatus(task._id, newStatus, i)
+                          }
+                          type="task"
+                          key={task._id}
+                          taskId={task._id}
+                          handleTaskStatus={handleTaskStatus}
+                        />
+                        <S.smallTrashIcon
+                          src={trash}
+                          onClick={() => {
+                            openModal("task", i, task._id);
+                            // deleteTask(task._id, i);
+                          }}
+                        />
                       </S.statusWrapper>
 
                       <S.arrowIconDown
@@ -241,12 +322,16 @@ const ProjectPage = ({}) => {
           </S.tasksContainer>
           <GenericModal
             toDelete="project"
-            isOpen={isModalOpen}
-            onRequestClose={closeModal}
+            isOpen={isProjectModalOpen}
+            onRequestClose={() => closeModal("project")}
             onRequestDelete={deleteProject}
-          >
-            <p>something</p>
-          </GenericModal>
+          ></GenericModal>
+          <GenericModal
+            toDelete="task"
+            isOpen={isTaskModalOpen}
+            onRequestClose={() => closeModal("task")}
+            onRequestDelete={() => deleteTask(taskToDeleteId)}
+          ></GenericModal>
         </>
       )}
       <FooterMenu />
