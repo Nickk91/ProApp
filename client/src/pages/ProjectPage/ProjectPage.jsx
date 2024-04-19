@@ -17,6 +17,7 @@ const ProjectPage = ({}) => {
   const [isLoading, setIsLoading] = useState(true);
   const [project, setProject] = useState(null);
   const [taskStatuses, setTaskStatuses] = useState([]);
+  const [fetchProject, setFetchProject] = useState(false);
 
   const { projectId } = useParams();
 
@@ -56,7 +57,7 @@ const ProjectPage = ({}) => {
     };
 
     fetchProjects();
-  }, []);
+  }, [fetchProject]);
 
   let username = "ELADJMC_82";
 
@@ -65,7 +66,6 @@ const ProjectPage = ({}) => {
   const [isProjectModalOpen, setProjectIsModalOpen] = useState(false);
   const [isTaskModalOpen, setTaskIsModalOpen] = useState(false);
   const [taskToDeleteId, setTaskToDeleteId] = useState();
-  const [taskToDeleteIndex, setTaskToDeleteIndex] = useState();
 
   const openModal = (item, taskIndex, taskId) => {
     if (item === "project") {
@@ -75,7 +75,6 @@ const ProjectPage = ({}) => {
       console.log("taskIndex in openModal:", taskIndex);
       console.log("taskId in openModal:", taskId);
       setTaskToDeleteId(taskId);
-      setTaskToDeleteIndex(taskIndex);
 
       setTaskIsModalOpen(true);
     }
@@ -85,12 +84,9 @@ const ProjectPage = ({}) => {
     if (item === "task") setTaskIsModalOpen(false);
   };
 
-  const deleteTask = async (taskToDeleteId, taskToDeleteIndex) => {
+  const deleteTask = async (taskToDeleteId) => {
     try {
       const token = localStorage.getItem("token");
-      // console.log("i in deleteTask:", i);
-      console.log("taskId in deleteTask:", taskToDeleteId);
-      console.log(taskToDeleteIndex);
 
       const response = await fetch(
         `${import.meta.env.VITE_BASEURL}/projects/${projectId}/deletetask`,
@@ -108,30 +104,9 @@ const ProjectPage = ({}) => {
         throw new Error("Failed to fetch relevant project");
       }
 
-      const data = await response.json();
-      let tasksArray = data.projectTasks;
-      console.log("tasksArray in deleteTask ", tasksArray);
-
-      setTaskStatuses((taskStatuses) =>
-        taskStatuses.filter((task, index) => index != taskToDeleteIndex)
-      );
-      console.log("taskStatuses after deleting task:", taskStatuses);
-
-      // setProject(data);
-      // console.log("TASKS AFTER DELETING:", data.projectTasks);
-
-      // const arr = data.projectTasks.map((task) => task.status);
-      // console.log("Project tasks statuses are:", arr);
-      // setTaskStatuses(arr);
-
-      // setIsLoading(false);
-
-      // setSelectedValue(data.projectStatus.toUpperCase());
-
-      setTaskToDeleteId(null);
-      setTaskToDeleteIndex(null);
       closeModal("task");
-      navigate(`/projects/${projectId}`);
+      setIsLoading(true);
+      setFetchProject((fetchProject) => !fetchProject);
     } catch (error) {
       console.error("Error deleting task:", error);
     }
@@ -189,7 +164,6 @@ const ProjectPage = ({}) => {
       }
 
       setSelectedValue(e.toUpperCase());
-      // navigate(`/projects/${projectId}`);
     } catch (error) {
       console.error("Error updating project status:", error);
     }
