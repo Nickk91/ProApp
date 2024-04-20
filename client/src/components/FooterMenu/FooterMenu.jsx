@@ -6,8 +6,20 @@ import { FiPlus } from "react-icons/fi";
 import { IoIosLogOut } from "react-icons/io";
 import { IoPersonOutline } from "react-icons/io5";
 import * as S from "./Styled.js";
+import { useNavigate } from "react-router-dom";
 
 const FooterMenu = () => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    navigate("/loggedout");
+  };
+
+  const handleAddProject = () => {
+    navigate("/addproject");
+  };
+
   return (
     <S.menu>
       <S.ul>
@@ -19,7 +31,7 @@ const FooterMenu = () => {
         </S.li>
         <S.plus>
           <S.li>
-            <FiPlus />
+            <FiPlus onClick={handleAddProject} />
           </S.li>
         </S.plus>
 
@@ -27,7 +39,7 @@ const FooterMenu = () => {
           <IoPersonOutline />
         </S.li>
         <S.li>
-          <IoIosLogOut />
+          <IoIosLogOut onClick={handleLogout} />
         </S.li>
       </S.ul>
     </S.menu>
