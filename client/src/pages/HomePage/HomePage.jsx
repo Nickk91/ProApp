@@ -14,7 +14,7 @@ const HomePage = () => {
   };
   return (
     <section className="page">
-      <S.formTitle>My Projects</S.formTitle>
+      <S.formTitleInv>My Projects</S.formTitleInv>
       <S.hero src={heroImg} alt="Hero Image of no projects" />
       <S.h2>Add your first project</S.h2>
       <S.addLogo
