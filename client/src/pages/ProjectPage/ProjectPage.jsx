@@ -67,13 +67,11 @@ const ProjectPage = ({}) => {
   const [isTaskModalOpen, setTaskIsModalOpen] = useState(false);
   const [taskToDeleteId, setTaskToDeleteId] = useState();
 
-  const openModal = (item, taskIndex, taskId) => {
+  const openModal = (item, taskId) => {
     if (item === "project") {
       setProjectIsModalOpen(true);
     }
     if (item === "task") {
-      console.log("taskIndex in openModal:", taskIndex);
-      console.log("taskId in openModal:", taskId);
       setTaskToDeleteId(taskId);
 
       setTaskIsModalOpen(true);
@@ -114,6 +112,7 @@ const ProjectPage = ({}) => {
 
   const deleteProject = async () => {
     try {
+      setIsLoading(true);
       const token = localStorage.getItem("token");
 
       const response = await fetch(
@@ -130,7 +129,7 @@ const ProjectPage = ({}) => {
         throw new Error("Failed to delete project");
       }
 
-      navigate("/myprojects");
+      navigate("/");
     } catch (error) {
       console.error("Error deleting project:", error);
     }
@@ -195,8 +194,6 @@ const ProjectPage = ({}) => {
         return updatedStatuses;
       });
       console.log(taskStatuses);
-
-      // taskStatuses, setTaskStatuses
     } catch (error) {
       console.error("Error updating task status:", error);
     }
@@ -257,7 +254,6 @@ const ProjectPage = ({}) => {
                   {extendedTaskList.includes(i) ? (
                     <S.taskStatusExpanded key={i}>
                       <S.statusWrapper>
-                        {/* {task.status} */}
                         <TaskStatusSelection
                           selectedValue={taskStatuses[i]}
                           onChange={(newStatus) =>
@@ -272,7 +268,6 @@ const ProjectPage = ({}) => {
                           src={trash}
                           onClick={() => {
                             openModal("task", i, task._id);
-                            // deleteTask(task._id, i);
                           }}
                         />
                       </S.statusWrapper>
@@ -303,7 +298,6 @@ const ProjectPage = ({}) => {
                           src={trash}
                           onClick={() => {
                             openModal("task", i, task._id);
-                            // deleteTask(task._id, i);
                           }}
                         />
                       </S.statusWrapper>

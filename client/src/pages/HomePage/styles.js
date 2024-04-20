@@ -8,6 +8,15 @@ const formTitle = styled.div`
   margin-top: 60px;
 `;
 
+const formTitleInv = styled.div`
+  display: hidden;
+  padding-bottom: 22px;
+
+  font-size: 32px;
+  margin-right: 130px;
+  margin-top: 60px;
+`;
+
 const hero = styled.img`
   width: 360px;
   margin-top: 60px;
@@ -20,4 +29,4 @@ const addLogo = styled.img`
   margin-top: 30px;
 `;
 
-export { formTitle, hero, h2, addLogo };
+export { formTitle, hero, h2, addLogo, formTitleInv };

@@ -27,10 +27,15 @@ const MyProjects = () => {
         );
 
         if (!response.ok) {
+          navigate("/noprojects");
           throw new Error("Failed to fetch projects");
         }
 
         const data = await response.json();
+        console.log(data);
+        if (data.length === 0) {
+          navigate("/noprojects");
+        }
         setProjects(data);
         setIsLoading(false);
       } catch (error) {

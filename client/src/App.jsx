@@ -38,7 +38,7 @@ function App() {
         <Route
           element={<PrivateRoutes authLevel={userAuthLevels.regularUser} />}
         >
-          <Route path="/" element={<HomePage />} />
+          <Route path="/noprojects" element={<HomePage />} />
           <Route path="/addproject" element={<AddProjectPage />} />
           {/* /addtask */}
           <Route
@@ -73,7 +73,7 @@ function App() {
           path="/projects/:projectId/deletetask/:taskId"
           element={<ProjectPage />}
         />
-        <Route path="/myprojects" element={<MyProjects />} />
+        <Route path="/" element={<MyProjects />} />
         <Route path="/test" element={<TestPage />} />
       </Routes>
     </>
