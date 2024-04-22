@@ -5,6 +5,13 @@ const page = styled.div`
   flex-direction: column;
   border: solid black 2px;
   align-items: center;
+  min-height: 550px;
+  min-width: 300px;
 `;
 
-export { page };
+const userTitle = styled.div`
+  padding-bottom: 22px;
+  font-size: 35px;
+`;
+
+export { page, userTitle };

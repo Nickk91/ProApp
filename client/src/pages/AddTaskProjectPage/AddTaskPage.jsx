@@ -5,6 +5,7 @@ import { addTaskFormInputs } from "../../constants/formInputsData.js";
 import ReturnIcon from "../../assets/images/back_icon.svg";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
+import "../style/pagestyle.css";
 
 const AddTaskPage = () => {
   const { projectId } = useParams();

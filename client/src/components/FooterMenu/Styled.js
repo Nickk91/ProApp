@@ -9,6 +9,9 @@ const menu = styled.div`
   display: flex;
   width: 100%;
   background-color: rgb(240, 240, 240);
+  min-width: 300px;
+  justify-content: center;
+  align-items: center;
 `;
 
 const ul = styled.ul`
@@ -17,7 +20,8 @@ const ul = styled.ul`
   list-style-type: none;
   align-items: center;
   justify-content: space-around;
-  width: 100%;
+  width: 60%;
+  max-width: 500px;
 `;
 const li = styled.ul`
   align-self: center;

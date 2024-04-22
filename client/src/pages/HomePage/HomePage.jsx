@@ -5,6 +5,7 @@ import heroImg from "../../assets/images/NoProjects.svg";
 import addLogo from "../../assets/images/icon_Plus_Circle_.svg";
 import { useNavigate } from "react-router-dom";
 import FooterMenu from "../../components/FooterMenu/FooterMenu.jsx";
+import "../style/pagestyle.css";
 
 const HomePage = () => {
   const navigate = useNavigate();

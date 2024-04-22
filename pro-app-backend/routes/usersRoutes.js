@@ -23,6 +23,9 @@ router.post("/userexist", userExist);
 router.post("/login", loginUser);
 
 router.get("/current", validateToken, currentUser);
+// app.use("/api/pro-app/users/current", currentUser);
+
+// app.use("/api/pro-app/users", usersRoutes);
 
 //Route to get single user by ID
 router.get("/:id", getUserById);

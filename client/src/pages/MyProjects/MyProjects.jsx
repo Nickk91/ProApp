@@ -5,6 +5,8 @@ import ProjectCard from "../../components/ProjectCard/ProjectCard.jsx";
 import * as S from "../../components/StyledComponents/styles.jsx";
 import { useNavigate } from "react-router-dom";
 import FooterMenu from "../../components/FooterMenu/FooterMenu.jsx";
+import Spinner from "../../components/Spinner/Spinner.jsx";
+import "../style/pagestyle.css";
 
 const MyProjects = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -27,7 +29,6 @@ const MyProjects = () => {
         );
 
         if (!response.ok) {
-          navigate("/noprojects");
           throw new Error("Failed to fetch projects");
         }
 
@@ -40,6 +41,7 @@ const MyProjects = () => {
         setIsLoading(false);
       } catch (error) {
         console.error("Error fetching projects:", error);
+        navigate("/noprojects");
       }
     };
 
@@ -53,11 +55,11 @@ const MyProjects = () => {
   };
 
   return (
-    <S.page>
+    <section className="page">
       <S.projectTitle>My projects</S.projectTitle>
 
       {isLoading ? (
-        <h1>Loading</h1>
+        <Spinner />
       ) : (
         projects.map((project, index) => (
           <ProjectCard
@@ -68,7 +70,7 @@ const MyProjects = () => {
         ))
       )}
       <FooterMenu />
-    </S.page>
+    </section>
   );
 };
 

@@ -1,12 +1,13 @@
 import React from "react";
 import "../style/pagestyle.css";
 import StatusSelection from "../../components/ProjectStatusSelection/ProjectStatusSelection";
+import Spinner from "../../components/Spinner/Spinner.jsx";
 
 const TestPage = () => {
   return (
-    <div className="pagey">
-      <StatusSelection />
-    </div>
+    <section className="page">
+      <Spinner />
+    </section>
   );
 };
 

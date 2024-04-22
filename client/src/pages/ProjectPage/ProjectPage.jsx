@@ -9,6 +9,7 @@ import { useParams } from "react-router-dom";
 import FooterMenu from "../../components/FooterMenu/FooterMenu.jsx";
 import ProjectStatusSelection from "../../components/ProjectStatusSelection/ProjectStatusSelection.jsx";
 import TaskStatusSelection from "../../components/TaskStatusSelection/TaskStatusSelection.jsx";
+import Spinner from "../../components/Spinner/Spinner.jsx";
 
 const ProjectPage = ({}) => {
   const [selectedValue, setSelectedValue] = useState("TODO");
@@ -210,9 +211,9 @@ const ProjectPage = ({}) => {
   };
 
   return (
-    <S.page>
+    <section className="page">
       {isLoading ? (
-        <h1>LOADING...</h1>
+        <Spinner />
       ) : (
         <>
           <S.topDiv>
@@ -329,7 +330,7 @@ const ProjectPage = ({}) => {
         </>
       )}
       <FooterMenu />
-    </S.page>
+    </section>
   );
 };
 

@@ -1,7 +1,8 @@
 import React from "react";
+import "../style/pagestyle.css";
 
 const UnauthorizedPage = () => {
-  return <div>Unauthorized Access!</div>;
+  return <section className="page">Unauthorized Access!</section>;
 };
 
 export default UnauthorizedPage;

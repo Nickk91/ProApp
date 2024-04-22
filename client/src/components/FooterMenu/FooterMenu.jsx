@@ -36,7 +36,7 @@ const FooterMenu = () => {
         </S.plus>
 
         <S.li>
-          <IoPersonOutline />
+          <IoPersonOutline onClick={() => navigate("/userpage")} />
         </S.li>
         <S.li>
           <IoIosLogOut onClick={handleLogout} />

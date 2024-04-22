@@ -1,7 +1,8 @@
 import React from "react";
+import "../style/pagestyle.css";
 
 const MissingPage = () => {
-  return <div>Page Missing</div>;
+  return <section className="page">Page Missing</section>;
 };
 
 export default MissingPage;

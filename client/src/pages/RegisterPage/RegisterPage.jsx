@@ -4,6 +4,8 @@ import { loginAndRegisterFormInputs } from "../../constants/formInputsData.js";
 import * as S from "../../components/StyledComponents/styles.jsx";
 import ReturnIcon from "../../assets/images/back_icon.svg";
 import { useNavigate } from "react-router-dom";
+import Spinner from "../../components/Spinner/Spinner.jsx";
+import "../style/pagestyle.css";
 
 const RegisterPage = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -52,11 +54,11 @@ const RegisterPage = () => {
   };
 
   return (
-    <>
+    <section className="page">
       {isLoading ? (
-        <h1>Loading...</h1>
+        <Spinner />
       ) : (
-        <section className="page">
+        <>
           <S.ReturnIcon src={ReturnIcon} onClick={handleClick} />
           <GenericForm
             title="Register"
@@ -64,10 +66,10 @@ const RegisterPage = () => {
             submitButtonText="NEXT"
             onSubmit={handleFormSubmit}
           />
-        </section>
+        </>
       )}
       ;
-    </>
+    </section>
   );
 };
 

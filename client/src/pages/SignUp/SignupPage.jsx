@@ -4,6 +4,8 @@ import { RegisterFormInputsPartTwo } from "../../constants/formInputsData.js";
 import * as S from "../../components/StyledComponents/styles.jsx";
 import ReturnIcon from "../../assets/images/back_icon.svg";
 import { useNavigate } from "react-router-dom";
+import Spinner from "../../components/Spinner/Spinner.jsx";
+import "../style/pagestyle.css";
 
 const SignupPage = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -53,11 +55,11 @@ const SignupPage = () => {
   };
 
   return (
-    <>
+    <section className="page">
       {isLoading ? (
-        <h1>Loading...</h1>
+        <Spinner />
       ) : (
-        <section className="page">
+        <>
           <S.ReturnIcon src={ReturnIcon} onClick={handleClick} />
           <GenericForm
             title="Register"
@@ -69,9 +71,9 @@ const SignupPage = () => {
             By siging up, you agree to Photo's <u>Terms of Service</u> and{" "}
             <u>Privacy Policy.</u>
           </S.p>
-        </section>
+        </>
       )}
-    </>
+    </section>
   );
 };
 
