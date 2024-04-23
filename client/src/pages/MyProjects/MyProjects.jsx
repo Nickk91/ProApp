@@ -8,44 +8,122 @@ import FooterMenu from "../../components/FooterMenu/FooterMenu.jsx";
 import Spinner from "../../components/Spinner/Spinner.jsx";
 import "../style/pagestyle.css";
 
-const MyProjects = () => {
+const MyProjects = ({ userLoggedIn }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [projects, setProjects] = useState();
 
   // ${import.meta.env.VITE_BASEURL}/projects
+  // useEffect(() => {
+  //   const fetchProjects = async () => {
+  //     try {
+  //       const token = localStorage.getItem("token");
+
+  //       const response = await fetch(
+  //         `${import.meta.env.VITE_BASEURL}/projects/user`,
+  //         {
+  //           method: "GET",
+  //           headers: {
+  //             Authorization: `Bearer ${token}`,
+  //           },
+  //         }
+  //       );
+
+  //       if (!response.ok) {
+  //         throw new Error("Failed to fetch projects");
+  //       }
+
+  //       const data = await response.json();
+  //       console.log(data);
+  //       if (data.length === 0) {
+  //         navigate("/noprojects");
+  //       }
+  //       setProjects(data);
+  //       setIsLoading(false);
+  //     } catch (error) {
+  //       console.error("Error fetching projects:", error);
+  //       navigate("/noprojects");
+  //     }
+  //   };
+
+  //   fetchProjects();
+  // }, []);
+
+  // useEffect(() => {
+  //   if (userLoggedIn) {
+  //     const fetchProjects = async () => {
+  //       try {
+  //         const token = localStorage.getItem("token");
+
+  //         const response = await fetch(
+  //           `${import.meta.env.VITE_BASEURL}/projects/user`,
+  //           {
+  //             method: "GET",
+  //             headers: {
+  //               Authorization: `Bearer ${token}`,
+  //             },
+  //           }
+  //         );
+
+  //         if (!response.ok) {
+  //           throw new Error("Failed to fetch projects");
+  //         }
+
+  //         const data = await response.json();
+  //         console.log(data);
+  //         if (data.length === 0) {
+  //           navigate("/noprojects");
+  //         }
+  //         setProjects(data);
+  //         setIsLoading(false);
+  //       } catch (error) {
+  //         console.error("Error fetching projects:", error);
+  //         navigate("/noprojects");
+  //       }
+  //     };
+
+  //     fetchProjects();
+  //   } else {
+  //     navigate("/loggedout");
+  //   }
+  // }, [userLoggedIn]);
+
   useEffect(() => {
-    const fetchProjects = async () => {
-      try {
-        const token = localStorage.getItem("token");
+    const token = localStorage.getItem("token");
 
-        const response = await fetch(
-          `${import.meta.env.VITE_BASEURL}/projects/user`,
-          {
-            method: "GET",
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
+    if (token) {
+      const fetchProjects = async () => {
+        try {
+          const response = await fetch(
+            `${import.meta.env.VITE_BASEURL}/projects/user`,
+            {
+              method: "GET",
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+
+          if (!response.ok) {
+            throw new Error("Failed to fetch projects");
           }
-        );
 
-        if (!response.ok) {
-          throw new Error("Failed to fetch projects");
-        }
-
-        const data = await response.json();
-        console.log(data);
-        if (data.length === 0) {
+          const data = await response.json();
+          console.log(data);
+          if (data.length === 0) {
+            navigate("/noprojects");
+          }
+          setProjects(data);
+          setIsLoading(false);
+        } catch (error) {
+          console.error("Error fetching projects:", error);
           navigate("/noprojects");
         }
-        setProjects(data);
-        setIsLoading(false);
-      } catch (error) {
-        console.error("Error fetching projects:", error);
-        navigate("/noprojects");
-      }
-    };
+      };
 
-    fetchProjects();
+      fetchProjects();
+    } else {
+      navigate("/loggedout");
+    }
   }, []);
 
   const navigate = useNavigate();

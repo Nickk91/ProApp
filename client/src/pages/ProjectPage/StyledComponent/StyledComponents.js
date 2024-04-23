@@ -98,7 +98,6 @@ const selectDiv = styled.div`
 const taskStatus = styled.div`
   display: flex;
   flex-direction: row;
-  /* border: 1px solid black; */
   padding-top: 1px;
   font-size: 13px;
   font-weight: bold;
@@ -109,7 +108,6 @@ const taskStatus = styled.div`
 const taskStatusExpanded = styled.div`
   display: flex;
   flex-direction: row;
-  /* border: 1px solid black; */
   font-size: 13px;
   font-weight: bold;
   justify-content: space-between;
@@ -118,30 +116,6 @@ const taskStatusExpanded = styled.div`
   align-items: flex-end;
   position: relative;
 `;
-
-// const taskStatusExpanded = styled.div`
-//   display: flex;
-//   flex-direction: row;
-//   font-size: 13px;
-//   font-weight: bold;
-//   justify-content: space-between;
-//   padding-top: 5px;
-//   height: 0; /* Start with height 0 */
-//   overflow: hidden; /* Hide content when height is 0 */
-//   align-items: flex-end;
-//   position: relative;
-//   transition: height 0.3s ease; /* Transition on height property */
-// `;
-
-// const taskStatus = styled.div`
-//   display: flex;
-//   flex-direction: row;
-//   padding-top: 1px;
-//   font-size: 13px;
-//   font-weight: bold;
-//   justify-content: space-between;
-//   padding-top: 5px;
-// `;
 
 const statusWrapper = styled.div`
   display: flex;

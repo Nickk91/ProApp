@@ -13,7 +13,7 @@ import Spinner from "../../components/Spinner/Spinner.jsx";
 
 const ProjectPage = () => {
   const [selectedValue, setSelectedValue] = useState("TODO");
-  const [extendedTaskList, setExtendedTaskList] = useState([]);
+  const [expandedTaskList, setExpandedTaskList] = useState([]);
   const [userType, setUserType] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [project, setProject] = useState(null);
@@ -203,10 +203,10 @@ const ProjectPage = () => {
   const src = "https://cdn-icons-png.flaticon.com/512/4345/4345800.png";
 
   const handleExtendTask = (i) => {
-    setExtendedTaskList((extendedTaskList) =>
-      extendedTaskList.includes(i)
-        ? extendedTaskList.filter((item) => item !== i)
-        : [...extendedTaskList, i]
+    setExpandedTaskList((expandedTaskList) =>
+      expandedTaskList.includes(i)
+        ? expandedTaskList.filter((item) => item !== i)
+        : [...expandedTaskList, i]
     );
   };
 
@@ -252,7 +252,7 @@ const ProjectPage = () => {
                 <S.listItem key={i}>
                   <p>{task.name}</p>
 
-                  {extendedTaskList.includes(i) ? (
+                  {expandedTaskList.includes(i) ? (
                     <S.taskStatusExpanded key={i}>
                       <S.statusWrapper>
                         <TaskStatusSelection
