@@ -131,6 +131,10 @@ const projectTitle = styled.div`
   margin-top: 50px;
 `;
 
+const spaceDiv = styled.div`
+  height: 100px;
+`;
+
 export {
   form,
   formTitle,
@@ -151,4 +155,5 @@ export {
   errorText,
   page,
   projectTitle,
+  spaceDiv,
 };

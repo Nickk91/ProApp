@@ -90,58 +90,58 @@ const selectDiv = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
-  /* border: 1px solid black; */
+  color: white;
   justify-content: flex-start;
   align-items: center;
-`;
-
-// const taskStatus = styled.div`
-//   display: flex;
-//   flex-direction: row;
-//   /* border: 1px solid black; */
-//   padding-top: 1px;
-//   font-size: 13px;
-//   font-weight: bold;
-//   justify-content: space-between;
-//   padding-top: 5px;
-// `;
-
-// const taskStatusExpanded = styled.div`
-//   display: flex;
-//   flex-direction: row;
-//   /* border: 1px solid black; */
-//   font-size: 13px;
-//   font-weight: bold;
-//   justify-content: space-between;
-//   padding-top: 5px;
-//   height: 100px;
-//   align-items: flex-end;
-//   position: relative;
-// `;
-
-const taskStatusExpanded = styled.div`
-  display: flex;
-  flex-direction: row;
-  font-size: 13px;
-  font-weight: bold;
-  justify-content: space-between;
-  padding-top: 5px;
-  height: 0; /* Start with height 0 */
-  overflow: hidden; /* Hide content when height is 0 */
-  align-items: flex-end;
-  position: relative;
-  transition: height 0.3s ease; /* Transition on height property */
 `;
 
 const taskStatus = styled.div`
   display: flex;
   flex-direction: row;
+  /* border: 1px solid black; */
   padding-top: 1px;
   font-size: 13px;
   font-weight: bold;
   justify-content: space-between;
   padding-top: 5px;
 `;
+
+const taskStatusExpanded = styled.div`
+  display: flex;
+  flex-direction: row;
+  /* border: 1px solid black; */
+  font-size: 13px;
+  font-weight: bold;
+  justify-content: space-between;
+  padding-top: 5px;
+  height: 100px;
+  align-items: flex-end;
+  position: relative;
+`;
+
+// const taskStatusExpanded = styled.div`
+//   display: flex;
+//   flex-direction: row;
+//   font-size: 13px;
+//   font-weight: bold;
+//   justify-content: space-between;
+//   padding-top: 5px;
+//   height: 0; /* Start with height 0 */
+//   overflow: hidden; /* Hide content when height is 0 */
+//   align-items: flex-end;
+//   position: relative;
+//   transition: height 0.3s ease; /* Transition on height property */
+// `;
+
+// const taskStatus = styled.div`
+//   display: flex;
+//   flex-direction: row;
+//   padding-top: 1px;
+//   font-size: 13px;
+//   font-weight: bold;
+//   justify-content: space-between;
+//   padding-top: 5px;
+// `;
 
 const statusWrapper = styled.div`
   display: flex;

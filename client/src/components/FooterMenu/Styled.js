@@ -20,8 +20,8 @@ const ul = styled.ul`
   list-style-type: none;
   align-items: center;
   justify-content: space-around;
-  width: 60%;
-  max-width: 500px;
+  width: 90%;
+  max-width: 700px;
 `;
 const li = styled.ul`
   align-self: center;

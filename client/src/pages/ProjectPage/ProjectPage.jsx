@@ -11,7 +11,7 @@ import ProjectStatusSelection from "../../components/ProjectStatusSelection/Proj
 import TaskStatusSelection from "../../components/TaskStatusSelection/TaskStatusSelection.jsx";
 import Spinner from "../../components/Spinner/Spinner.jsx";
 
-const ProjectPage = ({}) => {
+const ProjectPage = () => {
   const [selectedValue, setSelectedValue] = useState("TODO");
   const [extendedTaskList, setExtendedTaskList] = useState([]);
   const [userType, setUserType] = useState(false);

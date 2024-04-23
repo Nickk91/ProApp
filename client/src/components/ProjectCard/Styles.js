@@ -34,7 +34,7 @@ const statusWrapper = styled.div`
 `;
 
 const projectImg = styled.img`
-  width: 330px;
+  width: 300px;
   height: 270px;
   border: 1px solid black;
   margin: 10px;
