@@ -16,8 +16,13 @@ import ProjectPage from "./pages/ProjectPage/ProjectPage.jsx";
 import MyProjects from "./pages/MyProjects/MyProjects.jsx";
 import Userpage from "./pages/UserPage/Userpage.jsx";
 import TestPage from "./pages/TestPage/TestPage.jsx";
+import { useState } from "react";
 
 function App() {
+  // const [userLoggedIn, setUserLoggedIn] = useState(false);
+
+  // let homePage = userLoggedIn ? "MyProjects" : "LoggedOutPage";
+
   return (
     <>
       <Helmet>
@@ -74,6 +79,7 @@ function App() {
           path="/projects/:projectId/deletetask/:taskId"
           element={<ProjectPage />}
         />
+
         <Route path="/" element={<MyProjects />} />
         <Route path="/test" element={<TestPage />} />
       </Routes>
