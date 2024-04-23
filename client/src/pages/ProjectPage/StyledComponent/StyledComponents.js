@@ -9,6 +9,8 @@ const projectImg = styled.img`
   width: 330px;
   height: 270px;
   border: 1px solid black;
+  border-radius: 10px;
+  box-shadow: 1px 1px 5px gray;
 `;
 
 const statusIconInProg = styled.div`
@@ -51,25 +53,26 @@ const smallTrashIcon = styled.img`
 const page = styled.div`
   display: flex;
   flex-direction: column;
-  border: solid black 2px;
+  /* border: solid black 2px; */
   align-items: center;
+  min-height: 550px;
 `;
 
 const tasksHeader = styled.div`
-  margin-top: 30px;
+  margin-top: 31px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   width: 350px;
-  border: 2px solid red;
-  margin-bottom: 30px;
+  /* border: 2px solid red; */
+  margin-bottom: 31px;
 `;
 
 const addTaskIcon = styled.img`
   height: 24px;
 `;
 const tasksContainer = styled.div`
-  border: 2px solid rebeccapurple;
+  /* border: 2px solid rebeccapurple; */
 
   width: 350px;
   margin-bottom: 100px;
@@ -79,7 +82,7 @@ const container = styled.div`
   width: 350px;
   display: flex;
   flex-direction: column;
-  border: 2px solid green;
+  /* border: 2px solid green; */
   align-items: center;
 `;
 
@@ -87,7 +90,7 @@ const selectDiv = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
-  border: 1px solid black;
+  color: white;
   justify-content: flex-start;
   align-items: center;
 `;
@@ -95,7 +98,8 @@ const selectDiv = styled.div`
 const taskStatus = styled.div`
   display: flex;
   flex-direction: row;
-  border: 1px solid black;
+  /* border: 1px solid black; */
+  padding-top: 1px;
   font-size: 13px;
   font-weight: bold;
   justify-content: space-between;
@@ -105,7 +109,7 @@ const taskStatus = styled.div`
 const taskStatusExpanded = styled.div`
   display: flex;
   flex-direction: row;
-  border: 1px solid black;
+  /* border: 1px solid black; */
   font-size: 13px;
   font-weight: bold;
   justify-content: space-between;
@@ -114,6 +118,30 @@ const taskStatusExpanded = styled.div`
   align-items: flex-end;
   position: relative;
 `;
+
+// const taskStatusExpanded = styled.div`
+//   display: flex;
+//   flex-direction: row;
+//   font-size: 13px;
+//   font-weight: bold;
+//   justify-content: space-between;
+//   padding-top: 5px;
+//   height: 0; /* Start with height 0 */
+//   overflow: hidden; /* Hide content when height is 0 */
+//   align-items: flex-end;
+//   position: relative;
+//   transition: height 0.3s ease; /* Transition on height property */
+// `;
+
+// const taskStatus = styled.div`
+//   display: flex;
+//   flex-direction: row;
+//   padding-top: 1px;
+//   font-size: 13px;
+//   font-weight: bold;
+//   justify-content: space-between;
+//   padding-top: 5px;
+// `;
 
 const statusWrapper = styled.div`
   display: flex;
@@ -124,7 +152,8 @@ const taskList = styled.ul`
   list-style-type: none;
 `;
 const listItem = styled.li`
-  border: 1px solid yellow;
+  margin-top: 1px;
+  border: 0.5px dotted rgba(0, 0, 0, 0.3);
   padding-top: 15px;
   width: 99%;
 `;
@@ -142,9 +171,9 @@ const arrowIconDown = styled.img`
 
 const taskDescription = styled.div`
   position: absolute;
-  border: solid 1px red;
+  /* border: solid 1px red; */
   top: 10px;
-  color: #a1a1a1;
+  color: #404040;
   font-size: 15px;
 `;
 const userNameButton = styled.div`

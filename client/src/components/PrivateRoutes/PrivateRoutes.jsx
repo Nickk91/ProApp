@@ -17,7 +17,7 @@ const PrivateRoutes = ({ authLevel }) => {
 
       try {
         setIsLoading(true);
-        console.log(token);
+        // console.log(token);
         const response = await axios.get(
           `${import.meta.env.VITE_BASEURL}/users/current`,
           { headers: { Authorization: `Bearer ${token}` } }

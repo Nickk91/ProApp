@@ -4,6 +4,7 @@ import GenericForm from "../../components/GenericForm/GenericForm.jsx";
 import * as S from "../../components/StyledComponents/styles.jsx";
 import ReturnIcon from "../../assets/images/back_icon.svg";
 import { useNavigate } from "react-router-dom";
+import "../style/pagestyle.css";
 
 const AddProjectPage = () => {
   // const [isLoading, setIsLoading] = useState(true);

@@ -3,7 +3,8 @@
   flex-direction: column;
   border: solid black 2px;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
+  min-width: 300px;
 }
 
 .pagey {

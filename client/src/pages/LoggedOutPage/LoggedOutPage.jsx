@@ -4,6 +4,7 @@ import "../style/pagestyle.css";
 import "../../assets/images/Group.png";
 import heroImg from "../../assets/images/Group.png";
 import * as S from "./styles.js";
+import "../style/pagestyle.css";
 
 const LoggedOutPage = () => {
   const navigate = useNavigate();

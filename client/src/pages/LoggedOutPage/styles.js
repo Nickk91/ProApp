@@ -1,19 +1,20 @@
 import styled from "styled-components";
 
 const topContainer = styled.div`
-height: 100%;
-width 100%;
-// border: solid red 2px;
-display: flex;
+  height: 100%;
+  width: 100%;
+  /* border: solid red 2px; */
+  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
+  min-height: 50vh;
 `;
 const bottomContainer = styled.div`
-height: 100%;
-width 100%;
-// border: solid green 2px;
-display: flex;
+  width: 100%;
+  min-height: 50vh;
+  /* border: solid green 2px; */
+  display: flex;
   flex-direction: column-reverse;
   align-items: center;
   justify-content: flex-start;

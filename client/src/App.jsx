@@ -40,6 +40,7 @@ function App() {
         >
           <Route path="/noprojects" element={<HomePage />} />
           <Route path="/addproject" element={<AddProjectPage />} />
+          <Route path="/userpage" element={<Userpage />} />
           {/* /addtask */}
           <Route
             path="/projects/:projectId/addtask"
@@ -50,7 +51,7 @@ function App() {
         {/* Private routes for admin */}
         <Route element={<PrivateRoutes authLevel={userAuthLevels.admin} />}>
           <Route path="/edit-task" element={<EditTaskPage />} />
-          <Route path="/userpage" element={<Userpage />} />
+
           {/*  <Route path="/admin-only" element={<AdminsPage />} /> */}
         </Route>
 

@@ -3,6 +3,7 @@ import * as S from "../../components/StyledComponents/styles.jsx";
 import GenericTaskForm from "../../components/GenericTaskForm/GenericTaskForm.jsx";
 import { addTaskFormInputs } from "../../constants/formInputsData.js";
 import ReturnIcon from "../../assets/images/back_icon.svg";
+import "../style/pagestyle.css";
 
 const EditTaskPage = () => {
   const handleFormSubmit = (e) => {

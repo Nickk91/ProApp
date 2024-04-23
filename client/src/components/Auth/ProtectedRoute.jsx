@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Spinner from "../Spinner/Spinner";
 
 const ProtectedRoute = ({ Page, typeOfUser }) => {
   const navigate = useNavigate();
@@ -31,8 +32,7 @@ const ProtectedRoute = ({ Page, typeOfUser }) => {
 
   return (
     <>
-      {isLoading && <h1>Loading...</h1>}{" "}
-      {/* Show loading indicator if still loading */}
+      {isLoading && <Spinner />} {/* Show loading indicator if still loading */}
       {!isLoading && authLevel === typeOfUser && <Page />}{" "}
       {/* Show Page if authLevel matches */}
       {!isLoading && authLevel !== typeOfUser && navigate("/login")}{" "}

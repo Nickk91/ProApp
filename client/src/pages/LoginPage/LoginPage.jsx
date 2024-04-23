@@ -4,6 +4,8 @@ import GenericForm from "../../components/GenericForm/GenericForm.jsx";
 import { loginAndRegisterFormInputs } from "../../constants/formInputsData.js";
 import * as S from "../../components/StyledComponents/styles.jsx";
 import ReturnIcon from "../../assets/images/back_icon.svg";
+import Spinner from "../../components/Spinner/Spinner.jsx";
+import "../style/pagestyle.css";
 
 const LoginPage = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -56,7 +58,9 @@ const LoginPage = () => {
   return (
     <>
       {isLoading ? (
-        <h1>Loading...</h1>
+        <section className="page">
+          <Spinner />
+        </section>
       ) : (
         <section className="page">
           <S.ReturnIcon src={ReturnIcon} />

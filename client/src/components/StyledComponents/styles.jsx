@@ -3,7 +3,7 @@ import { IoReturnUpBack } from "react-icons/io5";
 
 const form = styled.form`
   margin-top: 83px;
-  border: yellow 2px solid;
+  /* border: yellow 2px solid; */
   width: 360px;
   overflow: visible;
   position: relative;
@@ -15,7 +15,7 @@ const formTitle = styled.div`
 `;
 
 const inputsContainer = styled.div`
-  border: green solid 2px;
+  /* border: green solid 2px; */
   display: flex;
   flex-direction: column;
   gap: 3px;
@@ -119,6 +119,9 @@ const page = styled.div`
   flex-direction: column;
   border: solid black 2px;
   align-items: center;
+  min-height: 550px;
+  min-width: 300px;
+  max-width: 1400px;
 `;
 
 const projectTitle = styled.div`
@@ -126,6 +129,10 @@ const projectTitle = styled.div`
   font-size: 35px;
   margin-left: -150px;
   margin-top: 50px;
+`;
+
+const spaceDiv = styled.div`
+  height: 100px;
 `;
 
 export {
@@ -148,4 +155,5 @@ export {
   errorText,
   page,
   projectTitle,
+  spaceDiv,
 };
