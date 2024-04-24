@@ -5,9 +5,11 @@ import * as S from "../../components/StyledComponents/styles.jsx";
 import ReturnIcon from "../../assets/images/back_icon.svg";
 import { useNavigate } from "react-router-dom";
 import "../style/pagestyle.css";
+import Spinner from "../../components/Spinner/Spinner.jsx";
+import FooterMenu from "../../components/FooterMenu/FooterMenu.jsx";
 
 const AddProjectPage = () => {
-  // const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [displayError, setDisplayError] = useState(false);
   //ADD BACKEND VALIDATIONS
   const navigate = useNavigate();
@@ -21,6 +23,7 @@ const AddProjectPage = () => {
     const projectImage = formData.get("Project image URL");
 
     try {
+      setIsLoading(true);
       const token = localStorage.getItem("token");
 
       const response = await fetch(`${import.meta.env.VITE_BASEURL}/projects`, {
@@ -47,6 +50,7 @@ const AddProjectPage = () => {
       console.error("Error;", error);
       setDisplayError(true);
     }
+    setIsLoading(false);
   };
 
   const handleBack = () => {
@@ -55,13 +59,21 @@ const AddProjectPage = () => {
 
   return (
     <section className="page">
-      <S.ReturnIcon onClick={handleBack} src={ReturnIcon} />
-      <GenericForm
-        title="Add Project"
-        inputs={addProjectFormInputs}
-        submitButtonText="ADD"
-        onSubmit={handleFormSubmit}
-      />
+      {isLoading ? (
+        <Spinner />
+      ) : (
+        <>
+          {" "}
+          <S.ReturnIcon onClick={handleBack} src={ReturnIcon} />
+          <GenericForm
+            title="Add Project"
+            inputs={addProjectFormInputs}
+            submitButtonText="ADD"
+            onSubmit={handleFormSubmit}
+          />
+        </>
+      )}
+      <FooterMenu />
     </section>
   );
 };

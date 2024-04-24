@@ -132,6 +132,13 @@ const listItem = styled.li`
   width: 99%;
 `;
 
+const noTasks = styled.div`
+  text-align: center;
+  font-style: italic;
+  background-color: rgba(128, 128, 128, 0.2);
+  border-radius: 5px;
+`;
+
 const taskName = styled.h3``;
 
 const arrowIconUp = styled.img`
@@ -187,4 +194,5 @@ export {
   taskDescription,
   userNameButton,
   smallTrashIcon,
+  noTasks,
 };

@@ -19,6 +19,7 @@ const ProjectPage = () => {
   const [project, setProject] = useState(null);
   const [taskStatuses, setTaskStatuses] = useState([]);
   const [fetchProject, setFetchProject] = useState(false);
+  const [NoTasks, setNoTasks] = useState();
 
   const { projectId } = useParams();
 
@@ -247,73 +248,82 @@ const ProjectPage = () => {
           </S.tasksHeader>
 
           <S.tasksContainer>
-            <S.taskList>
-              {project.projectTasks.map((task, i) => (
-                <S.listItem key={i}>
-                  <p>{task.name}</p>
+            {project.projectTasks.length === 0 ? (
+              <S.noTasks>NO TASKS FOR CURRENT PROJECT :( </S.noTasks>
+            ) : (
+              <>
+                <S.taskList>
+                  {project.projectTasks.map((task, i) => (
+                    <S.listItem key={i}>
+                      <p>{task.name}</p>
 
-                  {expandedTaskList.includes(i) ? (
-                    <S.taskStatusExpanded key={i}>
-                      <S.statusWrapper>
-                        <TaskStatusSelection
-                          selectedValue={taskStatuses[i]}
-                          onChange={(newStatus) =>
-                            handleTaskStatus(task._id, newStatus, i)
-                          }
-                          type="task"
-                          key={task._id}
-                          taskId={task.id}
-                          handleTaskStatus={handleTaskStatus}
-                        />
-                        <S.smallTrashIcon
-                          src={trash}
-                          onClick={() => {
-                            openModal("task", i, task._id);
-                          }}
-                        />
-                      </S.statusWrapper>
-                      <S.taskDescription> {task.description}</S.taskDescription>
+                      {expandedTaskList.includes(i) ? (
+                        <S.taskStatusExpanded key={i}>
+                          <S.statusWrapper>
+                            <TaskStatusSelection
+                              selectedValue={taskStatuses[i]}
+                              onChange={(newStatus) =>
+                                handleTaskStatus(task._id, newStatus, i)
+                              }
+                              type="task"
+                              key={task._id}
+                              taskId={task.id}
+                              handleTaskStatus={handleTaskStatus}
+                            />
+                            <S.smallTrashIcon
+                              src={trash}
+                              onClick={() => {
+                                openModal("task", i, task._id);
+                              }}
+                            />
+                          </S.statusWrapper>
+                          <S.taskDescription>
+                            {" "}
+                            {task.description}
+                          </S.taskDescription>
 
-                      <S.arrowIconUp
-                        onClick={() => {
-                          handleExtendTask(i);
-                        }}
-                        src={arrowIcon}
-                      />
-                    </S.taskStatusExpanded>
-                  ) : (
-                    <S.taskStatus key={i}>
-                      <S.statusWrapper>
-                        {/* tasks */}
-                        <TaskStatusSelection
-                          selectedValue={taskStatuses[i]}
-                          onChange={(newStatus) =>
-                            handleTaskStatus(task._id, newStatus, i)
-                          }
-                          type="task"
-                          key={task._id}
-                          taskId={task._id}
-                          handleTaskStatus={handleTaskStatus}
-                        />
-                        <S.smallTrashIcon
-                          src={trash}
-                          onClick={() => {
-                            openModal("task", i, task._id);
-                          }}
-                        />
-                      </S.statusWrapper>
+                          <S.arrowIconUp
+                            onClick={() => {
+                              handleExtendTask(i);
+                            }}
+                            src={arrowIcon}
+                          />
+                        </S.taskStatusExpanded>
+                      ) : (
+                        <S.taskStatus key={i}>
+                          <S.statusWrapper>
+                            {/* tasks */}
+                            <TaskStatusSelection
+                              selectedValue={taskStatuses[i]}
+                              onChange={(newStatus) =>
+                                handleTaskStatus(task._id, newStatus, i)
+                              }
+                              type="task"
+                              key={task._id}
+                              taskId={task._id}
+                              handleTaskStatus={handleTaskStatus}
+                            />
+                            <S.smallTrashIcon
+                              src={trash}
+                              onClick={() => {
+                                openModal("task", i, task._id);
+                              }}
+                            />
+                          </S.statusWrapper>
 
-                      <S.arrowIconDown
-                        onClick={() => {
-                          handleExtendTask(i);
-                        }}
-                        src={arrowIcon}
-                      />
-                    </S.taskStatus>
-                  )}
-                </S.listItem>
-              ))}
-            </S.taskList>
+                          <S.arrowIconDown
+                            onClick={() => {
+                              handleExtendTask(i);
+                            }}
+                            src={arrowIcon}
+                          />
+                        </S.taskStatus>
+                      )}
+                    </S.listItem>
+                  ))}
+                </S.taskList>
+              </>
+            )}
           </S.tasksContainer>
           <GenericModal
             toDelete="project"
