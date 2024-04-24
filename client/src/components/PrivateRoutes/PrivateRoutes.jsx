@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Outlet, Navigate } from "react-router-dom";
 import axios from "axios";
+import Spinner from "../Spinner/Spinner";
 
 const PrivateRoutes = ({ authLevel }) => {
   const [userAuthLevel, setUserAuthLevel] = useState(0);
@@ -39,7 +40,9 @@ const PrivateRoutes = ({ authLevel }) => {
   return (
     <>
       {isLoading ? (
-        <h1>Loading..</h1>
+        <section className="page">
+          <Spinner />
+        </section>
       ) : userAuthLevel >= authLevel ? (
         <Outlet />
       ) : (

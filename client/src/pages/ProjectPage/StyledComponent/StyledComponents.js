@@ -38,6 +38,9 @@ const topDiv = styled.div`
   flex-direction: row;
   justify-content: space-between;
   margin-top: 50px;
+  @media screen and (max-width: 350px) {
+    width: 95%;
+  }
 `;
 
 const trashIcon = styled.img`
@@ -53,7 +56,6 @@ const smallTrashIcon = styled.img`
 const page = styled.div`
   display: flex;
   flex-direction: column;
-  /* border: solid black 2px; */
   align-items: center;
   min-height: 550px;
 `;
@@ -64,16 +66,17 @@ const tasksHeader = styled.div`
   flex-direction: row;
   justify-content: space-between;
   width: 350px;
-  /* border: 2px solid red; */
   margin-bottom: 31px;
+
+  @media screen and (max-width: 350px) {
+    width: 95%;
+  }
 `;
 
 const addTaskIcon = styled.img`
   height: 24px;
 `;
 const tasksContainer = styled.div`
-  /* border: 2px solid rebeccapurple; */
-
   width: 350px;
   margin-bottom: 100px;
 `;
@@ -82,17 +85,14 @@ const container = styled.div`
   width: 350px;
   display: flex;
   flex-direction: column;
-  /* border: 2px solid green; */
   align-items: center;
 `;
 
 const selectDiv = styled.div`
-  width: 100%;
+  width: 150px;
   display: flex;
-  align-items: center;
   color: white;
-  justify-content: flex-start;
-  align-items: center;
+  margin-right: 180px;
 `;
 
 const taskStatus = styled.div`
@@ -124,12 +124,24 @@ const statusWrapper = styled.div`
 `;
 const taskList = styled.ul`
   list-style-type: none;
+
+  @media screen and (max-width: 350px) {
+    width: 95%;
+    margin: 0 auto;
+  }
 `;
 const listItem = styled.li`
   margin-top: 1px;
   border: 0.5px dotted rgba(0, 0, 0, 0.3);
   padding-top: 15px;
   width: 99%;
+`;
+
+const noTasks = styled.div`
+  text-align: center;
+  font-style: italic;
+  background-color: rgba(128, 128, 128, 0.2);
+  border-radius: 5px;
 `;
 
 const taskName = styled.h3``;
@@ -145,7 +157,6 @@ const arrowIconDown = styled.img`
 
 const taskDescription = styled.div`
   position: absolute;
-  /* border: solid 1px red; */
   top: 10px;
   color: #404040;
   font-size: 15px;
@@ -187,4 +198,5 @@ export {
   taskDescription,
   userNameButton,
   smallTrashIcon,
+  noTasks,
 };

@@ -1,7 +1,7 @@
 .page {
   display: flex;
   flex-direction: column;
-  border: solid black 2px;
+  /* border: solid black 2px; */
   align-items: center;
   min-height: 100vh;
   min-width: 300px;

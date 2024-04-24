@@ -30,9 +30,6 @@ app.use("/authGood", (req, res, next) => {
   res.send({ userLevel: 1 });
 });
 
-// // Apply validateToken middleware to routes that require authentication
-// app.use("/api/pro-app", validateToken);
-
 // users routes
 
 mongoose

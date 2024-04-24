@@ -1,9 +1,7 @@
 import styled from "styled-components";
-import { IoReturnUpBack } from "react-icons/io5";
 
 const form = styled.form`
   margin-top: 83px;
-  /* border: yellow 2px solid; */
   width: 360px;
   overflow: visible;
   position: relative;
@@ -12,27 +10,33 @@ const form = styled.form`
 const formTitle = styled.div`
   padding-bottom: 22px;
   font-size: 35px;
+  @media screen and (max-width: 365px) {
+    margin-left: 25px;
+  }
 `;
 
 const inputsContainer = styled.div`
-  /* border: green solid 2px; */
   display: flex;
   flex-direction: column;
   gap: 3px;
   overflow: visible;
+
+  @media screen and (max-width: 365px) {
+    width: 340px;
+    margin: 0 auto;
+  }
 `;
 
 const ReturnIcon = styled.img`
   position: relative;
-  left: -160px; /* Adjust this value to move the icon horizontally */
-  top: 55px; /* Adjust this value to move the icon vertically */
+  left: -160px;
+  top: 55px;
   width: 20px;
   height: 20px;
 `;
 
 const p = styled.p`
   margin-top: 30px;
-  // text-align: center;
   font-size: 11px;
   max-width: 330px;
 `;
@@ -46,6 +50,15 @@ const submitButton = styled.button`
   width: 100%;
   font-size: 11px;
   font-weight: 700;
+
+  @media screen and (max-width: 365px) {
+    width: 95%;
+    align-self: center;
+  }
+  @media screen and (min-width: 600px) {
+    width: 95%;
+    align-self: center;
+  }
 `;
 
 const input = styled.input`
@@ -53,6 +66,16 @@ const input = styled.input`
   background-color: white;
   height: 50px;
   margin-bottom: 7px;
+  min-width: 200px;
+
+  @media screen and (max-width: 365px) {
+    width: 95%;
+    align-self: center;
+  }
+  @media screen and (min-width: 600px) {
+    width: 95%;
+    align-self: center;
+  }
 `;
 
 const inputBox = styled.input`
@@ -60,10 +83,31 @@ const inputBox = styled.input`
   background-color: white;
   height: 150px;
   margin-bottom: 7px;
+
+  @media screen and (max-width: 365px) {
+    width: 95%;
+    align-self: center;
+  }
+
+  @media screen and (min-width: 600px) {
+    width: 95%;
+    align-self: center;
+  }
 `;
 
 const label = styled.label`
   margin-bottom: 7px;
+  min-width: 200px;
+
+  @media screen and (max-width: 365px) {
+    width: 95%;
+    align-self: center;
+  }
+
+  @media screen and (min-width: 600px) {
+    width: 95%;
+    align-self: center;
+  }
 `;
 
 const statusesContainer = styled.div`
@@ -90,10 +134,15 @@ const del = styled.img`
   margin-top: -30px;
 `;
 const topContainer = styled.div`
-  border: orange 2px solid;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+
+  @media screen and (max-width: 365px) {
+    width: 340px;
+
+    margin: 0 auto;
+  }
 `;
 const deleteModal = styled.div`
   position: absoulute;
@@ -129,10 +178,20 @@ const projectTitle = styled.div`
   font-size: 35px;
   margin-left: -150px;
   margin-top: 50px;
+
+  @media screen and (max-width: 365px) {
+    /* Styles for screens with a maximum width of 600px */
+    /* For example, you can change the width of the form */
+    margin-left: 1px;
+  }
 `;
 
 const spaceDiv = styled.div`
   height: 100px;
+`;
+
+const spacer = styled.div`
+  height: 30px;
 `;
 
 export {
@@ -156,4 +215,5 @@ export {
   page,
   projectTitle,
   spaceDiv,
+  spacer,
 };

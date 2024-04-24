@@ -9,9 +9,9 @@ const ProjectCard = ({ project, onClick }) => {
           <strong>{project.projectName.toUpperCase()}</strong>
         </p>
         <S.statusWrapper>
-          {project.projectStatus === "IN PROGRESS" ? (
+          {project.projectStatus === "in progress" ? (
             <S.statusIconInProg />
-          ) : project.projectStatus === "TODO" ? (
+          ) : project.projectStatus === "todo" ? (
             <S.statusIconTodo />
           ) : (
             <S.statusIconDone />
