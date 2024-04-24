@@ -44,6 +44,7 @@ const GenericForm = ({
         ))}
         <S.submitButton>{submitButtonText}</S.submitButton>
       </S.inputsContainer>
+      <S.spacer />
     </S.form>
   );
 };
