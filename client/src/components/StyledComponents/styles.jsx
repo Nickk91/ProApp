@@ -12,6 +12,11 @@ const form = styled.form`
 const formTitle = styled.div`
   padding-bottom: 22px;
   font-size: 35px;
+  @media screen and (max-width: 365px) {
+    /* Styles for screens with a maximum width of 600px */
+    /* For example, you can change the width of the form */
+    margin-left: 25px;
+  }
 `;
 
 const inputsContainer = styled.div`
@@ -25,7 +30,7 @@ const inputsContainer = styled.div`
     /* Styles for screens with a maximum width of 600px */
     /* For example, you can change the width of the form */
     width: 340px;
-    align-self: center;
+    margin: 0 auto;
   }
 `;
 
@@ -88,6 +93,13 @@ const inputBox = styled.input`
   background-color: white;
   height: 150px;
   margin-bottom: 7px;
+
+  @media screen and (max-width: 365px) {
+    /* Styles for screens with a maximum width of 600px */
+    /* For example, you can change the width of the form */
+    width: 95%;
+    align-self: center;
+  }
 `;
 
 const label = styled.label`
@@ -137,6 +149,14 @@ const topContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+
+  @media screen and (max-width: 365px) {
+    /* Styles for screens with a maximum width of 600px */
+    /* For example, you can change the width of the form */
+    width: 340px;
+
+    margin: 0 auto;
+  }
 `;
 const deleteModal = styled.div`
   position: absoulute;
@@ -172,6 +192,12 @@ const projectTitle = styled.div`
   font-size: 35px;
   margin-left: -150px;
   margin-top: 50px;
+
+  @media screen and (max-width: 365px) {
+    /* Styles for screens with a maximum width of 600px */
+    /* For example, you can change the width of the form */
+    margin-left: 1px;
+  }
 `;
 
 const spaceDiv = styled.div`
