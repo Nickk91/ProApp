@@ -15,11 +15,18 @@ const formTitle = styled.div`
 `;
 
 const inputsContainer = styled.div`
-  /* border: green solid 2px; */
+  border: green solid 2px;
   display: flex;
   flex-direction: column;
   gap: 3px;
   overflow: visible;
+
+  @media screen and (max-width: 365px) {
+    /* Styles for screens with a maximum width of 600px */
+    /* For example, you can change the width of the form */
+    width: 340px;
+    align-self: center;
+  }
 `;
 
 const ReturnIcon = styled.img`
@@ -46,6 +53,13 @@ const submitButton = styled.button`
   width: 100%;
   font-size: 11px;
   font-weight: 700;
+
+  @media screen and (max-width: 365px) {
+    /* Styles for screens with a maximum width of 600px */
+    /* For example, you can change the width of the form */
+    width: 95%;
+    align-self: center;
+  }
 `;
 
 const input = styled.input`
@@ -53,6 +67,20 @@ const input = styled.input`
   background-color: white;
   height: 50px;
   margin-bottom: 7px;
+  min-width: 200px;
+
+  @media screen and (max-width: 365px) {
+    /* Styles for screens with a maximum width of 600px */
+    /* For example, you can change the width of the form */
+    width: 95%;
+    align-self: center;
+  }
+  @media screen and (min-width: 600px) {
+    /* Styles for screens with a maximum width of 600px */
+    /* For example, you can change the width of the form */
+    width: 95%;
+    align-self: center;
+  }
 `;
 
 const inputBox = styled.input`
@@ -64,6 +92,21 @@ const inputBox = styled.input`
 
 const label = styled.label`
   margin-bottom: 7px;
+  min-width: 200px;
+
+  @media screen and (max-width: 365px) {
+    /* Styles for screens with a maximum width of 600px */
+    /* For example, you can change the width of the form */
+    width: 95%;
+    align-self: center;
+  }
+
+  @media screen and (min-width: 600px) {
+    /* Styles for screens with a maximum width of 600px */
+    /* For example, you can change the width of the form */
+    width: 95%;
+    align-self: center;
+  }
 `;
 
 const statusesContainer = styled.div`

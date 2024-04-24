@@ -25,7 +25,7 @@ const ul = styled.ul`
   align-items: center;
   justify-content: space-around;
   width: 90%;
-  max-width: 700px;
+  max-width: 400px;
 `;
 const li = styled.ul`
   align-self: center;
