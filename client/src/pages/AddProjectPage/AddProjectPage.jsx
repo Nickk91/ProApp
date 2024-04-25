@@ -63,7 +63,6 @@ const AddProjectPage = () => {
         <Spinner />
       ) : (
         <>
-          {" "}
           <S.ReturnIcon onClick={handleBack} src={ReturnIcon} />
           <GenericForm
             title="Add Project"
@@ -73,6 +72,7 @@ const AddProjectPage = () => {
           />
         </>
       )}
+
       <FooterMenu />
     </section>
   );
