@@ -11,7 +11,9 @@ const GenericInput = ({
   error,
   displayError,
   attributes = {},
+  value,
 }) => {
+  console.log("Value:", value); // Log the value prop
   return (
     <>
       {label && <S.label htmlFor={name}></S.label>}
@@ -21,6 +23,7 @@ const GenericInput = ({
         name={name}
         id={name}
         {...attributes}
+        defaultValue={value}
       />
       {displayError && <S.errorText>{error}</S.errorText>}
     </>

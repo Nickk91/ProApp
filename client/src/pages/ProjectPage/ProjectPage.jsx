@@ -10,6 +10,7 @@ import FooterMenu from "../../components/FooterMenu/FooterMenu.jsx";
 import ProjectStatusSelection from "../../components/ProjectStatusSelection/ProjectStatusSelection.jsx";
 import TaskStatusSelection from "../../components/TaskStatusSelection/TaskStatusSelection.jsx";
 import Spinner from "../../components/Spinner/Spinner.jsx";
+import { CiEdit } from "react-icons/ci";
 
 const ProjectPage = () => {
   const [selectedValue, setSelectedValue] = useState("TODO");
@@ -211,6 +212,27 @@ const ProjectPage = () => {
     );
   };
 
+  const handleEditTask = async (
+    taskId,
+    taskName,
+    taskDescription,
+    taskStatus
+  ) => {
+    console.log("handleEditTask:", taskId);
+    console.log("taskName:", taskName);
+    console.log("taskDescription:", taskDescription);
+    console.log("taskStatus:", taskStatus);
+    const edit = true;
+    navigate(`/projects/${projectId}/edit-task/${taskId}`, {
+      state: { taskId, taskName, taskDescription, taskStatus, edit },
+    });
+
+    //   <Route
+    //   path="/projects/:projectId/edit-task/:taskId"
+    //   element={<EditTaskPage />}
+    // />
+  };
+
   return (
     <section className="page">
       {isLoading ? (
@@ -276,6 +298,17 @@ const ProjectPage = () => {
                                 openModal("task", i, task._id);
                               }}
                             />
+                            <CiEdit
+                              size={20}
+                              onClick={() => {
+                                handleEditTask(
+                                  task._id,
+                                  task.name,
+                                  task.description,
+                                  task.status
+                                );
+                              }}
+                            />
                           </S.statusWrapper>
                           <S.taskDescription>
                             {" "}
@@ -307,6 +340,17 @@ const ProjectPage = () => {
                               src={trash}
                               onClick={() => {
                                 openModal("task", i, task._id);
+                              }}
+                            />
+                            <CiEdit
+                              size={20}
+                              onClick={() => {
+                                handleEditTask(
+                                  task._id,
+                                  task.name,
+                                  task.description,
+                                  task.status
+                                );
                               }}
                             />
                           </S.statusWrapper>

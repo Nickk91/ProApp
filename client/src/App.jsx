@@ -19,8 +19,6 @@ import TestPage from "./pages/TestPage/TestPage.jsx";
 import { useState } from "react";
 
 function App() {
-  // const [userLoggedIn, setUserLoggedIn] = useState(false);
-
   // let homePage = userLoggedIn ? "MyProjects" : "LoggedOutPage";
 
   return (
@@ -55,7 +53,7 @@ function App() {
         </Route>
         {/* Private routes for admin */}
         <Route element={<PrivateRoutes authLevel={userAuthLevels.admin} />}>
-          <Route path="/edit-task" element={<EditTaskPage />} />
+          {/* <Route path="/edit-task" element={<EditTaskPage />} /> */}
 
           {/*  <Route path="/admin-only" element={<AdminsPage />} /> */}
         </Route>
@@ -78,6 +76,10 @@ function App() {
         <Route
           path="/projects/:projectId/deletetask/:taskId"
           element={<ProjectPage />}
+        />
+        <Route
+          path="/projects/:projectId/edit-task/:taskId"
+          element={<EditTaskPage />}
         />
 
         <Route path="/" element={<MyProjects />} />
