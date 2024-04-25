@@ -5,6 +5,10 @@ const form = styled.form`
   width: 360px;
   overflow: visible;
   position: relative;
+
+  @media screen and (max-height: 650px) {
+    margin-top: 50px;
+  }
 `;
 
 const formTitle = styled.div`
@@ -33,6 +37,10 @@ const ReturnIcon = styled.img`
   top: 55px;
   width: 20px;
   height: 20px;
+
+  @media screen and (max-height: 650px) {
+    top: 40px;
+  }
 `;
 
 const p = styled.p`
