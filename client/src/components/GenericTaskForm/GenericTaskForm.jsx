@@ -14,6 +14,11 @@ const GenericTaskForm = ({
   submitButtonText,
   inputs,
   onSubmit,
+  taskId,
+  taskName,
+  taskDescription,
+  taskStatus,
+  edit,
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -30,6 +35,9 @@ const GenericTaskForm = ({
     const formProps = Object.fromEntries(formData.entries());
     onSubmit(e, formProps);
   };
+  console.log("edit is:", edit);
+  console.log("taskName:", taskName);
+  console.log("taskDescription is:", taskDescription);
 
   return (
     <>
@@ -49,6 +57,7 @@ const GenericTaskForm = ({
             name={inputs[0].name}
             attributes={inputs[0].attributes}
             placeholder={inputs[0].placeholder ? inputs[0].placeholder : ""}
+            value={edit ? taskName : ""}
           />
           <GenericTaskInput
             key={inputs[1].name}
@@ -56,6 +65,7 @@ const GenericTaskForm = ({
             name={inputs[1].name}
             attributes={inputs[1].attributes}
             placeholder={inputs[1].placeholder ? inputs[1].placeholder : ""}
+            value={edit ? taskDescription : ""}
           />
           <S.statusesContainer>
             <S.statusButtonCasule>

@@ -188,8 +188,6 @@ const projectTitle = styled.div`
   margin-top: 50px;
 
   @media screen and (max-width: 365px) {
-    /* Styles for screens with a maximum width of 600px */
-    /* For example, you can change the width of the form */
     margin-left: 1px;
   }
 `;
