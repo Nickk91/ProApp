@@ -4,20 +4,65 @@ import GenericTaskForm from "../../components/GenericTaskForm/GenericTaskForm.js
 import { addTaskFormInputs } from "../../constants/formInputsData.js";
 import ReturnIcon from "../../assets/images/back_icon.svg";
 import "../style/pagestyle.css";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 const EditTaskPage = () => {
   const location = useLocation();
-  const { taskId, taskName, taskDescription, taskStatus, edit } =
-    location.state;
-  const handleFormSubmit = (e) => {
+  const { taskId, taskName, taskDesc, taskStatus, edit } = location.state;
+
+  const { projectId } = useParams();
+  const navigate = useNavigate();
+
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
+
+    const name = formData.get("taskName");
+    const description = formData.get("taskDescription");
+
+    try {
+      const selectedTaskStatus = localStorage.getItem("taskStatus");
+
+      const token = localStorage.getItem("token");
+
+      const response = await fetch(
+        `${
+          import.meta.env.VITE_BASEURL
+        }/projects/project/${projectId}/edit-task`,
+
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            taskId,
+            name,
+            description,
+            selectedTaskStatus,
+          }),
+        }
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        navigate(`/projects/${projectId}`); // Redirect to the project page after adding the task
+      } else {
+        console.error("Editing task failed:", await response.json());
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      setDisplayError(true);
+    }
   };
 
   return (
     <section className="page">
-      <S.ReturnIcon src={ReturnIcon} />
+      <S.ReturnIcon
+        src={ReturnIcon}
+        onClick={() => navigate(`/projects/${projectId}`)}
+      />
       <GenericTaskForm
         title="Edit Task"
         inputs={addTaskFormInputs}
@@ -25,7 +70,7 @@ const EditTaskPage = () => {
         onSubmit={handleFormSubmit}
         taskId={taskId}
         taskName={taskName}
-        taskDescription={taskDescription}
+        taskDesc={taskDesc}
         taskStatus={taskStatus}
         edit={edit}
       />

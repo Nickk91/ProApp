@@ -20,7 +20,6 @@ const ProjectPage = () => {
   const [project, setProject] = useState(null);
   const [taskStatuses, setTaskStatuses] = useState([]);
   const [fetchProject, setFetchProject] = useState(false);
-  const [NoTasks, setNoTasks] = useState();
 
   const { projectId } = useParams();
 
@@ -212,25 +211,11 @@ const ProjectPage = () => {
     );
   };
 
-  const handleEditTask = async (
-    taskId,
-    taskName,
-    taskDescription,
-    taskStatus
-  ) => {
-    console.log("handleEditTask:", taskId);
-    console.log("taskName:", taskName);
-    console.log("taskDescription:", taskDescription);
-    console.log("taskStatus:", taskStatus);
+  const handleEditTask = async (taskId, taskName, taskDesc, taskStatus) => {
     const edit = true;
     navigate(`/projects/${projectId}/edit-task/${taskId}`, {
-      state: { taskId, taskName, taskDescription, taskStatus, edit },
+      state: { taskId, taskName, taskDesc, taskStatus, edit },
     });
-
-    //   <Route
-    //   path="/projects/:projectId/edit-task/:taskId"
-    //   element={<EditTaskPage />}
-    // />
   };
 
   return (

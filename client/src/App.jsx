@@ -7,7 +7,7 @@ import SignupPage from "./pages/SignUp/SignupPage.jsx";
 import AddProjectPage from "./pages/AddProjectPage/AddProjectPage.jsx";
 import LoginPage from "./pages/LoginPage/LoginPage.jsx";
 import RegisterPage from "./pages/RegisterPage/RegisterPage.jsx";
-import AddTaskPage from "./pages/AddTaskProjectPage/AddTaskPage.jsx";
+import AddTaskPage from "./pages/AddTaskPage/AddTaskPage.jsx";
 import EditTaskPage from "./pages/EditTaskPage.jsx/EditTaskPage.jsx";
 import PrivateRoutes from "./components/PrivateRoutes/PrivateRoutes.jsx";
 import ProtectedRoute from "./components/Auth/ProtectedRoute.jsx";
