@@ -68,7 +68,7 @@ export const addTask = async (req, res) => {
     const newTask = {
       name: req.body.name,
       description: req.body.description,
-      status: "todo",
+      status: req.body.selectedTaskStatus,
     };
 
     project.projectTasks.push(newTask);
@@ -235,5 +235,57 @@ export const updateProjectStatusById = async (req, res) => {
     res
       .status(STATUS_CODE.INTERNAL_SERVER_ERROR)
       .json({ message: "Internal Server Error" });
+  }
+};
+
+export const editTaskByTaskId = async (req, res) => {
+  try {
+    console.log("editTaskByTaskId controller!!!");
+
+    // taskId,
+    // name,
+    // description,
+    // selectedTaskStatus,
+
+    const { id } = req.params;
+    const taskId = req.body.taskId;
+    const newStatus = req.body.selectedTaskStatus;
+    const newName = req.body.name;
+    const newDescription = req.body.description;
+
+    console.log("project id:", id);
+    console.log("taskId!!:", taskId);
+    console.log("NEW STATUS!!:", newStatus);
+    console.log("NEW Name!!:", newName);
+    console.log("NEW Description!!:", newDescription);
+
+    const project = await Project.findById(id);
+
+    if (!project) {
+      res.status(STATUS_CODE.NOT_FOUND);
+      throw new Error("Project was not found");
+    }
+
+    let taskIndex = project.projectTasks.findIndex(
+      (task) => task._id.toString() === taskId
+    );
+
+    if (taskIndex === -1) {
+      res.status(STATUS_CODE.NOT_FOUND);
+      throw new Error("Task was not found in the project");
+    }
+
+    project.projectTasks[taskIndex].status = newStatus;
+    project.projectTasks[taskIndex].description = newDescription;
+    project.projectTasks[taskIndex].name = newName;
+    await project.save();
+    res.send({
+      message: "Task status updated successfully",
+    });
+  } catch (error) {
+    console.error("Error updating task status", error);
+    res
+      .status(STATUS_CODE.INTERNAL_SERVER_ERROR)
+      .json({ error: "Internal Server Error" });
   }
 };

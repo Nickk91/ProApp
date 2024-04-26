@@ -212,19 +212,10 @@ const ProjectPage = () => {
   };
 
   const handleEditTask = async (taskId, taskName, taskDesc, taskStatus) => {
-    console.log("handleEditTask:", taskId);
-    console.log("taskName:", taskName);
-    console.log("taskDescription:", taskDesc);
-    console.log("taskStatus:", taskStatus);
     const edit = true;
     navigate(`/projects/${projectId}/edit-task/${taskId}`, {
       state: { taskId, taskName, taskDesc, taskStatus, edit },
     });
-
-    //   <Route
-    //   path="/projects/:projectId/edit-task/:taskId"
-    //   element={<EditTaskPage />}
-    // />
   };
 
   return (

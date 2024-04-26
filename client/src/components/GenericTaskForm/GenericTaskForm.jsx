@@ -35,6 +35,7 @@ const GenericTaskForm = ({
     e.preventDefault();
     const formData = new FormData(e.target);
     const formProps = Object.fromEntries(formData.entries());
+    localStorage.setItem("taskStatus", selectedStatus);
     onSubmit(e, formProps);
   };
   // console.log("edit is:", edit);

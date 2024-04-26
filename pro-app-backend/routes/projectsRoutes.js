@@ -11,6 +11,7 @@ import {
   updateProjectStatusById,
   updateTaskStatusById,
   deleteTaskById,
+  editTaskByTaskId,
 } from "../controllers/projectController.js";
 import { validateToken } from "../middleware/validateTokenHandler.js";
 
@@ -28,6 +29,9 @@ router.get("/user", validateToken, getProjectsByUserId);
 
 //Route to create a new task
 router.post("/project/:id/addtask", validateToken, addTask);
+
+//Route to edit  task
+router.patch("/project/:id/edit-task", validateToken, editTaskByTaskId);
 
 // `${import.meta.env.VITE_BASEURL}/projects/${projectId}/addtask`,
 

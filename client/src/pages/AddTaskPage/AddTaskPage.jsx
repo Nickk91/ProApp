@@ -21,6 +21,7 @@ const AddTaskPage = () => {
     console.log(description);
 
     try {
+      const selectedTaskStatus = localStorage.getItem("taskStatus");
       const token = localStorage.getItem("token");
 
       const response = await fetch(
@@ -34,6 +35,7 @@ const AddTaskPage = () => {
           body: JSON.stringify({
             name,
             description,
+            selectedTaskStatus,
           }),
         }
       );
