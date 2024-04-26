@@ -75,6 +75,7 @@ const input = styled.input`
   height: 50px;
   margin-bottom: 7px;
   min-width: 200px;
+  padding-left: 5px;
 
   @media screen and (max-width: 365px) {
     width: 95%;
@@ -91,6 +92,7 @@ const inputBox = styled.input`
   background-color: white;
   height: 150px;
   margin-bottom: 7px;
+  padding-left: 5px;
 
   @media screen and (max-width: 365px) {
     width: 95%;
@@ -130,6 +132,15 @@ const statusButton = styled.img`
   // height: 50px;
 `;
 const statusButtonCasule = styled.div`
+  /* background: #d5ddf8; */
+  height: 22px;
+  padding-left: 3px;
+  padding-right: 10px;
+  padding-top: 4px;
+  border-radius: 5px;
+`;
+
+const selectedStatusButtonCasule = styled.div`
   background: #d5ddf8;
   height: 22px;
   padding-left: 3px;
@@ -213,6 +224,7 @@ export {
   statusesContainer,
   statusButton,
   statusButtonCasule,
+  selectedStatusButtonCasule,
   del,
   topContainer,
   deleteModal,

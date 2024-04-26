@@ -8,8 +8,7 @@ import { useLocation } from "react-router-dom";
 
 const EditTaskPage = () => {
   const location = useLocation();
-  const { taskId, taskName, taskDescription, taskStatus, edit } =
-    location.state;
+  const { taskId, taskName, taskDesc, taskStatus, edit } = location.state;
   const handleFormSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -25,7 +24,7 @@ const EditTaskPage = () => {
         onSubmit={handleFormSubmit}
         taskId={taskId}
         taskName={taskName}
-        taskDescription={taskDescription}
+        taskDesc={taskDesc}
         taskStatus={taskStatus}
         edit={edit}
       />

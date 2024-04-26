@@ -13,7 +13,6 @@ const GenericInput = ({
   attributes = {},
   value,
 }) => {
-  console.log("Value:", value); // Log the value prop
   return (
     <>
       {label && <S.label htmlFor={name}></S.label>}

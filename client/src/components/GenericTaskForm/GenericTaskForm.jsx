@@ -16,11 +16,13 @@ const GenericTaskForm = ({
   onSubmit,
   taskId,
   taskName,
-  taskDescription,
+  taskDesc,
   taskStatus,
   edit,
 }) => {
+  !edit && (taskStatus = "todo");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedStatus, setSelectedStatus] = useState(taskStatus);
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -35,9 +37,9 @@ const GenericTaskForm = ({
     const formProps = Object.fromEntries(formData.entries());
     onSubmit(e, formProps);
   };
-  console.log("edit is:", edit);
-  console.log("taskName:", taskName);
-  console.log("taskDescription is:", taskDescription);
+  // console.log("edit is:", edit);
+  // console.log("taskName:", taskName);
+  // console.log("taskDesc is:", taskDesc);
 
   return (
     <>
@@ -65,21 +67,56 @@ const GenericTaskForm = ({
             name={inputs[1].name}
             attributes={inputs[1].attributes}
             placeholder={inputs[1].placeholder ? inputs[1].placeholder : ""}
-            value={edit ? taskDescription : ""}
+            value={edit ? taskDesc : ""}
           />
           <S.statusesContainer>
-            <S.statusButtonCasule>
-              <S.statusButton src={todo} alt="status todo button" />
-            </S.statusButtonCasule>
-            <S.statusButtonCasule>
-              <S.statusButton
-                src={inProgress}
-                alt="status in progress button"
-              />
-            </S.statusButtonCasule>
-            <S.statusButtonCasule>
-              <S.statusButton src={done} alt="status done button" />
-            </S.statusButtonCasule>
+            {selectedStatus === "todo" ? (
+              <S.selectedStatusButtonCasule>
+                <S.statusButton src={todo} alt="status todo button" />
+              </S.selectedStatusButtonCasule>
+            ) : (
+              <S.statusButtonCasule
+                onClick={() => {
+                  setSelectedStatus("todo");
+                }}
+              >
+                <S.statusButton src={todo} alt="status todo button" />
+              </S.statusButtonCasule>
+            )}
+
+            {selectedStatus === "in progress" ? (
+              <S.selectedStatusButtonCasule>
+                <S.statusButton
+                  src={inProgress}
+                  alt="status in progress button"
+                />
+              </S.selectedStatusButtonCasule>
+            ) : (
+              <S.statusButtonCasule
+                onClick={() => {
+                  setSelectedStatus("in progress");
+                }}
+              >
+                <S.statusButton
+                  src={inProgress}
+                  alt="status in progress button"
+                />
+              </S.statusButtonCasule>
+            )}
+
+            {selectedStatus === "done" ? (
+              <S.selectedStatusButtonCasule>
+                <S.statusButton src={done} alt="status done button" />
+              </S.selectedStatusButtonCasule>
+            ) : (
+              <S.statusButtonCasule
+                onClick={() => {
+                  setSelectedStatus("done");
+                }}
+              >
+                <S.statusButton src={done} alt="status done button" />
+              </S.statusButtonCasule>
+            )}
           </S.statusesContainer>
 
           <S.submitButton>{submitButtonText}</S.submitButton>

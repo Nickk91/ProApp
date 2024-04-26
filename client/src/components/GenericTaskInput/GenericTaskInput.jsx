@@ -7,6 +7,7 @@ const GenericTaskInput = ({
   name,
   placeholder,
   attributes = {},
+  value,
 }) => {
   return (
     <>
@@ -17,6 +18,7 @@ const GenericTaskInput = ({
         name={name}
         id={name}
         {...attributes}
+        defaultValue={value}
       />
     </>
   );
