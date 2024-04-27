@@ -5,6 +5,7 @@ const selectDiv = styled.div`
   display: flex;
   align-items: center;
   border: 1px solid black;
+  border-radius: 5px;
   justify-content: flex-start;
   align-items: center;
 `;
@@ -15,6 +16,10 @@ const select = styled.select`
   font-weight: 600;
   margin-left: 6px;
   font-size: 14px;
+  /* border: 1px solid black; */
+
+  border-radius: 5px;
+  cursor: pointer;
 `;
 
 const statusIconInProg = styled.div`

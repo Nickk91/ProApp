@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+import { CiEdit } from "react-icons/ci";
+
 const projectTitle = styled.div`
   padding-bottom: 22px;
   font-size: 35px;
@@ -46,11 +48,19 @@ const topDiv = styled.div`
 const trashIcon = styled.img`
   height: 24.84px;
   width: 19.05px;
+  cursor: pointer;
 `;
+
 const smallTrashIcon = styled.img`
   height: 12.42px;
   width: 9.525px;
   margin-top: 2px;
+  transition: transform 0.2s; /* Add a smooth transition effect */
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(1.5); /* Increase size by 10% on hover */
+  }
 `;
 
 const page = styled.div`
@@ -75,6 +85,7 @@ const tasksHeader = styled.div`
 
 const addTaskIcon = styled.img`
   height: 24px;
+  cursor: pointer;
 `;
 const tasksContainer = styled.div`
   width: 350px;
@@ -149,10 +160,12 @@ const taskName = styled.h3``;
 const arrowIconUp = styled.img`
   height: 15px;
   transform: rotate(180deg);
+  cursor: pointer;
 `;
 
 const arrowIconDown = styled.img`
   height: 15px;
+  cursor: pointer;
 `;
 
 const taskDescription = styled.div`

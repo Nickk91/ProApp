@@ -37,6 +37,7 @@ const ReturnIcon = styled.img`
   top: 55px;
   width: 20px;
   height: 20px;
+  cursor: pointer;
 
   @media screen and (max-height: 650px) {
     top: 40px;
@@ -58,6 +59,7 @@ const submitButton = styled.button`
   width: 100%;
   font-size: 11px;
   font-weight: 700;
+  cursor: pointer;
 
   @media screen and (max-width: 365px) {
     width: 95%;
@@ -130,6 +132,7 @@ const statusesContainer = styled.div`
 
 const statusButton = styled.img`
   // height: 50px;
+  cursor: pointer;
 `;
 const statusButtonCasule = styled.div`
   /* background: #d5ddf8; */
@@ -138,6 +141,7 @@ const statusButtonCasule = styled.div`
   padding-right: 10px;
   padding-top: 4px;
   border-radius: 5px;
+  cursor: pointer;
 `;
 
 const selectedStatusButtonCasule = styled.div`
@@ -147,6 +151,7 @@ const selectedStatusButtonCasule = styled.div`
   padding-right: 10px;
   padding-top: 4px;
   border-radius: 5px;
+  cursor: pointer;
 `;
 
 const del = styled.img`
