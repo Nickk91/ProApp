@@ -13,28 +13,34 @@ const app = express();
 // cors middleware
 // app.use(cors());
 
-const BASE_SERVER_URL = process.env.BASE_SERVER_URL;
-const CLIENT_PORT = process.env.CLIENT_PORT;
+app.use(
+  cors({
+    origin: ["https://proappdevenv.netlify.app"],
+  })
+);
 
-const allowedOrigins = [
-  `${BASE_SERVER_URL}:${CLIENT_PORT}`,
-  process.env.PRODUCTION_FRONT_URL,
-];
+// const BASE_SERVER_URL = process.env.BASE_SERVER_URL;
+// const CLIENT_PORT = process.env.CLIENT_PORT;
 
-// app.set("trust proxy", 1);
+// const allowedOrigins = [
+//   `${BASE_SERVER_URL}:${CLIENT_PORT}`,
+//   process.env.PRODUCTION_FRONT_URL,
+// ];
 
-const corsOptions = {
-  origin: function (origin, callback) {
-    if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
-      callback(null, true);
-    } else {
-      callback(new Error("Invalid origin"));
-    }
-  },
-  credentials: true, // This is important for cookies, authorization headers with HTTPS
-};
+// // app.set("trust proxy", 1); only if you use google auth
 
-app.use(cors(corsOptions));
+// const corsOptions = {
+//   origin: function (origin, callback) {
+//     if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+//       callback(null, true);
+//     } else {
+//       callback(new Error("Invalid origin"));
+//     }
+//   },
+//   credentials: true, // This is important for cookies, authorization headers with HTTPS
+// };
+
+// app.use(cors(corsOptions));
 
 // middleware for JSON parsing
 app.use(express.json());
