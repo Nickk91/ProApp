@@ -5,9 +5,9 @@ const ProjectCard = ({ project, onClick }) => {
   return (
     <S.cardContainer onClick={onClick}>
       <S.topLine>
-        <p>
+        <S.projectname>
           <strong>{project.projectName.toUpperCase()}</strong>
-        </p>
+        </S.projectname>
         <S.statusWrapper>
           {project.projectStatus === "in progress" ? (
             <S.statusIconInProg />

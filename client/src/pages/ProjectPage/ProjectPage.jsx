@@ -11,6 +11,8 @@ import ProjectStatusSelection from "../../components/ProjectStatusSelection/Proj
 import TaskStatusSelection from "../../components/TaskStatusSelection/TaskStatusSelection.jsx";
 import Spinner from "../../components/Spinner/Spinner.jsx";
 import { CiEdit } from "react-icons/ci";
+import styled from "styled-components";
+import AnimatedCiEdit from "../../components/AnimatedCiEdit/AnimatedCiEdit.jsx";
 
 const ProjectPage = () => {
   const [selectedValue, setSelectedValue] = useState("TODO");
@@ -44,10 +46,9 @@ const ProjectPage = () => {
 
         const data = await response.json();
         setProject(data);
-        console.log(data.projectTasks);
 
         const arr = data.projectTasks.map((task) => task.status);
-        console.log("Project tasks statuses are:", arr);
+
         setTaskStatuses(arr);
 
         setIsLoading(false);
@@ -70,6 +71,7 @@ const ProjectPage = () => {
   const [taskToDeleteId, setTaskToDeleteId] = useState();
 
   const openModal = (item, taskId) => {
+    console.log(taskId);
     if (item === "project") {
       setProjectIsModalOpen(true);
     }
@@ -86,6 +88,7 @@ const ProjectPage = () => {
 
   const deleteTask = async (taskToDeleteId) => {
     try {
+      console.log(taskToDeleteId);
       const token = localStorage.getItem("token");
 
       const response = await fetch(
@@ -280,11 +283,11 @@ const ProjectPage = () => {
                             <S.smallTrashIcon
                               src={trash}
                               onClick={() => {
-                                openModal("task", i, task._id);
+                                openModal("task", task._id);
                               }}
                             />
-                            <CiEdit
-                              size={20}
+                            <AnimatedCiEdit
+                              // size={20}
                               onClick={() => {
                                 handleEditTask(
                                   task._id,
@@ -324,11 +327,10 @@ const ProjectPage = () => {
                             <S.smallTrashIcon
                               src={trash}
                               onClick={() => {
-                                openModal("task", i, task._id);
+                                openModal("task", task._id);
                               }}
                             />
-                            <CiEdit
-                              size={20}
+                            <AnimatedCiEdit
                               onClick={() => {
                                 handleEditTask(
                                   task._id,

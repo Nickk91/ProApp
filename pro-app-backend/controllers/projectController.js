@@ -242,22 +242,11 @@ export const editTaskByTaskId = async (req, res) => {
   try {
     console.log("editTaskByTaskId controller!!!");
 
-    // taskId,
-    // name,
-    // description,
-    // selectedTaskStatus,
-
     const { id } = req.params;
     const taskId = req.body.taskId;
     const newStatus = req.body.selectedTaskStatus;
     const newName = req.body.name;
     const newDescription = req.body.description;
-
-    console.log("project id:", id);
-    console.log("taskId!!:", taskId);
-    console.log("NEW STATUS!!:", newStatus);
-    console.log("NEW Name!!:", newName);
-    console.log("NEW Description!!:", newDescription);
 
     const project = await Project.findById(id);
 

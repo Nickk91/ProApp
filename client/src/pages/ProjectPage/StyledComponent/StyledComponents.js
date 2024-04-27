@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+import { CiEdit } from "react-icons/ci";
+
 const projectTitle = styled.div`
   padding-bottom: 22px;
   font-size: 35px;
@@ -47,10 +49,16 @@ const trashIcon = styled.img`
   height: 24.84px;
   width: 19.05px;
 `;
+
 const smallTrashIcon = styled.img`
   height: 12.42px;
   width: 9.525px;
   margin-top: 2px;
+  transition: transform 0.2s; /* Add a smooth transition effect */
+
+  &:hover {
+    transform: scale(1.5); /* Increase size by 10% on hover */
+  }
 `;
 
 const page = styled.div`

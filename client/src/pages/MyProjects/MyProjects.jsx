@@ -7,10 +7,13 @@ import { useNavigate } from "react-router-dom";
 import FooterMenu from "../../components/FooterMenu/FooterMenu.jsx";
 import Spinner from "../../components/Spinner/Spinner.jsx";
 import "../style/pagestyle.css";
+import Pagination from "../../components/Pagination/Pagination.jsx";
 
 const MyProjects = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const [projects, setProjects] = useState();
+  const [projects, setProjects] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [projectsPerPage, setProjectsPerPage] = useState(2);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -57,6 +60,15 @@ const MyProjects = () => {
     navigate(`/projects/${projectId}`);
   };
 
+  const lastProjectIndex = currentPage * projectsPerPage;
+  const firstProjectIndex = lastProjectIndex - projectsPerPage;
+
+  let currentProjects = [];
+
+  if (projects) {
+    currentProjects = projects.slice(firstProjectIndex, lastProjectIndex);
+  }
+
   return (
     <section className="page">
       <S.projectTitle>My projects</S.projectTitle>
@@ -64,7 +76,7 @@ const MyProjects = () => {
       {isLoading ? (
         <Spinner />
       ) : (
-        projects.map((project, index) => (
+        currentProjects.map((project, index) => (
           <ProjectCard
             key={index}
             project={project}
@@ -72,6 +84,11 @@ const MyProjects = () => {
           />
         ))
       )}
+      <Pagination
+        totalProjects={projects.length}
+        projectsPerPage={projectsPerPage}
+        setCurrentPage={setCurrentPage}
+      />
       <S.spaceDiv />
 
       <FooterMenu />

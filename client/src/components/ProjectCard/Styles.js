@@ -47,6 +47,17 @@ const projectTitle = styled.div`
 
 const cardContainer = styled.div`
   margin-top: 50px;
+  opacity: 0.97;
+  transition: transform 0.2s;
+
+  &:hover {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+`;
+
+const projectname = styled.div`
+  max-width: 150px;
 `;
 
 export {
@@ -58,4 +69,5 @@ export {
   topLine,
   projectTitle,
   cardContainer,
+  projectname,
 };
