@@ -49,6 +49,7 @@ const cardContainer = styled.div`
   margin-top: 50px;
   opacity: 0.97;
   transition: transform 0.2s;
+  cursor: pointer;
 
   &:hover {
     transform: scale(1.1);

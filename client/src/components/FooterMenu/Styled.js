@@ -31,6 +31,7 @@ const li = styled.ul`
   align-self: center;
   text-align: center;
   margin-top: 3px;
+  cursor: pointer;
 `;
 
 const plus = styled.div`

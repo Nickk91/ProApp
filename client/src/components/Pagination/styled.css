@@ -5,6 +5,7 @@
   margin-top: 20px;
   margin-bottom: 20px;
   margin-inline: 5px;
+  cursor: pointer;
 }
 
 .active {

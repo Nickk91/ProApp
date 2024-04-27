@@ -7,6 +7,8 @@ const selectDiv = styled.div`
   border: 1px solid black;
   justify-content: flex-start;
   align-items: center;
+  border-radius: 5px;
+  cursor: pointer;
 `;
 
 const select = styled.select`
@@ -15,6 +17,8 @@ const select = styled.select`
   font-weight: 600;
   margin-left: 6px;
   font-size: 14px;
+  border-radius: 5px;
+  cursor: pointer;
 `;
 
 const statusIconInProg = styled.div`
@@ -35,6 +39,7 @@ const statusIconTodo = styled.div`
   width: 14px;
   background-color: #a1a1a1;
   border-radius: 50%;
+  cursor: pointer;
 `;
 
 export { selectDiv, select, statusIconInProg, statusIconDone, statusIconTodo };

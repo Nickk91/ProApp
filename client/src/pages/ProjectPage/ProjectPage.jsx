@@ -299,7 +299,6 @@ const ProjectPage = () => {
                             />
                           </S.statusWrapper>
                           <S.taskDescription>
-                            {" "}
                             {task.description}
                           </S.taskDescription>
 
