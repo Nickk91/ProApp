@@ -1,20 +1,27 @@
 import React from "react";
-import * as S from "./styled.js";
+import "./styled.css";
 
-const Pagination = ({ totalProjects, projectsPerPage, setCurrentPage }) => {
+const Pagination = ({
+  totalProjects,
+  projectsPerPage,
+  setCurrentPage,
+  currentPage,
+}) => {
   let pages = [];
   for (let i = 1; i <= Math.ceil(totalProjects / projectsPerPage); i++) {
     pages.push(i);
   }
   return (
     <div>
-      {pages.map((page, index) => {
-        return (
-          <S.pageButton onClick={() => setCurrentPage(page)} key={index}>
-            {page}
-          </S.pageButton>
-        );
-      })}
+      {pages.map((page, index) => (
+        <button
+          key={index}
+          onClick={() => setCurrentPage(page)}
+          className={page == currentPage ? "pagebuttonactive" : "pagebutton"}
+        >
+          {page}
+        </button>
+      ))}
     </div>
   );
 };
