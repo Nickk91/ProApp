@@ -6,6 +6,7 @@ import {
   getUserById,
   loginUser,
   userExist,
+  getUserIdByUsername,
 } from "../controllers/userController.js";
 import { validateToken } from "../middleware/validateTokenHandler.js";
 
@@ -23,7 +24,8 @@ router.post("/userexist", userExist);
 router.post("/login", loginUser);
 
 router.get("/current", validateToken, currentUser);
-// app.use("/api/pro-app/users/current", currentUser);
+
+router.get("/getuserid", validateToken, getUserIdByUsername);
 
 // app.use("/api/pro-app/users", usersRoutes);
 

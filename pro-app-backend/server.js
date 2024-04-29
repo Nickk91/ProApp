@@ -11,13 +11,13 @@ dotenv.config();
 const app = express();
 
 // cors middleware
-// app.use(cors());
+app.use(cors());
 
-app.use(
-  cors({
-    origin: ["https://proappdevenv.netlify.app"],
-  })
-);
+// app.use(
+//   cors({
+//     origin: ["*"],
+//   })
+// );
 
 // const BASE_SERVER_URL = process.env.BASE_SERVER_URL;
 // const CLIENT_PORT = process.env.CLIENT_PORT;

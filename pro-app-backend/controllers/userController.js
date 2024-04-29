@@ -160,3 +160,26 @@ export const userExist = async (req, res) => {
     return res.status(STATUS_CODE.OK).json({ message: "User does not exist" });
   }
 };
+
+export const getUserIdByUsername = async (req, res) => {
+  const userName = req.body.userName;
+  if (!userName) {
+    return res
+      .status(STATUS_CODE.BAD_REQUEST)
+      .json({ error: "Username is mandatory!" });
+  }
+
+  const users = await User.find({
+    username: { $regex: userName, $options: "i" },
+  });
+
+  if (users) {
+    return res
+      .status(STATUS_CODE.OK)
+      .json({ message: "User exists", userId: users._id });
+  } else {
+    return res
+      .status(STATUS_CODE.NOT_FOUND)
+      .json({ message: "User does not exist" });
+  }
+};

@@ -12,6 +12,8 @@ import {
   updateTaskStatusById,
   deleteTaskById,
   editTaskByTaskId,
+  getProjectByUserId,
+  getProjectsByProjectName,
 } from "../controllers/projectController.js";
 import { validateToken } from "../middleware/validateTokenHandler.js";
 
@@ -27,6 +29,8 @@ router.post("/", validateToken, addProject);
 
 router.get("/user", validateToken, getProjectsByUserId);
 
+router.get("/user/searchprojects", validateToken, getProjectsByUserId);
+
 //Route to create a new task
 router.post("/project/:id/addtask", validateToken, addTask);
 
@@ -37,6 +41,18 @@ router.patch("/project/:id/edit-task", validateToken, editTaskByTaskId);
 
 //Route to get a project by project ID
 router.get("/project/:id", validateToken, getProjectById);
+
+//Route to get a project by user Id
+router.get("/project/userId", validateToken, getProjectByUserId);
+
+//Route to get a project by project name
+router.get(
+  "/project/projectname/:searchItem",
+  validateToken,
+  getProjectsByProjectName
+);
+
+// projects/project/projectname
 
 //Route to get delete a task by task ID
 router.patch("/:id/deletetask", validateToken, deleteTaskById);
