@@ -27,7 +27,7 @@ export const getProjectsByUserId = async (req, res) => {
 
 export const getProjectByUserIds = async (req, res) => {
   try {
-    const userIdsArray = req.body.userIdsArray;
+    const userIdsArray = req.userIdsArray;
 
     console.log("getProjectByUserIds userIdsArray is:", userIdsArray);
 
@@ -35,7 +35,10 @@ export const getProjectByUserIds = async (req, res) => {
       user: { $in: userIdsArray },
     });
 
-    res.json(projects);
+    console.log("in getProjectByUserIds projects are:", projects);
+
+    return res.status(STATUS_CODE.OK).json({ projects });
+    // res.json(projects);
   } catch (error) {
     console.log("Error fetching projects:", error);
     res
