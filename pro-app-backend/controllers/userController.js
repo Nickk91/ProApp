@@ -173,10 +173,13 @@ export const getUserIdByUsername = async (req, res, next) => {
   const users = await User.find({
     username: { $regex: userName, $options: "i" },
   });
+  console.log("getUserIdByUsername:", users);
 
   if (users.length > 0) {
     let userIdsArray = users.map((user) => user._id);
+
     req.userIdsArray = userIdsArray;
+    console.log("req.userIdsArray!!!:", req.userIdsArray);
     next();
   } else {
     return res

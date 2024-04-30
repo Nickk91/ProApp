@@ -80,6 +80,7 @@ const SearchPage = () => {
         const data = await response.json();
         // setSearchResults(data);
         console.log(data);
+        setSearchResults(data);
       } else {
         console.error("Search failed");
       }
@@ -116,6 +117,10 @@ const SearchPage = () => {
       lastProjectIndex
     );
   }
+
+  const handleClick = (projectId) => {
+    navigate(`/projects/${projectId}`);
+  };
 
   console.log(searchResults.projects);
   return (
