@@ -68,6 +68,10 @@ const submitButton = styled.button`
   }
 `;
 
+const spaceDiv = styled.div`
+  height: 150px;
+`;
+
 export {
   searchTitle,
   activeButton,
@@ -75,4 +79,5 @@ export {
   buttonsContainer,
   searchInput,
   submitButton,
+  spaceDiv,
 };

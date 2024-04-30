@@ -25,9 +25,23 @@ export const getProjectsByUserId = async (req, res) => {
   }
 };
 
-export const getProjectByUserId = async (req, res) => {
+export const getProjectByUserIds = async (req, res) => {
   try {
-  } catch (error) {}
+    const userIdsArray = req.body.userIdsArray;
+
+    console.log("getProjectByUserIds userIdsArray is:", userIdsArray);
+
+    const projects = await Project.find({
+      user: { $in: userIdsArray },
+    });
+
+    res.json(projects);
+  } catch (error) {
+    console.log("Error fetching projects:", error);
+    res
+      .status(STATUS_CODE.INTERNAL_SERVER_ERROR)
+      .json({ error: "Internal Server Error ssss" });
+  }
 };
 
 export const getProjectsByProjectName = async (req, res) => {

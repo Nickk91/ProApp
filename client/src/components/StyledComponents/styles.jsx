@@ -11,6 +11,16 @@ const form = styled.form`
   }
 `;
 
+const searchForm = styled.form`
+  width: 360px;
+  overflow: visible;
+  position: relative;
+
+  @media screen and (max-height: 650px) {
+    margin-top: 50px;
+  }
+`;
+
 const formTitle = styled.div`
   padding-bottom: 22px;
   font-size: 35px;
@@ -217,6 +227,7 @@ const spacer = styled.div`
 `;
 
 export {
+  searchForm,
   form,
   formTitle,
   inputsContainer,

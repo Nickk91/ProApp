@@ -161,8 +161,9 @@ export const userExist = async (req, res) => {
   }
 };
 
-export const getUserIdByUsername = async (req, res) => {
-  const userName = req.body.userName;
+export const getUserIdByUsername = async (req, res, next) => {
+  console.log("getUserIdByUsername CONTROLLER");
+  const userName = req.params.userName;
   if (!userName) {
     return res
       .status(STATUS_CODE.BAD_REQUEST)
@@ -173,10 +174,10 @@ export const getUserIdByUsername = async (req, res) => {
     username: { $regex: userName, $options: "i" },
   });
 
-  if (users) {
-    return res
-      .status(STATUS_CODE.OK)
-      .json({ message: "User exists", userId: users._id });
+  if (users.length > 0) {
+    let userIdsArray = users.map((user) => user._id);
+    req.userIdsArray = userIdsArray;
+    next();
   } else {
     return res
       .status(STATUS_CODE.NOT_FOUND)

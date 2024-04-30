@@ -52,7 +52,7 @@ const cardContainer = styled.div`
   cursor: pointer;
 
   &:hover {
-    transform: scale(1.1);
+    transform: scale(1.02);
     opacity: 1;
   }
 `;

@@ -8,6 +8,7 @@ import {
   userExist,
   getUserIdByUsername,
 } from "../controllers/userController.js";
+import { getProjectByUserIds } from "../controllers/projectController.js";
 import { validateToken } from "../middleware/validateTokenHandler.js";
 
 const router = express.Router();
@@ -25,7 +26,12 @@ router.post("/login", loginUser);
 
 router.get("/current", validateToken, currentUser);
 
-router.get("/getuserid", validateToken, getUserIdByUsername);
+//Route to get userId by userName (ADD VALIDTAE TOKEN LATER)
+router.get(
+  "/search/getuserid/:userName",
+  getUserIdByUsername,
+  getProjectByUserIds
+);
 
 // app.use("/api/pro-app/users", usersRoutes);
 

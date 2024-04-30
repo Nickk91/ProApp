@@ -13,6 +13,9 @@ const SearchPage = () => {
   const [searchBy, setSearchBy] = useState("project name");
   const [searchResults, setSearchResults] = useState({});
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const [projectsPerPage, setProjectsPerPage] = useState(2);
+
   const [displayError, setDisplayError] = useState(false);
 
   const searchProjectsInputs = [
@@ -26,78 +29,95 @@ const SearchPage = () => {
 
   const navigate = useNavigate();
 
+  const searchByProjectName = async (searchItem, token) => {
+    try {
+      setIsLoading(true);
+      console.log(token);
+      const response = await fetch(
+        `${
+          import.meta.env.VITE_BASEURL
+        }/projects/project/projectname/${searchItem}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        setSearchResults(data);
+        console.log(data);
+      } else {
+        console.error("Search failed");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const searchByUsername = async (userName, token) => {
+    try {
+      console.log(userName);
+      console.log(token);
+      setIsLoading(true);
+      const response = await fetch(
+        `${import.meta.env.VITE_BASEURL}/users/search/getuserid/${userName}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        // setSearchResults(data);
+        console.log(data);
+      } else {
+        console.error("Search failed");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     const token = localStorage.getItem("token");
     const formData = new FormData(e.target);
     console.log(formData);
 
-    let searchItem;
     if (searchBy === "project name") {
-      searchItem = formData.get("search");
-      console.log(searchItem);
-
-      try {
-        // console.log("trying to fetch");
-        setIsLoading(true);
-        // console.log("isLoading:", isLoading);
-        const response = await fetch(
-          `${
-            import.meta.env.VITE_BASEURL
-          }/projects/project/projectname/${searchItem}`,
-
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-        console.log("response is:", response);
-
-        if (response.ok) {
-          const data = await response.json();
-          setSearchResults(data);
-          console.log(data);
-        } else {
-          console.error("Search failed");
-        }
-      } catch (error) {
-        console.error("Error:", error);
-      }
+      const searchItem = formData.get("search");
+      await searchByProjectName(searchItem, token);
     } else if (searchBy === "username") {
-      const userName = formData.get("username");
-      try {
-        setIsLoading(true);
-        const response = await fetch(
-          `${import.meta.env.VITE_BASEURL}/users/getuserid`,
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ username: userName }),
-          }
-        );
-
-        if (response.ok) {
-          const data = await response.json();
-          const token = data.accessToken;
-
-          localStorage.setItem("token", token);
-          navigate("/");
-        } else {
-          console.error("Login failed");
-        }
-      } catch (error) {
-        console.error("Error:", error);
-        setDisplayError(true);
-      }
+      const userName = formData.get("search");
+      await searchByUsername(userName, token);
     }
-
-    setIsLoading(false);
   };
+
+  const lastProjectIndex = currentPage * projectsPerPage;
+  const firstProjectIndex = lastProjectIndex - projectsPerPage;
+
+  let currentProjects = [];
+
+  if (searchResults.projects) {
+    currentProjects = searchResults.projects.slice(
+      firstProjectIndex,
+      lastProjectIndex
+    );
+  }
+
+  console.log(searchResults.projects);
   return (
     <section className="page">
       <S.searchTitle>Search projects by:</S.searchTitle>
@@ -123,20 +143,29 @@ const SearchPage = () => {
         submitButtonText="Search"
         onSubmit={handleFormSubmit}
         displayError={displayError}
+        search={true}
       />
-      {/* {data && data.projects.map(() => {})}; */}
       {isLoading ? (
         <Spinner />
-      ) : (
-        searchResults.projects.map((project, index) => (
-          <ProjectCard
-            key={index}
-            project={project}
-            onClick={() => handleClick(project._id)}
+      ) : !searchResults.projects ? null : (
+        <>
+          {currentProjects.map((project, index) => (
+            <ProjectCard
+              key={index}
+              project={project}
+              onClick={() => handleClick(project._id)}
+            />
+          ))}
+          <Pagination
+            totalProjects={searchResults.projects.length}
+            projectsPerPage={projectsPerPage}
+            setCurrentPage={setCurrentPage}
           />
-        ))
+        </>
       )}
-      <Pagination />
+
+      <S.spaceDiv />
+
       <FooterMenu />
     </section>
   );
