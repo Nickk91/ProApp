@@ -5,13 +5,12 @@ import GenericInput from "../GenericInput/GenericInput.jsx";
 import * as S from "../StyledComponents/styles.jsx";
 import validateForm from "../../Validation/validateForm.js";
 
-const GenericForm = ({
+const SearchForm = ({
   title,
   submitButtonText,
   inputs,
   onSubmit,
   displayError,
-  search,
 }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -23,14 +22,8 @@ const GenericForm = ({
 
   const errors = validateForm({});
 
-  const FormComponent = search ? S.searchForm : S.form;
-
   return (
-    <FormComponent
-      onSubmit={handleSubmit}
-      className="generic-from-wrapper"
-      action=""
-    >
+    <S.form onSubmit={handleSubmit} className="generic-from-wrapper" action="">
       <S.formTitle>{title}</S.formTitle>
       <S.inputsContainer>
         {inputs.map((input, index) => (
@@ -52,8 +45,8 @@ const GenericForm = ({
         ))}
         <S.submitButton>{submitButtonText}</S.submitButton>
       </S.inputsContainer>
-    </FormComponent>
+    </S.form>
   );
 };
 
-export default GenericForm;
+export default SearchForm;

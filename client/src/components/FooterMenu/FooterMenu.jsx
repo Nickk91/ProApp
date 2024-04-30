@@ -22,7 +22,7 @@ const FooterMenu = () => {
           <S.homeIcon onClick={() => navigate("/")} />
         </S.li>
         <S.li>
-          <S.SearchIcon />
+          <S.SearchIcon onClick={() => navigate("/projects/search")} />
         </S.li>
         <S.li onClick={handleAddProject}>
           <S.plus>

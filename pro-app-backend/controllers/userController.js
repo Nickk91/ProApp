@@ -160,3 +160,27 @@ export const userExist = async (req, res) => {
     return res.status(STATUS_CODE.OK).json({ message: "User does not exist" });
   }
 };
+
+export const getUserIdByUsername = async (req, res, next) => {
+  console.log("getUserIdByUsername CONTROLLER");
+  const userName = req.params.userName;
+  if (!userName) {
+    return res
+      .status(STATUS_CODE.BAD_REQUEST)
+      .json({ error: "Username is mandatory!" });
+  }
+
+  const users = await User.find({
+    username: { $regex: userName, $options: "i" },
+  });
+
+  if (users.length > 0) {
+    let userIdsArray = users.map((user) => user._id);
+    req.userIdsArray = userIdsArray;
+    next();
+  } else {
+    return res
+      .status(STATUS_CODE.NOT_FOUND)
+      .json({ message: "User does not exist" });
+  }
+};

@@ -16,7 +16,9 @@ import ProjectPage from "./pages/ProjectPage/ProjectPage.jsx";
 import MyProjects from "./pages/MyProjects/MyProjects.jsx";
 import Userpage from "./pages/UserPage/Userpage.jsx";
 import TestPage from "./pages/TestPage/TestPage.jsx";
+
 import { useState } from "react";
+import SearchPage from "./pages/SearchPage/SearchPage.jsx";
 
 function App() {
   // let homePage = userLoggedIn ? "MyProjects" : "LoggedOutPage";
@@ -81,6 +83,8 @@ function App() {
           path="/projects/:projectId/edit-task/:taskId"
           element={<EditTaskPage />}
         />
+
+        <Route path="/projects/search" element={<SearchPage />} />
 
         <Route path="/" element={<MyProjects />} />
         <Route path="/test" element={<TestPage />} />
