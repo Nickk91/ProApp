@@ -38,6 +38,12 @@ const projectImg = styled.img`
   height: 270px;
   border: 1px solid black;
   margin: 10px;
+  border-radius: 10px;
+  box-shadow: 2px 2px 5px gray;
+
+  &:hover {
+    box-shadow: 3px 3px 5px gray;
+  }
 `;
 
 const projectTitle = styled.div`
@@ -50,7 +56,6 @@ const cardContainer = styled.div`
   opacity: 0.97;
   transition: transform 0.2s;
   cursor: pointer;
-
   &:hover {
     transform: scale(1.02);
     opacity: 1;
