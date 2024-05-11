@@ -11,7 +11,13 @@ dotenv.config();
 const app = express();
 
 // cors middleware
-app.use(cors());
+// app.use(cors());
+
+app.use(
+  cors({
+    origin: "https://proappdevenv.netlify.app",
+  })
+);
 
 // app.use(
 //   cors({
