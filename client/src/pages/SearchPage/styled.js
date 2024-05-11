@@ -10,7 +10,7 @@ const searchTitle = styled.div`
   }
 `;
 
-const activeButton = styled.button`
+const inactiveButton = styled.button`
   color: black;
   background: white;
   width: 140px;
@@ -20,9 +20,10 @@ const activeButton = styled.button`
   font-size: 13px;
   font-weight: 700;
   transition: background-color 0.3s, color 0.3s;
+  cursor: pointer;
 `;
 
-const inactiveButton = styled.button`
+const activeButton = styled.button`
   background: black;
   color: white;
   width: 140px;
@@ -32,6 +33,7 @@ const inactiveButton = styled.button`
   font-size: 13px;
   font-weight: 700;
   transition: background-color 0.3s, color 0.3;
+  cursor: pointer;
 `;
 
 const buttonsContainer = styled.button`
