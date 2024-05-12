@@ -13,11 +13,29 @@ const app = express();
 // cors middleware
 // app.use(cors());
 
-app.use(
-  cors({
-    origin: "https://proappdevenv.netlify.app",
-  })
-);
+// app.use(
+//   cors({
+//     origin: "https://proappdevenv.netlify.app",
+//   })
+// );
+
+// Function to set CORS options dynamically
+const corsOptionsDelegate = (req, callback) => {
+  let corsOptions;
+  let allowedOrigins = [process.env.PRODUCTION_FRONT_URL];
+
+  if (allowedOrigins.indexOf(req.header("Origin")) !== -1) {
+    corsOptions = { origin: true }; // reflect (enable) the requested origin in the CORS response
+  } else {
+    corsOptions = { origin: false }; // disable CORS for this request
+  }
+  callback(null, corsOptions); // callback expects two parameters: error and options
+};
+
+// Apply CORS dynamically to all routes
+app.use(cors(corsOptionsDelegate));
+
+// in env file: PRODUCTION_FRONT_URL=https://proappdevenv.netlify.app
 
 // app.use(
 //   cors({
