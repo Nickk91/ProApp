@@ -16,12 +16,15 @@ import ProjectPage from "./pages/ProjectPage/ProjectPage.jsx";
 import MyProjects from "./pages/MyProjects/MyProjects.jsx";
 import Userpage from "./pages/UserPage/Userpage.jsx";
 import TestPage from "./pages/TestPage/TestPage.jsx";
-
 import { useState } from "react";
 import SearchPage from "./pages/SearchPage/SearchPage.jsx";
-
+import ProjectsByUsers from "./pages/ProjectsByUsers/ProjectsByUsers.jsx";
+import { useSelector, useDispatch } from "react-redux";
+import { login, logout } from "./slices/authSlice.js";
 function App() {
-  // let homePage = userLoggedIn ? "MyProjects" : "LoggedOutPage";
+  const dispatch = useDispatch();
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const authLevel = useSelector((state) => state.auth.user?.authLevel);
 
   return (
     <>
@@ -54,11 +57,13 @@ function App() {
           {/* <Route path="/projects" element={<ProjectListPage />} /> */}
         </Route>
         {/* Private routes for admin */}
-        <Route element={<PrivateRoutes authLevel={userAuthLevels.admin} />}>
-          {/* <Route path="/edit-task" element={<EditTaskPage />} /> */}
+        {authLevel === userAuthLevels.admin && (
+          <Route element={<PrivateRoutes authLevel={userAuthLevels.admin} />}>
+            {/* <Route path="/edit-task" element={<EditTaskPage />} /> */}
 
-          {/*  <Route path="/admin-only" element={<AdminsPage />} /> */}
-        </Route>
+            {/*  <Route path="/admin-only" element={<AdminsPage />} /> */}
+          </Route>
+        )}
 
         {/* Public routes */}
         <Route
@@ -70,7 +75,7 @@ function App() {
             />
           }
         />
-        <Route path="/loggedout" element={<LoggedOutPage />} />
+        {/* <Route path="/loggedout" element={<LoggedOutPage />} /> */}
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/signup" element={<SignupPage />} />
@@ -86,7 +91,10 @@ function App() {
 
         <Route path="/projects/search" element={<SearchPage />} />
 
-        <Route path="/" element={<MyProjects />} />
+        <Route
+          path="/"
+          element={isLoggedIn ? <MyProjects /> : <LoggedOutPage />}
+        />
         <Route path="/test" element={<TestPage />} />
       </Routes>
     </>

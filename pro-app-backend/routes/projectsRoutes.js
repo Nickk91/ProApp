@@ -45,7 +45,7 @@ router.get("/project/:id", validateToken, getProjectById);
 //Route to get a project by user Id
 router.get("/project/userId", validateToken, getProjectByUserIds);
 
-//Route to get a project by project name
+//Route to get a project by project name (ADD VALIDTAE TOKEN LATER)
 router.get(
   "/project/projectname/:searchItem",
   validateToken,

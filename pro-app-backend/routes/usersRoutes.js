@@ -35,8 +35,6 @@ router.get(
   getProjectByUserIds
 );
 
-// app.use("/api/pro-app/users", usersRoutes);
-
 //Route to get single user by ID
 router.get("/:id", getUserById);
 export default router;

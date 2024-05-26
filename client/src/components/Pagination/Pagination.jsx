@@ -1,14 +1,17 @@
 import React, { useEffect } from "react";
 import "./styled.css";
 
+// totalItems={projects.length}
+// ItemsPerPage
+
 const Pagination = ({
-  totalProjects,
-  projectsPerPage,
+  totalItems,
+  ItemsPerPage,
   setCurrentPage,
   currentPage,
 }) => {
   let pages = [];
-  for (let i = 1; i <= Math.ceil(totalProjects / projectsPerPage); i++) {
+  for (let i = 1; i <= Math.ceil(totalItems / ItemsPerPage); i++) {
     pages.push(i);
   }
 

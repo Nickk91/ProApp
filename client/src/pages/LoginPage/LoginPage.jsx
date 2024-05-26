@@ -5,27 +5,29 @@ import { loginAndRegisterFormInputs } from "../../constants/formInputsData.js";
 import * as S from "../../components/StyledComponents/styles.jsx";
 import ReturnIcon from "../../assets/images/back_icon.svg";
 import Spinner from "../../components/Spinner/Spinner.jsx";
+import { useDispatch } from "react-redux";
+import { login } from "../../slices/authSlice.js";
 import "../style/pagestyle.css";
 
 const LoginPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [displayError, setDisplayError] = useState(false);
-  const [userLoggedIn, setUserLoggedIn] = useState(false);
+  // const [userLoggedIn, setUserLoggedIn] = useState(false);
 
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
       navigate("/");
     }
     setIsLoading(false);
-  }, []);
+  }, [dispatch, navigate]);
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
-    console.log(formData);
-
     const email = formData.get("email");
     const password = formData.get("password");
 
@@ -43,9 +45,14 @@ const LoginPage = () => {
 
       if (response.ok) {
         const data = await response.json();
+        console.log(data);
         const token = data.accessToken;
+        console.log(data);
+        const user = data.user;
+        console.log(user);
 
         localStorage.setItem("token", token);
+        dispatch(login(user));
         navigate("/");
       } else {
         console.error("Login failed");

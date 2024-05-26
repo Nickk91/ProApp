@@ -10,7 +10,7 @@ export const loginUser = async (req, res) => {
     throw new Error("All fields are mandatory!");
   }
   const user = await User.findOne({ email });
-  //compare password with hashedpassword
+
   if (user && (await bcrypt.compare(password, user.password))) {
     const accessToken = jwt.sign(
       {
@@ -18,12 +18,21 @@ export const loginUser = async (req, res) => {
           username: user.username,
           email: user.email,
           _id: user._id,
+          authLevel: user._authLevel,
         },
       },
       process.env.ACCESS_TOKEN_SECRET,
       { expiresIn: "35m" }
     );
-    res.status(STATUS_CODE.OK).json({ accessToken });
+    res.status(STATUS_CODE.OK).json({
+      accessToken,
+      user: {
+        _id: user._id,
+        username: user.username,
+        email: user.email,
+        authLevel: user._authLevel,
+      },
+    });
   } else {
     res.status(STATUS_CODE.UNAUTHORIZED);
     throw new Error("email or password is not valid");
