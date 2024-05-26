@@ -5,6 +5,8 @@ import arrowIcon from "../../assets/images/icon_chevron_up.svg";
 import TaskStatusSelection from "../TaskStatusSelection/TaskStatusSelection.jsx";
 import AnimatedCiEdit from "../AnimatedCiEdit/AnimatedCiEdit.jsx";
 import "./style.css";
+import { userAuthLevels } from "../../constants/userAuthLevels.js";
+import { useSelector } from "react-redux";
 
 const Task = ({
   task,
@@ -16,6 +18,8 @@ const Task = ({
   handleExtendTask,
   expanded,
 }) => {
+  const authLevel = useSelector((state) => state.auth.user?.authLevel);
+
   return (
     <div className={expanded ? "taskbox-expanded" : "taskbox"} key={i}>
       <S.statusWrapper>
@@ -27,15 +31,25 @@ const Task = ({
           taskId={task.id}
           handleTaskStatus={handleTaskStatus}
         />
-        <S.smallTrashIcon
-          src={trash}
-          onClick={() => openModal("task", task._id)}
-        />
-        <AnimatedCiEdit
-          onClick={() =>
-            handleEditTask(task._id, task.name, task.description, task.status)
-          }
-        />
+        {authLevel === userAuthLevels.admin && (
+          <>
+            {" "}
+            <S.smallTrashIcon
+              src={trash}
+              onClick={() => openModal("task", task._id)}
+            />
+            <AnimatedCiEdit
+              onClick={() =>
+                handleEditTask(
+                  task._id,
+                  task.name,
+                  task.description,
+                  task.status
+                )
+              }
+            />
+          </>
+        )}
       </S.statusWrapper>
       <div className={expanded ? "description-shown" : "description-hidden"}>
         {task.description}
