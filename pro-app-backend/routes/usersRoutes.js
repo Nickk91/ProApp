@@ -24,6 +24,8 @@ router.post("/userexist", userExist);
 
 router.post("/login", loginUser);
 
+console.log("currentUser:", currentUser);
+
 router.get("/current", validateToken, currentUser);
 
 //Route to get userId by userName (ADD VALIDTAE TOKEN LATER)
@@ -32,8 +34,6 @@ router.get(
   getUserIdByUsername,
   getProjectByUserIds
 );
-
-// app.use("/api/pro-app/users", usersRoutes);
 
 //Route to get single user by ID
 router.get("/:id", getUserById);

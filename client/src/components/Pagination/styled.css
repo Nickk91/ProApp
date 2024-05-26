@@ -1,13 +1,21 @@
 /* styled.css */
 
 .pagebutton {
-  min-width: 20px;
+  min-width: 25px;
+  min-height: 25px;
   margin-top: 20px;
   margin-bottom: 20px;
   margin-inline: 5px;
+  border-radius: 5px;
   cursor: pointer;
+  transition: transform 0.2s;
 }
 
-.active {
-  background: yellow !important;
+.pagebuttonactive {
+  font-weight: 800;
+  background-color: rgba(128, 128, 128, 0.4);
+}
+
+.pagebutton:hover {
+  transform: scale(1.2);
 }

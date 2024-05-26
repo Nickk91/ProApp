@@ -11,60 +11,39 @@ dotenv.config();
 const app = express();
 
 // cors middleware
-// app.use(cors());
+app.use(cors());
 
 // app.use(
 //   cors({
-//     origin: "https://proappdevenv.netlify.app",
+//     origin: [
+//       "https://proappdevenv.netlify.app",
+//       "http://localhost:5173/loggedout",
+//     ],
 //   })
 // );
 
-// Function to set CORS options dynamically
-const corsOptionsDelegate = (req, callback) => {
-  let corsOptions;
-  let allowedOrigins = [process.env.PRODUCTION_FRONT_URL];
+// // Function to set CORS options dynamically
+// const corsOptionsDelegate = (req, callback) => {
+//   let corsOptions;
+//   let allowedOrigins = [
+//     process.env.PRODUCTION_FRONT_URL,
+//     `${process.env.BASE_SERVER_URL}:${process.env.CLIENT_PORT}`,
+//   ];
 
-  if (allowedOrigins.indexOf(req.header("Origin")) !== -1) {
-    corsOptions = { origin: true }; // reflect (enable) the requested origin in the CORS response
-  } else {
-    corsOptions = { origin: false }; // disable CORS for this request
-  }
-  callback(null, corsOptions); // callback expects two parameters: error and options
-};
-
-// Apply CORS dynamically to all routes
-app.use(cors(corsOptionsDelegate));
-
-// in env file: PRODUCTION_FRONT_URL=https://proappdevenv.netlify.app
-
-// app.use(
-//   cors({
-//     origin: ["*"],
-//   })
-// );
-
-// const BASE_SERVER_URL = process.env.BASE_SERVER_URL;
-// const CLIENT_PORT = process.env.CLIENT_PORT;
-
-// const allowedOrigins = [
-//   `${BASE_SERVER_URL}:${CLIENT_PORT}`,
-//   process.env.PRODUCTION_FRONT_URL,
-// ];
-
-// // app.set("trust proxy", 1); only if you use google auth
-
-// const corsOptions = {
-//   origin: function (origin, callback) {
-//     if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
-//       callback(null, true);
-//     } else {
-//       callback(new Error("Invalid origin"));
-//     }
-//   },
-//   credentials: true, // This is important for cookies, authorization headers with HTTPS
+//   if (allowedOrigins.indexOf(req.header("Origin")) !== -1) {
+//     corsOptions = {
+//       origin: true,
+//       methods: "GET, HEAD, PUT, PATCH, POST, DELETE",
+//       optionsSuccessStatus: 200,
+//     }; // reflect (enable) the requested origin in the CORS response
+//   } else {
+//     corsOptions = { origin: false }; // disable CORS for this request
+//   }
+//   callback(null, corsOptions); // callback expects two parameters: error and options
 // };
 
-// app.use(cors(corsOptions));
+// // Apply CORS dynamically to all routes
+// app.use(cors(corsOptionsDelegate));
 
 // middleware for JSON parsing
 app.use(express.json());

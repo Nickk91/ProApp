@@ -1,4 +1,4 @@
-//MyProjects.jsx
+//ProjectsByUsers.jsx
 
 import React, { useEffect, useState } from "react";
 import ProjectCard from "../../components/ProjectCard/ProjectCard.jsx";
@@ -9,17 +9,17 @@ import Spinner from "../../components/Spinner/Spinner.jsx";
 import "../style/pagestyle.css";
 import Pagination from "../../components/Pagination/Pagination.jsx";
 
-const MyProjects = () => {
+const ProjectsByUsers = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const [projects, setProjects] = useState([]);
+  const [users, setUsers] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [projectsPerPage, setProjectsPerPage] = useState(2);
+  const [usersPerPage, setUsersPerPage] = useState(2);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
 
     if (token) {
-      const fetchProjects = async () => {
+      const fetchUsers = async () => {
         try {
           const response = await fetch(
             `${import.meta.env.VITE_BASEURL}/projects/user`,
@@ -32,7 +32,7 @@ const MyProjects = () => {
           );
 
           if (!response.ok) {
-            throw new Error("Failed to fetch projects");
+            throw new Error("Failed to fetch users");
           }
 
           const data = await response.json();
@@ -40,53 +40,53 @@ const MyProjects = () => {
           if (data.length === 0) {
             navigate("/noprojects");
           }
-          setProjects(data);
+          setUsers(data);
           setIsLoading(false);
         } catch (error) {
-          console.error("Error fetching projects:", error);
+          console.error("Error fetching users:", error);
           navigate("/noprojects");
         }
       };
 
-      fetchProjects();
+      fetchUsers();
     } else {
-      navigate("/");
+      navigate("/loggedout");
     }
   }, []);
 
   const navigate = useNavigate();
 
-  const handleClick = (projectId) => {
-    navigate(`/projects/${projectId}`);
+  const handleClick = (userId) => {
+    navigate(`/projects/${userId}`);
   };
 
-  const lastProjectIndex = currentPage * projectsPerPage;
-  const firstProjectIndex = lastProjectIndex - projectsPerPage;
+  const lastItemIndex = currentPage * itemsPerPage;
+  const firstItemsIndex = lastItemIndex - itemsPerPage;
 
-  let currentProjects = [];
+  let currentUsers = [];
 
-  if (projects) {
-    currentProjects = projects.slice(firstProjectIndex, lastProjectIndex);
+  if (users) {
+    currentUsers = users.slice(firstItemsIndex, lastItemIndex);
   }
 
   return (
     <section className="page">
-      <S.projectTitle>My projects</S.projectTitle>
+      <S.projectTitle>Users</S.projectTitle>
 
       {isLoading ? (
         <Spinner />
       ) : (
-        currentProjects.map((project, index) => (
+        currentUsers.map((user, index) => (
           <ProjectCard
             key={index}
-            project={project}
-            onClick={() => handleClick(project._id)}
+            project={user}
+            onClick={() => handleClick(user._id)}
           />
         ))
       )}
       <Pagination
-        totalItems={projects.length}
-        ItemsPerPage={projectsPerPage}
+        totalItems={users.length}
+        ItemsPerPage={usersPerPage}
         setCurrentPage={setCurrentPage}
         currentPage={currentPage}
       />
@@ -97,4 +97,4 @@ const MyProjects = () => {
   );
 };
 
-export default MyProjects;
+export default ProjectsByUsers;

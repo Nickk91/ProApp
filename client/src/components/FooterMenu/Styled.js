@@ -8,7 +8,7 @@ const menu = styled.div`
   position: fixed;
   bottom: 0;
   height: 100px;
-  border: 1px solid black;
+  border-top: 1px solid black;
   z-index: 999;
   display: flex;
   width: 100%;

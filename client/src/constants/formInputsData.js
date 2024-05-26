@@ -68,20 +68,7 @@ const addTaskFormInputs = [
   },
 ];
 
-const searchProjectsInputs = [
-  {
-    name: "search by",
-    type: "text",
-    placeholder: "search by",
-    attributes: { required: true, minLength: 1 },
-  },
-  {
-    name: "SEARCH",
-    type: "submit",
-    placeholder: "Task description",
-    attributes: { required: true, minLength: 1 },
-  },
-];
+
 
 export {
   addProjectFormInputs,
