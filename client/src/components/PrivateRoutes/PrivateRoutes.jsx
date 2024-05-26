@@ -35,7 +35,7 @@ const PrivateRoutes = ({ authLevel }) => {
   }, []);
 
   // const token = localStorage.getItem("token");
-  // console.log(`in the PrivateRoutes component ${token}`);
+  console.log(`in the PrivateRoutes component `);
 
   return (
     <>

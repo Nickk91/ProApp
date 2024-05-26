@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 import { CiEdit } from "react-icons/ci";
 
@@ -45,10 +45,24 @@ const topDiv = styled.div`
   }
 `;
 
+const tiltAndScale = keyframes`
+  0% { transform: scale(1) rotate(0deg); }
+  25% { transform: scale(1.3) rotate(-10deg); }
+  50% { transform: scale(1.3) rotate(10deg); }
+  75% { transform: scale(1.3) rotate(-10deg); }
+  100% { transform: scale(1.3) rotate(0deg); }
+`;
+
 const trashIcon = styled.img`
   height: 24.84px;
   width: 19.05px;
   cursor: pointer;
+  display: block; /* Ensures the transform-origin works as intended */
+
+  &:hover {
+    animation: ${tiltAndScale} 0.5s ease-in-out forwards;
+    transform-origin: center;
+  }
 `;
 
 const smallTrashIcon = styled.img`
@@ -85,7 +99,12 @@ const tasksHeader = styled.div`
 
 const addTaskIcon = styled.img`
   height: 24px;
+  transition: transform 0.2s; /* Add a smooth transition effect */
   cursor: pointer;
+
+  &:hover {
+    transform: scale(1.3); /* Increase size by 10% on hover */
+  }
 `;
 const tasksContainer = styled.div`
   width: 350px;
@@ -132,6 +151,7 @@ const statusWrapper = styled.div`
   display: flex;
   flex-direction: row;
   gap: 5px;
+  /* border: 2px solid red; */
 `;
 const taskList = styled.ul`
   list-style-type: none;
@@ -170,7 +190,9 @@ const arrowIconDown = styled.img`
 
 const taskDescription = styled.div`
   position: absolute;
-  top: 10px;
+  margin-bottom: 70px;
+  max-width: 300px;
+  text-align: left;
   color: #404040;
   font-size: 15px;
 `;

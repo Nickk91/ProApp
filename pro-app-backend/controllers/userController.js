@@ -89,7 +89,7 @@ export const getUserById = async (req, res) => {
 
 export const currentUser = async (req, res) => {
   try {
-    console.log(req.user);
+    console.log("IN CURRENT CONTROLLER", req.user);
     const user = await User.findById(req.user._id);
     if (!user) {
       res.status(404);

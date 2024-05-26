@@ -88,6 +88,7 @@ const MyProjects = () => {
         totalProjects={projects.length}
         projectsPerPage={projectsPerPage}
         setCurrentPage={setCurrentPage}
+        currentPage={currentPage}
       />
       <S.spaceDiv />
 

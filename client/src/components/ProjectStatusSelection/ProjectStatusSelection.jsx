@@ -12,6 +12,7 @@ const ProjectStatusSelection = ({ selectedValue, onChange, type, key }) => {
         name={type}
         id={type}
         value={selectedValue}
+        // selectedValue={selectedValue}
         onChange={(e) => {
           onChange(e.target.value.toLowerCase());
           {
@@ -26,5 +27,6 @@ const ProjectStatusSelection = ({ selectedValue, onChange, type, key }) => {
     </S.selectDiv>
   );
 };
+
 
 export default ProjectStatusSelection;

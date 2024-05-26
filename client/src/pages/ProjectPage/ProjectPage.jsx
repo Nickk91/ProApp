@@ -2,17 +2,13 @@ import React, { useState, useEffect } from "react";
 import * as S from "./StyledComponent/StyledComponents.js";
 import trash from "../../assets/images/trash_icon.svg";
 import addTask from "../../assets/images/icon_Plus_Circle_.svg";
-import arrowIcon from "../../assets/images/icon_chevron_up.svg";
 import GenericModal from "../../components/GenericModal/GenericModal.jsx";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import FooterMenu from "../../components/FooterMenu/FooterMenu.jsx";
 import ProjectStatusSelection from "../../components/ProjectStatusSelection/ProjectStatusSelection.jsx";
-import TaskStatusSelection from "../../components/TaskStatusSelection/TaskStatusSelection.jsx";
 import Spinner from "../../components/Spinner/Spinner.jsx";
-import { CiEdit } from "react-icons/ci";
-import styled from "styled-components";
-import AnimatedCiEdit from "../../components/AnimatedCiEdit/AnimatedCiEdit.jsx";
+import Task from "../../components/Task/Task.jsx";
 
 const ProjectPage = () => {
   const [selectedValue, setSelectedValue] = useState("TODO");
@@ -265,89 +261,33 @@ const ProjectPage = () => {
                 <S.taskList>
                   {project.projectTasks.map((task, i) => (
                     <S.listItem key={i}>
-                      <p>{task.name}</p>
+                      <taskName>{task.name}</taskName>
 
                       {expandedTaskList.includes(i) ? (
-                        <S.taskStatusExpanded key={i}>
-                          <S.statusWrapper>
-                            <TaskStatusSelection
-                              selectedValue={taskStatuses[i]}
-                              onChange={(newStatus) =>
-                                handleTaskStatus(task._id, newStatus, i)
-                              }
-                              type="task"
-                              key={task._id}
-                              taskId={task.id}
-                              handleTaskStatus={handleTaskStatus}
-                            />
-                            <S.smallTrashIcon
-                              src={trash}
-                              onClick={() => {
-                                openModal("task", task._id);
-                              }}
-                            />
-                            <AnimatedCiEdit
-                              // size={20}
-                              onClick={() => {
-                                handleEditTask(
-                                  task._id,
-                                  task.name,
-                                  task.description,
-                                  task.status
-                                );
-                              }}
-                            />
-                          </S.statusWrapper>
-                          <S.taskDescription>
-                            {task.description}
-                          </S.taskDescription>
-
-                          <S.arrowIconUp
-                            onClick={() => {
-                              handleExtendTask(i);
-                            }}
-                            src={arrowIcon}
-                          />
-                        </S.taskStatusExpanded>
+                        <Task
+                          key={i}
+                          task={task}
+                          i={i}
+                          taskStatuses={taskStatuses}
+                          handleTaskStatus={handleTaskStatus}
+                          openModal={openModal}
+                          handleEditTask={handleEditTask}
+                          handleExtendTask={handleExtendTask}
+                          expanded={true}
+                        />
                       ) : (
-                        <S.taskStatus key={i}>
-                          <S.statusWrapper>
-                            {/* tasks */}
-                            <TaskStatusSelection
-                              selectedValue={taskStatuses[i]}
-                              onChange={(newStatus) =>
-                                handleTaskStatus(task._id, newStatus, i)
-                              }
-                              type="task"
-                              key={task._id}
-                              taskId={task._id}
-                              handleTaskStatus={handleTaskStatus}
-                            />
-                            <S.smallTrashIcon
-                              src={trash}
-                              onClick={() => {
-                                openModal("task", task._id);
-                              }}
-                            />
-                            <AnimatedCiEdit
-                              onClick={() => {
-                                handleEditTask(
-                                  task._id,
-                                  task.name,
-                                  task.description,
-                                  task.status
-                                );
-                              }}
-                            />
-                          </S.statusWrapper>
-
-                          <S.arrowIconDown
-                            onClick={() => {
-                              handleExtendTask(i);
-                            }}
-                            src={arrowIcon}
-                          />
-                        </S.taskStatus>
+                        <Task
+                          key={i}
+                          task={task}
+                          i={i}
+                          taskStatuses={taskStatuses}
+                          handleTaskStatus={handleTaskStatus}
+                          openModal={openModal}
+                          handleEditTask={handleEditTask}
+                          handleExtendTask={handleExtendTask}
+                          arrowIcon
+                          expanded={false}
+                        />
                       )}
                     </S.listItem>
                   ))}

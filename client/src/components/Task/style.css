@@ -1,0 +1,57 @@
+.task-container {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  width: 100%; /* Ensure the container width is consistent */
+}
+
+.taskbox,
+.taskbox-expanded {
+  display: flex;
+  flex-direction: row;
+  font-size: 13px;
+  font-weight: bold;
+  justify-content: space-between;
+  transition: all 0.3s ease; /* added transition */
+  padding-top: 5px; /* common padding */
+}
+
+.taskbox {
+  height: 50px; /* height for non-expanded state */
+  align-items: center;
+}
+
+.taskbox-expanded {
+  height: 100px; /* height for expanded state */
+  align-items: flex-end; /* align items to the end */
+  /* align-items: center; */
+}
+
+.description-hidden {
+  /* position: absolute;
+  max-width: 300px;
+  text-align: left;
+  color: #404040;
+  font-size: 15px;
+  opacity: 0;
+  transition: opacity 0.3s ease; */
+
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+}
+
+.description-shown {
+  position: absolute;
+  margin-bottom: 70px;
+  max-width: 300px;
+  text-align: left;
+  color: #404040;
+  font-size: 15px;
+
+  margin-left: 6px;
+
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}

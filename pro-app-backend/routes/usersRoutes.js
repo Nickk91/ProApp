@@ -24,6 +24,8 @@ router.post("/userexist", userExist);
 
 router.post("/login", loginUser);
 
+console.log("currentUser:", currentUser);
+
 router.get("/current", validateToken, currentUser);
 
 //Route to get userId by userName (ADD VALIDTAE TOKEN LATER)

@@ -71,9 +71,9 @@ function App() {
           }
         />
         <Route path="/loggedout" element={<LoggedOutPage />} />
+        <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/signup" element={<SignupPage />} />
-        <Route path="/login" element={<LoginPage />} />
         <Route path="/projects/:projectId" element={<ProjectPage />} />
         <Route
           path="/projects/:projectId/deletetask/:taskId"
