@@ -7,6 +7,8 @@ import Spinner from "../../components/Spinner/Spinner.jsx";
 import "../style/pagestyle.css";
 import Pagination from "../../components/Pagination/Pagination.jsx";
 import GenericForm from "../../components/GenericForm/GenericForm.jsx";
+import { useSelector } from "react-redux";
+import { userAuthLevels } from "../../constants/userAuthLevels.js";
 
 const SearchPage = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -78,9 +80,8 @@ const SearchPage = () => {
 
       if (response.ok) {
         const data = await response.json();
-        // setSearchResults(data);
-        console.log(data);
         setSearchResults(data);
+        console.log(data);
       } else {
         console.error("Search failed");
       }
@@ -123,18 +124,21 @@ const SearchPage = () => {
   };
 
   console.log(searchResults.projects);
+
+  const authLevel = useSelector((state) => state.auth.user?.authLevel);
+
   return (
     <section className="page">
       <S.searchTitle>Search projects by:</S.searchTitle>
       <S.buttonsContainer>
-        {searchBy === "username" ? (
-          <S.activeButton>USERNAME</S.activeButton>
-        ) : (
-          <S.inactiveButton onClick={() => setSearchBy("username")}>
-            USERNAME
-          </S.inactiveButton>
-        )}
-
+        {authLevel === userAuthLevels.admin &&
+          (searchBy === "username" ? (
+            <S.activeButton>USERNAME</S.activeButton>
+          ) : (
+            <S.inactiveButton onClick={() => setSearchBy("username")}>
+              USERNAME
+            </S.inactiveButton>
+          ))}
         {searchBy === "project name" ? (
           <S.activeButton>PROJECT NAME</S.activeButton>
         ) : (
@@ -168,9 +172,7 @@ const SearchPage = () => {
           />
         </>
       )}
-
       <S.spaceDiv />
-
       <FooterMenu />
     </section>
   );

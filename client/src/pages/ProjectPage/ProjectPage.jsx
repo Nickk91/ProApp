@@ -9,17 +9,20 @@ import FooterMenu from "../../components/FooterMenu/FooterMenu.jsx";
 import ProjectStatusSelection from "../../components/ProjectStatusSelection/ProjectStatusSelection.jsx";
 import Spinner from "../../components/Spinner/Spinner.jsx";
 import Task from "../../components/Task/Task.jsx";
+import { userAuthLevels } from "../../constants/userAuthLevels.js";
+import { useSelector } from "react-redux";
 
 const ProjectPage = () => {
   const [selectedValue, setSelectedValue] = useState("TODO");
   const [expandedTaskList, setExpandedTaskList] = useState([]);
-  const [userType, setUserType] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [project, setProject] = useState(null);
   const [taskStatuses, setTaskStatuses] = useState([]);
   const [fetchProject, setFetchProject] = useState(false);
 
   const { projectId } = useParams();
+
+  const authLevel = useSelector((state) => state.auth.user?.authLevel);
 
   useEffect(() => {
     const fetchProjects = async () => {
@@ -225,7 +228,7 @@ const ProjectPage = () => {
         <>
           <S.topDiv>
             <S.projectTitle>{project.projectName}</S.projectTitle>
-            {userType === "Admin" ? (
+            {authLevel === userAuthLevels.admin ? (
               <S.userNameButton onClick={handleUser}>
                 <strong>{username}</strong>
               </S.userNameButton>
