@@ -85,6 +85,7 @@ export const getProjectById = async (req, res) => {
       projectImage,
       projectStatus,
       projectTasks,
+      user,
     } = project;
     res.send({
       projectName,
@@ -92,6 +93,7 @@ export const getProjectById = async (req, res) => {
       projectImage,
       projectStatus,
       projectTasks,
+      user,
     });
   } catch (error) {
     console.log("Error fetching project", error);

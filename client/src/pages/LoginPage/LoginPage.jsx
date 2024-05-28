@@ -12,7 +12,6 @@ import "../style/pagestyle.css";
 const LoginPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [displayError, setDisplayError] = useState(false);
-  // const [userLoggedIn, setUserLoggedIn] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();

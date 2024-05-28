@@ -16,11 +16,10 @@ import ProjectPage from "./pages/ProjectPage/ProjectPage.jsx";
 import MyProjects from "./pages/MyProjects/MyProjects.jsx";
 import Userpage from "./pages/UserPage/Userpage.jsx";
 import TestPage from "./pages/TestPage/TestPage.jsx";
-import { useState } from "react";
 import SearchPage from "./pages/SearchPage/SearchPage.jsx";
 import ProjectsByUsers from "./pages/ProjectsByUsers/ProjectsByUsers.jsx";
 import { useSelector, useDispatch } from "react-redux";
-import { login, logout } from "./slices/authSlice.js";
+
 function App() {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
@@ -75,7 +74,7 @@ function App() {
             />
           }
         />
-        {/* <Route path="/loggedout" element={<LoggedOutPage />} /> */}
+        <Route path="/loggedout" element={<LoggedOutPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/signup" element={<SignupPage />} />

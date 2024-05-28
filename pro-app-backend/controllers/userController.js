@@ -18,7 +18,7 @@ export const loginUser = async (req, res) => {
           username: user.username,
           email: user.email,
           _id: user._id,
-          authLevel: user._authLevel,
+          authLevel: user.authLevel,
         },
       },
       process.env.ACCESS_TOKEN_SECRET,
@@ -30,7 +30,7 @@ export const loginUser = async (req, res) => {
         _id: user._id,
         username: user.username,
         email: user.email,
-        authLevel: user._authLevel,
+        authLevel: user.authLevel,
       },
     });
   } else {
@@ -84,8 +84,8 @@ export const getUserById = async (req, res) => {
       res.status(STATUS_CODE.NOT_FOUND);
       throw new Error("User was not found");
     }
-    const { username, email, isAdmin, _id } = user;
-    res.send({ username, email, isAdmin, _id });
+    const { username, email, authLevel, _id } = user;
+    res.send({ username, email, authLevel, _id });
   } catch (error) {
     console.log("Error fetching user", error);
     res.status(500).json({ error: "Internal Server Error" });

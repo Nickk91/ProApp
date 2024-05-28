@@ -71,6 +71,7 @@ const MyProjects = () => {
   }
 
   const authLevel = useSelector((state) => state.auth.user?.authLevel);
+  console.log(authLevel);
 
   return (
     <section className="page">

@@ -2,12 +2,17 @@ import React from "react";
 import { FiPlus } from "react-icons/fi";
 import * as S from "./Styled.js";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { logout } from "../../slices/authSlice.js";
 
 const FooterMenu = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleLogout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("TaskStatus");
+    dispatch(logout());
     navigate("/loggedout");
   };
 
@@ -29,7 +34,6 @@ const FooterMenu = () => {
             <FiPlus />
           </S.plus>
         </S.li>
-
         <S.li>
           <S.userIcon onClick={() => navigate("/userpage")} />
         </S.li>

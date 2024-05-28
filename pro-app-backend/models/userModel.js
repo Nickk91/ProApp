@@ -25,9 +25,9 @@ const userScheme = new mongoose.Schema({
     },
   },
 
-  isAdmin: {
-    type: Boolean,
-    default: false,
+  authLevel: {
+    type: Number,
+    default: 1,
   },
   projects: [{ type: mongoose.Schema.Types.ObjectId, ref: "Project" }],
 });
