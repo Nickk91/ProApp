@@ -19,6 +19,7 @@ const ProjectPage = () => {
   const [project, setProject] = useState(null);
   const [taskStatuses, setTaskStatuses] = useState([]);
   const [fetchProject, setFetchProject] = useState(false);
+  const [username, setUsername] = useState();
 
   const { projectId } = useParams();
 
@@ -29,6 +30,7 @@ const ProjectPage = () => {
       try {
         const token = localStorage.getItem("token");
 
+        // Fetch project data
         const response = await fetch(
           `${import.meta.env.VITE_BASEURL}/projects/project/${projectId}`,
           {
@@ -45,23 +47,41 @@ const ProjectPage = () => {
 
         const data = await response.json();
         setProject(data);
+        const userId = data.user;
 
         const arr = data.projectTasks.map((task) => task.status);
-
         setTaskStatuses(arr);
 
-        setIsLoading(false);
+        // setIsLoading(false);
 
         setSelectedValue(data.projectStatus.toUpperCase());
+
+        const userResponse = await fetch(
+          `${import.meta.env.VITE_BASEURL}/users/${userId}`,
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        if (!userResponse.ok) {
+          throw new Error("Failed to fetch user data");
+        }
+
+        const userData = await userResponse.json();
+        setUsername(userData.username);
+
+        setIsLoading(false);
+        console.log("User Data:", userData);
       } catch (error) {
-        console.error("Error fetching projects:", error);
+        console.error("Error fetching projects or user data:", error);
       }
     };
 
     fetchProjects();
-  }, [fetchProject]);
-
-  let username = "ELADJMC_82";
+  }, [fetchProject, projectId]);
 
   const navigate = useNavigate();
 

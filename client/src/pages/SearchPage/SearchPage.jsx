@@ -31,7 +31,7 @@ const SearchPage = () => {
 
   const navigate = useNavigate();
 
-  const searchByProjectName = async (searchItem, token) => {
+  const adminSearchByProjectName = async (searchItem, token) => {
     try {
       setIsLoading(true);
       console.log(token);
@@ -62,10 +62,39 @@ const SearchPage = () => {
     }
   };
 
+  const searchByProjectName = async (searchItem, userId, token) => {
+    try {
+      setIsLoading(true);
+
+      const response = await fetch(
+        `${
+          import.meta.env.VITE_BASEURL
+        }/projects/project/projectname-and-id/${searchItem}/${userId}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        setSearchResults(data);
+        console.log(data);
+      } else {
+        console.error("Search failed");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const searchByUsername = async (userName, token) => {
     try {
-      console.log(userName);
-      console.log(token);
       setIsLoading(true);
       const response = await fetch(
         `${import.meta.env.VITE_BASEURL}/users/search/getuserid/${userName}`,
@@ -92,6 +121,8 @@ const SearchPage = () => {
     }
   };
 
+  const userId = useSelector((state) => state.auth.user._id);
+
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     const token = localStorage.getItem("token");
@@ -100,7 +131,9 @@ const SearchPage = () => {
 
     if (searchBy === "project name") {
       const searchItem = formData.get("search");
-      await searchByProjectName(searchItem, token);
+      authLevel === userAuthLevels.admin
+        ? await adminSearchByProjectName(searchItem, token)
+        : await searchByProjectName(searchItem, userId, token);
     } else if (searchBy === "username") {
       const userName = formData.get("search");
       await searchByUsername(userName, token);
@@ -139,6 +172,7 @@ const SearchPage = () => {
               USERNAME
             </S.inactiveButton>
           ))}
+
         {searchBy === "project name" ? (
           <S.activeButton>PROJECT NAME</S.activeButton>
         ) : (
