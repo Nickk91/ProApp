@@ -2,12 +2,15 @@ import React from "react";
 import { FiPlus } from "react-icons/fi";
 import * as S from "./Styled.js";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../slices/authSlice.js";
 
 const FooterMenu = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const userId = useSelector((state) => state.auth.user._id);
+  console.log(userId);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -35,7 +38,7 @@ const FooterMenu = () => {
           </S.plus>
         </S.li>
         <S.li>
-          <S.userIcon onClick={() => navigate("/userpage")} />
+          <S.userIcon onClick={() => navigate(`/userpage/${userId}`)} />
         </S.li>
         <S.li>
           <S.logoutIcon onClick={handleLogout} />

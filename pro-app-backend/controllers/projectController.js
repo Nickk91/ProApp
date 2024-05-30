@@ -71,6 +71,33 @@ export const getProjectsByProjectName = async (req, res) => {
   }
 };
 
+export const getUserProjectsByProjectNameByUserId = async (req, res) => {
+  try {
+    console.log("IN getUserProjectsByProjectNameByUserId:");
+    const { searchItem, userId } = req.params;
+    console.log("IN Controller projectName ", searchItem);
+    console.log("IN Controller userId ", userId);
+
+    const projects = await Project.find({
+      user: userId,
+
+      projectName: { $regex: new RegExp(searchItem, "i") },
+    });
+    if (!projects || projects.length === 0) {
+      return res
+        .status(STATUS_CODE.NOT_FOUND)
+        .json({ error: "No projects were found" });
+    }
+
+    return res.status(STATUS_CODE.OK).json({ projects });
+  } catch (error) {
+    console.error("Error:", error);
+    return res
+      .status(STATUS_CODE.INTERNAL_SERVER_ERROR)
+      .json({ error: "Internal Server Error" });
+  }
+};
+
 export const getProjectById = async (req, res) => {
   try {
     const { id } = req.params;

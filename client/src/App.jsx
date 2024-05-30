@@ -47,7 +47,7 @@ function App() {
         >
           <Route path="/noprojects" element={<HomePage />} />
           <Route path="/addproject" element={<AddProjectPage />} />
-          <Route path="/userpage" element={<Userpage />} />
+          <Route path="/userpage/:userId" element={<Userpage />} />
           {/* /addtask */}
           <Route
             path="/projects/:projectId/addtask"

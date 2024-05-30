@@ -14,6 +14,7 @@ import {
   editTaskByTaskId,
   getProjectByUserIds,
   getProjectsByProjectName,
+  getUserProjectsByProjectNameByUserId,
 } from "../controllers/projectController.js";
 import { validateToken } from "../middleware/validateTokenHandler.js";
 
@@ -48,8 +49,15 @@ router.get("/project/userId", validateToken, getProjectByUserIds);
 //Route to get a project by project name (ADD VALIDTAE TOKEN LATER)
 router.get(
   "/project/projectname/:searchItem",
-  validateToken,
+  // validateToken,
   getProjectsByProjectName
+);
+
+//Route to get a project by project name (ADD VALIDTAE TOKEN LATER)
+router.get(
+  "/project/projectname-and-id/:searchItem/:userId",
+  // validateToken,
+  getUserProjectsByProjectNameByUserId
 );
 
 // projects/project/projectname
