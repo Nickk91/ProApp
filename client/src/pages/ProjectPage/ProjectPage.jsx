@@ -20,6 +20,7 @@ const ProjectPage = () => {
   const [taskStatuses, setTaskStatuses] = useState([]);
   const [fetchProject, setFetchProject] = useState(false);
   const [username, setUsername] = useState();
+  const [userIdProp, setUserIdProp] = useState();
 
   const { projectId } = useParams();
 
@@ -72,6 +73,9 @@ const ProjectPage = () => {
 
         const userData = await userResponse.json();
         setUsername(userData.username);
+
+        setUserIdProp(userData._id);
+        // setUserIdProp()
 
         setIsLoading(false);
         console.log("User Data:", userData);
@@ -164,7 +168,7 @@ const ProjectPage = () => {
   };
 
   const handleUser = () => {
-    navigate("/userpage");
+    navigate(`/userpage/${userIdProp}`);
   };
 
   const handleProjectStatus = async (e) => {
