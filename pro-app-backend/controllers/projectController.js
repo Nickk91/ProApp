@@ -35,15 +35,57 @@ export const getProjectByUserIds = async (req, res) => {
       user: { $in: userIdsArray },
     });
 
-    console.log("in getProjectByUserIds projects are:", projects);
+    console.log(
+      "in getProjectByUserIds projects that are returned are:",
+      projects
+    );
 
     return res.status(STATUS_CODE.OK).json({ projects });
-    // res.json(projects);
   } catch (error) {
     console.log("Error fetching projects:", error);
     res
       .status(STATUS_CODE.INTERNAL_SERVER_ERROR)
-      .json({ error: "Internal Server Error ssss" });
+      .json({ error: "Internal Server Error" });
+  }
+};
+
+export const getProjectByUserIdParams = async (req, res) => {
+  try {
+    const { userIdsArray } = req.params;
+    console.log("userIdsArray PPP:", userIdsArray);
+
+    if (!userIdsArray) {
+      return res
+        .status(STATUS_CODE.BAD_REQUEST)
+        .json({ error: "No user IDs provided" });
+    }
+
+    if (!userIdsArray) {
+      return res
+        .status(STATUS_CODE.BAD_REQUEST)
+        .json({ error: "No user IDs provided" });
+    }
+
+    // Assuming userIdsArray is passed as a comma-separated string
+    const userIds = userIdsArray.split(",");
+
+    console.log("getProjectByUserIdParams userIdsArray is:", userIds);
+
+    const projects = await Project.find({
+      user: { $in: userIds },
+    });
+
+    console.log(
+      "in getProjectByUserIdParams projects that are returned are:",
+      projects
+    );
+
+    return res.status(STATUS_CODE.OK).json({ projects });
+  } catch (error) {
+    console.log("Error fetching projects:", error);
+    res
+      .status(STATUS_CODE.INTERNAL_SERVER_ERROR)
+      .json({ error: "Internal Server Error" });
   }
 };
 
