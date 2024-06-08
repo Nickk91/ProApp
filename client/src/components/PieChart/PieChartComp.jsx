@@ -5,7 +5,6 @@ import * as S from "./styled.js";
 const PieChartComp = ({ data, fill, title }) => {
   return (
     <>
-      {/* <div>{title}</div> */}
       <S.chartContainer>
         <PieChart width={400} height={400}>
           <Pie
@@ -16,7 +15,7 @@ const PieChartComp = ({ data, fill, title }) => {
             cy={200}
             outerRadius={80}
             fill={fill}
-            label={(entry) => entry.label}
+            label={(entry) => (entry.value ? entry.label : "")}
           />
           <Tooltip />
         </PieChart>
