@@ -12,9 +12,9 @@ import {
   updateTaskStatusById,
   deleteTaskById,
   editTaskByTaskId,
-  getProjectByUserIds,
   getProjectsByProjectName,
   getUserProjectsByProjectNameByUserId,
+  getProjectByUserIdParams,
 } from "../controllers/projectController.js";
 import { validateToken } from "../middleware/validateTokenHandler.js";
 
@@ -43,8 +43,8 @@ router.patch("/project/:id/edit-task", validateToken, editTaskByTaskId);
 //Route to get a project by project ID
 router.get("/project/:id", validateToken, getProjectById);
 
-//Route to get a project by user Id
-router.get("/project/userId", validateToken, getProjectByUserIds);
+//Route to get a project by user Id add validate token later
+router.get("/project/user/:userIdsArray", getProjectByUserIdParams);
 
 //Route to get a project by project name (ADD VALIDTAE TOKEN LATER)
 router.get(

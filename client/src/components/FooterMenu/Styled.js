@@ -3,6 +3,7 @@ import { CiSearch } from "react-icons/ci";
 import { HiOutlineHome } from "react-icons/hi2";
 import { IoIosLogOut } from "react-icons/io";
 import { IoPersonOutline } from "react-icons/io5";
+import { PiUsersLight } from "react-icons/pi";
 
 const menu = styled.div`
   position: fixed;
@@ -82,4 +83,22 @@ const userIcon = styled(IoPersonOutline)`
   }
 `;
 
-export { menu, ul, plus, li, SearchIcon, homeIcon, logoutIcon, userIcon };
+const usersIcon = styled(PiUsersLight)`
+  transition: transform 0.2s;
+
+  &:hover {
+    transform: scale(1.5); /* Increase size by 50% on hover */
+  }
+`;
+
+export {
+  menu,
+  ul,
+  plus,
+  li,
+  SearchIcon,
+  homeIcon,
+  logoutIcon,
+  userIcon,
+  usersIcon,
+};

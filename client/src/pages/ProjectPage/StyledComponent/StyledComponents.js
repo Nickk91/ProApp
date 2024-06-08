@@ -206,6 +206,7 @@ const userNameButton = styled.div`
   background: #d5ddf8;
   border-radius: 10px;
   box-shadow: 1px 1px 4px gray;
+  cursor: pointer;
 `;
 
 export {
