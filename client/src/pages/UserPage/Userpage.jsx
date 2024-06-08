@@ -6,15 +6,8 @@ import "../style/pagestyle.css";
 import { useSelector } from "react-redux";
 import { userAuthLevels } from "../../constants/userAuthLevels.js";
 import { useParams } from "react-router-dom";
-import {
-  countProjectByStatus,
-  countTasks,
-  sum,
-  toPercentage,
-  formatTaskCount,
-  formatProjectCount,
-} from "../../utils/functions.js";
-import { PieChart, Pie, Tooltip } from "recharts";
+import { countTasks, sum } from "../../utils/functions.js";
+import { getProjectCounts, getTaskCounts } from "../../utils/dataUtils.js";
 import PieChartComp from "../../components/PieChart/PieChartComp.jsx";
 
 const Userpage = () => {
@@ -120,21 +113,10 @@ const Userpage = () => {
     fetchProjects();
   }, [userIdToSearchBy, token]);
 
-  const todoProjectCount = countProjectByStatus(projects, "todo");
-  const inProgressProjectCount = countProjectByStatus(projects, "in progress");
-  const doneProjectCount = countProjectByStatus(projects, "done");
+  const projectsCounts = getProjectCounts(projects);
+  const taskCounts = getTaskCounts(projects);
 
-  const projectsCounts = [
-    { name: "Todo projects", value: todoProjectCount },
-    {
-      name: "In progress projects",
-      value: inProgressProjectCount,
-    },
-    {
-      name: "Todo projects",
-      value: doneProjectCount,
-    },
-  ];
+  const totalTaskCount = sum(countTasks(projects));
 
   return (
     <section className="page">
@@ -154,38 +136,19 @@ const Userpage = () => {
               <li>User Email: {userData?.email}</li>
               <li>User Id: {userData?._id}</li>
               <S.h3>User Projects:</S.h3>
-              <li>User's Total Projects: {projects.length}</li>
-              <li>
-                {formatProjectCount(inProgressProjectCount, "in progress")}
-              </li>
-              <li>{formatProjectCount(todoProjectCount, "to do")}</li>
-              <li>{formatProjectCount(doneProjectCount, "done")}</li>
-              <S.h3>Total tasks: {sum(countTasks(projects))}</S.h3>
-              <li>
-                Of those tasks: {countTasks(projects)[0]} (
-                {toPercentage(
-                  countTasks(projects)[0] / sum(countTasks(projects))
-                )}
-                ) are todo
-              </li>
-              <li>
-                {formatTaskCount(
-                  countTasks(projects)[1],
-                  sum(countTasks(projects)),
-                  "in progress"
-                )}
-              </li>
-              <li>
-                {formatTaskCount(
-                  countTasks(projects)[2],
-                  sum(countTasks(projects)),
-                  "done"
-                )}
-              </li>
+              <PieChartComp
+                data={projectsCounts}
+                fill="#8884d8"
+                title="Projects Breakdown"
+              />
+              <S.h3>Total tasks: {totalTaskCount}</S.h3>
+              <PieChartComp
+                data={taskCounts}
+                fill="#2bc5da"
+                title="Projects Breakdown"
+              />
             </S.list>
-            <PieChartComp data={projectsCounts} fill="#8884d8" />
           </S.container>
-
           <FooterMenu />
         </>
       )}

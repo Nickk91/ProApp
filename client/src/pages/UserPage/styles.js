@@ -12,7 +12,7 @@ const page = styled.div`
 const userTitle = styled.div`
   padding-bottom: 22px;
   font-size: 35px;
-  margin-top: 30px;
+  margin-top: 20px;
 `;
 
 const username = styled.div`
@@ -23,7 +23,8 @@ const userImg = styled.img`
   width: 135px;
   height: 122px;
   border: 1px solid black;
-  margin: 10px;
+  margin-top: -10px;
+
   border-radius: 10px;
   box-shadow: 2px 2px 5px gray;
   cursor: pointer;

@@ -23,7 +23,7 @@ export const sum = (arr) => {
 
 export const toPercentage = (decimalNumber) => {
   const percentage = decimalNumber * 100;
-  return `${parseFloat(percentage.toFixed(2))}%`;
+  return `${parseFloat(percentage.toFixed(1))}%`;
 };
 
 export const formatTaskCount = (count, totalCount, status) => {
