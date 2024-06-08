@@ -4,13 +4,14 @@ import * as S from "./Styled.js";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../slices/authSlice.js";
+import { userAuthLevels } from "../../constants/userAuthLevels.js";
 
 const FooterMenu = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const userId = useSelector((state) => state.auth.user._id);
-  console.log(userId);
+  const authLevel = useSelector((state) => state.auth.user?.authLevel);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -40,6 +41,11 @@ const FooterMenu = () => {
         <S.li>
           <S.userIcon onClick={() => navigate(`/userpage/${userId}`)} />
         </S.li>
+        {authLevel === userAuthLevels.admin && (
+          <S.li>
+            <S.usersIcon onClick={() => navigate(`/userpage/${userId}`)} />
+          </S.li>
+        )}
         <S.li>
           <S.logoutIcon onClick={handleLogout} />
         </S.li>

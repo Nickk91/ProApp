@@ -6,7 +6,16 @@ import "../style/pagestyle.css";
 import { useSelector } from "react-redux";
 import { userAuthLevels } from "../../constants/userAuthLevels.js";
 import { useParams } from "react-router-dom";
-import { countProjectByStatus } from "../../constants/functions.js";
+import {
+  countProjectByStatus,
+  countTasks,
+  sum,
+  toPercentage,
+  formatTaskCount,
+  formatProjectCount,
+} from "../../utils/functions.js";
+import { PieChart, Pie, Tooltip } from "recharts";
+import PieChartComp from "../../components/PieChart/PieChartComp.jsx";
 
 const Userpage = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -23,7 +32,6 @@ const Userpage = () => {
   useEffect(() => {
     const fetchUserById = async () => {
       try {
-        console.log(token);
         if (!token) throw new Error("No token found");
 
         const response = await fetch(
@@ -66,8 +74,8 @@ const Userpage = () => {
 
         const data = await response.json();
         setUserData(data);
+
         setUserIdToSearchBy(id);
-        console.log(userIdToSearchBy);
       } catch (error) {
         console.error(error);
       } finally {
@@ -80,15 +88,12 @@ const Userpage = () => {
     } else {
       fetchUser();
     }
-  }, [authLevel, userId, id]);
+  }, [authLevel, userId, id, token]);
 
   useEffect(() => {
     const fetchProjects = async () => {
       if (!userIdToSearchBy) return;
       try {
-        console.log(userIdToSearchBy);
-        console.log(token);
-
         if (!token) throw new Error("No token found");
 
         const response = await fetch(
@@ -107,51 +112,83 @@ const Userpage = () => {
 
         const data = await response.json();
         setProjects(data.projects);
-        console.log("projects[0]", projects[0].projectStatus);
       } catch (error) {
         console.error("Error fetching projects:", error);
       }
     };
 
     fetchProjects();
-  }, [userIdToSearchBy]);
+  }, [userIdToSearchBy, token]);
 
-  const inProgressProjectCount = countProjectByStatus(projects, "in progress");
   const todoProjectCount = countProjectByStatus(projects, "todo");
-  const doneProjectCount = countProjectByStatus(projects, "todo");
+  const inProgressProjectCount = countProjectByStatus(projects, "in progress");
+  const doneProjectCount = countProjectByStatus(projects, "done");
+
+  const projectsCounts = [
+    { name: "Todo projects", value: todoProjectCount },
+    {
+      name: "In progress projects",
+      value: inProgressProjectCount,
+    },
+    {
+      name: "Todo projects",
+      value: doneProjectCount,
+    },
+  ];
 
   return (
     <section className="page">
-      <S.userTitle>User Details:</S.userTitle>
+      <S.userTitle>User Page:</S.userTitle>
       {isLoading ? (
         <Spinner />
       ) : (
         <>
-          <ul>
-            <li>User Id: {userData?._id}</li>
-            <li>Username: {userData?.username}</li>
-            <li>User Email: {userData?.email}</li>
-            <li>User's Total Projects: {projects.length}</li>
-            <p>Out of these projects:</p>
-            <li>
-              {inProgressProjectCount === 1
-                ? "1 project is in progress"
-                : `${inProgressProjectCount} projects are in progress`}
-            </li>
-            <li>
-              {todoProjectCount === 1
-                ? "1 project is to do"
-                : `${todoProjectCount} projects are to do`}
-            </li>
-            <li>
-              {doneProjectCount === 1
-                ? "1 project is done"
-                : `${doneProjectCount} projects are done`}
-            </li>
-          </ul>
+          <S.userImg
+            src={userData.avatar}
+            alt={`${userData.username}'s avatar`}
+          />
+          <S.container>
+            <S.list>
+              <S.h3>User Details:</S.h3>
+              <li>Username: {userData?.username}</li>
+              <li>User Email: {userData?.email}</li>
+              <li>User Id: {userData?._id}</li>
+              <S.h3>User Projects:</S.h3>
+              <li>User's Total Projects: {projects.length}</li>
+              <li>
+                {formatProjectCount(inProgressProjectCount, "in progress")}
+              </li>
+              <li>{formatProjectCount(todoProjectCount, "to do")}</li>
+              <li>{formatProjectCount(doneProjectCount, "done")}</li>
+              <S.h3>Total tasks: {sum(countTasks(projects))}</S.h3>
+              <li>
+                Of those tasks: {countTasks(projects)[0]} (
+                {toPercentage(
+                  countTasks(projects)[0] / sum(countTasks(projects))
+                )}
+                ) are todo
+              </li>
+              <li>
+                {formatTaskCount(
+                  countTasks(projects)[1],
+                  sum(countTasks(projects)),
+                  "in progress"
+                )}
+              </li>
+              <li>
+                {formatTaskCount(
+                  countTasks(projects)[2],
+                  sum(countTasks(projects)),
+                  "done"
+                )}
+              </li>
+            </S.list>
+            <PieChartComp data={projectsCounts} fill="#8884d8" />
+          </S.container>
+
+          <FooterMenu />
         </>
       )}
-      <FooterMenu />
     </section>
   );
 };

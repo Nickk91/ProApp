@@ -84,8 +84,8 @@ export const getUserById = async (req, res) => {
       res.status(STATUS_CODE.NOT_FOUND);
       throw new Error("User was not found");
     }
-    const { username, email, authLevel, _id } = user;
-    res.send({ username, email, authLevel, _id });
+    const { username, email, authLevel, avatar, _id } = user;
+    res.send({ username, email, authLevel, avatar, _id });
   } catch (error) {
     console.log("Error fetching user", error);
     res.status(500).json({ error: "Internal Server Error" });
@@ -104,9 +104,9 @@ export const currentUser = async (req, res) => {
       res.status(404);
       throw new Error("User dosen't exist");
     }
-    const { _id, email, username, isAdmin } = user;
+    const { _id, email, username, isAdmin, avatar } = user;
     const userAuthLevel = isAdmin ? 2 : 1;
-    res.json({ _id, email, username, userAuthLevel });
+    res.json({ _id, email, username, userAuthLevel, avatar });
   } catch (error) {
     next();
   }
