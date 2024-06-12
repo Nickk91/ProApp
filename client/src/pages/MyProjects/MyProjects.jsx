@@ -1,5 +1,3 @@
-//MyProjects.jsx
-
 import React, { useEffect, useState } from "react";
 import ProjectCard from "../../components/ProjectCard/ProjectCard.jsx";
 import * as S from "../../components/StyledComponents/styles.jsx";
@@ -15,6 +13,8 @@ const MyProjects = () => {
   const [projects, setProjects] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [projectsPerPage, setProjectsPerPage] = useState(2);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -42,10 +42,11 @@ const MyProjects = () => {
             navigate("/noprojects");
           }
           setProjects(data);
-          setIsLoading(false);
         } catch (error) {
           console.error("Error fetching projects:", error);
           navigate("/noprojects");
+        } finally {
+          setIsLoading(false);
         }
       };
 
@@ -53,9 +54,7 @@ const MyProjects = () => {
     } else {
       navigate("/");
     }
-  }, []);
-
-  const navigate = useNavigate();
+  }, [navigate]);
 
   const handleClick = (projectId) => {
     navigate(`/projects/${projectId}`);
@@ -64,38 +63,34 @@ const MyProjects = () => {
   const lastProjectIndex = currentPage * projectsPerPage;
   const firstProjectIndex = lastProjectIndex - projectsPerPage;
 
-  let currentProjects = [];
-
-  if (projects) {
-    currentProjects = projects.slice(firstProjectIndex, lastProjectIndex);
-  }
+  const currentProjects = projects.slice(firstProjectIndex, lastProjectIndex);
 
   const authLevel = useSelector((state) => state.auth.user?.authLevel);
   console.log(authLevel);
 
   return (
     <section className="page">
-      <S.projectTitle>My projects</S.projectTitle>
-
       {isLoading ? (
         <Spinner />
       ) : (
-        currentProjects.map((project, index) => (
-          <ProjectCard
-            key={index}
-            project={project}
-            onClick={() => handleClick(project._id)}
+        <>
+          {projects.length > 0 && <S.projectTitle>My projects</S.projectTitle>}
+          {currentProjects.map((project, index) => (
+            <ProjectCard
+              key={index}
+              project={project}
+              onClick={() => handleClick(project._id)}
+            />
+          ))}
+          <Pagination
+            totalItems={projects.length}
+            ItemsPerPage={projectsPerPage}
+            setCurrentPage={setCurrentPage}
+            currentPage={currentPage}
           />
-        ))
+        </>
       )}
-      <Pagination
-        totalItems={projects.length}
-        ItemsPerPage={projectsPerPage}
-        setCurrentPage={setCurrentPage}
-        currentPage={currentPage}
-      />
       <S.spaceDiv />
-
       <FooterMenu />
     </section>
   );

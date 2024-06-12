@@ -288,7 +288,7 @@ const ProjectPage = () => {
                 <S.taskList>
                   {project.projectTasks.map((task, i) => (
                     <S.listItem key={i}>
-                      <taskName>{task.name}</taskName>
+                      <S.taskName>{task.name}</S.taskName>
 
                       {expandedTaskList.includes(i) ? (
                         <Task

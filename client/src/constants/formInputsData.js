@@ -3,14 +3,14 @@ const addProjectFormInputs = [
     name: "Project name",
     type: "text",
     label: "Project name",
-    placeholder: "project name",
+    placeholder: "Project name",
     attributes: { required: true, minLength: 1 },
   },
   {
     name: "Project description",
     type: "text",
     label: "Project description",
-    placeholder: "project description",
+    placeholder: "Project description",
     attributes: { required: true, minLength: 1 },
   },
   {
@@ -67,8 +67,6 @@ const addTaskFormInputs = [
     attributes: { required: true, minLength: 1 },
   },
 ];
-
-
 
 export {
   addProjectFormInputs,
