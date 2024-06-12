@@ -34,12 +34,13 @@ const GenericForm = ({
       <S.formTitle>{title}</S.formTitle>
       <S.inputsContainer>
         {inputs.map((input, index) => (
-          <>
-            {input.label && (
+          <React.Fragment key={index}>
+            {/* {input.label && (
               // <S.label key={`${index} label`}>{input.label}</S.label>
               <S.label>{input.label}</S.label>
-            )}
+            )} */}
             <GenericInput
+              key={index}
               type={input.type}
               label={input.label}
               name={input.name}
@@ -48,7 +49,7 @@ const GenericForm = ({
               error={errors[input.name]}
               displayError={displayError}
             />
-          </>
+          </React.Fragment>
         ))}
         <S.submitButton>{submitButtonText}</S.submitButton>
       </S.inputsContainer>

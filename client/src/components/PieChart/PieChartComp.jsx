@@ -6,16 +6,17 @@ const PieChartComp = ({ data, fill, title }) => {
   return (
     <>
       <S.chartContainer>
-        <PieChart width={400} height={400}>
+        <PieChart width={350} height={350}>
           <Pie
             dataKey="value"
-            isAnimationActive={true}
+            isAnimationActive={false}
             data={data}
             cx={200}
             cy={200}
             outerRadius={80}
             fill={fill}
             label={(entry) => (entry.value ? entry.label : "")}
+            animation={true}
           />
           <Tooltip />
         </PieChart>

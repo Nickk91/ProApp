@@ -70,7 +70,10 @@ const LoginPage = () => {
         </section>
       ) : (
         <section className="page">
-          <S.ReturnIcon src={ReturnIcon} />
+          <S.ReturnIcon
+            src={ReturnIcon}
+            onClick={() => navigate("/loggedout")}
+          />
           <GenericForm
             title="Log in"
             inputs={loginAndRegisterFormInputs}
