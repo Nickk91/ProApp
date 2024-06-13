@@ -19,6 +19,7 @@ const Userpage = () => {
   const [isProjectsLoading, setIsProjectsLoading] = useState(true);
   const [imageModalOpen, setImageModalOpen] = useState(false);
   const [avatarUpdated, setAvatarUpdated] = useState(false);
+  const [imageError, setImageError] = useState(null);
   const formRef = useRef(null);
 
   const { userId } = useParams();
@@ -113,6 +114,7 @@ const Userpage = () => {
       setAvatarUpdated((prev) => !prev);
     } catch (error) {
       console.error("Error updating user picture:", error);
+      setImageError(`Error updating user picture: ${error}`);
     }
   };
 
@@ -123,8 +125,10 @@ const Userpage = () => {
     if (checkIfUrl(url)) {
       changeUserPic(userId, url);
       setImageModalOpen(false);
+      setImageError(null);
     } else {
       console.log("Invalid URL");
+      setImageError("Invalid URL");
     }
   };
 
@@ -190,6 +194,11 @@ const Userpage = () => {
           <S.urlInput type="url" name="url" required />
           <S.acceptBtn type="submit">Accept</S.acceptBtn>
         </form>
+        {imageError ? (
+          <S.errorMessage>{imageError}</S.errorMessage>
+        ) : (
+          <S.errorMessageHidden />
+        )}
       </ImageModal>
     </section>
   );
