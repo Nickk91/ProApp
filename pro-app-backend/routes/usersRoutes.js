@@ -7,6 +7,7 @@ import {
   loginUser,
   userExist,
   getUserIdByUsername,
+  changeUserImg,
 } from "../controllers/userController.js";
 import { getProjectByUserIds } from "../controllers/projectController.js";
 import { validateToken } from "../middleware/validateTokenHandler.js";
@@ -24,11 +25,10 @@ router.post("/userexist", userExist);
 
 router.post("/login", loginUser);
 
-console.log("currentUser:", currentUser);
-
 router.get("/current", validateToken, currentUser);
 
-//Route to get userId by userName (ADD VALIDTAE TOKEN LATER)
+router.patch("/update-pic", validateToken, changeUserImg);
+
 router.get(
   "/search/getuserid/:userName",
   getUserIdByUsername,

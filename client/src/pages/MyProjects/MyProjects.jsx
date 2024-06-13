@@ -90,6 +90,7 @@ const MyProjects = () => {
           />
         </>
       )}
+
       <S.spaceDiv />
       <FooterMenu />
     </section>

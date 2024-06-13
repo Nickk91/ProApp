@@ -196,3 +196,32 @@ export const getUserIdByUsername = async (req, res, next) => {
       .json({ message: "User does not exist" });
   }
 };
+
+export const changeUserImg = async (req, res) => {
+  try {
+    const { userId, url } = req.body;
+    console.log("Received userId:", userId);
+    console.log("Received url:", url);
+
+    const user = await User.findById(userId);
+    console.log("User found:", user);
+
+    if (!user) {
+      return res
+        .status(STATUS_CODE.NOT_FOUND)
+        .json({ message: "User not found" });
+    }
+
+    user.avatar = url;
+    await user.save();
+
+    res
+      .status(STATUS_CODE.OK)
+      .json({ message: "User's avatar updated successfully", user });
+  } catch (error) {
+    console.error("Error updating user's avatar", error);
+    res
+      .status(STATUS_CODE.INTERNAL_SERVER_ERROR)
+      .json({ message: "Internal Server Error" });
+  }
+};
