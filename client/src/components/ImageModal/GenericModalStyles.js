@@ -1,5 +1,19 @@
 import styled from "styled-components";
 
+export const closeButton = styled.div`
+  position: absolute;
+  font-family: ABeeZee;
+  font-style: italic;
+  color: black;
+  cursor: pointer;
+  &:hover {
+    color: red;
+  }
+  top: 10px;
+  right: 15px;
+  font-size: 20px;
+`;
+
 export const ModalBackground = styled.div`
   position: fixed;
   left: 0;
@@ -57,25 +71,6 @@ export const ButtonCover = styled.button`
   color: #333333;
   background: #f4e6d1;
 `;
-export const XButton = styled.div`
-  position: absolute;
-  font-family: ABeeZee;
-  font-style: italic;
-  color: black;
-  cursor: pointer;
-  &:hover {
-    color: red;
-  }
-  top: 10px;
-  right: 15px;
-  font-size: 20px;
-
-  @media screen and (min-width: 768px) {
-    font-size: 1.2rem;
-    top: 20px;
-    right: 30px;
-  }
-`;
 
 export const delBigger = styled.img`
   height: 67px;
@@ -96,16 +91,6 @@ export const btnsContainer = styled.div`
   margin-top: 40px;
 `;
 
-// export const yesBtn = styled.button`
-//   border: 3px solid black;
-//   height: 34px;
-//   width: 70px;
-//   color: black;
-//   background-color: white;
-//   border-radius: 9px;
-//   font-weight: bold;
-//   font-size: 17px;
-// `;
 export const noBtn = styled.button`
   border: 3px solid black;
   height: 34px;

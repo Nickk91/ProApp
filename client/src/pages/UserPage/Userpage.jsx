@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import { userAuthLevels } from "../../constants/userAuthLevels.js";
 import { useParams } from "react-router-dom";
 import { getProjectCounts, getTaskCounts } from "../../utils/dataUtils.js";
+import { checkIfUrl } from "../../utils/functions.js";
 import PieChartComp from "../../components/PieChart/PieChartComp.jsx";
 import ImageModal from "../../components/ImageModal/ImageModal.jsx";
 
@@ -16,8 +17,9 @@ const Userpage = () => {
   const [projects, setProjects] = useState([]);
   const [userIdToSearchBy, setUserIdToSearchBy] = useState();
   const [isProjectsLoading, setIsProjectsLoading] = useState(true);
-  const [ImageModalOpen, setImageModalOpen] = useState(false);
-  const formRef = useRef(null); // Create a ref for the form
+  const [imageModalOpen, setImageModalOpen] = useState(false);
+  const [avatarUpdated, setAvatarUpdated] = useState(false);
+  const formRef = useRef(null);
 
   const { userId } = useParams();
   const authLevel = useSelector((state) => state.auth.user?.authLevel);
@@ -25,25 +27,22 @@ const Userpage = () => {
   const token = localStorage.getItem("token");
 
   useEffect(() => {
-    const fetchUserById = async () => {
+    const fetchUser = async (url) => {
       try {
         if (!token) throw new Error("No token found");
 
-        const response = await fetch(
-          `${import.meta.env.VITE_BASEURL}/users/${userId}`,
-          {
-            method: "GET",
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        const response = await fetch(url, {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
-        if (!response.ok) throw new Error("Failed to fetch different user");
+        if (!response.ok) throw new Error("Failed to fetch user");
 
         const data = await response.json();
         setUserData(data);
-        setUserIdToSearchBy(userId);
+        setUserIdToSearchBy(data._id);
       } catch (error) {
         console.error(error);
       } finally {
@@ -51,39 +50,13 @@ const Userpage = () => {
       }
     };
 
-    const fetchUser = async () => {
-      try {
-        if (!token) throw new Error("No token found");
+    const url =
+      authLevel === userAuthLevels.admin && userId !== id
+        ? `${import.meta.env.VITE_BASEURL}/users/${userId}`
+        : `${import.meta.env.VITE_BASEURL}/users/current`;
 
-        const response = await fetch(
-          `${import.meta.env.VITE_BASEURL}/users/current`,
-          {
-            method: "GET",
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-
-        if (!response.ok) throw new Error("Failed to fetch current user");
-
-        const data = await response.json();
-        setUserData(data);
-
-        setUserIdToSearchBy(id);
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    if (authLevel === userAuthLevels.admin && userId !== id) {
-      fetchUserById();
-    } else {
-      fetchUser();
-    }
-  }, [authLevel, userId, id, token]);
+    fetchUser(url);
+  }, [authLevel, userId, id, token, avatarUpdated]);
 
   useEffect(() => {
     const fetchProjects = async () => {
@@ -118,24 +91,26 @@ const Userpage = () => {
     fetchProjects();
   }, [userIdToSearchBy, token]);
 
-  const changeUserPic = async (url) => {
+  const changeUserPic = async (userId, url) => {
     try {
-      console.log("Changing user picture to:", url);
+      if (!token) throw new Error("No token found");
+
       const response = await fetch(
         `${import.meta.env.VITE_BASEURL}/users/update-pic`,
         {
-          method: "POST",
+          method: "PATCH",
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
-          body: JSON.stringify({ imageUrl: url }),
+          body: JSON.stringify({ userId, url }),
         }
       );
 
       if (!response.ok) throw new Error("Failed to update user picture");
-      const data = await response.json();
-      console.log("User picture updated successfully:", data);
+
+      console.log("User picture updated successfully");
+      setAvatarUpdated((prev) => !prev);
     } catch (error) {
       console.error("Error updating user picture:", error);
     }
@@ -143,11 +118,14 @@ const Userpage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("logging formRef.current:", formRef.current);
-    const formData = new FormData(formRef.current); // Use formRef.current to get the form element
+    const formData = new FormData(formRef.current);
     const url = formData.get("url");
-    console.log("Submitted URL:", url);
-    changeUserPic(url);
+    if (checkIfUrl(url)) {
+      changeUserPic(userId, url);
+      setImageModalOpen(false);
+    } else {
+      console.log("Invalid URL");
+    }
   };
 
   const projectsCounts = getProjectCounts(projects);
@@ -163,9 +141,7 @@ const Userpage = () => {
           <S.userImg
             src={userData.avatar}
             alt={`${userData.username}'s avatar`}
-            onClick={() => {
-              setImageModalOpen((imageModalOpen) => !imageModalOpen);
-            }}
+            onClick={() => setImageModalOpen((prev) => !prev)}
           />
           <S.container>
             <S.list>
@@ -189,7 +165,7 @@ const Userpage = () => {
                     />
                   </S.miniWrap>
                   <S.miniWrap>
-                    <S.h3>User Tasks: </S.h3>
+                    <S.h3>User Tasks:</S.h3>
                     <PieChartComp
                       data={taskCounts}
                       fill="#2bc5da"
@@ -205,17 +181,15 @@ const Userpage = () => {
       )}
       <ImageModal
         toDelete="project"
-        isOpen={ImageModalOpen}
+        isOpen={imageModalOpen}
         onRequestClose={() => setImageModalOpen(false)}
         onRequestChangeUrl={handleSubmit}
       >
-        <form ref={formRef}>
+        <form ref={formRef} onSubmit={handleSubmit}>
           Please enter the URL of your image
           <S.urlInput type="url" name="url" required />
-          <S.acceptBtn onClick={handleSubmit}>Accept</S.acceptBtn>
-          {/* Added the button here */}
+          <S.acceptBtn type="submit">Accept</S.acceptBtn>
         </form>
-        <S.space />
       </ImageModal>
     </section>
   );

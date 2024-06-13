@@ -67,6 +67,7 @@ const urlInput = styled.input`
 
 const acceptBtn = styled.button`
   border: 3px solid black;
+  margin-top: 20px;
   height: 34px;
   width: 70px;
   color: black;
@@ -74,6 +75,11 @@ const acceptBtn = styled.button`
   border-radius: 9px;
   font-weight: bold;
   font-size: 17px;
+  cursor: pointer;
+  &:hover {
+    color: white;
+    background-color: black;
+  }
 `;
 const chartsContainer = styled.div`
   margin-left: -40px;
