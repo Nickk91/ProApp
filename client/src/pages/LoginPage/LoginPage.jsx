@@ -22,7 +22,7 @@ const LoginPage = () => {
       navigate("/");
     }
     setIsLoading(false);
-  }, [dispatch, navigate]);
+  }, [navigate]);
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -44,23 +44,61 @@ const LoginPage = () => {
 
       if (response.ok) {
         const data = await response.json();
-        console.log(data);
-        const token = data.accessToken;
-        console.log(data);
+        const token = data.accessToken; // Ensure this matches your backend response
         const user = data.user;
-        console.log(user);
 
         localStorage.setItem("token", token);
         dispatch(login(user));
         navigate("/");
       } else {
         console.error("Login failed");
+        setDisplayError(true);
       }
     } catch (error) {
-      console.error("Error;", error);
+      console.error("Error:", error);
       setDisplayError(true);
     }
   };
+
+  const fetchProtectedData = async () => {
+    const token = localStorage.getItem("token");
+    console.log("Token from localStorage:", token); // Log the token retrieved from localStorage
+
+    if (!token) {
+      console.error("Token not found");
+      return;
+    }
+
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_BASEURL}/protected-route`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data);
+      } else {
+        console.error("Failed to fetch protected data");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
+  useEffect(() => {
+    // Only call fetchProtectedData if necessary
+    const token = localStorage.getItem("token");
+    if (token) {
+      fetchProtectedData();
+    }
+  }, []);
 
   return (
     <>

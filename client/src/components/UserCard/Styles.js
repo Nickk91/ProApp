@@ -42,6 +42,7 @@ const statusWrapper = styled.div`
   display: flex;
   flex-direction: row;
   gap: 5px;
+  margin-top: 5px;
 `;
 
 const userImg = styled.img`
