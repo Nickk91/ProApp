@@ -10,62 +10,41 @@ dotenv.config();
 
 const app = express();
 
-// cors middleware
-app.use(cors());
+// Determine the environment and set the appropriate MongoDB URI and frontend URL
+const mongoUri =
+  process.env.ENV === "production"
+    ? process.env.MONGO_URI_PROD
+    : process.env.MONGO_URI;
+const frontendUrl =
+  process.env.ENV === "production"
+    ? process.env.PRODUCTION_FRONT_URL
+    : `${process.env.BASE_SERVER_URL}:${process.env.CLIENT_PORT}`;
 
-// app.use(
-//   cors({
-//     origin: [
-//       "https://proappdevenv.netlify.app",
-//       "http://localhost:5173/loggedout",
-//     ],
-//   })
-// );
+// CORS configuration
+const corsOptions = {
+  origin: frontendUrl, // Your frontend URL
+  optionsSuccessStatus: 200,
+};
+app.use(cors(corsOptions));
 
-// // Function to set CORS options dynamically
-// const corsOptionsDelegate = (req, callback) => {
-//   let corsOptions;
-//   let allowedOrigins = [
-//     process.env.PRODUCTION_FRONT_URL,
-//     `${process.env.BASE_SERVER_URL}:${process.env.CLIENT_PORT}`,
-//   ];
-
-//   if (allowedOrigins.indexOf(req.header("Origin")) !== -1) {
-//     corsOptions = {
-//       origin: true,
-//       methods: "GET, HEAD, PUT, PATCH, POST, DELETE",
-//       optionsSuccessStatus: 200,
-//     }; // reflect (enable) the requested origin in the CORS response
-//   } else {
-//     corsOptions = { origin: false }; // disable CORS for this request
-//   }
-//   callback(null, corsOptions); // callback expects two parameters: error and options
-// };
-
-// // Apply CORS dynamically to all routes
-// app.use(cors(corsOptionsDelegate));
-
-// middleware for JSON parsing
 app.use(express.json());
 
 // Error handling middleware
 app.use(errorHandler);
 
-// projects routes
-
+// Projects routes
 app.use("/api/pro-app/projects", projectsRoutes);
 
-// users routes
+// Users routes
 app.use("/api/pro-app/users", usersRoutes);
 
 app.use("/authGood", (req, res, next) => {
   res.send({ userLevel: 1 });
 });
 
-// users routes
-
+// MongoDB connection and server start
 mongoose
-  .connect(process.env.MONGO_URI)
+  .connect(mongoUri)
   .then(() => {
     console.log("MongoDB connected successfully");
     app.listen(process.env.PORT, () => {
