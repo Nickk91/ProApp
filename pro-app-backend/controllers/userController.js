@@ -85,6 +85,7 @@ export const getUserById = async (req, res) => {
       throw new Error("User was not found");
     }
     const { username, email, authLevel, avatar, _id } = user;
+    console.log("getUserById: user is:", user);
     res.send({ username, email, authLevel, avatar, _id });
   } catch (error) {
     console.log("Error fetching user", error);

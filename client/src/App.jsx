@@ -19,6 +19,7 @@ import TestPage from "./pages/TestPage/TestPage.jsx";
 import SearchPage from "./pages/SearchPage/SearchPage.jsx";
 import ProjectsByUsers from "./pages/ProjectsByUsers/ProjectsByUsers.jsx";
 import { useSelector, useDispatch } from "react-redux";
+import UsersPage from "./pages/UsersPage/UsersPage.jsx";
 
 function App() {
   const dispatch = useDispatch();
@@ -48,6 +49,7 @@ function App() {
           <Route path="/noprojects" element={<HomePage />} />
           <Route path="/addproject" element={<AddProjectPage />} />
           <Route path="/userpage/:userId" element={<Userpage />} />
+          <Route path="/users" element={<UsersPage />} />
           {/* /addtask */}
           <Route
             path="/projects/:projectId/addtask"

@@ -207,7 +207,7 @@ const page = styled.div`
   max-width: 1400px;
 `;
 
-const projectTitle = styled.div`
+const pageTitle = styled.div`
   /* padding-bottom: 22px; */
   font-size: 35px;
   margin-left: -150px;
@@ -247,7 +247,7 @@ export {
   delBigger,
   errorText,
   page,
-  projectTitle,
+  pageTitle,
   spaceDiv,
   spacer,
 };

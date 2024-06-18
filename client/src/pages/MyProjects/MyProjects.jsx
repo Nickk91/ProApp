@@ -74,7 +74,7 @@ const MyProjects = () => {
         <Spinner />
       ) : (
         <>
-          {projects.length > 0 && <S.projectTitle>My projects</S.projectTitle>}
+          {projects.length > 0 && <S.pageTitle>My projects</S.pageTitle>}
           {currentProjects.map((project, index) => (
             <ProjectCard
               key={index}

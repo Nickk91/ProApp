@@ -4,8 +4,8 @@ import asyncHandler from "express-async-handler";
 
 export const validateToken = asyncHandler(async (req, res, next) => {
   let token;
-  let authHeader = req.headers.authorization;
-  console.log("validatetoken token:", token);
+  const authHeader = req.headers.authorization;
+  console.log("Authorization Header:", authHeader); // Log the Authorization header
 
   if (!authHeader || !authHeader.toLowerCase().startsWith("bearer")) {
     return res
@@ -14,8 +14,11 @@ export const validateToken = asyncHandler(async (req, res, next) => {
   }
 
   token = authHeader.split(" ")[1];
+  console.log("Extracted Token:", token); // Log the extracted token
+
   jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
     if (err) {
+      console.error("JWT Verification Error:", err); // Log the error
       return res
         .status(STATUS_CODE.UNAUTHORIZED)
         .json({ message: "User is not authorized" });

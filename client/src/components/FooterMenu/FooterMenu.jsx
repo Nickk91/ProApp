@@ -43,7 +43,7 @@ const FooterMenu = () => {
         </S.li>
         {authLevel === userAuthLevels.admin && (
           <S.li>
-            <S.usersIcon onClick={() => navigate(`/userpage/${userId}`)} />
+            <S.usersIcon onClick={() => navigate(`/users`)} />
           </S.li>
         )}
         <S.li>

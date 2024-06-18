@@ -1,6 +1,9 @@
 import React from "react";
 import * as S from "./GenericModalStyles.js";
 import { IoMdCloseCircle } from "react-icons/io";
+
+import styled from "styled-components";
+
 export default function ImageModal({ children, isOpen, onRequestClose }) {
   return (
     <>
@@ -9,9 +12,7 @@ export default function ImageModal({ children, isOpen, onRequestClose }) {
           {isOpen && (
             <S.ModalBackground onClick={() => onRequestClose()}>
               <S.ModalBody onClick={(e) => e.stopPropagation()}>
-                <S.closeButton onClick={() => onRequestClose()}>
-                  <IoMdCloseCircle />
-                </S.closeButton>
+                <IoMdCloseCircle onClick={() => onRequestClose()} />
 
                 <S.modalText>{children}</S.modalText>
                 <S.btnsContainer></S.btnsContainer>

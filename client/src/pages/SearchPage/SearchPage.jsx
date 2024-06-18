@@ -17,7 +17,6 @@ const SearchPage = () => {
 
   const [currentPage, setCurrentPage] = useState(1);
   const [projectsPerPage, setProjectsPerPage] = useState(2);
-
   const [displayError, setDisplayError] = useState(false);
 
   const searchProjectsInputs = [
