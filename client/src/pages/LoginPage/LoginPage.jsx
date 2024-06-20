@@ -8,6 +8,7 @@ import Spinner from "../../components/Spinner/Spinner.jsx";
 import { useDispatch } from "react-redux";
 import { login } from "../../slices/authSlice.js";
 import "../style/pagestyle.css";
+import { jwtDecode } from "jwt-decode";
 
 const LoginPage = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -17,11 +18,23 @@ const LoginPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      navigate("/");
-    }
-    setIsLoading(false);
+    const checkToken = async () => {
+      const token = localStorage.getItem("token");
+      if (token) {
+        const decodedToken = jwtDecode(token);
+        const currentTime = Date.now() / 1000;
+
+        if (decodedToken.exp < currentTime) {
+          localStorage.removeItem("token");
+          setIsLoading(false);
+        } else {
+          navigate("/");
+        }
+      }
+      setIsLoading(false);
+    };
+
+    checkToken();
   }, [navigate]);
 
   const handleFormSubmit = async (e) => {
@@ -44,7 +57,7 @@ const LoginPage = () => {
 
       if (response.ok) {
         const data = await response.json();
-        const token = data.accessToken; // Ensure this matches your backend response
+        const token = data.accessToken;
         const user = data.user;
 
         localStorage.setItem("token", token);
@@ -83,8 +96,6 @@ const LoginPage = () => {
 
       if (response.ok) {
         const data = await response.json();
-        console.log(data);
-        console.log("data:", data);
       } else {
         console.error("Failed to fetch protected data");
       }

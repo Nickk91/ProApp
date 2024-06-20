@@ -126,7 +126,7 @@ const UsersPage = () => {
       )}
 
       <S.spaceDiv />
-      {/* <FooterMenu /> */}
+      <FooterMenu />
     </section>
   );
 };
