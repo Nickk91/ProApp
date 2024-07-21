@@ -5,10 +5,18 @@ import usersRoutes from "./routes/usersRoutes.js";
 import projectsRoutes from "./routes/projectsRoutes.js";
 import cors from "cors";
 import dotenv from "dotenv";
+import mongoSanitize from "express-mongo-sanitize";
+import { sanitizeInput } from "./middleware/sanitizeHtmlMiddleware.js";
+import STATUS_CODE from "./constants/statusCodes.js";
 
 dotenv.config();
 
 const app = express();
+
+// Middleware
+app.use(mongoSanitize());
+app.use(express.json()); // Ensure JSON body parsing is done before sanitization
+app.use(sanitizeInput); // Ensure this is applied before your routes
 
 // Determine the environment and set the appropriate MongoDB URI and frontend URL
 const mongoUri =
@@ -23,11 +31,9 @@ const frontendUrl =
 // CORS configuration
 const corsOptions = {
   origin: frontendUrl, // Your frontend URL
-  optionsSuccessStatus: 200,
+  optionsSuccessStatus: STATUS_CODE.OK,
 };
 app.use(cors(corsOptions));
-
-app.use(express.json());
 
 // Error handling middleware
 app.use(errorHandler);
