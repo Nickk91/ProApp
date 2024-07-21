@@ -29,6 +29,10 @@ router.get("/current", validateToken, currentUser);
 
 router.patch("/update-pic", validateToken, changeUserImg);
 
+router.post("/test-sanitize", (req, res) => {
+  res.json(req.body);
+});
+
 router.get(
   "/search/getuserid/:userName",
   getUserIdByUsername,
