@@ -1,17 +1,18 @@
 import React from "react";
+import PropTypes from "prop-types";
 import * as S from "./Styles"; // Ensure the correct path
 import { toPercentage } from "../../utils/functions";
 
 const UserCard = ({ user, projects, onClick }) => {
-  const todoProjects = projects.filter((project) => {
-    return project.projectStatus === "todo";
-  });
-  const inProgressProjects = projects.filter((project) => {
-    return project.projectStatus === "in progress";
-  });
-  const doneProjects = projects.filter((project) => {
-    return project.projectStatus === "done";
-  });
+  const todoProjects = projects.filter(
+    (project) => project.projectStatus === "todo"
+  );
+  const inProgressProjects = projects.filter(
+    (project) => project.projectStatus === "in progress"
+  );
+  const doneProjects = projects.filter(
+    (project) => project.projectStatus === "done"
+  );
 
   return (
     <S.cardContainer onClick={onClick}>
@@ -21,7 +22,7 @@ const UserCard = ({ user, projects, onClick }) => {
         </S.username>
       </S.topLine>
       <S.midLine>
-        <S.userImg src={user.avatar} />
+        <S.userImg src={user.avatar} alt={`${user.username}'s avatar`} />
         <S.list>
           <S.li>id: {user._id}</S.li>
           <S.li>username: {user.username}</S.li>
@@ -32,8 +33,8 @@ const UserCard = ({ user, projects, onClick }) => {
         <S.list>
           <S.statusWrapper>
             <h4>
-              Total projects: {projects.length}
-              {projects.length > 0 ? " (100%)" : ""}
+              Total projects: {projects.length}{" "}
+              {projects.length > 0 ? "(100%)" : ""}
             </h4>
           </S.statusWrapper>
           <S.statusWrapper>
@@ -41,7 +42,7 @@ const UserCard = ({ user, projects, onClick }) => {
             <h4>
               Todos: {todoProjects.length}{" "}
               {todoProjects.length > 0
-                ? toPercentage(todoProjects.length / projects.length)
+                ? `(${toPercentage(todoProjects.length / projects.length)})`
                 : ""}
             </h4>
           </S.statusWrapper>
@@ -50,7 +51,9 @@ const UserCard = ({ user, projects, onClick }) => {
             <h4>
               In progress: {inProgressProjects.length}{" "}
               {inProgressProjects.length > 0
-                ? toPercentage(inProgressProjects.length / projects.length)
+                ? `(${toPercentage(
+                    inProgressProjects.length / projects.length
+                  )})`
                 : ""}
             </h4>
           </S.statusWrapper>
@@ -59,7 +62,7 @@ const UserCard = ({ user, projects, onClick }) => {
             <h4>
               Done: {doneProjects.length}{" "}
               {doneProjects.length > 0
-                ? toPercentage(doneProjects.length / projects.length)
+                ? `(${toPercentage(doneProjects.length / projects.length)})`
                 : ""}
             </h4>
           </S.statusWrapper>
@@ -69,8 +72,19 @@ const UserCard = ({ user, projects, onClick }) => {
   );
 };
 
-// statusIconInProg,
-// statusIconDone,
-// statusIconTodo,
+UserCard.propTypes = {
+  user: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    username: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+    avatar: PropTypes.string.isRequired,
+  }).isRequired,
+  projects: PropTypes.arrayOf(
+    PropTypes.shape({
+      projectStatus: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+  onClick: PropTypes.func,
+};
 
 export default UserCard;

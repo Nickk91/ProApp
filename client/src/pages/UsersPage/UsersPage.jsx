@@ -41,7 +41,7 @@ const UsersPage = () => {
           }
 
           const data = await response.json();
-          console.log(data);
+
           if (data.length === 0) {
             navigate("/");
           }
@@ -78,7 +78,7 @@ const UsersPage = () => {
         if (!response.ok) throw new Error("Failed to fetch projects");
 
         const data = await response.json();
-        console.log("projects:", data);
+
         setProjects(data);
       } catch (error) {
         console.error("Error fetching projects:", error);
