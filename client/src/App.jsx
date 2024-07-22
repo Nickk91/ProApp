@@ -20,6 +20,7 @@ import SearchPage from "./pages/SearchPage/SearchPage.jsx";
 import ProjectsByUsers from "./pages/ProjectsByUsers/ProjectsByUsers.jsx";
 import { useSelector, useDispatch } from "react-redux";
 import UsersPage from "./pages/UsersPage/UsersPage.jsx";
+import RegisteredSuccessPage from "./pages/RegisteredSuccessPage/RegisteredSuccessPage.jsx";
 
 function App() {
   const dispatch = useDispatch();
@@ -81,6 +82,7 @@ function App() {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/projects/:projectId" element={<ProjectPage />} />
+        <Route path="/registerSuccess" element={<RegisteredSuccessPage />} />
         <Route
           path="/projects/:projectId/deletetask/:taskId"
           element={<ProjectPage />}
@@ -96,6 +98,8 @@ function App() {
           path="/"
           element={isLoggedIn ? <MyProjects /> : <LoggedOutPage />}
         />
+
+        <Route path="/myprojects" element={<MyProjects />} />
         <Route path="/test" element={<TestPage />} />
       </Routes>
     </>

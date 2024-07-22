@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../style/pagestyle.css";
 import "../../assets/images/Group.png";
 import heroImg from "../../assets/images/Group.png";
 import * as S from "./styles.js";
 import "../style/pagestyle.css";
+import { jwtDecode } from "jwt-decode";
 
 const LoggedOutPage = () => {
   const navigate = useNavigate();
@@ -12,6 +13,18 @@ const LoggedOutPage = () => {
   const handleClick = (value) => {
     navigate(`/${value}`);
   };
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      const decodedToken = jwtDecode(token);
+      const currentTime = Date.now() / 1000;
+
+      if (decodedToken.exp > currentTime) {
+        navigate("/myprojects");
+      }
+    }
+  }, []);
 
   return (
     <section className="page">

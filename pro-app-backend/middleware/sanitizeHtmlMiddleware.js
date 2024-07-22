@@ -1,4 +1,5 @@
 import sanitizeHtml from "sanitize-html";
+import STATUS_CODE from "../constants/statusCodes.js";
 
 const sanitizeAndCheck = (input) => {
   if (typeof input === "string") {
@@ -33,6 +34,6 @@ export const sanitizeInput = (req, res, next) => {
     }
     next();
   } catch (error) {
-    res.status(400).send({ error: error.message });
+    res.status(STATUS_CODE.BAD_REQUEST).send({ error: error.message });
   }
 };

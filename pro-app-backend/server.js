@@ -18,7 +18,6 @@ app.use(mongoSanitize());
 app.use(express.json()); // Ensure JSON body parsing is done before sanitization
 app.use(sanitizeInput); // Ensure this is applied before your routes
 
-// Determine the environment and set the appropriate MongoDB URI and frontend URL
 const mongoUri =
   process.env.ENV === "production"
     ? process.env.MONGO_URI_PROD
@@ -30,7 +29,7 @@ const frontendUrl =
 
 // CORS configuration
 const corsOptions = {
-  origin: frontendUrl, // Your frontend URL
+  origin: frontendUrl,
   optionsSuccessStatus: STATUS_CODE.OK,
 };
 app.use(cors(corsOptions));

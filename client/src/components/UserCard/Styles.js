@@ -19,7 +19,7 @@ const topLine = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  border: 1px solid black;
+  /* border: 1px solid black; */
 `;
 
 const midLine = styled.div`
@@ -28,7 +28,7 @@ const midLine = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  border: 1px solid black;
+  /* border: 1px solid black; */
 `;
 
 const statusIconTodo = styled.div`
@@ -78,11 +78,12 @@ const cardContainer = styled.div`
 `;
 const list = styled.ul`
   list-style-type: none;
-  border: 1px black solid;
+  /* border: 1px black solid; */
   margin-right: 35px;
 `;
 const li = styled.li`
-  font-size: 12px;
+  font-size: 13px;
+  font-weight: bold;
   align-self: left;
 `;
 

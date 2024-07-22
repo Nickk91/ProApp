@@ -42,7 +42,7 @@ const SignupPage = () => {
         } else {
           localStorage.removeItem("email");
           localStorage.removeItem("password");
-          navigate("/login");
+          navigate("/registerSuccess");
         }
       } else {
         console.error("Invalid username");
