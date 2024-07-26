@@ -274,7 +274,7 @@ const ProjectPage = () => {
 
           <S.tasksHeader>
             <h2>TASKS</h2>
-            <S.addProjectIcon
+            <S.addTaskIcon
               src={addTask}
               onClick={() => addTaskFunc(projectId)}
             />
