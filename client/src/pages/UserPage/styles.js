@@ -39,25 +39,38 @@ const list = styled.ul`
 `;
 const h3 = styled.h3`
   margin-top: 10px;
-  margin-bottom: 3px;
+  margin-bottom: 25px;
+  @media screen and (min-width: 620px) {
+    margin-top: -3px;
+    margin-bottom: 20px;
+  }
+`;
+
+const h32 = styled.h3`
+  margin-top: 10px;
+  margin-bottom: 25px;
+  margin-left: 40px;
   @media screen and (min-width: 620px) {
     margin-top: -3px;
     margin-bottom: 20px;
   }
 `;
 const miniWrap = styled.div`
-  /* border: 1px solid black; */
   max-height: 230px;
+  width: 300px;
 
   @media screen and (max-width: 345px) {
-    padding-left: 10px;
+    /* padding-left: 10px; */
   }
 `;
 
-const listItem = styled.li``;
+const listItem = styled.li`
+  margin-top: 5px;
+`;
 
 const container = styled.div`
-  margin-left: 40px;
+  /* margin-left: 40px; */
+  /* border: 1px solid black; */
 `;
 const urlInput = styled.input`
   margin-top: 10px;
@@ -82,10 +95,16 @@ const acceptBtn = styled.button`
   }
 `;
 const chartsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
   margin-left: -40px;
   margin-bottom: 70px;
   @media screen and (min-width: 620px) {
     display: flex;
+    flex-direction: row;
+
     margin-top: 20px;
     margin-left: 0px;
     gap: 35px;
@@ -103,13 +122,12 @@ const userDetailsContainer = styled.div`
 const space = styled.div`
   height: 320px;
   width: 200px;
-  border: 20px solid black;
 `;
 
 const errorMessage = styled.div`
   height: 50px;
   width: 100px;
-  color: red;
+  /* color: red; */
   border: 2px solid red;
   position: absolute;
   bottom: 20px;
@@ -127,8 +145,31 @@ const errorMessageHidden = styled.div`
   left: 50%;
   transform: translateX(-50%);
 `;
+const addProjectIcon = styled.img`
+  height: 24px;
+  transition: transform 0.2s;
+  cursor: pointer;
+  z-index: 990;
+
+  &:hover {
+    transform: scale(1.3);
+  }
+`;
+const addProjectContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  /* border: 1px dotted gray; */
+  gap: 10px;
+  margin-top: 4px;
+`;
+const minDiv = styled.div``;
 
 export {
+  addProjectContainer,
+  minDiv,
   page,
   userTitle,
   username,
@@ -136,6 +177,7 @@ export {
   list,
   listItem,
   h3,
+  h32,
   container,
   urlInput,
   acceptBtn,
@@ -145,4 +187,5 @@ export {
   space,
   errorMessage,
   errorMessageHidden,
+  addProjectIcon,
 };

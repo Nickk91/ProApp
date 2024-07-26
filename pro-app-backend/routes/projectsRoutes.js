@@ -15,6 +15,7 @@ import {
   getProjectsByProjectName,
   getUserProjectsByProjectNameByUserId,
   getProjectByUserIdParams,
+  addProjectByAdmin,
 } from "../controllers/projectController.js";
 import { validateToken } from "../middleware/validateTokenHandler.js";
 
@@ -26,7 +27,9 @@ router.delete("/:id", validateToken, deleteProjectById);
 router.get("/", getAllProjects);
 
 //Route to create a new project
-router.post("/", validateToken, addProject);
+router.post("/addproject", validateToken, addProject);
+
+router.post("/addprojectbyadmin", validateToken, addProjectByAdmin);
 
 router.get("/user", validateToken, getProjectsByUserId);
 
