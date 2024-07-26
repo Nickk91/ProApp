@@ -324,6 +324,28 @@ export const addProject = async (req, res) => {
   }
 };
 
+export const addProjectByAdmin = async (req, res) => {
+  try {
+    console.log("addProjectByAdmin controller!!");
+    const project = await Project.create({
+      projectName: req.body.projectName,
+      projectDescription: req.body.projectDescription,
+      projectImage: req.body.projectImage,
+      user: req.body.userId,
+    });
+    console.log("project in controller:", project);
+
+    const newProject = await Project.findById(project._id).populate("user");
+
+    res.status(STATUS_CODE.CREATED).send(newProject);
+  } catch (error) {
+    res
+      .status(STATUS_CODE.INTERNAL_SERVER_ERROR)
+      .json({ message: error.message });
+    console.log(STATUS_CODE.INTERNAL_SERVER_ERROR);
+  }
+};
+
 export const updateProjectStatusById = async (req, res) => {
   try {
     const { id } = req.params;

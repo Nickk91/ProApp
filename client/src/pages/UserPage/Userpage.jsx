@@ -3,13 +3,15 @@ import * as S from "./styles.js";
 import Spinner from "../../components/Spinner/Spinner.jsx";
 import FooterMenu from "../../components/FooterMenu/FooterMenu.jsx";
 import "../style/pagestyle.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { userAuthLevels } from "../../constants/userAuthLevels.js";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { getProjectCounts, getTaskCounts } from "../../utils/dataUtils.js";
 import { checkIfUrl } from "../../utils/functions.js";
 import PieChartComp from "../../components/PieChart/PieChartComp.jsx";
 import ImageModal from "../../components/ImageModal/ImageModal.jsx";
+import addTask from "../../assets/images/icon_Plus_Circle_.svg";
+import { setUserId } from "../../slices/userIdSlice.js";
 
 const Userpage = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -61,7 +63,10 @@ const Userpage = () => {
 
   useEffect(() => {
     const fetchProjects = async () => {
-      if (!userIdToSearchBy) return;
+      if (!userIdToSearchBy) {
+        // setProjects([]);
+        return;
+      }
       setIsProjectsLoading(true);
       try {
         if (!token) throw new Error("No token found");
@@ -133,7 +138,17 @@ const Userpage = () => {
   };
 
   const projectsCounts = getProjectCounts(projects);
+
   const taskCounts = getTaskCounts(projects);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleAddProject = (user_id) => {
+    console.log("clicked");
+    dispatch(setUserId(user_id));
+    navigate("/addproject");
+  };
 
   return (
     <section className="page">
@@ -151,38 +166,64 @@ const Userpage = () => {
             <S.list>
               <S.userDetailsContainer>
                 <S.h3>User Details:</S.h3>
-                <li>Username: {userData?.username}</li>
-                <li>User Email: {userData?.email}</li>
-                <li>User Id: {userData?._id}</li>
+                <S.listItem>Username: {userData?.username}</S.listItem>
+                <S.listItem>User Email: {userData?.email}</S.listItem>
+                <S.listItem>User Id: {userData?._id}</S.listItem>
               </S.userDetailsContainer>
 
               {isProjectsLoading ? (
                 <Spinner />
               ) : (
-                <S.chartsContainer>
-                  <S.miniWrap>
-                    <S.h3>User Projects:</S.h3>
-                    <PieChartComp
-                      data={projectsCounts}
-                      fill="#8884d8"
-                      title="User Projects"
+                <>
+                  <S.addProjectContainer>
+                    <h3>Add Project:</h3>
+
+                    <S.addProjectIcon
+                      src={addTask}
+                      onClick={() => {
+                        console.log("Button clicked");
+                        handleAddProject(userData._id);
+                      }}
                     />
-                  </S.miniWrap>
-                  <S.miniWrap>
-                    <S.h3>User Tasks:</S.h3>
-                    <PieChartComp
-                      data={taskCounts}
-                      fill="#2bc5da"
-                      title="User Tasks"
-                    />
-                  </S.miniWrap>
-                </S.chartsContainer>
+                  </S.addProjectContainer>
+                  <S.chartsContainer>
+                    {projects.length > 0 ? (
+                      <>
+                        <S.miniWrap>
+                          <S.h32>User Projects:</S.h32>
+                          <PieChartComp
+                            data={projectsCounts}
+                            fill="#8884d8"
+                            title="User Projects"
+                          />
+                        </S.miniWrap>
+                        <S.miniWrap>
+                          <S.h32>User Tasks:</S.h32>
+                          <PieChartComp
+                            data={taskCounts}
+                            fill="#2bc5da"
+                            title="User Tasks"
+                          />
+                        </S.miniWrap>
+                      </>
+                    ) : (
+                      <>
+                        {/* <S.addProjectContainer> */}
+                        <h3>
+                          <i>No projects found</i>
+                        </h3>
+                        {/* </S.addProjectContainer> */}
+                      </>
+                    )}
+                  </S.chartsContainer>
+                </>
               )}
             </S.list>
           </S.container>
           <FooterMenu />
         </>
       )}
+      <S.space />
       <ImageModal
         toDelete="project"
         isOpen={imageModalOpen}
