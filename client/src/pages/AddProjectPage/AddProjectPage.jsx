@@ -35,16 +35,13 @@ const AddProjectPage = () => {
     const projectDescription = formData.get("Project description");
     const projectImage = formData.get("Project image URL");
 
-    //     router.post("/addproject", validateToken, addProject);
-    // router.post("/addingproject", validateToken, addProject);
-
     try {
       setIsLoading(true);
       const token = localStorage.getItem("token");
+      let response;
 
       if (isAddingProjectToAnotherUser) {
-        console.log("trying to add project to user by admin");
-        const response = await fetch(
+        response = await fetch(
           `${import.meta.env.VITE_BASEURL}/projects/addprojectbyadmin`,
           {
             method: "POST",
@@ -61,7 +58,7 @@ const AddProjectPage = () => {
           }
         );
       } else {
-        const response = await fetch(
+        response = await fetch(
           `${import.meta.env.VITE_BASEURL}/projects/addproject`,
           {
             method: "POST",
@@ -78,13 +75,9 @@ const AddProjectPage = () => {
         );
       }
 
-      // projectName: req.body.projectName,
-      // projectDescription: req.body.projectDescription,
-      // projectImage: req.body.projectImage,
-      // user: req.user._id,
-
       if (response.ok) {
         const data = await response.json();
+        console.log("NAVIGATING TO: / ");
 
         navigate("/");
       } else {
