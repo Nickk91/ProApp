@@ -15,9 +15,7 @@ const AddProjectPage = () => {
   const [displayError, setDisplayError] = useState(false);
   const [isAddingProjectToAnotherUser, setIsAddingProjectToAnotherUser] =
     useState(false);
-  //ADD BACKEND VALIDATIONS
   const navigate = useNavigate();
-
   const authLevel = useSelector((state) => state.auth.user?.authLevel);
   const userId = useSelector((state) => state.userId.value);
 

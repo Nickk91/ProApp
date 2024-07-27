@@ -8,12 +8,15 @@ import Pagination from "../../components/Pagination/Pagination.jsx";
 import { useSelector } from "react-redux";
 import UserCard from "../../components/UserCard/UserCard.jsx";
 import { userAuthLevels } from "../../constants/userAuthLevels.js";
+import * as ST from "./styled.js";
+import { PiXLight } from "react-icons/pi";
+import { handleSortByUsername } from "../../utils/functions.js";
 
 const UsersPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [users, setUsers] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [usersPerPage, setUsersPerPage] = useState(2);
+  const [usersPerPage, setUsersPerPage] = useState(4);
   const [projects, setProjects] = useState([]);
   const [isProjectsLoading, setIsProjectsLoading] = useState(true);
 
@@ -97,7 +100,13 @@ const UsersPage = () => {
   const lastUserIndex = currentPage * usersPerPage;
   const firstUserIndex = lastUserIndex - usersPerPage;
 
-  const currentUsers = users.slice(firstUserIndex, lastUserIndex);
+  let currentUsers = users.slice(firstUserIndex, lastUserIndex);
+  console.log(currentUsers);
+
+  const sortUsers = () => {
+    const sortedUsers = handleSortByUsername(users);
+    setUsers(sortedUsers);
+  };
 
   return (
     <section className="page">
@@ -105,6 +114,10 @@ const UsersPage = () => {
         <Spinner />
       ) : (
         <>
+          <ST.sortContainer>
+            <ST.sortBtn onClick={sortUsers}>Sort by username</ST.sortBtn>
+            <ST.sortBtn>Sort by project quantity</ST.sortBtn>
+          </ST.sortContainer>
           {users.length > 0 && <S.pageTitle>Users</S.pageTitle>}
           {currentUsers.map((user, index) => (
             <UserCard

@@ -47,3 +47,27 @@ export const checkIfUrl = (str) => {
 
   return str.match(regex);
 };
+
+export const handleSortByUsername = (users) => {
+  const sortedUsers = [...users].sort((a, b) => {
+    const nameA = a.username;
+    const nameB = b.username;
+
+    // Regular expressions to test if the first character is a letter
+    const isAlphaA = /^[a-zA-Z]/.test(nameA);
+    const isAlphaB = /^[a-zA-Z]/.test(nameB);
+
+    // If both are alphabetic or non-alphabetic, use localeCompare with numeric option
+    if ((isAlphaA && isAlphaB) || (!isAlphaA && !isAlphaB)) {
+      return nameA.localeCompare(nameB, undefined, { numeric: true });
+    }
+
+    // If only one is alphabetic, the alphabetic one should come first
+    if (isAlphaA) return -1;
+    if (isAlphaB) return 1;
+
+    return 0; // This line will rarely be reached
+  });
+
+  return sortedUsers;
+};
