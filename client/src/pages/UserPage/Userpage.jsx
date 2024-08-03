@@ -64,7 +64,6 @@ const Userpage = () => {
   useEffect(() => {
     const fetchProjects = async () => {
       if (!userIdToSearchBy) {
-        // setProjects([]);
         return;
       }
       setIsProjectsLoading(true);
@@ -208,11 +207,9 @@ const Userpage = () => {
                       </>
                     ) : (
                       <>
-                        {/* <S.addProjectContainer> */}
                         <h3>
                           <i>No projects found</i>
                         </h3>
-                        {/* </S.addProjectContainer> */}
                       </>
                     )}
                   </S.chartsContainer>

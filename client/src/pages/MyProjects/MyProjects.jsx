@@ -12,7 +12,7 @@ const MyProjects = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [projects, setProjects] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [projectsPerPage, setProjectsPerPage] = useState(2);
+  const [projectsPerPage, setProjectsPerPage] = useState(4);
 
   const navigate = useNavigate();
 

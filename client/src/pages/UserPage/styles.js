@@ -160,10 +160,10 @@ const addProjectContainer = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: space-around;
-  width: 100%;
-  /* border: 1px dotted gray; */
+  max-width: 300px;
   gap: 10px;
   margin-top: 4px;
+  margin: 0 auto;
 `;
 const minDiv = styled.div``;
 
