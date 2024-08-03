@@ -71,3 +71,13 @@ export const handleSortByUsername = (users) => {
 
   return sortedUsers;
 };
+
+export const handleSortByProjectQuantity = (users) => {
+  console.log("RUNNING handleSortByProjectQuantity");
+  console.log(users[0].projects);
+  const sortedUsers = [...users].sort(
+    (a, b) => b.projects.length - a.projects.length
+  );
+  console.log(sortedUsers);
+  return sortedUsers;
+};

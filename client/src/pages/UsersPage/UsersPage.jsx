@@ -7,21 +7,20 @@ import "../style/pagestyle.css";
 import Pagination from "../../components/Pagination/Pagination.jsx";
 import { useSelector } from "react-redux";
 import UserCard from "../../components/UserCard/UserCard.jsx";
-import { userAuthLevels } from "../../constants/userAuthLevels.js";
 import * as ST from "./styled.js";
-import { PiXLight } from "react-icons/pi";
-import { handleSortByUsername } from "../../utils/functions.js";
+import {
+  handleSortByUsername,
+  handleSortByProjectQuantity,
+} from "../../utils/functions.js";
 
 const UsersPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [users, setUsers] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [usersPerPage, setUsersPerPage] = useState(4);
-  const [projects, setProjects] = useState([]);
-  const [isProjectsLoading, setIsProjectsLoading] = useState(true);
 
   const navigate = useNavigate();
-  const authLevel = useSelector((state) => state.auth.user?.authLevel);
+  // const authLevel = useSelector((state) => state.auth.user?.authLevel);
 
   const token = localStorage.getItem("token");
 
@@ -48,10 +47,36 @@ const UsersPage = () => {
           if (data.length === 0) {
             navigate("/");
           }
-          setUsers(data);
+
+          // Fetch projects after users are fetched
+          const projectsResponse = await fetch(
+            `${import.meta.env.VITE_BASEURL}/projects/`,
+            {
+              method: "GET",
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+
+          if (!projectsResponse.ok) {
+            throw new Error("Failed to fetch projects");
+          }
+
+          const projectsData = await projectsResponse.json();
+
+          // Populate projects in users
+          const usersWithProjects = data.map((user) => ({
+            ...user,
+            projects: projectsData.filter(
+              (project) => project.user === user._id
+            ),
+          }));
+
+          setUsers(usersWithProjects);
           setIsLoading(false);
         } catch (error) {
-          console.error("Error fetching users:", error);
+          console.error("Error fetching users or projects:", error);
         }
       };
 
@@ -61,38 +86,6 @@ const UsersPage = () => {
     }
   }, [token, navigate]);
 
-  useEffect(() => {
-    const fetchProjects = async () => {
-      if (users.length === 0) return;
-      setIsProjectsLoading(true);
-      try {
-        if (!token) throw new Error("No token found");
-
-        const response = await fetch(
-          `${import.meta.env.VITE_BASEURL}/projects/`,
-          {
-            method: "GET",
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-
-        if (!response.ok) throw new Error("Failed to fetch projects");
-
-        const data = await response.json();
-
-        setProjects(data);
-      } catch (error) {
-        console.error("Error fetching projects:", error);
-      } finally {
-        setIsProjectsLoading(false);
-      }
-    };
-
-    fetchProjects();
-  }, [token, users]);
-
   const handleClick = (userId) => {
     navigate(`/userpage/${userId}`);
   };
@@ -101,22 +94,31 @@ const UsersPage = () => {
   const firstUserIndex = lastUserIndex - usersPerPage;
 
   let currentUsers = users.slice(firstUserIndex, lastUserIndex);
-  console.log(currentUsers);
 
-  const sortUsers = () => {
+  const sortUsersByUsername = () => {
     const sortedUsers = handleSortByUsername(users);
+    setUsers(sortedUsers);
+  };
+
+  const sortByProjectQuantity = () => {
+    console.log("Sorting by project quantity");
+    const sortedUsers = handleSortByProjectQuantity(users);
     setUsers(sortedUsers);
   };
 
   return (
     <section className="page">
-      {isLoading || isProjectsLoading ? (
+      {isLoading ? (
         <Spinner />
       ) : (
         <>
           <ST.sortContainer>
-            <ST.sortBtn onClick={sortUsers}>Sort by username</ST.sortBtn>
-            <ST.sortBtn>Sort by project quantity</ST.sortBtn>
+            <ST.sortBtn onClick={sortUsersByUsername}>
+              Sort by username
+            </ST.sortBtn>
+            <ST.sortBtn onClick={sortByProjectQuantity}>
+              Sort by project quantity
+            </ST.sortBtn>
           </ST.sortContainer>
           {users.length > 0 && <S.pageTitle>Users</S.pageTitle>}
           {currentUsers.map((user, index) => (
@@ -124,9 +126,7 @@ const UsersPage = () => {
               key={user._id}
               user={user}
               onClick={() => handleClick(user._id)}
-              projects={projects.filter((project) => {
-                return project.user === user._id;
-              })}
+              projects={user.projects}
             />
           ))}
           <Pagination

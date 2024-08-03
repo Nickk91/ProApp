@@ -65,7 +65,7 @@ export const createUser = async (req, res) => {
 // @access Public
 export const getAllUsers = async (req, res) => {
   try {
-    const users = await User.find();
+    const users = await User.find({}).populate("projects").exec();
     console.log(users);
     res.send(users);
   } catch (error) {
@@ -75,6 +75,19 @@ export const getAllUsers = async (req, res) => {
       .json({ error: "Internal Server Error FOR REALY BRUV" });
   }
 };
+
+// export const getAllUsers = async (req, res) => {
+//   try {
+//     const users = await User.find();
+//     console.log(users);
+//     res.send(users);
+//   } catch (error) {
+//     console.log("Error fetching users", error);
+//     res
+//       .status(STATUS_CODE.INTERNAL_SERVER_ERROR)
+//       .json({ error: "Internal Server Error FOR REALY BRUV" });
+//   }
+// };
 
 export const getUserById = async (req, res) => {
   try {
