@@ -160,7 +160,7 @@ const addProjectContainer = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: space-around;
-  max-width: 300px;
+  max-width: 200px;
   gap: 10px;
   margin-top: 4px;
   margin: 0 auto;
