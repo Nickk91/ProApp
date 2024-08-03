@@ -5,7 +5,7 @@ import { addTaskFormInputs } from "../../constants/formInputsData.js";
 import ReturnIcon from "../../assets/images/back_icon.svg";
 import "../style/pagestyle.css";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-
+import FooterMenu from "../../components/FooterMenu/FooterMenu.jsx";
 const EditTaskPage = () => {
   const location = useLocation();
   const { taskId, taskName, taskDesc, taskStatus, edit } = location.state;
@@ -74,6 +74,7 @@ const EditTaskPage = () => {
         taskStatus={taskStatus}
         edit={edit}
       />
+      <FooterMenu />
     </section>
   );
 };
