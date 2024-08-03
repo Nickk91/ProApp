@@ -11,11 +11,13 @@ import * as ST from "./styled.js";
 import {
   handleSortByUsername,
   handleSortByProjectQuantity,
+  handleSortByProjectTodosQuantity,
 } from "../../utils/functions.js";
 
 const UsersPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [users, setUsers] = useState([]);
+  const [projectsData, setProjectsData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [usersPerPage, setUsersPerPage] = useState(4);
 
@@ -64,6 +66,7 @@ const UsersPage = () => {
           }
 
           const projectsData = await projectsResponse.json();
+          setProjectsData(projectsData);
 
           // Populate projects in users
           const usersWithProjects = data.map((user) => ({
@@ -105,6 +108,14 @@ const UsersPage = () => {
     setUsers(sortedUsers);
   };
 
+  const sortByTodoProjectQuantity = () => {
+    console.log("sort by todo project quantity");
+    console.log(users[0].projects);
+    console.log(projectsData);
+    const sortedUsers = handleSortByProjectTodosQuantity(users, projectsData);
+    setUsers(sortedUsers);
+  };
+
   return (
     <section className="page">
       {isLoading ? (
@@ -118,6 +129,9 @@ const UsersPage = () => {
             </ST.sortBtn>
             <ST.sortBtn onClick={sortByProjectQuantity}>
               Sort by project quantity
+            </ST.sortBtn>
+            <ST.sortBtn onClick={sortByTodoProjectQuantity}>
+              Sort by todo project quantity
             </ST.sortBtn>
           </ST.sortContainer>
           {currentUsers.map((user, index) => (

@@ -73,11 +73,26 @@ export const handleSortByUsername = (users) => {
 };
 
 export const handleSortByProjectQuantity = (users) => {
-  console.log("RUNNING handleSortByProjectQuantity");
-  console.log(users[0].projects);
   const sortedUsers = [...users].sort(
     (a, b) => b.projects.length - a.projects.length
   );
-  console.log(sortedUsers);
+  return sortedUsers;
+};
+
+export const handleSortByProjectTodosQuantity = (users, projectsData) => {
+  console.log("handling sortByProjectTodosQuantity");
+  console.log(projectsData);
+  console.log(users[0].projects[1]);
+  const usersWithTodoProjects = users.map((user) => ({
+    ...user,
+    todoProjects: projectsData.filter(
+      (project) => project.user === user._id && project.projectStatus === "todo"
+    ),
+  }));
+  console.log(usersWithTodoProjects);
+
+  const sortedUsers = [...usersWithTodoProjects].sort(
+    (a, b) => b.todoProjects.length - a.todoProjects.length
+  );
   return sortedUsers;
 };
