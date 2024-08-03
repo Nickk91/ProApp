@@ -35,7 +35,13 @@ const btnLogin = styled.button`
   border: 2px solid;
   font-size: 13px;
   font-weight: 700;
-  transition: background-color 0.3s, color 0.3s; /* Add transition for background-color and color */
+  transition: background-color 0.3s, color 0.3s, box-shadow 0.3s ease-in-out; /* Box-shadow transition */
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Adds a subtle shadow */
+    font-weight: 900;
+  }
 `;
 
 const btnRegister = styled.button`
@@ -47,7 +53,13 @@ const btnRegister = styled.button`
   border: 2px solid;
   font-size: 13px;
   font-weight: 700;
-  transition: background-color 0.3s, color 0.3s; /* Add transition for background-color and color */
+  transition: background-color 0.3s, color 0.3s, box-shadow 0.3s ease-in-out; /* Box-shadow transition */
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Adds a subtle shadow */
+    font-weight: 900;
+  }
 `;
 
 const buttonContainer = styled.button`

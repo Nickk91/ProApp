@@ -5,7 +5,7 @@ import FooterMenu from "../../components/FooterMenu/FooterMenu.jsx";
 import Spinner from "../../components/Spinner/Spinner.jsx";
 import "../style/pagestyle.css";
 import Pagination from "../../components/Pagination/Pagination.jsx";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 import UserCard from "../../components/UserCard/UserCard.jsx";
 import * as ST from "./styled.js";
 import {
@@ -101,7 +101,6 @@ const UsersPage = () => {
   };
 
   const sortByProjectQuantity = () => {
-    console.log("Sorting by project quantity");
     const sortedUsers = handleSortByProjectQuantity(users);
     setUsers(sortedUsers);
   };
@@ -112,6 +111,7 @@ const UsersPage = () => {
         <Spinner />
       ) : (
         <>
+          {users.length > 0 && <S.pageTitle>Users</S.pageTitle>}
           <ST.sortContainer>
             <ST.sortBtn onClick={sortUsersByUsername}>
               Sort by username
@@ -120,7 +120,6 @@ const UsersPage = () => {
               Sort by project quantity
             </ST.sortBtn>
           </ST.sortContainer>
-          {users.length > 0 && <S.pageTitle>Users</S.pageTitle>}
           {currentUsers.map((user, index) => (
             <UserCard
               key={user._id}

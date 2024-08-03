@@ -74,8 +74,6 @@ const spaceDiv = styled.div`
   height: 150px;
 `;
 
-
-
 export {
   searchTitle,
   activeButton,

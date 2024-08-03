@@ -69,7 +69,13 @@ const submitButton = styled.button`
   width: 100%;
   font-size: 11px;
   font-weight: 700;
+  transition: background-color 0.3s, color 0.3s, box-shadow 0.3s ease-in-out; /* Box-shadow transition */
   cursor: pointer;
+
+  &:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Adds a subtle shadow */
+    font-weight: 900;
+  }
 
   @media screen and (max-width: 365px) {
     width: 95%;

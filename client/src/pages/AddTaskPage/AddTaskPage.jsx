@@ -6,6 +6,7 @@ import ReturnIcon from "../../assets/images/back_icon.svg";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import "../style/pagestyle.css";
+import FooterMenu from "../../components/FooterMenu/FooterMenu.jsx";
 
 const AddTaskPage = () => {
   const { projectId } = useParams();
@@ -66,6 +67,7 @@ const AddTaskPage = () => {
         submitButtonText="ADD TASK"
         onSubmit={handleFormSubmit}
       />
+      <FooterMenu />
     </section>
   );
 };
