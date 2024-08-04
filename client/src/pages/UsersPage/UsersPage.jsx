@@ -108,11 +108,15 @@ const UsersPage = () => {
     setUsers(sortedUsers);
   };
 
-  const sortByTodoProjectQuantity = () => {
+  const sortByStatusProjectQuantity = (status) => {
     console.log("sort by todo project quantity");
     console.log(users[0].projects);
     console.log(projectsData);
-    const sortedUsers = handleSortByProjectTodosQuantity(users, projectsData);
+    const sortedUsers = handleSortByProjectTodosQuantity(
+      users,
+      projectsData,
+      status
+    );
     setUsers(sortedUsers);
   };
 
@@ -130,8 +134,16 @@ const UsersPage = () => {
             <ST.sortBtn onClick={sortByProjectQuantity}>
               Sort by project quantity
             </ST.sortBtn>
-            <ST.sortBtn onClick={sortByTodoProjectQuantity}>
+            <ST.sortBtn onClick={() => sortByStatusProjectQuantity("todo")}>
               Sort by todo project quantity
+            </ST.sortBtn>
+            <ST.sortBtn
+              onClick={() => sortByStatusProjectQuantity("in progress")}
+            >
+              Sort by in-prog. project quantity
+            </ST.sortBtn>
+            <ST.sortBtn onClick={() => sortByStatusProjectQuantity("done")}>
+              Sort by done project quantity
             </ST.sortBtn>
           </ST.sortContainer>
           {currentUsers.map((user, index) => (
