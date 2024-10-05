@@ -162,7 +162,6 @@ const taskList = styled.ul`
   }
 `;
 const listItem = styled.li`
-  margin-top: 1px;
   border: 0.5px dotted rgba(0, 0, 0, 0.3);
   padding-top: 15px;
   width: 99%;

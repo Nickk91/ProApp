@@ -36,7 +36,7 @@ const activeButton = styled.button`
   cursor: pointer;
 `;
 
-const buttonsContainer = styled.button`
+const buttonsContainer = styled.div`
   display: flex;
   flex-direction: row;
   gap: 7px;

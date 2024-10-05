@@ -1,5 +1,3 @@
-//
-
 import React from "react";
 import GenericInput from "../GenericInput/GenericInput.jsx";
 import * as S from "../StyledComponents/styles.jsx";
@@ -15,7 +13,6 @@ const GenericForm = ({
 }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(e.target);
     const formData = new FormData(e.target);
     const formProps = Object.fromEntries(formData.entries());
     onSubmit(e, formProps);
@@ -28,19 +25,16 @@ const GenericForm = ({
   return (
     <FormComponent
       onSubmit={handleSubmit}
-      className="generic-from-wrapper"
+      className="generic-form-wrapper"
       action=""
     >
       <S.formTitle>{title}</S.formTitle>
       <S.inputsContainer>
-        {inputs.map((input, index) => (
-          <React.Fragment key={index}>
-            {/* {input.label && (
-              // <S.label key={`${index} label`}>{input.label}</S.label>
-              <S.label>{input.label}</S.label>
-            )} */}
+        {inputs.map((input) => (
+          <React.Fragment key={input.name}>
+            {" "}
+            {/* Use input.name or any unique key */}
             <GenericInput
-              key={index}
               type={input.type}
               label={input.label}
               name={input.name}
