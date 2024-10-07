@@ -21,6 +21,9 @@ const ProjectPage = () => {
   const [fetchProject, setFetchProject] = useState(false);
   const [username, setUsername] = useState();
   const [userIdProp, setUserIdProp] = useState();
+  const [projectPicSrc, setProjectPicSrc] = useState(
+    "https://cdn-icons-png.flaticon.com/512/4345/4345800.png"
+  );
 
   const { projectId } = useParams();
 
@@ -48,12 +51,11 @@ const ProjectPage = () => {
 
         const data = await response.json();
         setProject(data);
+        data.projectImage && setProjectPicSrc(data.projectImage);
         const userId = data.user;
 
         const arr = data.projectTasks.map((task) => task.status);
         setTaskStatuses(arr);
-
-        // setIsLoading(false);
 
         setSelectedValue(data.projectStatus.toUpperCase());
 
@@ -73,12 +75,8 @@ const ProjectPage = () => {
 
         const userData = await userResponse.json();
         setUsername(userData.username);
-
         setUserIdProp(userData._id);
-        // setUserIdProp()
-
         setIsLoading(false);
-        console.log("User Data:", userData);
       } catch (error) {
         console.error("Error fetching projects or user data:", error);
       }
@@ -227,8 +225,6 @@ const ProjectPage = () => {
     }
   };
 
-  const src = "https://cdn-icons-png.flaticon.com/512/4345/4345800.png";
-
   const handleExtendTask = (i) => {
     setExpandedTaskList((expandedTaskList) =>
       expandedTaskList.includes(i)
@@ -269,7 +265,7 @@ const ProjectPage = () => {
               />
             </S.selectDiv>
 
-            <S.projectImg src={src} alt="" />
+            <S.projectImg src={projectPicSrc} alt="" />
           </S.container>
 
           <S.tasksHeader>

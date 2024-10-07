@@ -4,7 +4,7 @@ import * as S from "./styled.js";
 const TaskStatusSelection = ({
   selectedValue,
   onChange,
-  key,
+  // key,
   taskId,
   handleTaskStatus,
 }) => {
@@ -14,7 +14,7 @@ const TaskStatusSelection = ({
       {selectedValue === "todo" && <S.statusIconTodo />}
       {selectedValue === "done" && <S.statusIconDone />}
       <S.select
-        key={key}
+        // key={taskId}
         value={selectedValue}
         onChange={(e) => {
           onChange(e.target.value.toLowerCase());

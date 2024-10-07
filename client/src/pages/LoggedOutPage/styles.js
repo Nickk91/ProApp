@@ -62,7 +62,7 @@ const btnRegister = styled.button`
   }
 `;
 
-const buttonContainer = styled.button`
+const buttonContainer = styled.div`
   position: absolute;
   bottom: 27px;
   display: flex;

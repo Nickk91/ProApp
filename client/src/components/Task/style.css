@@ -7,8 +7,8 @@
 
 .taskbox,
 .taskbox-expanded {
+  position: relative;
   display: flex;
-  flex-direction: row;
   font-size: 13px;
   font-weight: bold;
   justify-content: space-between;
@@ -28,14 +28,6 @@
 }
 
 .description-hidden {
-  /* position: absolute;
-  max-width: 300px;
-  text-align: left;
-  color: #404040;
-  font-size: 15px;
-  opacity: 0;
-  transition: opacity 0.3s ease; */
-
   max-height: 0;
   overflow: hidden;
   opacity: 0;
@@ -44,14 +36,14 @@
 
 .description-shown {
   position: absolute;
-  margin-bottom: 70px;
+  top: 0;
+  display: flex;
+  flex-direction: row;
   max-width: 300px;
   text-align: left;
   color: #404040;
   font-size: 15px;
-
   margin-left: 6px;
-
   opacity: 1;
   transition: opacity 0.3s ease;
 }
