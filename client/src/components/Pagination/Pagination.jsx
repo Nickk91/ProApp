@@ -1,9 +1,6 @@
 import React, { useEffect } from "react";
 import "./styled.css";
 
-// totalItems={projects.length}
-// ItemsPerPage
-
 const Pagination = ({
   totalItems,
   ItemsPerPage,
@@ -15,9 +12,7 @@ const Pagination = ({
     pages.push(i);
   }
 
-  useEffect(() => {
-    console.log("currentPage:", currentPage, "typeof:", typeof currentPage);
-  }, [currentPage]);
+  useEffect(() => {}, [currentPage]);
 
   return (
     <div>

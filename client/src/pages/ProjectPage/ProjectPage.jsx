@@ -57,8 +57,6 @@ const ProjectPage = () => {
         const arr = data.projectTasks.map((task) => task.status);
         setTaskStatuses(arr);
 
-        // setIsLoading(false);
-
         setSelectedValue(data.projectStatus.toUpperCase());
 
         const userResponse = await fetch(
@@ -77,12 +75,8 @@ const ProjectPage = () => {
 
         const userData = await userResponse.json();
         setUsername(userData.username);
-
         setUserIdProp(userData._id);
-        // setUserIdProp()
-
         setIsLoading(false);
-        // console.log("User Data:", userData);
       } catch (error) {
         console.error("Error fetching projects or user data:", error);
       }
