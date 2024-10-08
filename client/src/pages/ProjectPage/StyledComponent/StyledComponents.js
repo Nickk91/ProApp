@@ -226,8 +226,56 @@ const ImagePlaceholder = styled.div`
     }
   }
 `;
+const urlInput = styled.input`
+  margin-top: 10px;
+  height: 25px;
+  width: 190px;
+`;
+
+const acceptBtn = styled.button`
+  border: 3px solid black;
+  margin-top: 20px;
+  height: 34px;
+  width: 70px;
+  color: black;
+  background-color: white;
+  border-radius: 9px;
+  font-weight: bold;
+  font-size: 17px;
+  cursor: pointer;
+  &:hover {
+    color: white;
+    background-color: black;
+  }
+`;
+
+const errorMessage = styled.div`
+  height: 50px;
+  width: 100px;
+  /* color: red; */
+  border: 2px solid red;
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+`;
+const errorMessageHidden = styled.div`
+  display: hidden;
+  height: 50px;
+  width: 65%;
+  color: red;
+
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+`;
 
 export {
+  errorMessageHidden,
+  errorMessage,
+  acceptBtn,
+  urlInput,
   projectTitle,
   projectImg,
   statusIconInProg,
