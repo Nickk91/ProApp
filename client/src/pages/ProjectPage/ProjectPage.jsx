@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import * as S from "./StyledComponent/StyledComponents.js";
 import trash from "../../assets/images/trash_icon.svg";
 import addTask from "../../assets/images/icon_Plus_Circle_.svg";
@@ -11,6 +11,8 @@ import Spinner from "../../components/Spinner/Spinner.jsx";
 import Task from "../../components/Task/Task.jsx";
 import { userAuthLevels } from "../../constants/userAuthLevels.js";
 import { useSelector } from "react-redux";
+import ImageModal from "../../components/ImageModal/ImageModal.jsx";
+import { checkIfUrl } from "../../utils/functions.js";
 
 const ProjectPage = () => {
   const [selectedValue, setSelectedValue] = useState("TODO");
@@ -25,6 +27,10 @@ const ProjectPage = () => {
     "https://cdn-icons-png.flaticon.com/512/4345/4345800.png"
   );
   const [imageIsLoaded, setIamgeIsLoaded] = useState(false);
+  const [imageModalOpen, setImageModalOpen] = useState(false);
+  const formRef = useRef(null);
+  const [imageError, setImageError] = useState(null);
+  const [avatarUpdated, setAvatarUpdated] = useState(false);
 
   const handleImageLoad = function () {
     setIamgeIsLoaded(true);
@@ -34,11 +40,11 @@ const ProjectPage = () => {
 
   const authLevel = useSelector((state) => state.auth.user?.authLevel);
 
+  const token = localStorage.getItem("token");
+
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const token = localStorage.getItem("token");
-
         // Fetch project data
         const response = await fetch(
           `${import.meta.env.VITE_BASEURL}/projects/project/${projectId}`,
@@ -88,7 +94,7 @@ const ProjectPage = () => {
     };
 
     fetchProjects();
-  }, [fetchProject, projectId]);
+  }, [fetchProject, projectId, avatarUpdated]);
 
   const navigate = useNavigate();
 
@@ -245,6 +251,47 @@ const ProjectPage = () => {
     });
   };
 
+  const changeProjectPic = async (projectId, url) => {
+    try {
+      if (!token) throw new Error("No token found");
+
+      const response = await fetch(
+        `${import.meta.env.VITE_BASEURL}/projects/${projectId}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ projectId, url }),
+        }
+      );
+
+      if (!response.ok) throw new Error("Failed to update user picture");
+
+      console.log("Project picture updated successfully");
+      setAvatarUpdated((prev) => !prev);
+    } catch (error) {
+      console.error("Error updating project picture:", error);
+      setImageError(`Error updating project picture: ${error}`);
+    }
+  };
+
+  const handleSubmit = (e) => {
+    console.log("HANDLE SUBMIT");
+    e.preventDefault();
+    const formData = new FormData(formRef.current);
+    const url = formData.get("url");
+    if (checkIfUrl(url)) {
+      changeProjectPic(projectId, url);
+      setImageModalOpen(false);
+      setImageError(null);
+    } else {
+      console.log("Invalid URL");
+      setImageError("Invalid URL");
+    }
+  };
+
   return (
     <section className="page">
       {isLoading ? (
@@ -277,6 +324,7 @@ const ProjectPage = () => {
               src={projectPicSrc}
               alt=""
               style={{ display: imageIsLoaded ? "block" : "none" }}
+              onClick={() => setImageModalOpen((prev) => !prev)}
             />
           </S.container>
 
@@ -345,6 +393,24 @@ const ProjectPage = () => {
         </>
       )}
       <FooterMenu />
+
+      <ImageModal
+        toDelete="project"
+        isOpen={imageModalOpen}
+        onRequestClose={() => setImageModalOpen(false)}
+        onRequestChangeUrl={handleSubmit}
+      >
+        <form ref={formRef} onSubmit={handleSubmit}>
+          Please enter the URL of your image
+          <S.urlInput type="url" name="url" required />
+          <S.acceptBtn type="submit">Accept</S.acceptBtn>
+        </form>
+        {imageError ? (
+          <S.errorMessage>{imageError}</S.errorMessage>
+        ) : (
+          <S.errorMessageHidden />
+        )}
+      </ImageModal>
     </section>
   );
 };
