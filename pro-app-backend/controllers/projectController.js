@@ -377,6 +377,36 @@ export const updateProjectStatusById = async (req, res) => {
   }
 };
 
+export const changeProjectPic = async (req, res) => {
+  try {
+    console.log("changeProjectPic:");
+    const { projectId, url } = req.body;
+    console.log("Received projectId:", projectId);
+    console.log("Received url:", url);
+
+    const project = await Project.findById(userId);
+    console.log("Project found:", user);
+
+    if (!project) {
+      return res
+        .status(STATUS_CODE.NOT_FOUND)
+        .json({ message: "Project not found" });
+    }
+
+    project.projectImage = url;
+    await user.save();
+
+    res
+      .status(STATUS_CODE.OK)
+      .json({ message: "Project's image updated successfully", user });
+  } catch (error) {
+    console.error("Error updating project's image", error);
+    res
+      .status(STATUS_CODE.INTERNAL_SERVER_ERROR)
+      .json({ message: "Internal Server Error" });
+  }
+};
+
 export const editTaskByTaskId = async (req, res) => {
   try {
     console.log("editTaskByTaskId controller!!!");
