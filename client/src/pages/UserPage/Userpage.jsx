@@ -23,6 +23,7 @@ const Userpage = () => {
   const [avatarUpdated, setAvatarUpdated] = useState(false);
   const [imageError, setImageError] = useState(null);
   const formRef = useRef(null);
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
 
   const { userId } = useParams();
   const authLevel = useSelector((state) => state.auth.user?.authLevel);
@@ -149,6 +150,10 @@ const Userpage = () => {
     navigate("/addproject");
   };
 
+  const handleImageLoad = () => {
+    setIsImageLoaded(true);
+  };
+
   return (
     <section className="page">
       <S.userTitle>User Page:</S.userTitle>
@@ -156,10 +161,13 @@ const Userpage = () => {
         <Spinner />
       ) : (
         <>
+          {!isImageLoaded && <S.ImagePlaceholder />}
           <S.userImg
             src={userData.avatar}
             alt={`${userData.username}'s avatar`}
             onClick={() => setImageModalOpen((prev) => !prev)}
+            onLoad={handleImageLoad}
+            style={{ display: isImageLoaded ? "block" : "none" }}
           />
           <S.container>
             <S.list>
@@ -220,7 +228,7 @@ const Userpage = () => {
           <FooterMenu />
         </>
       )}
-      <S.space />
+      {/* <S.space /> */}
       <ImageModal
         toDelete="project"
         isOpen={imageModalOpen}

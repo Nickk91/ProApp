@@ -33,6 +33,26 @@ const userImg = styled.img`
     box-shadow: 3px 3px 5px gray;
   }
 `;
+
+const ImagePlaceholder = styled.div`
+  width: 122px;
+  height: 122px;
+
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-top: 4px solid gray;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+`;
+
 const list = styled.ul`
   list-style-type: none;
   margin-top: 5px;
@@ -120,7 +140,8 @@ const userDetailsContainer = styled.div`
 `;
 
 const space = styled.div`
-  height: 320px;
+  /* height: 320px; */
+  height: 50px;
   width: 200px;
 `;
 
@@ -188,4 +209,5 @@ export {
   errorMessage,
   errorMessageHidden,
   addProjectIcon,
+  ImagePlaceholder,
 };

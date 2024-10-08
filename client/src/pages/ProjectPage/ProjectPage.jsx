@@ -24,6 +24,11 @@ const ProjectPage = () => {
   const [projectPicSrc, setProjectPicSrc] = useState(
     "https://cdn-icons-png.flaticon.com/512/4345/4345800.png"
   );
+  const [imageIsLoaded, setIamgeIsLoaded] = useState(false);
+
+  const handleImageLoad = function () {
+    setIamgeIsLoaded(true);
+  };
 
   const { projectId } = useParams();
 
@@ -265,7 +270,14 @@ const ProjectPage = () => {
               />
             </S.selectDiv>
 
-            <S.projectImg src={projectPicSrc} alt="" />
+            {!imageIsLoaded && <S.ImagePlaceholder />}
+
+            <S.projectImg
+              onLoad={handleImageLoad}
+              src={projectPicSrc}
+              alt=""
+              style={{ display: imageIsLoaded ? "block" : "none" }}
+            />
           </S.container>
 
           <S.tasksHeader>

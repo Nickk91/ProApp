@@ -2,8 +2,10 @@ import React from "react";
 import PropTypes from "prop-types";
 import * as S from "./Styles"; // Ensure the correct path
 import { toPercentage } from "../../utils/functions";
+import { useState } from "react";
 
 const UserCard = ({ user, projects, onClick }) => {
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
   const todoProjects = projects.filter(
     (project) => project.projectStatus === "todo"
   );
@@ -14,6 +16,10 @@ const UserCard = ({ user, projects, onClick }) => {
     (project) => project.projectStatus === "done"
   );
 
+  const handleImageLoad = () => {
+    setIsImageLoaded(true);
+  };
+
   return (
     <S.cardContainer onClick={onClick}>
       <S.topLine>
@@ -22,7 +28,13 @@ const UserCard = ({ user, projects, onClick }) => {
         </S.username>
       </S.topLine>
       <S.midLine>
-        <S.userImg src={user.avatar} alt={`${user.username}'s avatar`} />
+        {!isImageLoaded && <S.ImagePlaceholder />}
+        <S.userImg
+          src={user.avatar}
+          alt={`${user.username}'s avatar`}
+          onLoad={handleImageLoad}
+          style={{ display: isImageLoaded ? "block" : "none" }}
+        />
         <S.list>
           <S.li>id: {user._id}</S.li>
           <S.li>username: {user.username}</S.li>

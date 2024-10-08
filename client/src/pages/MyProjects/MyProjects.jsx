@@ -37,7 +37,7 @@ const MyProjects = () => {
           }
 
           const data = await response.json();
-          console.log(data);
+
           if (data.length === 0) {
             navigate("/noprojects");
           }
@@ -66,7 +66,6 @@ const MyProjects = () => {
   const currentProjects = projects.slice(firstProjectIndex, lastProjectIndex);
 
   const authLevel = useSelector((state) => state.auth.user?.authLevel);
-  console.log(authLevel);
 
   return (
     <section className="page">
