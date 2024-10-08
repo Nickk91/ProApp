@@ -16,6 +16,7 @@ import {
   getUserProjectsByProjectNameByUserId,
   getProjectByUserIdParams,
   addProjectByAdmin,
+  changeProjectPic,
 } from "../controllers/projectController.js";
 import { validateToken } from "../middleware/validateTokenHandler.js";
 
@@ -41,7 +42,8 @@ router.post("/project/:id/addtask", validateToken, addTask);
 //Route to edit  task
 router.patch("/project/:id/edit-task", validateToken, editTaskByTaskId);
 
-// `${import.meta.env.VITE_BASEURL}/projects/${projectId}/addtask`,
+//Route to changeProjectPic
+router.patch("/project/:id/change-pic", validateToken, changeProjectPic);
 
 //Route to get a project by project ID
 router.get("/project/:id", validateToken, getProjectById);
