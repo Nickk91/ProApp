@@ -20,7 +20,6 @@ const Pagination = ({
         <button
           key={index}
           onClick={() => {
-            console.log("Clicked page:", page);
             setCurrentPage(page);
           }}
           className={
