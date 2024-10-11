@@ -5,7 +5,7 @@ import asyncHandler from "express-async-handler";
 export const validateToken = asyncHandler(async (req, res, next) => {
   let token;
   const authHeader = req.headers.authorization;
-  console.log("Authorization Header:", authHeader); // Log the Authorization header
+  // console.log("Authorization Header:", authHeader);
 
   if (!authHeader || !authHeader.toLowerCase().startsWith("bearer")) {
     return res
@@ -14,7 +14,7 @@ export const validateToken = asyncHandler(async (req, res, next) => {
   }
 
   token = authHeader.split(" ")[1];
-  console.log("Extracted Token:", token); // Log the extracted token
+  // console.log("Extracted Token:", token);
 
   jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
     if (err) {

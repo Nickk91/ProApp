@@ -379,14 +379,8 @@ export const updateProjectStatusById = async (req, res) => {
 
 export const changeProjectPic = async (req, res) => {
   try {
-    console.log("changeProjectPic:");
     const { projectId, url } = req.body;
-    console.log("Received projectId:", projectId);
-    console.log("Received url:", url);
-
-    const project = await Project.findById(userId);
-    console.log("Project found:", user);
-
+    const project = await Project.findById(projectId);
     if (!project) {
       return res
         .status(STATUS_CODE.NOT_FOUND)
@@ -394,11 +388,10 @@ export const changeProjectPic = async (req, res) => {
     }
 
     project.projectImage = url;
-    await user.save();
-
+    await project.save();
     res
       .status(STATUS_CODE.OK)
-      .json({ message: "Project's image updated successfully", user });
+      .json({ message: "Project's image updated successfully", project });
   } catch (error) {
     console.error("Error updating project's image", error);
     res
