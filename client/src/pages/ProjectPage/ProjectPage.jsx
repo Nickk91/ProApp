@@ -256,7 +256,9 @@ const ProjectPage = () => {
       if (!token) throw new Error("No token found");
 
       const response = await fetch(
-        `${import.meta.env.VITE_BASEURL}/projects/${projectId}`,
+        `${
+          import.meta.env.VITE_BASEURL
+        }/projects/project/${projectId}/change-pic`,
         {
           method: "PATCH",
           headers: {
@@ -278,7 +280,7 @@ const ProjectPage = () => {
   };
 
   const handleSubmit = (e) => {
-    console.log("HANDLE SUBMIT");
+    console.log("HANDLE SUBMIT change project pic");
     e.preventDefault();
     const formData = new FormData(formRef.current);
     const url = formData.get("url");
