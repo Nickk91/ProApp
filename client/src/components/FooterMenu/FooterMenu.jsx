@@ -10,8 +10,8 @@ const FooterMenu = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const userId = useSelector((state) => state.auth.user._id);
-  const authLevel = useSelector((state) => state.auth.user?.authLevel);
+  const user = useSelector((state) => state.auth.user); // Fetch user object
+  const authLevel = user?.authLevel; // Safely access authLevel
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -23,6 +23,11 @@ const FooterMenu = () => {
   const handleAddProject = () => {
     navigate("/addproject");
   };
+
+  // Return null or a loader if the user is not logged in yet
+  if (!user) {
+    return null; // or return a loader if you prefer
+  }
 
   return (
     <S.menu>
@@ -39,7 +44,7 @@ const FooterMenu = () => {
           </S.plus>
         </S.li>
         <S.li>
-          <S.userIcon onClick={() => navigate(`/userpage/${userId}`)} />
+          <S.userIcon onClick={() => navigate(`/userpage/${user._id}`)} />
         </S.li>
         {authLevel === userAuthLevels.admin && (
           <S.li>
