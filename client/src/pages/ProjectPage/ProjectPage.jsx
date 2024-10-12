@@ -271,7 +271,6 @@ const ProjectPage = () => {
 
       if (!response.ok) throw new Error("Failed to update user picture");
 
-      console.log("Project picture updated successfully");
       setAvatarUpdated((prev) => !prev);
     } catch (error) {
       console.error("Error updating project picture:", error);
@@ -280,7 +279,6 @@ const ProjectPage = () => {
   };
 
   const handleSubmit = (e) => {
-    console.log("HANDLE SUBMIT change project pic");
     e.preventDefault();
     const formData = new FormData(formRef.current);
     const url = formData.get("url");
