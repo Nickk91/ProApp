@@ -1,42 +1,58 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import GenericForm from "../../components/GenericForm/GenericForm.jsx";
-import { loginAndRegisterFormInputs } from "../../constants/formInputsData.js";
-import * as S from "../../components/StyledComponents/styles.jsx";
-import ReturnIcon from "../../assets/images/back_icon.svg";
-import Spinner from "../../components/Spinner/Spinner.jsx";
 import { useDispatch } from "react-redux";
-import { login } from "../../slices/authSlice.js";
-import "../style/pagestyle.css";
-import { jwtDecode } from "jwt-decode";
+import axios from "axios";
+import { jwtDecode } from "jwt-decode"; // Correct import for jwtDecode
+import { login } from "../../slices/authSlice";
+import GenericForm from "../../components/GenericForm/GenericForm";
+import Spinner from "../../components/Spinner/Spinner";
+import * as S from "../../components/StyledComponents/styles";
+import ReturnIcon from "../../assets/images/back_icon.svg";
+import { loginAndRegisterFormInputs } from "../../constants/formInputsData";
 
 const LoginPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [displayError, setDisplayError] = useState(false);
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  // Check token on component load
   useEffect(() => {
     const checkToken = async () => {
       const token = localStorage.getItem("token");
       if (token) {
-        const decodedToken = jwtDecode(token);
-        const currentTime = Date.now() / 1000;
+        try {
+          const decodedToken = jwtDecode(token);
+          const currentTime = Date.now() / 1000;
 
-        if (decodedToken.exp < currentTime) {
-          localStorage.removeItem("token");
+          if (decodedToken.exp < currentTime) {
+            // Token expired, remove it
+            localStorage.removeItem("token");
+            setIsLoading(false);
+          } else {
+            // Token is valid, fetch user data
+            const response = await axios.get(
+              `${import.meta.env.VITE_BASEURL}/users/current`,
+              { headers: { Authorization: `Bearer ${token}` } }
+            );
+
+            // Dispatch login action with user data (including authLevel)
+            dispatch(login(response.data));
+            navigate("/"); // Redirect to home
+          }
+        } catch (error) {
+          console.error("Error verifying token:", error);
           setIsLoading(false);
-        } else {
-          navigate("/");
         }
+      } else {
+        setIsLoading(false);
       }
-      setIsLoading(false);
     };
 
     checkToken();
-  }, [navigate]);
+  }, [dispatch, navigate]);
 
+  // Handle login form submission
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -44,73 +60,30 @@ const LoginPage = () => {
     const password = formData.get("password");
 
     try {
-      const response = await fetch(
+      const response = await axios.post(
         `${import.meta.env.VITE_BASEURL}/users/login`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ email, password }),
-        }
+        { email, password },
+        { headers: { "Content-Type": "application/json" } }
       );
 
-      if (response.ok) {
-        const data = await response.json();
-        const token = data.accessToken;
-        const user = data.user;
+      if (response.status === 200) {
+        const { accessToken, user } = response.data;
 
-        localStorage.setItem("token", token);
+        // Store token and dispatch login action
+        localStorage.setItem("token", accessToken);
         dispatch(login(user));
+
+        // Redirect to home page
         navigate("/");
       } else {
         console.error("Login failed");
         setDisplayError(true);
       }
     } catch (error) {
-      console.error("Error:", error);
+      console.error("Login error:", error);
       setDisplayError(true);
     }
   };
-
-  const fetchProtectedData = async () => {
-    const token = localStorage.getItem("token");
-    console.log("Token from localStorage:", token); // Log the token retrieved from localStorage
-
-    if (!token) {
-      console.error("Token not found");
-      return;
-    }
-
-    try {
-      const response = await fetch(
-        `${import.meta.env.VITE_BASEURL}/protected-route`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      if (response.ok) {
-        const data = await response.json();
-      } else {
-        console.error("Failed to fetch protected data");
-      }
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  };
-
-  useEffect(() => {
-    // Only call fetchProtectedData if necessary
-    const token = localStorage.getItem("token");
-    if (token) {
-      fetchProtectedData();
-    }
-  }, []);
 
   return (
     <>

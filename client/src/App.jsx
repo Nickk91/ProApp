@@ -1,7 +1,6 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import { Helmet } from "react-helmet";
-import HomePage from "./pages/HomePage/HomePage.jsx";
 import LoggedOutPage from "./pages/LoggedOutPage/LoggedOutPage.jsx";
 import SignupPage from "./pages/SignUp/SignupPage.jsx";
 import AddProjectPage from "./pages/AddProjectPage/AddProjectPage.jsx";
@@ -10,23 +9,16 @@ import RegisterPage from "./pages/RegisterPage/RegisterPage.jsx";
 import AddTaskPage from "./pages/AddTaskPage/AddTaskPage.jsx";
 import EditTaskPage from "./pages/EditTaskPage.jsx/EditTaskPage.jsx";
 import PrivateRoutes from "./components/PrivateRoutes/PrivateRoutes.jsx";
-import ProtectedRoute from "./components/Auth/ProtectedRoute.jsx";
 import { userAuthLevels } from "./constants/userAuthLevels.js";
 import ProjectPage from "./pages/ProjectPage/ProjectPage.jsx";
 import MyProjects from "./pages/MyProjects/MyProjects.jsx";
 import Userpage from "./pages/UserPage/Userpage.jsx";
-import TestPage from "./pages/TestPage/TestPage.jsx";
 import SearchPage from "./pages/SearchPage/SearchPage.jsx";
-import ProjectsByUsers from "./pages/ProjectsByUsers/ProjectsByUsers.jsx";
-import { useSelector, useDispatch } from "react-redux";
 import UsersPage from "./pages/UsersPage/UsersPage.jsx";
 import RegisteredSuccessPage from "./pages/RegisteredSuccessPage/RegisteredSuccessPage.jsx";
+import FooterMenu from "./components/FooterMenu/FooterMenu.jsx"; // Import FooterMenu
 
 function App() {
-  const dispatch = useDispatch();
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-  const authLevel = useSelector((state) => state.auth.user?.authLevel);
-
   return (
     <>
       <Helmet>
@@ -41,42 +33,75 @@ function App() {
           rel="stylesheet"
         />
       </Helmet>
-      {/* <h1>{import.meta.env.VITE_BASEURL}</h1> */}
+
       <Routes>
-        {/* Private routes */}
+        {/* Private routes (Authenticated routes where FooterMenu appears) */}
         <Route
           element={<PrivateRoutes authLevel={userAuthLevels.regularUser} />}
         >
-          <Route path="/noprojects" element={<HomePage />} />
-          <Route path="/addproject" element={<AddProjectPage />} />
-          <Route path="/userpage/:userId" element={<Userpage />} />
-          <Route path="/users" element={<UsersPage />} />
-          {/* /addtask */}
+          {/* FooterMenu rendered here for logged-in users */}
+          <Route
+            path="/"
+            element={
+              <>
+                <MyProjects />
+                <FooterMenu />
+              </>
+            }
+          />
+          <Route
+            path="/myprojects"
+            element={
+              <>
+                <MyProjects />
+                <FooterMenu />
+              </>
+            }
+          />
+          <Route
+            path="/addproject"
+            element={
+              <>
+                <AddProjectPage />
+                <FooterMenu />
+              </>
+            }
+          />
+          <Route
+            path="/userpage/:userId"
+            element={
+              <>
+                <Userpage />
+                <FooterMenu />
+              </>
+            }
+          />
           <Route
             path="/projects/:projectId/addtask"
-            element={<AddTaskPage />}
+            element={
+              <>
+                <AddTaskPage />
+                <FooterMenu />
+              </>
+            }
           />
-          {/* <Route path="/projects" element={<ProjectListPage />} /> */}
         </Route>
+
         {/* Private routes for admin */}
-        {authLevel === userAuthLevels.admin && (
-          <Route element={<PrivateRoutes authLevel={userAuthLevels.admin} />}>
-            {/* <Route path="/edit-task" element={<EditTaskPage />} /> */}
+        <Route element={<PrivateRoutes authLevel={userAuthLevels.admin} />}>
+          {/* Admin Routes */}
+          <Route
+            path="/users"
+            element={
+              <>
+                <UsersPage />
+                <FooterMenu />
+              </>
+            }
+          />
+        </Route>
 
-            {/*  <Route path="/admin-only" element={<AdminsPage />} /> */}
-          </Route>
-        )}
-
-        {/* Public routes */}
-        <Route
-          path="/authtest"
-          element={
-            <ProtectedRoute
-              Page={AddTaskPage}
-              typeOfUser={userAuthLevels.regularUser}
-            />
-          }
-        />
+        {/* Public routes (No FooterMenu here) */}
         <Route path="/loggedout" element={<LoggedOutPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
@@ -84,23 +109,10 @@ function App() {
         <Route path="/projects/:projectId" element={<ProjectPage />} />
         <Route path="/registerSuccess" element={<RegisteredSuccessPage />} />
         <Route
-          path="/projects/:projectId/deletetask/:taskId"
-          element={<ProjectPage />}
-        />
-        <Route
           path="/projects/:projectId/edit-task/:taskId"
           element={<EditTaskPage />}
         />
-
         <Route path="/projects/search" element={<SearchPage />} />
-
-        <Route
-          path="/"
-          element={isLoggedIn ? <MyProjects /> : <LoggedOutPage />}
-        />
-
-        <Route path="/myprojects" element={<MyProjects />} />
-        <Route path="/test" element={<TestPage />} />
       </Routes>
     </>
   );
