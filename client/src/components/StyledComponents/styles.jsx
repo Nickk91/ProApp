@@ -232,6 +232,29 @@ const spacer = styled.div`
   height: 30px;
 `;
 
+export const errorBox = styled.div`
+  opacity: 0.97;
+  transition: transform 0.2s;
+  display: flex; /* Ensures the content inside the errorBox is flexbox */
+  justify-content: center; /* Centers content horizontally */
+  align-items: center; /* Centers content vertically */
+  width: 100%; /* Make sure the errorBox takes up full width */
+  height: 100%; /* Make sure the errorBox takes up full height */
+  position: absolute; /* Ensures it can be positioned relative to its container */
+  top: 0;
+  left: 0;
+  font-size: 10px;
+  text-align: center;
+
+  @media screen and (min-width: 300px) {
+    font-size: 20px;
+  }
+
+  @media screen and (min-width: 600px) {
+    font-size: 35px;
+  }
+`;
+
 export {
   searchForm,
   form,
