@@ -20,6 +20,7 @@ const UsersPage = () => {
   const [projectsData, setProjectsData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [usersPerPage, setUsersPerPage] = useState(4);
+  const [errorMessage, setErrorMessage] = useState(null);
 
   const navigate = useNavigate();
   // const authLevel = useSelector((state) => state.auth.user?.authLevel);
@@ -30,6 +31,7 @@ const UsersPage = () => {
     if (token) {
       const fetchUsers = async () => {
         try {
+          // throw new Error("Simulated error for testing");
           const response = await fetch(
             `${import.meta.env.VITE_BASEURL}/users/`,
             {
@@ -77,9 +79,11 @@ const UsersPage = () => {
           }));
 
           setUsers(usersWithProjects);
-          setIsLoading(false);
         } catch (error) {
           console.error("Error fetching users or projects:", error);
+          setErrorMessage(error.message);
+        } finally {
+          setIsLoading(false);
         }
       };
 
@@ -124,6 +128,8 @@ const UsersPage = () => {
     <section className="page">
       {isLoading ? (
         <Spinner />
+      ) : errorMessage ? (
+        <S.errorBox>{errorMessage}</S.errorBox>
       ) : (
         <>
           {users.length > 0 && <S.pageTitle>Users</S.pageTitle>}

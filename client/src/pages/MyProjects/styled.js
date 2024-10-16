@@ -10,3 +10,9 @@ export const filterContainer = styled.div`
 `;
 
 export const filterBtn = styled.button``;
+
+export const errorBox = styled.div`
+  border: solid 2px black;
+  height: 200px;
+  width: 200px;
+`;

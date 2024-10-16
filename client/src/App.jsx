@@ -86,6 +86,15 @@ function App() {
             }
           />
         </Route>
+        <Route
+          path="/noprojects"
+          element={
+            <>
+              <AddTaskPage />
+              <FooterMenu />
+            </>
+          }
+        />
 
         {/* Private routes for admin */}
         <Route element={<PrivateRoutes authLevel={userAuthLevels.admin} />}>

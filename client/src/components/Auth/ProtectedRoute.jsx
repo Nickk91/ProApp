@@ -32,11 +32,9 @@ const ProtectedRoute = ({ Page, typeOfUser }) => {
 
   return (
     <>
-      {isLoading && <Spinner />} {/* Show loading indicator if still loading */}
-      {!isLoading && authLevel === typeOfUser && <Page />}{" "}
-      {/* Show Page if authLevel matches */}
-      {!isLoading && authLevel !== typeOfUser && navigate("/login")}{" "}
-      {/* Redirect to login if authLevel does not match */}
+      {isLoading && <Spinner />}
+      {!isLoading && authLevel === typeOfUser && <Page />}
+      {!isLoading && authLevel !== typeOfUser && navigate("/login")}
     </>
   );
 };
