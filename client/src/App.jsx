@@ -16,7 +16,9 @@ import Userpage from "./pages/UserPage/Userpage.jsx";
 import SearchPage from "./pages/SearchPage/SearchPage.jsx";
 import UsersPage from "./pages/UsersPage/UsersPage.jsx";
 import RegisteredSuccessPage from "./pages/RegisteredSuccessPage/RegisteredSuccessPage.jsx";
-import FooterMenu from "./components/FooterMenu/FooterMenu.jsx"; // Import FooterMenu
+import FooterMenu from "./components/FooterMenu/FooterMenu.jsx";
+import HomePage from "./pages/HomePage/HomePage.jsx";
+import UnauthorizedPage from "./pages/UnauthorizedPage/UnauthorizedPage.jsx";
 
 function App() {
   return (
@@ -42,15 +44,6 @@ function App() {
           {/* FooterMenu rendered here for logged-in users */}
           <Route
             path="/"
-            element={
-              <>
-                <MyProjects />
-                <FooterMenu />
-              </>
-            }
-          />
-          <Route
-            path="/myprojects"
             element={
               <>
                 <MyProjects />
@@ -90,7 +83,16 @@ function App() {
           path="/noprojects"
           element={
             <>
-              <AddTaskPage />
+              <HomePage />
+              <FooterMenu />
+            </>
+          }
+        />
+        <Route
+          path="/unauthorized"
+          element={
+            <>
+              <UnauthorizedPage />
               <FooterMenu />
             </>
           }

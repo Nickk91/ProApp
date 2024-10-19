@@ -1,11 +1,7 @@
 import React from "react";
 
 const ErrorMessageBox = () => {
-  return (
-    <div>
-
-    </div>
-  );
+  return <section></section>;
 };
 
 export default ErrorMessageBox;

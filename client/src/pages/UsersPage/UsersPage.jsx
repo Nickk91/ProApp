@@ -5,7 +5,6 @@ import FooterMenu from "../../components/FooterMenu/FooterMenu.jsx";
 import Spinner from "../../components/Spinner/Spinner.jsx";
 import "../style/pagestyle.css";
 import Pagination from "../../components/Pagination/Pagination.jsx";
-// import { useSelector } from "react-redux";
 import UserCard from "../../components/UserCard/UserCard.jsx";
 import * as ST from "./styled.js";
 import {
@@ -23,7 +22,6 @@ const UsersPage = () => {
   const [errorMessage, setErrorMessage] = useState(null);
 
   const navigate = useNavigate();
-  // const authLevel = useSelector((state) => state.auth.user?.authLevel);
 
   const token = localStorage.getItem("token");
 

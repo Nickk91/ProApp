@@ -30,6 +30,9 @@ const Userpage = () => {
   const id = useSelector((state) => state.auth.user._id);
   const token = localStorage.getItem("token");
 
+  console.log("userId :", userId);
+  console.log("id :", id);
+
   useEffect(() => {
     const fetchUser = async (url) => {
       try {
