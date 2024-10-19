@@ -118,8 +118,9 @@ export const currentUser = async (req, res) => {
       res.status(404);
       throw new Error("User dosen't exist");
     }
-    const { _id, email, username, isAdmin, avatar } = user;
-    const userAuthLevel = isAdmin ? 2 : 1;
+    const { _id, email, username, avatar, authLevel } = user;
+    // isAdmin
+    const userAuthLevel = authLevel;
     res.json({ _id, email, username, userAuthLevel, avatar });
   } catch (error) {
     next();

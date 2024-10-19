@@ -23,6 +23,7 @@ const HomePage = () => {
         onClick={handleAddProject}
         alt="Hero Image of no projects"
       />
+      <S.space />
       <FooterMenu />
     </section>
   );

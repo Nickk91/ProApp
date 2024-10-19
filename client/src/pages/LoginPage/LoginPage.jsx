@@ -71,7 +71,16 @@ const LoginPage = () => {
 
         // Store token and dispatch login action
         localStorage.setItem("token", accessToken);
-        dispatch(login(user));
+        console.log("USER:", user);
+        dispatch(
+          login({
+            _id: user._id,
+            authLevel: user.authLevel,
+            email: user.email,
+            username: user.username,
+            isLoggedIn: true,
+          })
+        );
 
         // Redirect to home page
         navigate("/");

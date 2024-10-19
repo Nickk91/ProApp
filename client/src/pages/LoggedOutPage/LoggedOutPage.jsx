@@ -21,7 +21,7 @@ const LoggedOutPage = () => {
       const currentTime = Date.now() / 1000;
 
       if (decodedToken.exp > currentTime) {
-        navigate("/myprojects");
+        navigate("/");
       }
     }
   }, []);
