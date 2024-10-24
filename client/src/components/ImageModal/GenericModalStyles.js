@@ -54,6 +54,7 @@ export const ModalPositionContainer = styled.div`
 
 export const FormContainer = styled.div`
   position: relative;
+  z-index: 999;
 `;
 
 export const ButtonCover = styled.button`
