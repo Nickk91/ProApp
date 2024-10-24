@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const form = styled.form`
+export const form = styled.form`
   margin-top: 83px;
   width: 360px;
   overflow: visible;
@@ -11,7 +11,7 @@ const form = styled.form`
   }
 `;
 
-const searchForm = styled.form`
+export const searchForm = styled.form`
   width: 360px;
   overflow: visible;
   position: relative;
@@ -21,7 +21,7 @@ const searchForm = styled.form`
   }
 `;
 
-const formTitle = styled.div`
+export const formTitle = styled.div`
   padding-bottom: 22px;
   font-size: 35px;
   @media screen and (max-width: 365px) {
@@ -29,7 +29,7 @@ const formTitle = styled.div`
   }
 `;
 
-const inputsContainer = styled.div`
+export const inputsContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 3px;
@@ -41,7 +41,7 @@ const inputsContainer = styled.div`
   }
 `;
 
-const ReturnIcon = styled.img`
+export const ReturnIcon = styled.img`
   position: relative;
   left: -160px;
   top: 55px;
@@ -54,13 +54,13 @@ const ReturnIcon = styled.img`
   }
 `;
 
-const p = styled.p`
+export const p = styled.p`
   margin-top: 30px;
   font-size: 11px;
   max-width: 330px;
 `;
 
-const submitButton = styled.button`
+export const submitButton = styled.button`
   margin-top: 0px;
   border-radius: 7px;
   background: black;
@@ -87,7 +87,7 @@ const submitButton = styled.button`
   }
 `;
 
-const input = styled.input`
+export const input = styled.input`
   border: 2px solid black;
   background-color: white;
   height: 50px;
@@ -105,7 +105,7 @@ const input = styled.input`
   }
 `;
 
-const inputBox = styled.input`
+export const inputBox = styled.input`
   border: 2px solid black;
   background-color: white;
   height: 150px;
@@ -123,7 +123,7 @@ const inputBox = styled.input`
   }
 `;
 
-const label = styled.label`
+export const label = styled.label`
   margin-bottom: 7px;
   min-width: 200px;
 
@@ -138,7 +138,7 @@ const label = styled.label`
   }
 `;
 
-const statusesContainer = styled.div`
+export const statusesContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -146,11 +146,11 @@ const statusesContainer = styled.div`
   margin-bottom: 10px;
 `;
 
-const statusButton = styled.img`
+export const statusButton = styled.img`
   // height: 50px;
   cursor: pointer;
 `;
-const statusButtonCasule = styled.div`
+export const statusButtonCasule = styled.div`
   /* background: #d5ddf8; */
   height: 22px;
   padding-left: 3px;
@@ -160,7 +160,7 @@ const statusButtonCasule = styled.div`
   cursor: pointer;
 `;
 
-const selectedStatusButtonCasule = styled.div`
+export const selectedStatusButtonCasule = styled.div`
   background: #d5ddf8;
   height: 22px;
   padding-left: 3px;
@@ -170,10 +170,10 @@ const selectedStatusButtonCasule = styled.div`
   cursor: pointer;
 `;
 
-const del = styled.img`
+export const del = styled.img`
   margin-top: -30px;
 `;
-const topContainer = styled.div`
+export const topContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -184,7 +184,7 @@ const topContainer = styled.div`
     margin: 0 auto;
   }
 `;
-const deleteModal = styled.div`
+export const deleteModal = styled.div`
   position: absoulute;
   height: 250px;
   width: 250px;
@@ -193,17 +193,17 @@ const deleteModal = styled.div`
   background: #ffffff;
   z-index: 999;
 `;
-const delBigger = styled.img`
+export const delBigger = styled.img`
   height: 75px;
   width: 75px;
 `;
 
-const errorText = styled.p`
+export const errorText = styled.p`
   width: 100%;
   color: red;
   font-size: 12px;
 `;
-const page = styled.div`
+export const page = styled.div`
   display: flex;
   flex-direction: column;
   border: solid black 2px;
@@ -213,7 +213,7 @@ const page = styled.div`
   max-width: 1400px;
 `;
 
-const pageTitle = styled.div`
+export const pageTitle = styled.div`
   /* padding-bottom: 22px; */
   font-size: 35px;
   margin-left: -150px;
@@ -224,15 +224,15 @@ const pageTitle = styled.div`
   }
 `;
 
-const spaceDiv = styled.div`
+export const spaceDiv = styled.div`
   height: 100px;
 `;
 
-const spacer = styled.div`
+export const spacer = styled.div`
   height: 30px;
 `;
 
-export const errorBox = styled.div`
+export const ErrorBox = styled.div`
   opacity: 0.97;
   transition: transform 0.2s;
   display: flex; /* Ensures the content inside the errorBox is flexbox */
@@ -254,29 +254,3 @@ export const errorBox = styled.div`
     font-size: 35px;
   }
 `;
-
-export {
-  searchForm,
-  form,
-  formTitle,
-  inputsContainer,
-  ReturnIcon,
-  submitButton,
-  input,
-  label,
-  p,
-  inputBox,
-  statusesContainer,
-  statusButton,
-  statusButtonCasule,
-  selectedStatusButtonCasule,
-  del,
-  topContainer,
-  deleteModal,
-  delBigger,
-  errorText,
-  page,
-  pageTitle,
-  spaceDiv,
-  spacer,
-};
