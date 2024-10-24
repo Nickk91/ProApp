@@ -2,26 +2,26 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Spinner from "../Spinner/Spinner";
+import "../../pages/style/pagestyle.css";
 
 const ProtectedRoute = ({ Page, typeOfUser }) => {
   const navigate = useNavigate();
-  const [authLevel, setAuthLevel] = useState(0);
+  const [authLevel, setAuthLevel] = useState(null); // Null to represent loading state
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    console.log(`in the Priavte Routes compenent ${token}`);
+
     const getUserAuth = async () => {
       try {
-        const level = await axios.get("http://localhost:3000/authGood");
-        const userLevel = level.data.userLevel;
-        if (userLevel !== 1 && userLevel !== 2) {
-          setAuthLevel(0);
-        } else {
-          setAuthLevel(userLevel);
-        }
+        const response = await axios.get(
+          `${import.meta.env.VITE_BASEURL}/users/current`,
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
+        setAuthLevel(response.data.userAuthLevel);
       } catch (error) {
-        setAuthLevel(0);
+        console.error("Error verifying token:", error);
+        setAuthLevel(0); // Consider user unauthorized if error occurs
       } finally {
         setIsLoading(false);
       }
@@ -30,13 +30,25 @@ const ProtectedRoute = ({ Page, typeOfUser }) => {
     getUserAuth();
   }, []);
 
-  return (
-    <>
-      {isLoading && <Spinner />}
-      {!isLoading && authLevel === typeOfUser && <Page />}
-      {!isLoading && authLevel !== typeOfUser && navigate("/login")}
-    </>
-  );
+  useEffect(() => {
+    if (!isLoading) {
+      if (authLevel === 0) {
+        navigate("/login");
+      } else if (authLevel < typeOfUser) {
+        navigate("/unauthorized");
+      }
+    }
+  }, [isLoading, authLevel, navigate, typeOfUser]);
+
+  if (isLoading) {
+    return (
+      <section className="page">
+        <Spinner />
+      </section>
+    );
+  }
+
+  return authLevel >= typeOfUser ? <Page /> : null;
 };
 
 export default ProtectedRoute;

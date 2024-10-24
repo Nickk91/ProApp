@@ -19,6 +19,7 @@ import RegisteredSuccessPage from "./pages/RegisteredSuccessPage/RegisteredSucce
 import FooterMenu from "./components/FooterMenu/FooterMenu.jsx";
 import HomePage from "./pages/HomePage/HomePage.jsx";
 import UnauthorizedPage from "./pages/UnauthorizedPage/UnauthorizedPage.jsx";
+import ProtectedRoute from "./components/Auth/ProtectedRoute.jsx";
 
 function App() {
   return (
@@ -99,18 +100,15 @@ function App() {
         />
 
         {/* Private routes for admin */}
-        <Route element={<PrivateRoutes authLevel={userAuthLevels.admin} />}>
-          {/* Admin Routes */}
-          <Route
-            path="/users"
-            element={
-              <>
-                <UsersPage />
-                <FooterMenu />
-              </>
-            }
-          />
-        </Route>
+        <Route
+          path="/users"
+          element={
+            <ProtectedRoute
+              Page={UsersPage}
+              typeOfUser={userAuthLevels.admin}
+            />
+          }
+        />
 
         {/* Public routes (No FooterMenu here) */}
         <Route path="/loggedout" element={<LoggedOutPage />} />

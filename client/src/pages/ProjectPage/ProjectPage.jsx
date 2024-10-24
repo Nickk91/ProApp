@@ -47,7 +47,6 @@ const ProjectPage = () => {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        // throw new Error("Simulated error for testing");
         // Fetch project data
         const response = await fetch(
           `${import.meta.env.VITE_BASEURL}/projects/project/${projectId}`,
