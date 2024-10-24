@@ -7,11 +7,16 @@ const UnauthorizedPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    setTimeout(navigate("/"), 5000);
+    const timeout = setTimeout(() => {
+      navigate("/");
+    }, 5000);
+
+    return () => clearTimeout(timeout);
   }, []);
+
   return (
     <section className="page">
-      <S.errorBox>Unauthorized Access!</S.errorBox>
+      <S.ErrorBox>Unauthorized Access! Redirecting in 5 seconds...</S.ErrorBox>
     </section>
   );
 };
