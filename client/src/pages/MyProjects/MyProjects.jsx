@@ -11,7 +11,7 @@ const MyProjects = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [projects, setProjects] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [projectsPerPage, setProjectsPerPage] = useState(4);
+  const [projectsPerPage, setProjectsPerPage] = useState(6);
   const [errorMessage, setErrorMessage] = useState(null);
 
   const navigate = useNavigate();
@@ -73,7 +73,7 @@ const MyProjects = () => {
       {isLoading ? (
         <Spinner />
       ) : errorMessage ? (
-        <S.errorBox>{errorMessage}</S.errorBox>
+        <S.ErrorBox>{errorMessage}</S.ErrorBox>
       ) : (
         <>
           {projects.length > 0 && <S.pageTitle>My projects</S.pageTitle>}

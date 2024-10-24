@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import * as S from "./StyledComponent/StyledComponents.js";
+import * as ST from "../../components/StyledComponents/styles.jsx";
 import trash from "../../assets/images/trash_icon.svg";
 import addTask from "../../assets/images/icon_Plus_Circle_.svg";
 import GenericModal from "../../components/GenericModal/GenericModal.jsx";
@@ -31,6 +32,7 @@ const ProjectPage = () => {
   const formRef = useRef(null);
   const [imageError, setImageError] = useState(null);
   const [avatarUpdated, setAvatarUpdated] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(null);
 
   const handleImageLoad = function () {
     setIamgeIsLoaded(true);
@@ -45,6 +47,7 @@ const ProjectPage = () => {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
+        // throw new Error("Simulated error for testing");
         // Fetch project data
         const response = await fetch(
           `${import.meta.env.VITE_BASEURL}/projects/project/${projectId}`,
@@ -90,6 +93,9 @@ const ProjectPage = () => {
         setIsLoading(false);
       } catch (error) {
         console.error("Error fetching projects or user data:", error);
+        console.log("error.message:", error.message);
+        setIsLoading(false);
+        setErrorMessage(error.message);
       }
     };
 
@@ -296,6 +302,8 @@ const ProjectPage = () => {
     <section className="page">
       {isLoading ? (
         <Spinner />
+      ) : errorMessage ? (
+        <ST.ErrorBox>{errorMessage}</ST.ErrorBox>
       ) : (
         <>
           <S.topDiv>
@@ -340,42 +348,40 @@ const ProjectPage = () => {
             {project.projectTasks.length === 0 ? (
               <S.noTasks>NO TASKS FOR CURRENT PROJECT :( </S.noTasks>
             ) : (
-              <>
-                <S.taskList>
-                  {project.projectTasks.map((task, i) => (
-                    <S.listItem key={i}>
-                      <S.taskName>{task.name}</S.taskName>
+              <S.taskList>
+                {project.projectTasks.map((task, i) => (
+                  <S.listItem key={i}>
+                    <S.taskName>{task.name}</S.taskName>
 
-                      {expandedTaskList.includes(i) ? (
-                        <Task
-                          key={i}
-                          task={task}
-                          i={i}
-                          taskStatuses={taskStatuses}
-                          handleTaskStatus={handleTaskStatus}
-                          openModal={openModal}
-                          handleEditTask={handleEditTask}
-                          handleExtendTask={handleExtendTask}
-                          expanded={true}
-                        />
-                      ) : (
-                        <Task
-                          key={i}
-                          task={task}
-                          i={i}
-                          taskStatuses={taskStatuses}
-                          handleTaskStatus={handleTaskStatus}
-                          openModal={openModal}
-                          handleEditTask={handleEditTask}
-                          handleExtendTask={handleExtendTask}
-                          arrowIcon
-                          expanded={false}
-                        />
-                      )}
-                    </S.listItem>
-                  ))}
-                </S.taskList>
-              </>
+                    {expandedTaskList.includes(i) ? (
+                      <Task
+                        key={i}
+                        task={task}
+                        i={i}
+                        taskStatuses={taskStatuses}
+                        handleTaskStatus={handleTaskStatus}
+                        openModal={openModal}
+                        handleEditTask={handleEditTask}
+                        handleExtendTask={handleExtendTask}
+                        expanded={true}
+                      />
+                    ) : (
+                      <Task
+                        key={i}
+                        task={task}
+                        i={i}
+                        taskStatuses={taskStatuses}
+                        handleTaskStatus={handleTaskStatus}
+                        openModal={openModal}
+                        handleEditTask={handleEditTask}
+                        handleExtendTask={handleExtendTask}
+                        arrowIcon
+                        expanded={false}
+                      />
+                    )}
+                  </S.listItem>
+                ))}
+              </S.taskList>
             )}
           </S.tasksContainer>
           <GenericModal
@@ -383,13 +389,13 @@ const ProjectPage = () => {
             isOpen={isProjectModalOpen}
             onRequestClose={() => closeModal("project")}
             onRequestDelete={deleteProject}
-          ></GenericModal>
+          />
           <GenericModal
             toDelete="task"
             isOpen={isTaskModalOpen}
             onRequestClose={() => closeModal("task")}
             onRequestDelete={() => deleteTask(taskToDeleteId)}
-          ></GenericModal>
+          />
         </>
       )}
       <FooterMenu />
