@@ -148,8 +148,8 @@ const space = styled.div`
 const errorMessage = styled.div`
   height: 50px;
   width: 100px;
-  /* color: red; */
-  border: 2px solid red;
+  color: red;
+  border: 2px dotted red;
   position: absolute;
   bottom: 20px;
   left: 50%;

@@ -12,6 +12,7 @@ import PieChartComp from "../../components/PieChart/PieChartComp.jsx";
 import ImageModal from "../../components/ImageModal/ImageModal.jsx";
 import addTask from "../../assets/images/icon_Plus_Circle_.svg";
 import { setUserId } from "../../slices/userIdSlice.js";
+import * as ST from "../../components/StyledComponents/styles.jsx";
 
 const Userpage = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -24,19 +25,17 @@ const Userpage = () => {
   const [imageError, setImageError] = useState(null);
   const formRef = useRef(null);
   const [isImageLoaded, setIsImageLoaded] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(null);
 
   const { userId } = useParams();
   const authLevel = useSelector((state) => state.auth.user?.authLevel);
   const id = useSelector((state) => state.auth.user._id);
   const token = localStorage.getItem("token");
 
-  console.log("userId :", userId);
-  console.log("id :", id);
-
   useEffect(() => {
     const fetchUser = async (url) => {
       try {
-        if (!token) throw new Error("No token found");
+        if (!token) throw new Error("No token found. Please log in");
 
         const response = await fetch(url, {
           method: "GET",
@@ -51,6 +50,7 @@ const Userpage = () => {
         setUserData(data);
         setUserIdToSearchBy(data._id);
       } catch (error) {
+        setErrorMessage(error.message);
         console.error(error);
       } finally {
         setIsLoading(false);
@@ -72,6 +72,7 @@ const Userpage = () => {
       }
       setIsProjectsLoading(true);
       try {
+        // throw new Error("SIMULATED ERROR FOR TESTING");
         if (!token) throw new Error("No token found");
 
         const response = await fetch(
@@ -92,6 +93,7 @@ const Userpage = () => {
         setProjects(data.projects);
       } catch (error) {
         console.error("Error fetching projects:", error);
+        setErrorMessage(error.message);
       } finally {
         setIsProjectsLoading(false);
       }
@@ -122,7 +124,7 @@ const Userpage = () => {
       setAvatarUpdated((prev) => !prev);
     } catch (error) {
       console.error("Error updating user picture:", error);
-      setImageError(`Error updating user picture: ${error}`);
+      setImageError(`Error updating user picture: ${error.message}`);
     }
   };
 
@@ -136,7 +138,7 @@ const Userpage = () => {
       setImageError(null);
     } else {
       console.log("Invalid URL");
-      setImageError("Invalid URL");
+      setImageError("INVALID URL!");
     }
   };
 
@@ -162,6 +164,8 @@ const Userpage = () => {
       <S.userTitle>User Page:</S.userTitle>
       {isLoading ? (
         <Spinner />
+      ) : errorMessage ? (
+        <ST.ErrorBox>{errorMessage}</ST.ErrorBox>
       ) : (
         <>
           {!isImageLoaded && <S.ImagePlaceholder />}
@@ -231,7 +235,6 @@ const Userpage = () => {
           <FooterMenu />
         </>
       )}
-      {/* <S.space /> */}
       <ImageModal
         toDelete="project"
         isOpen={imageModalOpen}
