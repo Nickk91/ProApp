@@ -235,12 +235,12 @@ export const spacer = styled.div`
 export const ErrorBox = styled.div`
   opacity: 0.97;
   transition: transform 0.2s;
-  display: flex; /* Ensures the content inside the errorBox is flexbox */
-  justify-content: center; /* Centers content horizontally */
-  align-items: center; /* Centers content vertically */
-  width: 100%; /* Make sure the errorBox takes up full width */
-  height: 100%; /* Make sure the errorBox takes up full height */
-  position: absolute; /* Ensures it can be positioned relative to its container */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  position: absolute;
   top: 0;
   left: 0;
   font-size: 10px;

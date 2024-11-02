@@ -66,24 +66,6 @@ const projectname = styled.div`
   max-width: 150px;
 `;
 
-// const ImagePlaceholder = styled.div`
-//   width: 300px;
-//   height: 270px;
-//   border: 1px solid black;
-//   margin: 10px;
-//   border-radius: 10px;
-//   box-shadow: 2px 2px 5px gray;
-//   background-color: #e0e0e0; /* Light gray to indicate loading state */
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-//   position: relative;
-
-//   &:hover {
-//     box-shadow: 3px 3px 5px gray;
-//   }
-// `;
-
 const ImagePlaceholder = styled.div`
   width: 250px;
   height: 250px;

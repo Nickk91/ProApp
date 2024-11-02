@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import * as S from "./Styles"; // Ensure the correct path
+import * as S from "./Styles";
 import { toPercentage } from "../../utils/functions";
 import { useState } from "react";
 

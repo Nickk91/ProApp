@@ -14,7 +14,6 @@ const GenericTaskForm = ({
   submitButtonText,
   inputs,
   onSubmit,
-  taskId,
   taskName,
   taskDesc,
   taskStatus,
@@ -38,9 +37,6 @@ const GenericTaskForm = ({
     localStorage.setItem("taskStatus", selectedStatus);
     onSubmit(e, formProps);
   };
-  // console.log("edit is:", edit);
-  // console.log("taskName:", taskName);
-  // console.log("taskDesc is:", taskDesc);
 
   return (
     <>

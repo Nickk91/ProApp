@@ -2,7 +2,7 @@ import React from "react";
 import { PieChart, Pie, Tooltip } from "recharts";
 import * as S from "./styled.js";
 
-const PieChartComp = ({ data, fill, title }) => {
+const PieChartComp = ({ data, fill }) => {
   return (
     <>
       <S.chartContainer>
