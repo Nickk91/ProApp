@@ -5,9 +5,6 @@ const MyForm = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  
 `;
-// height: 70vh;
-// margin-top: 100px;
 
 export default MyForm;

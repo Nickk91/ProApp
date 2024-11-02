@@ -12,19 +12,18 @@
   font-size: 13px;
   font-weight: bold;
   justify-content: space-between;
-  transition: all 0.3s ease; /* added transition */
-  padding-top: 5px; /* common padding */
+  transition: all 0.3s ease;
+  padding-top: 5px;
 }
 
 .taskbox {
-  height: 50px; /* height for non-expanded state */
+  height: 50px;
   align-items: center;
 }
 
 .taskbox-expanded {
-  height: 100px; /* height for expanded state */
-  align-items: flex-end; /* align items to the end */
-  /* align-items: center; */
+  height: 100px;
+  align-items: flex-end;
 }
 
 .description-hidden {

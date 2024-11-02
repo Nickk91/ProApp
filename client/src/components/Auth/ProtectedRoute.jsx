@@ -21,7 +21,7 @@ const ProtectedRoute = ({ Page, typeOfUser }) => {
         setAuthLevel(response.data.userAuthLevel);
       } catch (error) {
         console.error("Error verifying token:", error);
-        setAuthLevel(0); // Consider user unauthorized if error occurs
+        setAuthLevel(0);
       } finally {
         setIsLoading(false);
       }

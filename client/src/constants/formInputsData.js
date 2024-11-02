@@ -26,7 +26,6 @@ const loginAndRegisterFormInputs = [
   {
     name: "email",
     type: "email",
-    // label: "Username",
 
     placeholder: "jane@example.com",
     attributes: {
@@ -38,7 +37,6 @@ const loginAndRegisterFormInputs = [
     name: "password",
     type: "password",
     placeholder: "password",
-    // label: "Password",
     attributes: { required: true, minLength: 8 },
   },
 ];

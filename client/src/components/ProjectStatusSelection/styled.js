@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const selectDiv = styled.div`
+export const selectDiv = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
@@ -11,7 +11,7 @@ const selectDiv = styled.div`
   cursor: pointer;
 `;
 
-const select = styled.select`
+export const select = styled.select`
   width: 130px;
   border-width: 0;
   font-weight: 600;
@@ -21,25 +21,23 @@ const select = styled.select`
   cursor: pointer;
 `;
 
-const statusIconInProg = styled.div`
+export const statusIconInProg = styled.div`
   height: 14px;
   width: 14px;
   background-color: #ff9900;
   border-radius: 50%;
 `;
-const statusIconDone = styled.div`
+export const statusIconDone = styled.div`
   height: 14px;
   width: 14px;
   background-color: #03d60c;
   border-radius: 50%;
 `;
 
-const statusIconTodo = styled.div`
+export const statusIconTodo = styled.div`
   height: 14px;
   width: 14px;
   background-color: #a1a1a1;
   border-radius: 50%;
   cursor: pointer;
 `;
-
-export { selectDiv, select, statusIconInProg, statusIconDone, statusIconTodo };

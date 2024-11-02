@@ -7,7 +7,7 @@ const AnimatedCiEdit = styled(CiEdit)`
   transition: transform 0.2s;
   cursor: pointer;
   &:hover {
-    transform: scale(1.5); /* Increase size by 10% on hover */
+    transform: scale(1.5);
   }
 `;
 

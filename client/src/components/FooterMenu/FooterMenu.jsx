@@ -24,9 +24,8 @@ const FooterMenu = () => {
     navigate("/addproject");
   };
 
-  // Return null or a loader if the user is not logged in yet
   if (!user) {
-    return null; // or return a loader if you prefer
+    return null;
   }
 
   return (
@@ -49,7 +48,6 @@ const FooterMenu = () => {
         {authLevel === userAuthLevels.admin && (
           <S.li>
             <S.usersIcon onClick={() => navigate("/users")} />
-            {/* Make sure this path is '/users' */}
           </S.li>
         )}
         <S.li>

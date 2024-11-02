@@ -2,8 +2,6 @@ import React from "react";
 import * as S from "./GenericModalStyles.js";
 import { IoMdCloseCircle } from "react-icons/io";
 
-import styled from "styled-components";
-
 export default function ImageModal({ children, isOpen, onRequestClose }) {
   return (
     <>

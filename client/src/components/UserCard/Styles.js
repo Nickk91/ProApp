@@ -1,51 +1,49 @@
 import styled from "styled-components";
-import { ul } from "../FooterMenu/Styled";
+// import { ul } from "../FooterMenu/Styled";
 
-const statusIconInProg = styled.div`
+export const statusIconInProg = styled.div`
   height: 14px;
   width: 14px;
   background-color: #ff9900;
   border-radius: 50%;
 `;
-const statusIconDone = styled.div`
+export const statusIconDone = styled.div`
   height: 14px;
   width: 14px;
   background-color: #03d60c;
   border-radius: 50%;
 `;
-const topLine = styled.div`
+export const topLine = styled.div`
   width: 100%;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  /* border: 1px solid black; */
 `;
 
-const midLine = styled.div`
+export const midLine = styled.div`
   width: 100%;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  /* border: 1px solid black; */
 `;
 
-const statusIconTodo = styled.div`
+export const statusIconTodo = styled.div`
   height: 14px;
   width: 14px;
   background-color: #a1a1a1;
   border-radius: 50%;
 `;
 
-const statusWrapper = styled.div`
+export const statusWrapper = styled.div`
   display: flex;
   flex-direction: row;
   gap: 5px;
   margin-top: 5px;
 `;
 
-const userImg = styled.img`
+export const userImg = styled.img`
   width: 50px;
   height: 54px;
   border: 1px solid black;
@@ -53,7 +51,7 @@ const userImg = styled.img`
   border-radius: 10px;
 `;
 
-const ImagePlaceholder = styled.div`
+export const ImagePlaceholder = styled.div`
   width: 54px;
   height: 54px;
 
@@ -72,12 +70,12 @@ const ImagePlaceholder = styled.div`
   }
 `;
 
-const projectTitle = styled.div`
+export const projectTitle = styled.div`
   padding-bottom: 22px;
   font-size: 35px;
 `;
 
-const cardContainer = styled.div`
+export const cardContainer = styled.div`
   margin-top: 50px;
   width: 300px;
   height: 270px;
@@ -95,39 +93,21 @@ const cardContainer = styled.div`
     opacity: 1;
   }
 `;
-const list = styled.ul`
+export const list = styled.ul`
   list-style-type: none;
-  /* border: 1px black solid; */
   margin-right: 35px;
 `;
-const li = styled.li`
+export const li = styled.li`
   font-size: 13px;
   font-weight: bold;
   align-self: left;
 `;
 
-const username = styled.div`
+export const username = styled.div`
   margin-top: 10px;
   margin-left: 10px;
   max-width: 150px;
 `;
-const bottomContainer = styled.div`
+export const bottomContainer = styled.div`
   margin-left: 10px;
 `;
-
-export {
-  statusIconInProg,
-  statusIconDone,
-  statusIconTodo,
-  statusWrapper,
-  userImg,
-  topLine,
-  projectTitle,
-  cardContainer,
-  username,
-  midLine,
-  list,
-  li,
-  bottomContainer,
-  ImagePlaceholder,
-};

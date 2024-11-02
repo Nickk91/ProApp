@@ -1,4 +1,3 @@
-// import { createApi, fetchBaseQuery } from "@reduxjs/toolkit";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const authApi = createApi({
@@ -8,7 +7,6 @@ export const authApi = createApi({
     prepareHeaders: (headers, { getState }) => {
       const token = getState().auth.token;
       if (token) {
-        //include token in req header
         headers.set("authorization", `Bearer ${token}`);
         return headers;
       }
