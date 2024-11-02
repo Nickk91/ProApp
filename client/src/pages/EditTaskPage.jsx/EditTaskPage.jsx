@@ -47,7 +47,7 @@ const EditTaskPage = () => {
 
       if (response.ok) {
         const data = await response.json();
-        navigate(`/projects/${projectId}`); // Redirect to the project page after adding the task
+        navigate(`/projects/${projectId}`);
       } else {
         console.error("Editing task failed:", await response.json());
       }

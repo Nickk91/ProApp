@@ -71,7 +71,7 @@ const LoginPage = () => {
 
         // Store token and dispatch login action
         localStorage.setItem("token", accessToken);
-        console.log("USER:", user);
+
         dispatch(
           login({
             _id: user._id,

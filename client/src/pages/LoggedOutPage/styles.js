@@ -1,32 +1,30 @@
 import styled from "styled-components";
 
-const topContainer = styled.div`
+export const topContainer = styled.div`
   height: 100%;
   width: 100%;
-  /* border: solid red 2px; */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
   min-height: 50vh;
 `;
-const bottomContainer = styled.div`
+export const bottomContainer = styled.div`
   width: 100%;
   min-height: 50vh;
-  /* border: solid green 2px; */
   display: flex;
   flex-direction: column-reverse;
   align-items: center;
   justify-content: flex-start;
 `;
 
-const hero = styled.img`
+export const hero = styled.img`
   // background: url("../../assets/images/Group.png");
   width: 224px;
   height: 54px;
 `;
 
-const btnLogin = styled.button`
+export const btnLogin = styled.button`
   color: black;
   background: white;
   width: 170px;
@@ -35,16 +33,16 @@ const btnLogin = styled.button`
   border: 2px solid;
   font-size: 13px;
   font-weight: 700;
-  transition: background-color 0.3s, color 0.3s, box-shadow 0.3s ease-in-out; /* Box-shadow transition */
+  transition: background-color 0.3s, color 0.3s, box-shadow 0.3s ease-in-out;
   cursor: pointer;
 
   &:hover {
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Adds a subtle shadow */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     font-weight: 900;
   }
 `;
 
-const btnRegister = styled.button`
+export const btnRegister = styled.button`
   background: black;
   color: white;
   width: 170px;
@@ -53,28 +51,19 @@ const btnRegister = styled.button`
   border: 2px solid;
   font-size: 13px;
   font-weight: 700;
-  transition: background-color 0.3s, color 0.3s, box-shadow 0.3s ease-in-out; /* Box-shadow transition */
+  transition: background-color 0.3s, color 0.3s, box-shadow 0.3s ease-in-out;
   cursor: pointer;
 
   &:hover {
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Adds a subtle shadow */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     font-weight: 900;
   }
 `;
 
-const buttonContainer = styled.div`
+export const buttonContainer = styled.div`
   position: absolute;
   bottom: 27px;
   display: flex;
   flex-direction: row;
   gap: 7px;
 `;
-
-export {
-  topContainer,
-  hero,
-  btnLogin,
-  btnRegister,
-  buttonContainer,
-  bottomContainer,
-};

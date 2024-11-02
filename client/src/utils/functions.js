@@ -84,17 +84,12 @@ export const handleSortByProjectTodosQuantity = (
   projectsData,
   status
 ) => {
-  // console.log(status);
-  console.log("handling sortByProjectTodosQuantity");
-  console.log(projectsData);
-  console.log(users[0].projects[1]);
   const usersWithTodoProjects = users.map((user) => ({
     ...user,
     todoProjects: projectsData.filter(
       (project) => project.user === user._id && project.projectStatus === status
     ),
   }));
-  console.log(usersWithTodoProjects);
 
   const sortedUsers = [...usersWithTodoProjects].sort(
     (a, b) => b.todoProjects.length - a.todoProjects.length

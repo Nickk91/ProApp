@@ -1,23 +1,21 @@
 import styled from "styled-components";
 
-const formTitle = styled.div`
+export const formTitle = styled.div`
   padding-bottom: 22px;
-
   font-size: 32px;
   margin-right: 130px;
   margin-top: 60px;
 `;
 
-const formTitleInv = styled.div`
+export const formTitleInv = styled.div`
   display: hidden;
   padding-bottom: 22px;
-
   font-size: 32px;
   margin-right: 130px;
   margin-top: 60px;
 `;
 
-const hero = styled.img`
+export const hero = styled.img`
   width: 360px;
   margin-top: 60px;
 
@@ -25,7 +23,7 @@ const hero = styled.img`
     margin-top: 0px;
   }
 `;
-const h2 = styled.h2`
+export const h2 = styled.h2`
   margin-top: 50px;
   font-size: 25px;
 
@@ -33,18 +31,16 @@ const h2 = styled.h2`
     margin-top: 20px;
   }
 `;
-const addLogo = styled.img`
+export const addLogo = styled.img`
   margin-top: 30px;
   transition: transform 0.3s ease;
   cursor: pointer;
 
   &:hover {
-    transform: scale(1.1); /* Increase size by 10% on hover */
+    transform: scale(1.1);
   }
 `;
 
-const space = styled.div`
+export const space = styled.div`
   height: 150px;
 `;
-
-export { space, formTitle, hero, h2, addLogo, formTitleInv };

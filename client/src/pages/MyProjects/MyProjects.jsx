@@ -42,7 +42,6 @@ const MyProjects = () => {
           const data = await response.json();
 
           if (data.length === 0) {
-            console.log("ZERO");
             navigate("/noprojects");
           }
           setProjects(data);

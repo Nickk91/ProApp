@@ -1,16 +1,14 @@
 import styled from "styled-components";
 
-const searchTitle = styled.div`
-  /* padding-bottom: 22px; */
+export const searchTitle = styled.div`
   font-size: 25px;
   margin-top: 50px;
-
   @media screen and (max-width: 365px) {
     margin-left: 1px;
   }
 `;
 
-const inactiveButton = styled.button`
+export const inactiveButton = styled.button`
   color: black;
   background: white;
   width: 140px;
@@ -23,7 +21,7 @@ const inactiveButton = styled.button`
   cursor: pointer;
 `;
 
-const activeButton = styled.button`
+export const activeButton = styled.button`
   background: black;
   color: white;
   width: 140px;
@@ -36,20 +34,20 @@ const activeButton = styled.button`
   cursor: pointer;
 `;
 
-const buttonsContainer = styled.div`
+export const buttonsContainer = styled.div`
   display: flex;
   flex-direction: row;
   gap: 7px;
   margin-top: 10px;
 `;
 
-const searchInput = styled.input`
+export const searchInput = styled.input`
   margin-top: 20px;
   width: 280px;
   height: 52px;
 `;
 
-const submitButton = styled.button`
+export const submitButton = styled.button`
   margin-top: 20px;
   border-radius: 7px;
   background: black;
@@ -70,16 +68,6 @@ const submitButton = styled.button`
   }
 `;
 
-const spaceDiv = styled.div`
+export const spaceDiv = styled.div`
   height: 150px;
 `;
-
-export {
-  searchTitle,
-  activeButton,
-  inactiveButton,
-  buttonsContainer,
-  searchInput,
-  submitButton,
-  spaceDiv,
-};

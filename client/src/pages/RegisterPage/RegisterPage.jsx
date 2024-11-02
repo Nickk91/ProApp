@@ -37,7 +37,6 @@ const RegisterPage = () => {
       if (response.ok) {
         const checkData = await response.json();
         if (checkData.error) {
-          console.log("Email already exists");
         } else {
           localStorage.setItem("email", email);
           localStorage.setItem("password", password);
