@@ -75,8 +75,6 @@ const AddProjectPage = () => {
 
       if (response.ok) {
         const data = await response.json();
-        console.log("data:", data);
-        console.log("data._id", data._id);
         navigate(`/projects/${data._id}`);
       } else {
         console.error("Adding project failed:", await response.json());

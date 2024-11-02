@@ -1,5 +1,3 @@
-// src/utils/dataUtils.js
-
 import {
   countProjectByStatus,
   countTasks,

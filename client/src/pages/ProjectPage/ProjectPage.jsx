@@ -33,6 +33,7 @@ const ProjectPage = () => {
   const [imageError, setImageError] = useState(null);
   const [avatarUpdated, setAvatarUpdated] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
+  let num = 0;
 
   const handleImageLoad = function () {
     setIamgeIsLoaded(true);
@@ -92,7 +93,6 @@ const ProjectPage = () => {
         setIsLoading(false);
       } catch (error) {
         console.error("Error fetching projects or user data:", error);
-        console.log("error.message:", error.message);
         setIsLoading(false);
         setErrorMessage(error.message);
       }
@@ -108,7 +108,6 @@ const ProjectPage = () => {
   const [taskToDeleteId, setTaskToDeleteId] = useState();
 
   const openModal = (item, taskId) => {
-    console.log(taskId);
     if (item === "project") {
       setProjectIsModalOpen(true);
     }
@@ -125,7 +124,6 @@ const ProjectPage = () => {
 
   const deleteTask = async (taskToDeleteId) => {
     try {
-      console.log(taskToDeleteId);
       const token = localStorage.getItem("token");
 
       const response = await fetch(
@@ -211,33 +209,34 @@ const ProjectPage = () => {
   };
 
   const handleTaskStatus = async (taskId, newStatus, i) => {
-    try {
-      const token = localStorage.getItem("token");
+    if (taskId) {
+      try {
+        const token = localStorage.getItem("token");
 
-      const response = await fetch(
-        `${import.meta.env.VITE_BASEURL}/projects/${projectId}/taskstatus`,
-        {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({ taskId: taskId, status: newStatus }),
+        const response = await fetch(
+          `${import.meta.env.VITE_BASEURL}/projects/${projectId}/taskstatus`,
+          {
+            method: "PATCH",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify({ taskId: taskId, status: newStatus }),
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error("Failed to update task status");
         }
-      );
 
-      if (!response.ok) {
-        throw new Error("Failed to update task status");
+        setTaskStatuses((prevStatuses) => {
+          const updatedStatuses = [...prevStatuses];
+          updatedStatuses[i] = newStatus;
+          return updatedStatuses;
+        });
+      } catch (error) {
+        console.error("Error updating task status:", error);
       }
-
-      setTaskStatuses((prevStatuses) => {
-        const updatedStatuses = [...prevStatuses];
-        updatedStatuses[i] = newStatus;
-        return updatedStatuses;
-      });
-      console.log(taskStatuses);
-    } catch (error) {
-      console.error("Error updating task status:", error);
     }
   };
 
@@ -292,7 +291,6 @@ const ProjectPage = () => {
       setImageModalOpen(false);
       setImageError(null);
     } else {
-      console.log("Invalid URL");
       setImageError("Invalid URL");
     }
   };

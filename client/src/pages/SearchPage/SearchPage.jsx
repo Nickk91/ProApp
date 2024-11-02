@@ -33,7 +33,6 @@ const SearchPage = () => {
   const adminSearchByProjectName = async (searchItem, token) => {
     try {
       setIsLoading(true);
-      console.log(token);
       const response = await fetch(
         `${
           import.meta.env.VITE_BASEURL
@@ -50,7 +49,6 @@ const SearchPage = () => {
       if (response.ok) {
         const data = await response.json();
         setSearchResults(data);
-        console.log(data);
       } else {
         console.error("Search failed");
       }
@@ -81,7 +79,6 @@ const SearchPage = () => {
       if (response.ok) {
         const data = await response.json();
         setSearchResults(data);
-        console.log(data);
       } else {
         console.error("Search failed");
       }
@@ -109,7 +106,6 @@ const SearchPage = () => {
       if (response.ok) {
         const data = await response.json();
         setSearchResults(data);
-        console.log(data);
       } else {
         console.error("Search failed");
       }
@@ -126,7 +122,6 @@ const SearchPage = () => {
     e.preventDefault();
     const token = localStorage.getItem("token");
     const formData = new FormData(e.target);
-    console.log(formData);
 
     if (searchBy === "project name") {
       const searchItem = formData.get("search");
@@ -154,8 +149,6 @@ const SearchPage = () => {
   const handleClick = (projectId) => {
     navigate(`/projects/${projectId}`);
   };
-
-  console.log(searchResults.projects);
 
   const authLevel = useSelector((state) => state.auth.user?.authLevel);
 

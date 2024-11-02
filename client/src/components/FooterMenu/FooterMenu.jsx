@@ -10,9 +10,8 @@ const FooterMenu = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const user = useSelector((state) => state.auth.user); // Fetch user object
-  const authLevel = user?.authLevel; // Safely access authLevel
-
+  const user = useSelector((state) => state.auth.user);
+  const authLevel = user?.authLevel;
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("TaskStatus");

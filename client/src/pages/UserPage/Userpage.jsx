@@ -72,7 +72,6 @@ const Userpage = () => {
       }
       setIsProjectsLoading(true);
       try {
-        // throw new Error("SIMULATED ERROR FOR TESTING");
         if (!token) throw new Error("No token found");
 
         const response = await fetch(
@@ -120,7 +119,6 @@ const Userpage = () => {
 
       if (!response.ok) throw new Error("Failed to update user picture");
 
-      console.log("User picture updated successfully");
       setAvatarUpdated((prev) => !prev);
     } catch (error) {
       console.error("Error updating user picture:", error);
@@ -137,7 +135,6 @@ const Userpage = () => {
       setImageModalOpen(false);
       setImageError(null);
     } else {
-      console.log("Invalid URL");
       setImageError("INVALID URL!");
     }
   };
@@ -150,7 +147,6 @@ const Userpage = () => {
   const navigate = useNavigate();
 
   const handleAddProject = (user_id) => {
-    console.log("clicked");
     dispatch(setUserId(user_id));
     navigate("/addproject");
   };
@@ -195,7 +191,6 @@ const Userpage = () => {
                     <S.addProjectIcon
                       src={addTask}
                       onClick={() => {
-                        console.log("Button clicked");
                         handleAddProject(userData._id);
                       }}
                     />

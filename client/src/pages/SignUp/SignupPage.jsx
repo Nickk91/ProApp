@@ -38,7 +38,6 @@ const SignupPage = () => {
       if (response.ok) {
         const checkData = await response.json();
         if (checkData.error) {
-          console.log("Invalid username");
         } else {
           localStorage.removeItem("email");
           localStorage.removeItem("password");

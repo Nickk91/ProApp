@@ -32,8 +32,6 @@ const GenericForm = ({
       <S.inputsContainer>
         {inputs.map((input) => (
           <React.Fragment key={input.name}>
-            {" "}
-            {/* Use input.name or any unique key */}
             <GenericInput
               type={input.type}
               label={input.label}

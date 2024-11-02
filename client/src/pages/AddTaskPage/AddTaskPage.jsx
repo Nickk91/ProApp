@@ -18,8 +18,6 @@ const AddTaskPage = () => {
 
     const name = formData.get("taskName");
     const description = formData.get("taskDescription");
-    console.log(name);
-    console.log(description);
 
     try {
       const selectedTaskStatus = localStorage.getItem("taskStatus");
@@ -43,7 +41,7 @@ const AddTaskPage = () => {
 
       if (response.ok) {
         const data = await response.json();
-        navigate(`/projects/${projectId}`); // Redirect to the project page after adding the task
+        navigate(`/projects/${projectId}`);
       } else {
         console.error("Adding task failed:", await response.json());
       }

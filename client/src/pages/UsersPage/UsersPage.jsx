@@ -111,9 +111,6 @@ const UsersPage = () => {
   };
 
   const sortByStatusProjectQuantity = (status) => {
-    console.log("sort by todo project quantity");
-    console.log(users[0].projects);
-    console.log(projectsData);
     const sortedUsers = handleSortByProjectTodosQuantity(
       users,
       projectsData,
@@ -127,7 +124,7 @@ const UsersPage = () => {
       {isLoading ? (
         <Spinner />
       ) : errorMessage ? (
-        <S.errorBox>{errorMessage}</S.errorBox>
+        <S.ErrorBox>{errorMessage}</S.ErrorBox>
       ) : (
         <>
           {users.length > 0 && <S.pageTitle>Users</S.pageTitle>}
