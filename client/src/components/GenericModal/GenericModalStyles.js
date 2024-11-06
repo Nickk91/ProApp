@@ -105,6 +105,7 @@ export const yesBtn = styled.button`
   border-radius: 9px;
   font-weight: bold;
   font-size: 17px;
+  cursor: pointer;
 `;
 export const noBtn = styled.button`
   border: 3px solid black;
@@ -115,4 +116,5 @@ export const noBtn = styled.button`
   border-radius: 9px;
   font-weight: bold;
   font-size: 17px;
+  cursor: pointer;
 `;
