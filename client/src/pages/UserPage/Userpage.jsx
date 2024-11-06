@@ -206,14 +206,17 @@ const Userpage = () => {
                             title="User Projects"
                           />
                         </S.miniWrap>
-                        <S.miniWrap>
-                          <S.h32>User Tasks:</S.h32>
-                          <PieChartComp
-                            data={taskCounts}
-                            fill="#2bc5da"
-                            title="User Tasks"
-                          />
-                        </S.miniWrap>
+
+                        {taskCounts.some((obj) => obj.value > 0) && (
+                          <S.miniWrap>
+                            <S.h32>User Tasks:</S.h32>
+                            <PieChartComp
+                              data={taskCounts}
+                              fill="#2bc5da"
+                              title="User Tasks"
+                            />
+                          </S.miniWrap>
+                        )}
                       </>
                     ) : (
                       <>
