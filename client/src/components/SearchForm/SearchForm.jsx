@@ -14,7 +14,7 @@ const SearchForm = ({
 }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(e.target);
+
     const formData = new FormData(e.target);
     const formProps = Object.fromEntries(formData.entries());
     onSubmit(e, formProps);

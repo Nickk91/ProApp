@@ -33,7 +33,6 @@ const ProjectPage = () => {
   const [imageError, setImageError] = useState(null);
   const [avatarUpdated, setAvatarUpdated] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
-  let num = 0;
 
   const handleImageLoad = function () {
     setIamgeIsLoaded(true);

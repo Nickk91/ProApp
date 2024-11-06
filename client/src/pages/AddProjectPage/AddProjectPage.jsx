@@ -12,7 +12,7 @@ import { useSelector } from "react-redux";
 
 const AddProjectPage = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [displayError, setDisplayError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(null);
   const [isAddingProjectToAnotherUser, setIsAddingProjectToAnotherUser] =
     useState(false);
   const navigate = useNavigate();
@@ -34,6 +34,8 @@ const AddProjectPage = () => {
     const projectImage = formData.get("Project image URL");
 
     try {
+      // throw new Error("SOMETHING WENT WRONG. PLEASE TRY AGAIN");
+
       setIsLoading(true);
       const token = localStorage.getItem("token");
       let response;
@@ -81,7 +83,8 @@ const AddProjectPage = () => {
       }
     } catch (error) {
       console.error("Error;", error);
-      setDisplayError(true);
+
+      setErrorMessage(error.message || "An unexpected error occurred.");
     }
     setIsLoading(false);
   };
@@ -94,6 +97,8 @@ const AddProjectPage = () => {
     <section className="page">
       {isLoading ? (
         <Spinner />
+      ) : errorMessage ? (
+        <S.ErrorBox>{errorMessage}</S.ErrorBox>
       ) : (
         <>
           <S.ReturnIcon onClick={handleBack} src={ReturnIcon} />

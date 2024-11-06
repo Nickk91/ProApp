@@ -76,6 +76,7 @@ export const ButtonCover = styled.button`
 export const delBigger = styled.img`
   height: 67px;
   margin-top: -17px;
+  cursor: pointer;
 `;
 
 export const modalText = styled.h3`
@@ -101,4 +102,5 @@ export const noBtn = styled.button`
   border-radius: 9px;
   font-weight: bold;
   font-size: 17px;
+  cursor: pointer;
 `;

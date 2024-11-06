@@ -56,7 +56,6 @@ export const createUser = async (req, res) => {
     res
       .status(STATUS_CODE.INTERNAL_SERVER_ERROR)
       .json({ message: error.message });
-    console.log(STATUS_CODE.INTERNAL_SERVER_ERROR);
   }
 };
 
@@ -66,10 +65,8 @@ export const createUser = async (req, res) => {
 export const getAllUsers = async (req, res) => {
   try {
     const users = await User.find({}).populate("projects").exec();
-    console.log(users);
     res.send(users);
   } catch (error) {
-    console.log("Error fetching users", error);
     res
       .status(STATUS_CODE.INTERNAL_SERVER_ERROR)
       .json({ error: "Internal Server Error FOR REALY BRUV" });
@@ -79,10 +76,10 @@ export const getAllUsers = async (req, res) => {
 // export const getAllUsers = async (req, res) => {
 //   try {
 //     const users = await User.find();
-//     console.log(users);
+
 //     res.send(users);
 //   } catch (error) {
-//     console.log("Error fetching users", error);
+
 //     res
 //       .status(STATUS_CODE.INTERNAL_SERVER_ERROR)
 //       .json({ error: "Internal Server Error FOR REALY BRUV" });
@@ -98,10 +95,8 @@ export const getUserById = async (req, res) => {
       throw new Error("User was not found");
     }
     const { username, email, authLevel, avatar, _id } = user;
-    console.log("getUserById: user is:", user);
     res.send({ username, email, authLevel, avatar, _id });
   } catch (error) {
-    console.log("Error fetching user", error);
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
@@ -112,7 +107,6 @@ export const getUserById = async (req, res) => {
 
 export const currentUser = async (req, res) => {
   try {
-    console.log("IN CURRENT CONTROLLER", req.user);
     const user = await User.findById(req.user._id);
     if (!user) {
       res.status(404);
@@ -186,7 +180,7 @@ export const userExist = async (req, res) => {
 };
 
 export const getUserIdByUsername = async (req, res, next) => {
-  console.log("getUserIdByUsername CONTROLLER");
+  ("getUserIdByUsername CONTROLLER");
   const userName = req.params.userName;
   if (!userName) {
     return res
@@ -197,13 +191,12 @@ export const getUserIdByUsername = async (req, res, next) => {
   const users = await User.find({
     username: { $regex: userName, $options: "i" },
   });
-  console.log("getUserIdByUsername:", users);
 
   if (users.length > 0) {
     let userIdsArray = users.map((user) => user._id);
 
     req.userIdsArray = userIdsArray;
-    console.log("req.userIdsArray!!!:", req.userIdsArray);
+
     next();
   } else {
     return res
@@ -215,11 +208,8 @@ export const getUserIdByUsername = async (req, res, next) => {
 export const changeUserImg = async (req, res) => {
   try {
     const { userId, url } = req.body;
-    console.log("Received userId:", userId);
-    console.log("Received url:", url);
 
     const user = await User.findById(userId);
-    console.log("User found:", user);
 
     if (!user) {
       return res
