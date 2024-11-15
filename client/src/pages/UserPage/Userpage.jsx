@@ -185,16 +185,24 @@ const Userpage = () => {
                 <Spinner />
               ) : (
                 <>
-                  <S.addProjectContainer>
-                    <h3>Add Project:</h3>
+                  <S.actionsContainer>
+                    <S.addProjectContainer>
+                      <h3>Add Project:</h3>
 
-                    <S.addProjectIcon
-                      src={addTask}
-                      onClick={() => {
-                        handleAddProject(userData._id);
-                      }}
-                    />
-                  </S.addProjectContainer>
+                      <S.addProjectIcon
+                        src={addTask}
+                        onClick={() => {
+                          handleAddProject(userData._id);
+                        }}
+                      />
+                    </S.addProjectContainer>
+                    <S.userPorjectsBtn
+                      onClick={() => navigate(`/projects-of-user/${userId}`)}
+                    >
+                      User's Projects
+                    </S.userPorjectsBtn>
+                  </S.actionsContainer>
+
                   <S.chartsContainer>
                     {projects.length > 0 ? (
                       <>
