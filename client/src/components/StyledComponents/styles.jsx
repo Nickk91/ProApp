@@ -201,7 +201,8 @@ export const delBigger = styled.img`
 export const errorText = styled.p`
   width: 100%;
   color: red;
-  font-size: 12px;
+  font-size: 15px;
+  height: 20px;
 `;
 export const page = styled.div`
   display: flex;

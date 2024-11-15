@@ -5,37 +5,49 @@ import jwt from "jsonwebtoken";
 
 export const loginUser = async (req, res) => {
   const { email, password } = req.body;
-  if (!email || !password) {
-    res.status(STATUS_CODE.BAD_REQUEST);
-    throw new Error("All fields are mandatory!");
-  }
-  const user = await User.findOne({ email });
 
-  if (user && (await bcrypt.compare(password, user.password))) {
-    const accessToken = jwt.sign(
-      {
+  if (!email || !password) {
+    return res
+      .status(STATUS_CODE.BAD_REQUEST)
+      .json({ message: "All fields are mandatory!" });
+  }
+
+  try {
+    const user = await User.findOne({ email });
+
+    if (user && (await bcrypt.compare(password, user.password))) {
+      const accessToken = jwt.sign(
+        {
+          user: {
+            username: user.username,
+            email: user.email,
+            _id: user._id,
+            authLevel: user.authLevel,
+          },
+        },
+        process.env.ACCESS_TOKEN_SECRET,
+        { expiresIn: "35m" }
+      );
+
+      return res.status(STATUS_CODE.OK).json({
+        accessToken,
         user: {
+          _id: user._id,
           username: user.username,
           email: user.email,
-          _id: user._id,
           authLevel: user.authLevel,
         },
-      },
-      process.env.ACCESS_TOKEN_SECRET,
-      { expiresIn: "35m" }
-    );
-    res.status(STATUS_CODE.OK).json({
-      accessToken,
-      user: {
-        _id: user._id,
-        username: user.username,
-        email: user.email,
-        authLevel: user.authLevel,
-      },
-    });
-  } else {
-    res.status(STATUS_CODE.UNAUTHORIZED);
-    throw new Error("email or password is not valid");
+      });
+    }
+
+    return res
+      .status(STATUS_CODE.UNAUTHORIZED)
+      .json({ message: "Email or password is not valid" });
+  } catch (error) {
+    console.error("Login error:", error);
+    res
+      .status(STATUS_CODE.INTERNAL_SERVER_ERROR)
+      .json({ message: "Internal server error" });
   }
 };
 

@@ -10,6 +10,7 @@ const GenericForm = ({
   onSubmit,
   displayError,
   search,
+  serverError,
 }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -39,10 +40,14 @@ const GenericForm = ({
               attributes={input.attributes}
               placeholder={input.placeholder ? input.placeholder : ""}
               error={errors[input.name]}
+              serverError={serverError}
               displayError={displayError}
             />
           </React.Fragment>
         ))}
+
+        {<S.errorText>{serverError && serverError}</S.errorText>}
+
         <S.submitButton>{submitButtonText}</S.submitButton>
       </S.inputsContainer>
     </FormComponent>
