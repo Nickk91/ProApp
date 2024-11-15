@@ -8,6 +8,7 @@ const GenericInput = ({
   placeholder,
   error,
   displayError,
+
   attributes = {},
   value,
 }) => {
@@ -22,7 +23,7 @@ const GenericInput = ({
         {...attributes}
         defaultValue={value}
       />
-      {displayError && <S.errorText>{error}</S.errorText>}
+      {/* {displayError && <S.errorText>{error}</S.errorText>} */}
     </>
   );
 };

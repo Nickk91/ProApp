@@ -13,6 +13,7 @@ import { loginAndRegisterFormInputs } from "../../constants/formInputsData";
 const LoginPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [displayError, setDisplayError] = useState(false);
+  const [serverError, setServerError] = useState(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -89,8 +90,13 @@ const LoginPage = () => {
         setDisplayError(true);
       }
     } catch (error) {
-      console.error("Login error:", error);
-      setDisplayError(true);
+      // Extract the server error message if it exists
+      const errorMessage =
+        error.response?.data?.message || "An unexpected error occurred";
+
+      console.error("Login error console log:", errorMessage);
+      setDisplayError(errorMessage); // Display the server message to the user
+      setServerError(errorMessage); // Save the error for other use cases
     }
   };
 
@@ -112,6 +118,7 @@ const LoginPage = () => {
             submitButtonText="LOG IN"
             onSubmit={handleFormSubmit}
             displayError={displayError}
+            serverError={serverError}
           />
         </section>
       )}
