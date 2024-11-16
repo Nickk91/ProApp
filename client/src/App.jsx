@@ -109,6 +109,15 @@ function App() {
             />
           }
         />
+        <Route
+          path="/projects-of-user/:userId"
+          element={
+            <ProtectedRoute
+              Page={MyProjects}
+              typeOfUser={userAuthLevels.admin}
+            />
+          }
+        />
 
         {/* Public routes (No FooterMenu here) */}
         <Route path="/loggedout" element={<LoggedOutPage />} />

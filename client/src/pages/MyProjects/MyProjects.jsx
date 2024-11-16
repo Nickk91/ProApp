@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import ProjectCard from "../../components/ProjectCard/ProjectCard.jsx";
 import * as S from "../../components/StyledComponents/styles.jsx";
+import * as ST from "./styled.js";
 import { useNavigate } from "react-router-dom";
 import FooterMenu from "../../components/FooterMenu/FooterMenu.jsx";
 import Spinner from "../../components/Spinner/Spinner.jsx";
 import "../style/pagestyle.css";
 import Pagination from "../../components/Pagination/Pagination.jsx";
+import { useParams } from "react-router-dom";
 
 const MyProjects = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -13,6 +15,8 @@ const MyProjects = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [projectsPerPage, setProjectsPerPage] = useState(6);
   const [errorMessage, setErrorMessage] = useState(null);
+  const { userId } = useParams();
+  console.log("userId:", userId);
 
   const navigate = useNavigate();
 
@@ -23,15 +27,20 @@ const MyProjects = () => {
       const fetchProjects = async () => {
         try {
           // throw new Error("Simulated error for testing");
-          const response = await fetch(
-            `${import.meta.env.VITE_BASEURL}/projects/user`,
-            {
-              method: "GET",
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-            }
-          );
+
+          let url = `${import.meta.env.VITE_BASEURL}/projects/user`;
+
+          // If userId is truthy, add it as a query parameter
+          if (userId) {
+            url += `?userId=${userId}`;
+          }
+
+          const response = await fetch(url, {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
 
           if (!response.ok) {
             throw new Error(
@@ -75,7 +84,10 @@ const MyProjects = () => {
         <S.ErrorBox>{errorMessage}</S.ErrorBox>
       ) : (
         <>
-          {projects.length > 0 && <S.pageTitle>My projects</S.pageTitle>}
+          {projects.length > 0 && (
+            <S.pageTitle>{userId ? "User's" : "My"} projects</S.pageTitle>
+          )}
+          <ST.userNameButton>{}</ST.userNameButton>
           {currentProjects.map((project, index) => (
             <ProjectCard
               key={index}

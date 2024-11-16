@@ -202,7 +202,9 @@ export const errorText = styled.p`
   width: 100%;
   color: red;
   font-size: 15px;
-  height: 20px;
+  height: 17px;
+  text-align: center;
+  padding-bottom: 20px;
 `;
 export const page = styled.div`
   display: flex;

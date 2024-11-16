@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const page = styled.div`
+export const page = styled.div`
   display: flex;
   flex-direction: column;
   border: solid black 2px;
@@ -9,17 +9,17 @@ const page = styled.div`
   min-width: 300px;
 `;
 
-const userTitle = styled.div`
+export const userTitle = styled.div`
   padding-bottom: 22px;
   font-size: 35px;
   margin-top: 20px;
 `;
 
-const username = styled.div`
+export const username = styled.div`
   max-width: 150px;
 `;
 
-const userImg = styled.img`
+export const userImg = styled.img`
   width: 135px;
   height: 122px;
   border: 1px solid black;
@@ -34,7 +34,7 @@ const userImg = styled.img`
   }
 `;
 
-const ImagePlaceholder = styled.div`
+export const ImagePlaceholder = styled.div`
   width: 122px;
   height: 122px;
 
@@ -53,11 +53,11 @@ const ImagePlaceholder = styled.div`
   }
 `;
 
-const list = styled.ul`
+export const list = styled.ul`
   list-style-type: none;
   margin-top: 5px;
 `;
-const h3 = styled.h3`
+export const h3 = styled.h3`
   margin-top: 10px;
   margin-bottom: 25px;
   @media screen and (min-width: 620px) {
@@ -66,7 +66,7 @@ const h3 = styled.h3`
   }
 `;
 
-const h32 = styled.h3`
+export const h32 = styled.h3`
   margin-top: 10px;
   margin-bottom: 25px;
   margin-left: 40px;
@@ -75,7 +75,7 @@ const h32 = styled.h3`
     margin-bottom: 20px;
   }
 `;
-const miniWrap = styled.div`
+export const miniWrap = styled.div`
   max-height: 230px;
   width: 300px;
 
@@ -84,21 +84,21 @@ const miniWrap = styled.div`
   }
 `;
 
-const listItem = styled.li`
+export const listItem = styled.li`
   margin-top: 5px;
 `;
 
-const container = styled.div`
+export const container = styled.div`
   /* margin-left: 40px; */
   /* border: 1px solid black; */
 `;
-const urlInput = styled.input`
+export const urlInput = styled.input`
   margin-top: 10px;
   height: 25px;
   width: 190px;
 `;
 
-const acceptBtn = styled.button`
+export const acceptBtn = styled.button`
   border: 3px solid black;
   margin-top: 20px;
   height: 34px;
@@ -114,7 +114,7 @@ const acceptBtn = styled.button`
     background-color: black;
   }
 `;
-const chartsContainer = styled.div`
+export const chartsContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -131,7 +131,7 @@ const chartsContainer = styled.div`
   }
 `;
 
-const userDetailsContainer = styled.div`
+export const userDetailsContainer = styled.div`
   max-width: 794px;
   @media screen and (min-width: 620px) {
     display: flex;
@@ -139,13 +139,13 @@ const userDetailsContainer = styled.div`
   }
 `;
 
-const space = styled.div`
+export const space = styled.div`
   /* height: 320px; */
   height: 50px;
   width: 200px;
 `;
 
-const errorMessage = styled.div`
+export const errorMessage = styled.div`
   height: 50px;
   width: 100px;
   color: red;
@@ -155,7 +155,7 @@ const errorMessage = styled.div`
   left: 50%;
   transform: translateX(-50%);
 `;
-const errorMessageHidden = styled.div`
+export const errorMessageHidden = styled.div`
   display: hidden;
   height: 50px;
   width: 65%;
@@ -166,7 +166,7 @@ const errorMessageHidden = styled.div`
   left: 50%;
   transform: translateX(-50%);
 `;
-const addProjectIcon = styled.img`
+export const addProjectIcon = styled.img`
   height: 24px;
   transition: transform 0.2s;
   cursor: pointer;
@@ -176,38 +176,42 @@ const addProjectIcon = styled.img`
     transform: scale(1.3);
   }
 `;
-const addProjectContainer = styled.div`
+export const addProjectContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-around;
+  justify-content: justify-content;
   max-width: 200px;
   gap: 10px;
   margin-top: 4px;
   margin: 0 auto;
+  transition: transform 0.2s;
 `;
-const minDiv = styled.div``;
+export const minDiv = styled.div``;
+export const actionsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 
-export {
-  addProjectContainer,
-  minDiv,
-  page,
-  userTitle,
-  username,
-  userImg,
-  list,
-  listItem,
-  h3,
-  h32,
-  container,
-  urlInput,
-  acceptBtn,
-  chartsContainer,
-  miniWrap,
-  userDetailsContainer,
-  space,
-  errorMessage,
-  errorMessageHidden,
-  addProjectIcon,
-  ImagePlaceholder,
-};
+  height: 90px;
+`;
+
+export const userPorjectsBtn = styled.button`
+  border: 3px solid black;
+  z-index: 300;
+  height: 50px;
+  width: 150px;
+  color: black;
+  background-color: white;
+  border-radius: 9px;
+  font-weight: bold;
+  font-size: 17px;
+  margin: 0 auto;
+  transition: color 0.2s, background-color 0.2s, transform 0.2s;
+  cursor: pointer;
+  &:hover {
+    color: white;
+    background-color: black;
+    transform: scale(1.05);
+  }
+`;
