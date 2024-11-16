@@ -20,7 +20,6 @@ import FooterMenu from "./components/FooterMenu/FooterMenu.jsx";
 import HomePage from "./pages/HomePage/HomePage.jsx";
 import UnauthorizedPage from "./pages/UnauthorizedPage/UnauthorizedPage.jsx";
 import ProtectedRoute from "./components/Auth/ProtectedRoute.jsx";
-import ProjectsOfDiffernetUser from "./pages/ProjectsOfDiffernetUser/ProjectsOfDiffernetUser.jsx";
 
 function App() {
   return (
@@ -114,7 +113,7 @@ function App() {
           path="/projects-of-user/:userId"
           element={
             <ProtectedRoute
-              Page={ProjectsOfDiffernetUser}
+              Page={MyProjects}
               typeOfUser={userAuthLevels.admin}
             />
           }

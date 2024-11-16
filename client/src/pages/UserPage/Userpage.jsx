@@ -28,6 +28,7 @@ const Userpage = () => {
   const [errorMessage, setErrorMessage] = useState(null);
 
   const { userId } = useParams();
+  console.log("userId:", userId);
   const authLevel = useSelector((state) => state.auth.user?.authLevel);
   const id = useSelector((state) => state.auth.user._id);
   const token = localStorage.getItem("token");
@@ -196,11 +197,13 @@ const Userpage = () => {
                         }}
                       />
                     </S.addProjectContainer>
-                    <S.userPorjectsBtn
-                      onClick={() => navigate(`/projects-of-user/${userId}`)}
-                    >
-                      User's Projects
-                    </S.userPorjectsBtn>
+                    {projects.length > 0 ? (
+                      <S.userPorjectsBtn
+                        onClick={() => navigate(`/projects-of-user/${userId}`)}
+                      >
+                        User's Projects
+                      </S.userPorjectsBtn>
+                    ) : null}
                   </S.actionsContainer>
 
                   <S.chartsContainer>

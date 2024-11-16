@@ -32,6 +32,8 @@ router.post("/addproject", validateToken, addProject);
 
 router.post("/addprojectbyadmin", validateToken, addProjectByAdmin);
 
+router.get("/user/:id", validateToken, getProjectsByUserId);
+
 router.get("/user", validateToken, getProjectsByUserId);
 
 router.get("/user/searchprojects", validateToken, getProjectsByUserId);
