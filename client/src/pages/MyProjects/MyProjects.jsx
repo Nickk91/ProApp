@@ -119,7 +119,15 @@ const MyProjects = () => {
           {projects.length > 0 && (
             <S.pageTitle>{userId ? "User's" : "My"} projects</S.pageTitle>
           )}
-          {userId && <ST.userNameButton>{userName}</ST.userNameButton>}
+          {userId && (
+            <ST.userNameButton
+              onClick={() => {
+                navigate(`/userpage/${userId}`);
+              }}
+            >
+              <strong>{userName}</strong>
+            </ST.userNameButton>
+          )}
           {currentProjects.map((project, index) => (
             <ProjectCard
               key={index}

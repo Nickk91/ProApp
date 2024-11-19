@@ -166,13 +166,15 @@ const Userpage = () => {
       ) : (
         <>
           {!isImageLoaded && <S.ImagePlaceholder />}
-          <S.userImg
-            src={userData.avatar}
-            alt={`${userData.username}'s avatar`}
-            onClick={() => setImageModalOpen((prev) => !prev)}
-            onLoad={handleImageLoad}
-            style={{ display: isImageLoaded ? "block" : "none" }}
-          />
+          <S.UserImgWrapper data-tooltip="Click to replace image!">
+            <S.UserImg
+              src={userData.avatar}
+              alt={`${userData.username}'s avatar`}
+              onClick={() => setImageModalOpen((prev) => !prev)}
+              onLoad={handleImageLoad}
+              style={{ display: isImageLoaded ? "block" : "none" }}
+            />
+          </S.UserImgWrapper>
           <S.container>
             <S.list>
               <S.userDetailsContainer>

@@ -19,12 +19,42 @@ export const username = styled.div`
   max-width: 150px;
 `;
 
-export const userImg = styled.img`
+export const UserImgWrapper = styled.div`
+  position: relative;
+  display: inline-block; /* Ensure the tooltip is positioned relative to the image */
+
+  /* Tooltip styles */
+  &::after {
+    content: attr(
+      data-tooltip
+    ); /* Use the custom attribute for the tooltip text */
+    visibility: hidden;
+    opacity: 0;
+    background-color: gray;
+    color: white;
+    text-align: center;
+    padding: 5px;
+    border-radius: 4px;
+    position: absolute;
+    bottom: 120%; /* Position above the image */
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap; /* Prevents text wrapping */
+    transition: opacity 0.3s ease-in-out;
+    z-index: 10;
+  }
+
+  &:hover::after {
+    visibility: visible;
+    opacity: 1;
+  }
+`;
+
+export const UserImg = styled.img`
   width: 135px;
   height: 122px;
   border: 1px solid black;
   margin-top: -10px;
-
   border-radius: 10px;
   box-shadow: 2px 2px 5px gray;
   cursor: pointer;

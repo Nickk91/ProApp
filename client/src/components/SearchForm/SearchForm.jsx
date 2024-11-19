@@ -40,7 +40,9 @@ const SearchForm = ({
             />
           </>
         ))}
-        <S.submitButton>{submitButtonText}</S.submitButton>
+        <S.submitButton>
+          <strong>{submitButtonText.toUpperCase()}</strong>
+        </S.submitButton>
       </S.inputsContainer>
     </S.form>
   );

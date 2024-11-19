@@ -17,8 +17,12 @@ export const inactiveButton = styled.button`
   border: 2px solid;
   font-size: 13px;
   font-weight: 700;
-  transition: background-color 0.3s, color 0.3s;
+  transition: background-color 0.3s, color 0.3s, transform 0.2s;
   cursor: pointer;
+
+  &:hover {
+    transform: scale(1.03);
+  }
 `;
 
 export const activeButton = styled.button`
@@ -30,8 +34,12 @@ export const activeButton = styled.button`
   border: 2px solid;
   font-size: 13px;
   font-weight: 700;
-  transition: background-color 0.3s, color 0.3;
+  transition: background-color 0.3s, color 0.3s, transform 0.2s;
   cursor: pointer;
+
+  &:hover {
+    transform: scale(1.03);
+  }
 `;
 
 export const buttonsContainer = styled.div`
@@ -71,3 +79,9 @@ export const submitButton = styled.button`
 export const spaceDiv = styled.div`
   height: 150px;
 `;
+
+// transition: transform 0.2s;
+
+// &:hover {
+//   transform: scale(1.2);
+// }
