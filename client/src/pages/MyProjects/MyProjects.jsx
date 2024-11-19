@@ -15,6 +15,7 @@ const MyProjects = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [projectsPerPage, setProjectsPerPage] = useState(6);
   const [errorMessage, setErrorMessage] = useState(null);
+  const [userName, setUserName] = useState(null);
   const { userId } = useParams();
   console.log("userId:", userId);
 
@@ -62,7 +63,38 @@ const MyProjects = () => {
         }
       };
 
+      const fetchUser = async () => {
+        try {
+          const userResponse = await fetch(
+            `${import.meta.env.VITE_BASEURL}/users/${userId}`,
+            {
+              method: "GET",
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+
+          if (!userResponse.ok) {
+            throw new Error("Failed to fetch user data");
+          }
+
+          const userData = await userResponse.json();
+          setUserName(userData.username);
+
+          setIsLoading(false);
+        } catch (error) {
+          console.error("Error fetching projects or user data:", error);
+          setIsLoading(false);
+          setErrorMessage(error.message);
+        }
+      };
+
       fetchProjects();
+
+      if (userId) {
+        fetchUser();
+      }
     } else {
       navigate("/");
     }
@@ -87,7 +119,7 @@ const MyProjects = () => {
           {projects.length > 0 && (
             <S.pageTitle>{userId ? "User's" : "My"} projects</S.pageTitle>
           )}
-          <ST.userNameButton>{}</ST.userNameButton>
+          {userId && <ST.userNameButton>{userName}</ST.userNameButton>}
           {currentProjects.map((project, index) => (
             <ProjectCard
               key={index}
