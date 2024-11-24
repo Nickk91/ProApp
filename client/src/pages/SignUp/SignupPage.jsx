@@ -19,6 +19,12 @@ const SignupPage = () => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const username = formData.get("username");
+
+    if (username.length > 15) {
+      alert("Username must be 15 characters or fewer.");
+      return;
+    }
+
     const email = localStorage.getItem("email");
     const password = localStorage.getItem("password");
 

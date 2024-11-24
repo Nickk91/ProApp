@@ -16,6 +16,8 @@ export const userNameButton = styled.div`
   align-items: center;
   justify-content: center;
   width: 120px;
+  min-width: 50px;
+  max-width: 190px;
   height: 30px;
   color: black;
   background: #d5ddf8;

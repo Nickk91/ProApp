@@ -51,23 +51,64 @@ export const loginUser = async (req, res) => {
   }
 };
 
+// export const createUser = async (req, res) => {
+//   try {
+//     const saltRounds = 10;
+//     const hashedPassword = await bcrypt.hash(req.body.password, saltRounds);
+
+//     const user = await User.create({
+//       username: req.body.username,
+//       password: hashedPassword,
+//       email: req.body.email,
+//     });
+//     res
+//       .status(STATUS_CODE.CREATED)
+//       .send({ username: user.username, email: user.email, _id: user._id });
+//   } catch (error) {
+//     res
+//       .status(STATUS_CODE.INTERNAL_SERVER_ERROR)
+//       .json({ message: error.message });
+//   }
+// };
+
 export const createUser = async (req, res) => {
   try {
     const saltRounds = 10;
     const hashedPassword = await bcrypt.hash(req.body.password, saltRounds);
 
-    const user = await User.create({
-      username: req.body.username,
+    const username = req.body.username.trim();
+    const email = req.body.email.trim().toLowerCase();
+
+    const newUser = await User.create({
+      username,
       password: hashedPassword,
-      email: req.body.email,
+      email,
     });
-    res
-      .status(STATUS_CODE.CREATED)
-      .send({ username: user.username, email: user.email, _id: user._id });
+    res.status(STATUS_CODE.CREATED).send({
+      username: newUser.username,
+      email: newUser.email,
+      _id: newUser._id,
+    });
   } catch (error) {
+    if (error.code === 11000) {
+      return res
+        .status(STATUS_CODE.CONFLICT)
+        .json({ error: "Username or email already exists" });
+    }
+
+    if (error.name === "ValidationError") {
+      const errorMessages = Object.values(error.errors).map(
+        (err) => err.message
+      );
+      return res
+        .status(STATUS_CODE.BAD_REQUEST)
+        .json({ error: errorMessages.join(", ") });
+    }
+
+    console.error("Error creating user:", error);
     res
       .status(STATUS_CODE.INTERNAL_SERVER_ERROR)
-      .json({ message: error.message });
+      .json({ error: "Internal server error" });
   }
 };
 

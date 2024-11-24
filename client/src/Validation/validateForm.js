@@ -7,6 +7,10 @@ export default function validateForm(values) {
   if (!values.username) {
     errors.username = "Username is required!";
   }
+  if (values.username && values.username.length > 15) {
+    errors.username = "Username must be 15 characters or fewer.";
+  }
+
   if (!values.email) {
     errors.email = "Email is required!";
   } else if (!email_pattern.test(values.email)) {

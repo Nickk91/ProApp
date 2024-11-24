@@ -47,6 +47,7 @@ const RegisterFormInputsPartTwo = [
     type: "text",
     name: "username",
     placeholder: "the_jane",
+    attributes: { required: true, minLength: 1, maxLength: 15 },
   },
 ];
 
