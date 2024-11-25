@@ -197,13 +197,19 @@ export const userNameButton = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 120px;
+  min-width: 50px;
+  max-width: 190px;
   height: 30px;
   color: black;
   background: #d5ddf8;
   border-radius: 10px;
   box-shadow: 1px 1px 4px gray;
   cursor: pointer;
+  transition: transform 0.2s;
+
+  &:hover {
+    transform: scale(1.2);
+  }
 `;
 
 export const ImagePlaceholder = styled.div`
