@@ -6,9 +6,11 @@ import ReturnIcon from "../../assets/images/back_icon.svg";
 import { useNavigate } from "react-router-dom";
 import Spinner from "../../components/Spinner/Spinner.jsx";
 import "../style/pagestyle.css";
+import validateForm from "../../Validation/validateForm.js";
 
 const RegisterPage = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [formErrors, setFormErrors] = useState({});
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -18,8 +20,22 @@ const RegisterPage = () => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
-    const email = formData.get("email");
-    const password = formData.get("password");
+
+    const email = formData.get("email").trim();
+    const password = formData.get("password").trim();
+
+    console.log("email", email);
+    console.log("password", password);
+
+    const errors = validateForm({ email, password });
+
+    console.log("errors:", errors);
+    console.log("errors.length:", errors.length);
+
+    if (Object.keys(errors).length > 0) {
+      setFormErrors(errors);
+      return;
+    }
 
     try {
       setIsLoading(true);
@@ -52,6 +68,25 @@ const RegisterPage = () => {
     }
   };
 
+  // const loginAndRegisterFormInputs = [
+  //   {
+  //     name: "email",
+  //     type: "email",
+
+  //     placeholder: "jane@example.com",
+  //     attributes: {
+  //       required: true,
+  //       minLength: 4,
+  //     },
+  //   },
+  //   {
+  //     name: "password",
+  //     type: "password",
+  //     placeholder: "password",
+  //     attributes: { required: true, minLength: 8 },
+  //   },
+  // ];
+
   return (
     <section className="page">
       {isLoading ? (
@@ -64,6 +99,7 @@ const RegisterPage = () => {
             inputs={loginAndRegisterFormInputs}
             submitButtonText="NEXT"
             onSubmit={handleFormSubmit}
+            errors={formErrors}
           />
         </>
       )}
