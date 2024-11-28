@@ -5,13 +5,7 @@ import GenericInput from "../GenericInput/GenericInput.jsx";
 import * as S from "../StyledComponents/styles.jsx";
 import validateForm from "../../Validation/validateForm.js";
 
-const SearchForm = ({
-  title,
-  submitButtonText,
-  inputs,
-  onSubmit,
-  displayError,
-}) => {
+const SearchForm = ({ title, submitButtonText, inputs, onSubmit }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -36,7 +30,6 @@ const SearchForm = ({
               attributes={input.attributes}
               placeholder={input.placeholder ? input.placeholder : ""}
               error={errors[input.name]}
-              displayError={displayError}
             />
           </>
         ))}

@@ -11,6 +11,8 @@ import validateForm from "../../Validation/validateForm.js";
 const RegisterPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [formErrors, setFormErrors] = useState({});
+  const [displayFormError, setDisplayFormError] = useState(false);
+
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -63,29 +65,11 @@ const RegisterPage = () => {
       }
     } catch (error) {
       console.error("Error;", error);
+      setDisplayFormError(true);
     } finally {
       setIsLoading(false);
     }
   };
-
-  // const loginAndRegisterFormInputs = [
-  //   {
-  //     name: "email",
-  //     type: "email",
-
-  //     placeholder: "jane@example.com",
-  //     attributes: {
-  //       required: true,
-  //       minLength: 4,
-  //     },
-  //   },
-  //   {
-  //     name: "password",
-  //     type: "password",
-  //     placeholder: "password",
-  //     attributes: { required: true, minLength: 8 },
-  //   },
-  // ];
 
   return (
     <section className="page">
@@ -99,7 +83,7 @@ const RegisterPage = () => {
             inputs={loginAndRegisterFormInputs}
             submitButtonText="NEXT"
             onSubmit={handleFormSubmit}
-            errors={formErrors}
+            formErrors={formErrors}
           />
         </>
       )}

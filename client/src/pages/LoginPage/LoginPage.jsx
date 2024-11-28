@@ -83,19 +83,15 @@ const LoginPage = () => {
           })
         );
 
-        // Redirect to home page
         navigate("/");
       } else {
         console.error("Login failed");
         setDisplayError(true);
       }
     } catch (error) {
-      // Extract the server error message if it exists
       const errorMessage =
         error.response?.data?.message || "An unexpected error occurred";
-
       console.error("Login error console log:", errorMessage);
-      setDisplayError(errorMessage); // Display the server message to the user
       setServerError(errorMessage); // Save the error for other use cases
     }
   };
