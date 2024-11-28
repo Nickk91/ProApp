@@ -47,7 +47,6 @@ const AddTaskPage = () => {
       }
     } catch (error) {
       console.error("Error:", error);
-      setDisplayError(true);
     }
   };
 

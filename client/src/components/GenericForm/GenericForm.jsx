@@ -11,6 +11,7 @@ const GenericForm = ({
   displayError,
   search,
   serverError,
+  formErrors,
 }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -40,6 +41,7 @@ const GenericForm = ({
               attributes={input.attributes}
               placeholder={input.placeholder ? input.placeholder : ""}
               error={errors[input.name]}
+              // formError={formErrors?[input.name]}
               serverError={serverError}
               displayError={displayError}
             />

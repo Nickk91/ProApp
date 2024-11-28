@@ -14,10 +14,11 @@ const SearchPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [searchBy, setSearchBy] = useState("project name");
   const [searchResults, setSearchResults] = useState({});
+  const [displayError, setDisplayError] = useState(false);
+  const [serverError, setServerError] = useState(null);
 
   const [currentPage, setCurrentPage] = useState(1);
   const [projectsPerPage, setProjectsPerPage] = useState(2);
-  const [displayError, setDisplayError] = useState(false);
 
   const searchProjectsInputs = [
     {
@@ -48,6 +49,8 @@ const SearchPage = () => {
 
       if (response.ok) {
         const data = await response.json();
+        setDisplayError(false);
+        setServerError(null);
         setSearchResults(data);
       } else {
         console.error("Search failed");
@@ -105,12 +108,19 @@ const SearchPage = () => {
 
       if (response.ok) {
         const data = await response.json();
+        setDisplayError(false);
+        setServerError(null);
         setSearchResults(data);
       } else {
         console.error("Search failed");
       }
     } catch (error) {
       console.error("Error:", error);
+      const errorMessage =
+        error.response?.data?.message || "An unexpected error occurred";
+      console.error("Search Error:", errorMessage);
+      setServerError(errorMessage);
+      setDisplayError(true);
     } finally {
       setIsLoading(false);
     }
@@ -177,20 +187,22 @@ const SearchPage = () => {
         inputs={searchProjectsInputs}
         submitButtonText="Search"
         onSubmit={handleFormSubmit}
-        displayError={displayError}
         search={true}
+        displayError={displayError}
+        serverError={serverError}
       />
       {isLoading ? (
         <Spinner />
       ) : !searchResults.projects ? null : (
         <>
-          {currentProjects.map((project, index) => (
-            <ProjectCard
-              key={index}
-              project={project}
-              onClick={() => handleClick(project._id)}
-            />
-          ))}
+          {!displayError &&
+            currentProjects.map((project, index) => (
+              <ProjectCard
+                key={index}
+                project={project}
+                onClick={() => handleClick(project._id)}
+              />
+            ))}
           <Pagination
             totalProjects={searchResults.projects.length}
             projectsPerPage={projectsPerPage}

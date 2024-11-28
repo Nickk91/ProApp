@@ -53,7 +53,6 @@ const EditTaskPage = () => {
       }
     } catch (error) {
       console.error("Error:", error);
-      setDisplayError(true);
     }
   };
 
