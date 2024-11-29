@@ -12,6 +12,7 @@ const GenericForm = ({
   search,
   serverError,
   formErrors,
+  displayFormError,
 }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -20,6 +21,7 @@ const GenericForm = ({
     onSubmit(e, formProps);
   };
 
+  //currently validates form for only Login page
   const errors = validateForm({});
 
   const FormComponent = search ? S.searchForm : S.form;
@@ -40,14 +42,16 @@ const GenericForm = ({
               name={input.name}
               attributes={input.attributes}
               placeholder={input.placeholder ? input.placeholder : ""}
+              //Specific errors from validateForm({}) validation
               error={errors[input.name]}
-              // formError={formErrors?[input.name]}
+              {...(!search && { formError: formErrors?.[input.name] || "" })}
+              {...(!search && { displayFormError })}
               serverError={serverError}
               displayError={displayError}
             />
           </React.Fragment>
         ))}
-
+        {/* displays error when email or password is wrong*/}
         {<S.errorText>{serverError && serverError}</S.errorText>}
 
         <S.submitButton>{submitButtonText}</S.submitButton>
