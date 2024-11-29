@@ -27,13 +27,9 @@ const RegisterPage = () => {
     const email = formData.get("email").trim();
     const password = formData.get("password").trim();
 
-    console.log("email", email);
-    console.log("password", password);
+    console.log(email === password);
 
     const errors = validateForm({ email, password });
-
-    console.log("errors:", errors);
-    console.log("errors.length:", errors.length);
 
     if (Object.keys(errors).length > 0) {
       setFormErrors(errors);
