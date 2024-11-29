@@ -12,6 +12,7 @@ const RegisterPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [formErrors, setFormErrors] = useState({});
   const [displayFormError, setDisplayFormError] = useState(false);
+  const [serverError, setServerError] = useState(null);
 
   const navigate = useNavigate();
 
@@ -36,6 +37,7 @@ const RegisterPage = () => {
 
     if (Object.keys(errors).length > 0) {
       setFormErrors(errors);
+      setDisplayFormError(true);
       return;
     }
 
@@ -65,7 +67,11 @@ const RegisterPage = () => {
       }
     } catch (error) {
       console.error("Error;", error);
-      setDisplayFormError(true);
+
+      const errorMessage =
+        error.response?.data?.message || "An unexpected error occurred";
+      console.error("Register error console log:", errorMessage);
+      setServerError(errorMessage);
     } finally {
       setIsLoading(false);
     }
@@ -84,6 +90,8 @@ const RegisterPage = () => {
             submitButtonText="NEXT"
             onSubmit={handleFormSubmit}
             formErrors={formErrors}
+            displayFormError={displayFormError}
+            serverError={serverError}
           />
         </>
       )}

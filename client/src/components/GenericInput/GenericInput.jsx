@@ -7,8 +7,10 @@ const GenericInput = ({
   name,
   placeholder,
   error,
-  formError,
   displayError,
+  formError,
+  displayFormError,
+  serverError,
 
   attributes = {},
   value,
@@ -24,9 +26,10 @@ const GenericInput = ({
         {...attributes}
         defaultValue={value}
       />
-      {displayError && <S.errorText>{error}</S.errorText>}
-
-      {/* {formError && <S.errorText>{formError}</S.errorText>} */}
+      {!serverError && displayError && <S.errorText>{error}</S.errorText>}
+      {!serverError && displayFormError && (
+        <S.errorText>{formError}</S.errorText>
+      )}
     </>
   );
 };

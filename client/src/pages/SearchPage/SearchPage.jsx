@@ -81,6 +81,8 @@ const SearchPage = () => {
 
       if (response.ok) {
         const data = await response.json();
+        setDisplayError(false);
+        setServerError(null);
         setSearchResults(data);
       } else {
         console.error("Search failed");
