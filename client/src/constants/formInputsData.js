@@ -1,20 +1,20 @@
 const addProjectFormInputs = [
   {
-    name: "Project name",
+    name: "projectName",
     type: "text",
     label: "Project name",
     placeholder: "Project name",
     attributes: { required: true, minLength: 1 },
   },
   {
-    name: "Project description",
+    name: "projectDescription",
     type: "text",
     label: "Project description",
     placeholder: "Project description",
     attributes: { required: true, minLength: 1 },
   },
   {
-    name: "Project image URL",
+    name: "projectImageURL",
     type: "text",
     label: "Project image URL",
     placeholder: "Project image URL",

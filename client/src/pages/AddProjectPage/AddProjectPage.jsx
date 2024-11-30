@@ -9,12 +9,15 @@ import Spinner from "../../components/Spinner/Spinner.jsx";
 import FooterMenu from "../../components/FooterMenu/FooterMenu.jsx";
 import { userAuthLevels } from "../../constants/userAuthLevels.js";
 import { useSelector } from "react-redux";
+import validateProjectAdding from "../../Validation/validateProjectAdding.js";
 
 const AddProjectPage = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState(null);
   const [isAddingProjectToAnotherUser, setIsAddingProjectToAnotherUser] =
     useState(false);
+  const [displayFormError, setDisplayFormError] = useState(false);
+  const [formErrors, setFormErrors] = useState(undefined);
+  const [serverError, setServerError] = useState(null);
   const navigate = useNavigate();
   const authLevel = useSelector((state) => state.auth.user?.authLevel);
   const userId = useSelector((state) => state.userId.value);
@@ -29,13 +32,23 @@ const AddProjectPage = () => {
     e.preventDefault();
     const formData = new FormData(e.target);
 
-    const projectName = formData.get("Project name");
-    const projectDescription = formData.get("Project description");
-    const projectImage = formData.get("Project image URL");
+    const projectName = formData.get("projectName").trim();
+    const projectDescription = formData.get("projectDescription").trim();
+    const projectImageURL = formData.get("projectImageURL").trim();
+
+    const errors = validateProjectAdding({
+      projectName,
+      projectDescription,
+      projectImageURL,
+    });
+
+    if (Object.keys(errors).length > 0) {
+      setFormErrors(errors);
+      setDisplayFormError(true);
+      return;
+    }
 
     try {
-      // throw new Error("SOMETHING WENT WRONG. PLEASE TRY AGAIN");
-
       setIsLoading(true);
       const token = localStorage.getItem("token");
       let response;
@@ -84,7 +97,9 @@ const AddProjectPage = () => {
     } catch (error) {
       console.error("Error;", error);
 
-      setErrorMessage(error.message || "An unexpected error occurred.");
+      setServerError(
+        `${error.message}. Please try again.` || "An unexpected error occurred."
+      );
     }
     setIsLoading(false);
   };
@@ -97,8 +112,6 @@ const AddProjectPage = () => {
     <section className="page">
       {isLoading ? (
         <Spinner />
-      ) : errorMessage ? (
-        <S.ErrorBox>{errorMessage}</S.ErrorBox>
       ) : (
         <>
           <S.ReturnIcon onClick={handleBack} src={ReturnIcon} />
@@ -107,6 +120,9 @@ const AddProjectPage = () => {
             inputs={addProjectFormInputs}
             submitButtonText="ADD"
             onSubmit={handleFormSubmit}
+            formErrors={formErrors}
+            displayFormError={displayFormError}
+            serverError={serverError}
           />
         </>
       )}

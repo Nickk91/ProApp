@@ -206,8 +206,9 @@ const SearchPage = () => {
               />
             ))}
           <Pagination
-            totalProjects={searchResults.projects.length}
-            projectsPerPage={projectsPerPage}
+            currentPage={currentPage}
+            totalItems={searchResults.projects.length}
+            ItemsPerPage={projectsPerPage}
             setCurrentPage={setCurrentPage}
           />
         </>

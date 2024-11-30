@@ -51,7 +51,7 @@ const GenericForm = ({
             />
           </React.Fragment>
         ))}
-        {/* displays error when email or password is wrong*/}
+        {/* When there's a server error and not a specific input error.*/}
         {<S.errorText>{serverError && serverError}</S.errorText>}
 
         <S.submitButton>{submitButtonText}</S.submitButton>
