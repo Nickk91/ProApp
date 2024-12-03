@@ -2,9 +2,6 @@ import React from "react";
 import GenericInput from "../GenericInput/GenericInput.jsx";
 import * as S from "../StyledComponents/styles.jsx";
 import GenericTaskInput from "../GenericTaskInput/GenericTaskInput.jsx";
-import todo from "../../assets/images/status_todo.svg";
-import inProgress from "../../assets/images/status_inprogress.svg";
-import done from "../../assets/images/status_done.svg";
 import trash from "../../assets/images/trash_icon.svg";
 import GenericModal from "../GenericModal/GenericModal.jsx";
 import { useState } from "react";
@@ -43,6 +40,7 @@ const GenericTaskForm = ({
     localStorage.setItem("taskStatus", formProps.taskStatus);
     onSubmit(e, formProps);
   };
+  console.log("GenericTaskForm formErrors", formErrors);
 
   return (
     <>
@@ -64,6 +62,8 @@ const GenericTaskForm = ({
                 key={input.name}
                 type={input.type}
                 name={input.name}
+                displayFormError={displayFormError}
+                formError={formErrors?.[input.name] || ""}
                 attributes={input.attributes}
                 placeholder={input.placeholder || ""}
                 value={edit ? taskName : ""}
@@ -75,6 +75,8 @@ const GenericTaskForm = ({
             selectedStatus={selectedStatus}
             setSelectedStatus={setSelectedStatus}
           />
+          {/* When there's a server error and not a specific input error.*/}
+          {<S.errorText>{serverError && serverError}</S.errorText>}
 
           <S.submitButton>{submitButtonText}</S.submitButton>
         </S.inputsContainer>

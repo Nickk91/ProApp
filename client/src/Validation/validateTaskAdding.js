@@ -19,6 +19,7 @@ export default function validateTaskAdding(values) {
   } else if (values.description.length > 120) {
     errors.description = "Task description should not exceed 120 characters.";
   }
+  console.log("errors:", errors);
 
   return errors;
 }

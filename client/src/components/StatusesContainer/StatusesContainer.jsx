@@ -5,8 +5,6 @@ import done from "../../assets/images/status_done.svg";
 import { useState } from "react";
 
 const StatusesContainer = ({ selectedStatus, setSelectedStatus }) => {
-  console.log("selectedStatus:", selectedStatus);
-
   const statuses = [
     { key: "todo", src: todo, alt: "status todo button" },
     { key: "in progress", src: inProgress, alt: "status in progress button" },

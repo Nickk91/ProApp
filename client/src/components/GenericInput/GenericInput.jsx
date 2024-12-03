@@ -11,7 +11,6 @@ const GenericInput = ({
   formError,
   displayFormError,
   serverError,
-
   attributes = {},
   value,
 }) => {
