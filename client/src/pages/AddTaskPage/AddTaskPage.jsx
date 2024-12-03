@@ -14,7 +14,7 @@ const AddTaskPage = () => {
   const navigate = useNavigate();
   const [displayFormError, setDisplayFormError] = useState(false);
   const [formErrors, setFormErrors] = useState(undefined);
-  const [serverError, setServerError] = useState(null);
+  const [serverError, setServerError] = useState(undefined);
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -23,15 +23,14 @@ const AddTaskPage = () => {
     const name = formData.get("name");
     const description = formData.get("description");
 
-    console.log("name:", name);
-
-    console.log("description:", description);
     const errors = validateTaskAdding({ name, description });
 
     if (Object.keys(errors).length > 0) {
       setFormErrors(errors);
       setDisplayFormError(true);
     }
+    console.log("formErrors.name:", formErrors.name);
+    console.log("formErrors.description:", formErrors.description);
 
     try {
       const selectedTaskStatus = localStorage.getItem("taskStatus");
@@ -61,7 +60,9 @@ const AddTaskPage = () => {
       }
     } catch (error) {
       console.error("Error:", error);
-      setServerError(error);
+      setServerError(
+        `${error.message}. Please try again.` || "An unexpected error occurred."
+      );
     }
   };
 
