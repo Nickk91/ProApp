@@ -20,9 +20,9 @@ export default function validateProjectAdding(values) {
   // Validate Project Description
   if (!values.projectDescription) {
     errors.projectDescription = "Project description is required!";
-  } else if (values.projectDescription.length < 2) {
+  } else if (values.projectDescription.length < 1) {
     errors.projectDescription =
-      "Project description should be at least 10 characters long.";
+      "Project description should be at least 1 characters long.";
   } else if (values.projectDescription.length > 120) {
     errors.projectDescription =
       "Project description should not exceed 120 characters.";

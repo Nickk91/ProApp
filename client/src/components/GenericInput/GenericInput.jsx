@@ -26,6 +26,7 @@ const GenericInput = ({
         {...attributes}
         defaultValue={value}
       />
+
       {!serverError && displayError && <S.errorText>{error}</S.errorText>}
       {!serverError && displayFormError && (
         <S.errorText>{formError}</S.errorText>
