@@ -65,7 +65,7 @@ const AddProjectPage = () => {
             body: JSON.stringify({
               projectName,
               projectDescription,
-              projectImage,
+              projectImageURL,
               userId,
             }),
           }
@@ -82,7 +82,7 @@ const AddProjectPage = () => {
             body: JSON.stringify({
               projectName,
               projectDescription,
-              projectImage,
+              projectImage: projectImageURL,
             }),
           }
         );

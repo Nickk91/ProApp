@@ -53,13 +53,13 @@ const RegisterFormInputsPartTwo = [
 
 const addTaskFormInputs = [
   {
-    name: "taskName",
+    name: "name",
     type: "text",
     placeholder: "Task Name",
     attributes: { required: true, minLength: 1 },
   },
   {
-    name: "taskDescription",
+    name: "description",
     type: "text",
     label: "Task description",
     placeholder: "Task description",

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import GenericInput from "../GenericInput/GenericInput.jsx";
 import * as S from "../StyledComponents/styles.jsx";
 import GenericTaskInput from "../GenericTaskInput/GenericTaskInput.jsx";
@@ -7,6 +7,8 @@ import inProgress from "../../assets/images/status_inprogress.svg";
 import done from "../../assets/images/status_done.svg";
 import trash from "../../assets/images/trash_icon.svg";
 import GenericModal from "../GenericModal/GenericModal.jsx";
+import { useState } from "react";
+import StatusesContainer from "../StatusesContainer/StatusesContainer.jsx";
 
 const GenericTaskForm = ({
   title,
@@ -18,10 +20,13 @@ const GenericTaskForm = ({
   taskDesc,
   taskStatus,
   edit,
+  formErrors,
+  displayFormError,
+  serverError,
 }) => {
   !edit && (taskStatus = "todo");
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedStatus, setSelectedStatus] = useState(taskStatus);
+  const [selectedStatus, setSelectedStatus] = useState(taskStatus || "todo");
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -34,7 +39,8 @@ const GenericTaskForm = ({
     e.preventDefault();
     const formData = new FormData(e.target);
     const formProps = Object.fromEntries(formData.entries());
-    localStorage.setItem("taskStatus", selectedStatus);
+    formProps.taskStatus = selectedStatus;
+    localStorage.setItem("taskStatus", formProps.taskStatus);
     onSubmit(e, formProps);
   };
 
@@ -50,71 +56,25 @@ const GenericTaskForm = ({
           <S.del onClick={openModal} src={trash} alt="#######" />
         </S.topContainer>
         <S.inputsContainer>
-          <GenericInput
-            key={inputs[0].name}
-            type={inputs[0].type}
-            name={inputs[0].name}
-            attributes={inputs[0].attributes}
-            placeholder={inputs[0].placeholder ? inputs[0].placeholder : ""}
-            value={edit ? taskName : ""}
-          />
-          <GenericTaskInput
-            key={inputs[1].name}
-            type={inputs[1].type}
-            name={inputs[1].name}
-            attributes={inputs[1].attributes}
-            placeholder={inputs[1].placeholder ? inputs[1].placeholder : ""}
-            value={edit ? taskDesc : ""}
-          />
-          <S.statusesContainer>
-            {selectedStatus === "todo" ? (
-              <S.selectedStatusButtonCasule>
-                <S.statusButton src={todo} alt="status todo button" />
-              </S.selectedStatusButtonCasule>
-            ) : (
-              <S.statusButtonCasule
-                onClick={() => {
-                  setSelectedStatus("todo");
-                }}
-              >
-                <S.statusButton src={todo} alt="status todo button" />
-              </S.statusButtonCasule>
-            )}
+          {inputs.map((input) => {
+            let Component =
+              input.name === "name" ? GenericInput : GenericTaskInput;
+            return (
+              <Component
+                key={input.name}
+                type={input.type}
+                name={input.name}
+                attributes={input.attributes}
+                placeholder={input.placeholder || ""}
+                value={edit ? taskName : ""}
+              />
+            );
+          })}
 
-            {selectedStatus === "in progress" ? (
-              <S.selectedStatusButtonCasule>
-                <S.statusButton
-                  src={inProgress}
-                  alt="status in progress button"
-                />
-              </S.selectedStatusButtonCasule>
-            ) : (
-              <S.statusButtonCasule
-                onClick={() => {
-                  setSelectedStatus("in progress");
-                }}
-              >
-                <S.statusButton
-                  src={inProgress}
-                  alt="status in progress button"
-                />
-              </S.statusButtonCasule>
-            )}
-
-            {selectedStatus === "done" ? (
-              <S.selectedStatusButtonCasule>
-                <S.statusButton src={done} alt="status done button" />
-              </S.selectedStatusButtonCasule>
-            ) : (
-              <S.statusButtonCasule
-                onClick={() => {
-                  setSelectedStatus("done");
-                }}
-              >
-                <S.statusButton src={done} alt="status done button" />
-              </S.statusButtonCasule>
-            )}
-          </S.statusesContainer>
+          <StatusesContainer
+            selectedStatus={selectedStatus}
+            setSelectedStatus={setSelectedStatus}
+          />
 
           <S.submitButton>{submitButtonText}</S.submitButton>
         </S.inputsContainer>

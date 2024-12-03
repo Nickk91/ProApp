@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import * as S from "../../components/StyledComponents/styles.jsx";
 import GenericTaskForm from "../../components/GenericTaskForm/GenericTaskForm.jsx";
 import { addTaskFormInputs } from "../../constants/formInputsData.js";
@@ -7,17 +7,31 @@ import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import "../style/pagestyle.css";
 import FooterMenu from "../../components/FooterMenu/FooterMenu.jsx";
+import validateTaskAdding from "../../Validation/validateTaskAdding.js";
 
 const AddTaskPage = () => {
   const { projectId } = useParams();
   const navigate = useNavigate();
+  const [displayFormError, setDisplayFormError] = useState(false);
+  const [formErrors, setFormErrors] = useState(undefined);
+  const [serverError, setServerError] = useState(null);
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
 
-    const name = formData.get("taskName");
-    const description = formData.get("taskDescription");
+    const name = formData.get("name");
+    const description = formData.get("description");
+
+    console.log("name:", name);
+
+    console.log("description:", description);
+    const errors = validateTaskAdding({ name, description });
+
+    if (Object.keys(errors).length > 0) {
+      setFormErrors(errors);
+      setDisplayFormError(true);
+    }
 
     try {
       const selectedTaskStatus = localStorage.getItem("taskStatus");
@@ -47,6 +61,7 @@ const AddTaskPage = () => {
       }
     } catch (error) {
       console.error("Error:", error);
+      setServerError(error);
     }
   };
 
@@ -63,6 +78,9 @@ const AddTaskPage = () => {
         inputs={addTaskFormInputs}
         submitButtonText="ADD TASK"
         onSubmit={handleFormSubmit}
+        formErrors={formErrors}
+        displayFormError={displayFormError}
+        serverError={serverError}
       />
       <FooterMenu />
     </section>
