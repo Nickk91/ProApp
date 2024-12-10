@@ -107,12 +107,16 @@ export const input = styled.input`
   }
 `;
 
-export const inputBox = styled.input`
+export const inputBox = styled.textarea`
   border: 2px solid black;
   background-color: white;
   height: 150px;
   margin-bottom: 7px;
-  padding-left: 5px;
+  padding: 5px;
+  font-size: 16px;
+  line-height: 1.5;
+  box-sizing: border-box;
+  resize: none; /* Prevent resizing if unnecessary */
 
   @media screen and (max-width: 365px) {
     width: 95%;

@@ -22,6 +22,8 @@ const AddTaskPage = () => {
 
     const name = formData.get("name");
     const description = formData.get("description");
+    // console.log("name:", name);
+    // console.log("description:", description);
 
     const errors = validateTaskAdding({ name, description });
 
@@ -29,8 +31,8 @@ const AddTaskPage = () => {
       setFormErrors(errors);
       setDisplayFormError(true);
     }
-    console.log("formErrors.name:", formErrors.name);
-    console.log("formErrors.description:", formErrors.description);
+    // console.log("formErrors.name:", formErrors.name);
+    // console.log("formErrors.description:", formErrors.description);
 
     try {
       const selectedTaskStatus = localStorage.getItem("taskStatus");
