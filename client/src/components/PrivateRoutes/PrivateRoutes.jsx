@@ -1,16 +1,23 @@
 import React from "react";
 import { Outlet, Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import Spinner from "../Spinner/Spinner";
 
 const PrivateRoutes = ({ authLevel }) => {
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-  const userAuthLevel = useSelector((state) => state.auth.user?.authLevel);
+  const { isLoggedIn, user, loading } = useSelector((state) => state.auth);
+
+  // console.log("isLoggedIn:", isLoggedIn);
+  // console.log("userAuthLevel:", userAuthLevel);
+  // console.log("authLevel:", authLevel);
+  if (loading) {
+    return <Spinner />;
+  }
 
   if (!isLoggedIn) {
     return <Navigate to="/loggedout" replace />;
   }
 
-  if (isLoggedIn && userAuthLevel < authLevel) {
+  if (user?.authLevel < authLevel) {
     return <Navigate to="/unauthorized" replace />;
   }
 
