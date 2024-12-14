@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import * as S from "../../components/StyledComponents/styles.jsx";
 import GenericTaskForm from "../../components/GenericTaskForm/GenericTaskForm.jsx";
 import { addTaskFormInputs } from "../../constants/formInputsData.js";
@@ -12,32 +12,30 @@ import validateTaskAdding from "../../Validation/validateTaskAdding.js";
 const AddTaskPage = () => {
   const { projectId } = useParams();
   const navigate = useNavigate();
-  const [displayFormError, setDisplayFormError] = useState(false);
   const [formErrors, setFormErrors] = useState(undefined);
   const [serverError, setServerError] = useState(undefined);
+
+  useEffect(() => {
+    if (!projectId) {
+      navigate("/projects"); // Redirect if no projectId
+    }
+  }, [projectId, navigate]);
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
-
     const name = formData.get("name");
     const description = formData.get("description");
-    // console.log("name:", name);
-    // console.log("description:", description);
 
     const errors = validateTaskAdding({ name, description });
-
     if (Object.keys(errors).length > 0) {
       setFormErrors(errors);
-      setDisplayFormError(true);
+      return;
     }
-    // console.log("formErrors.name:", formErrors.name);
-    // console.log("formErrors.description:", formErrors.description);
 
     try {
-      const selectedTaskStatus = localStorage.getItem("taskStatus");
+      const selectedTaskStatus = localStorage.getItem("taskStatus") || "TODO";
       const token = localStorage.getItem("token");
-
       const response = await fetch(
         `${import.meta.env.VITE_BASEURL}/projects/project/${projectId}/addtask`,
         {
@@ -46,43 +44,32 @@ const AddTaskPage = () => {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
-          body: JSON.stringify({
-            name,
-            description,
-            selectedTaskStatus,
-          }),
+          body: JSON.stringify({ name, description, selectedTaskStatus }),
         }
       );
 
       if (response.ok) {
-        const data = await response.json();
         navigate(`/projects/${projectId}`);
       } else {
-        console.error("Adding task failed:", await response.json());
+        setServerError("Failed to add task. Please try again.");
       }
     } catch (error) {
-      console.error("Error:", error);
-      setServerError(
-        `${error.message}. Please try again.` || "An unexpected error occurred."
-      );
+      setServerError("An unexpected error occurred. Please try again.");
     }
-  };
-
-  const handleBack = () => {
-    navigate(`/projects/${projectId}`);
   };
 
   return (
     <section className="page">
-      <S.ReturnIcon onClick={handleBack} src={ReturnIcon} />
+      <S.ReturnIcon
+        onClick={() => navigate(`/projects/${projectId}`)}
+        src={ReturnIcon}
+      />
       <GenericTaskForm
         title="Add Task"
-        toDelete="task"
         inputs={addTaskFormInputs}
         submitButtonText="ADD TASK"
         onSubmit={handleFormSubmit}
         formErrors={formErrors}
-        displayFormError={displayFormError}
         serverError={serverError}
       />
       <FooterMenu />

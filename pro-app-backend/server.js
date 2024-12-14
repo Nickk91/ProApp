@@ -34,9 +34,6 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
-// Error handling middleware
-app.use(errorHandler);
-
 // Projects routes
 app.use("/api/pro-app/projects", projectsRoutes);
 
@@ -46,6 +43,9 @@ app.use("/api/pro-app/users", usersRoutes);
 app.use("/authGood", (req, res, next) => {
   res.send({ userLevel: 1 });
 });
+
+// Error handling middleware
+app.use(errorHandler);
 
 // MongoDB connection and server start
 mongoose
