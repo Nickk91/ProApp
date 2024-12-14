@@ -20,8 +20,25 @@ import FooterMenu from "./components/FooterMenu/FooterMenu.jsx";
 import HomePage from "./pages/HomePage/HomePage.jsx";
 import UnauthorizedPage from "./pages/UnauthorizedPage/UnauthorizedPage.jsx";
 import ProtectedRoute from "./components/Auth/ProtectedRoute.jsx";
-
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { initializeAuth, setLoading } from "./slices/authSlice.js";
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+    if (storedUser) {
+      dispatch(
+        initializeAuth({
+          isLoggedIn: true,
+          user: storedUser,
+        })
+      );
+    } else {
+      dispatch(setLoading(false));
+    }
+  }, [dispatch]);
   return (
     <>
       <Helmet>

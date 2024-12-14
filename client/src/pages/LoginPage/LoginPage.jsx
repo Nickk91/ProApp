@@ -53,6 +53,11 @@ const LoginPage = () => {
     checkToken();
   }, [dispatch, navigate]);
 
+  const handleLogin = (userData) => {
+    dispatch(login(userData));
+    localStorage.setItem("user", JSON.stringify(userData));
+  };
+
   // Handle login form submission
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -73,15 +78,13 @@ const LoginPage = () => {
         // Store token and dispatch login action
         localStorage.setItem("token", accessToken);
 
-        dispatch(
-          login({
-            _id: user._id,
-            authLevel: user.authLevel,
-            email: user.email,
-            username: user.username,
-            isLoggedIn: true,
-          })
-        );
+        handleLogin({
+          _id: user._id,
+          authLevel: user.authLevel,
+          email: user.email,
+          username: user.username,
+          isLoggedIn: true,
+        });
 
         navigate("/");
       } else {

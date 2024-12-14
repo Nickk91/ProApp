@@ -13,9 +13,10 @@ const FooterMenu = () => {
   const user = useSelector((state) => state.auth.user);
   const authLevel = user?.authLevel;
   const handleLogout = () => {
+    dispatch(logout());
+    localStorage.removeItem("user");
     localStorage.removeItem("token");
     localStorage.removeItem("TaskStatus");
-    dispatch(logout());
     navigate("/loggedout");
   };
 
