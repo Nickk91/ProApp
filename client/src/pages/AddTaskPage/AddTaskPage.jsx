@@ -13,6 +13,7 @@ const AddTaskPage = () => {
   const { projectId } = useParams();
   const navigate = useNavigate();
   const [formErrors, setFormErrors] = useState(undefined);
+  const [displayFormError, setDisplayFormError] = useState(false);
   const [serverError, setServerError] = useState(undefined);
 
   useEffect(() => {
@@ -30,6 +31,7 @@ const AddTaskPage = () => {
     const errors = validateTaskAdding({ name, description });
     if (Object.keys(errors).length > 0) {
       setFormErrors(errors);
+      setDisplayFormError(true);
       return;
     }
 
@@ -70,6 +72,7 @@ const AddTaskPage = () => {
         submitButtonText="ADD TASK"
         onSubmit={handleFormSubmit}
         formErrors={formErrors}
+        displayFormError={displayFormError}
         serverError={serverError}
       />
       <FooterMenu />
