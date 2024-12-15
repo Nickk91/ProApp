@@ -9,11 +9,15 @@ import Spinner from "../../components/Spinner/Spinner";
 import * as S from "../../components/StyledComponents/styles";
 import ReturnIcon from "../../assets/images/back_icon.svg";
 import { loginAndRegisterFormInputs } from "../../constants/formInputsData";
+import validateForm from "../../Validation/validateForm";
 
 const LoginPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [displayError, setDisplayError] = useState(false);
   const [serverError, setServerError] = useState(null);
+  const [formErrors, setFormErrors] = useState(undefined);
+  const [displayFormError, setDisplayFormError] = useState(false);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -64,6 +68,14 @@ const LoginPage = () => {
     const formData = new FormData(e.target);
     const email = formData.get("email");
     const password = formData.get("password");
+
+    const errors = validateForm({ email, password });
+
+    if (Object.keys(errors).length > 0) {
+      setFormErrors(errors);
+      setDisplayFormError(true);
+      return;
+    }
 
     try {
       const response = await axios.post(
@@ -118,6 +130,8 @@ const LoginPage = () => {
             onSubmit={handleFormSubmit}
             displayError={displayError}
             serverError={serverError}
+            formErrors={formErrors}
+            displayFormError={displayFormError}
           />
         </section>
       )}
