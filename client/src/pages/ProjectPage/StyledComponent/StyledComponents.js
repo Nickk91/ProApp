@@ -273,3 +273,10 @@ export const errorMessageHidden = styled.div`
   left: 50%;
   transform: translateX(-50%);
 `;
+
+export const iconsWrap = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  align-items: center;
+`;

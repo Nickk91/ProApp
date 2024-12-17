@@ -6,6 +6,7 @@ import trash from "../../assets/images/trash_icon.svg";
 import GenericModal from "../GenericModal/GenericModal.jsx";
 import { useState } from "react";
 import StatusesContainer from "../StatusesContainer/StatusesContainer.jsx";
+import validateTaskAdding from "../../Validation/validateTaskAdding.js";
 
 const GenericTaskForm = ({
   title,
@@ -36,7 +37,20 @@ const GenericTaskForm = ({
     e.preventDefault();
     const formData = new FormData(e.target);
     const formProps = Object.fromEntries(formData.entries());
+
+    const name = formProps.name;
+    const description = formProps.description;
+    console.log(name);
+    console.log(description);
+
+    const errors = validateTaskAdding({ name, description });
+
+    if (Object.keys(errors).length > 0) {
+      formErrors = errors;
+    }
+
     formProps.taskStatus = selectedStatus;
+
     localStorage.setItem("taskStatus", formProps.taskStatus);
     onSubmit(e, formProps);
   };
@@ -51,7 +65,8 @@ const GenericTaskForm = ({
       >
         <S.topContainer>
           <S.formTitle>{title}</S.formTitle>
-          <S.del onClick={openModal} src={trash} alt="#######" />
+
+          {edit && <S.del onClick={openModal} src={trash} alt="#######" />}
         </S.topContainer>
         <S.inputsContainer>
           {inputs.map((input) => {
@@ -66,7 +81,15 @@ const GenericTaskForm = ({
                 formError={formErrors?.[input.name] || ""}
                 attributes={input.attributes}
                 placeholder={input.placeholder || ""}
-                value={edit ? taskName : ""}
+                value={
+                  edit
+                    ? input.name === "name"
+                      ? taskName
+                      : input.name === "description"
+                      ? taskDesc
+                      : ""
+                    : ""
+                }
               />
             );
           })}
