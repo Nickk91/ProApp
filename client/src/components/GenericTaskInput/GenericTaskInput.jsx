@@ -9,11 +9,8 @@ const GenericTaskInput = ({
   attributes = {},
   value,
   formError,
-  displayFormError,
   serverError,
 }) => {
-  console.log("GenericTaskInput: formError", formError);
-
   return (
     <>
       {label && <S.label htmlFor={name}></S.label>}
@@ -26,9 +23,7 @@ const GenericTaskInput = ({
         defaultValue={value}
       />
 
-      {!serverError && displayFormError && formError && (
-        <S.errorText>{formError}</S.errorText>
-      )}
+      {!serverError && formError && <S.errorText>{formError}</S.errorText>}
     </>
   );
 };

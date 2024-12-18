@@ -18,13 +18,13 @@ const GenericTaskForm = ({
   taskDesc,
   taskStatus,
   edit,
-  formErrors,
-  displayFormError,
   serverError,
 }) => {
   !edit && (taskStatus = "todo");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedStatus, setSelectedStatus] = useState(taskStatus || "todo");
+
+  const [formErrors, setFormErrors] = useState(undefined);
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -40,20 +40,16 @@ const GenericTaskForm = ({
 
     const name = formProps.name;
     const description = formProps.description;
-    console.log(name);
-    console.log(description);
-    console.log(edit);
+    formProps.taskStatus = selectedStatus;
+    localStorage.setItem("taskStatus", formProps.taskStatus);
 
     const errors = validateTaskAdding({ name, description });
 
     if (Object.keys(errors).length > 0) {
-      formErrors = errors;
+      setFormErrors(errors);
+    } else {
+      onSubmit(e, formProps);
     }
-
-    formProps.taskStatus = selectedStatus;
-
-    localStorage.setItem("taskStatus", formProps.taskStatus);
-    onSubmit(e, formProps);
   };
 
   return (
@@ -77,7 +73,6 @@ const GenericTaskForm = ({
                 key={input.name}
                 type={input.type}
                 name={input.name}
-                displayFormError={displayFormError}
                 formError={formErrors?.[input.name] || ""}
                 attributes={input.attributes}
                 placeholder={input.placeholder || ""}

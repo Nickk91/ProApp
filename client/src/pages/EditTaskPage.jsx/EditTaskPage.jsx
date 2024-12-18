@@ -11,18 +11,13 @@ import {
   useSearchParams,
 } from "react-router-dom";
 import FooterMenu from "../../components/FooterMenu/FooterMenu.jsx";
-import validateTaskAdding from "../../Validation/validateTaskAdding.js";
 import { useState } from "react";
 
 const EditTaskPage = () => {
-  const [formErrors, setFormErrors] = useState(undefined);
-  const [displayFormError, setDisplayFormError] = useState(false);
   const [serverError, setServerError] = useState(undefined);
 
   const location = useLocation();
   const { taskId, taskName, taskDesc, taskStatus, edit } = location.state;
-  console.log("taskName:", taskName);
-  console.log("taskDesc:", taskDesc);
 
   const { projectId } = useParams();
   const navigate = useNavigate();
@@ -33,13 +28,6 @@ const EditTaskPage = () => {
 
     const name = formData.get("name");
     const description = formData.get("description");
-
-    const errors = validateTaskAdding({ name, description });
-    if (Object.keys(errors).length > 0) {
-      setFormErrors(errors);
-      setDisplayFormError(true);
-      return;
-    }
 
     try {
       const selectedTaskStatus = localStorage.getItem("taskStatus");
@@ -94,8 +82,6 @@ const EditTaskPage = () => {
         taskDesc={taskDesc}
         taskStatus={taskStatus}
         edit={edit}
-        formError={formErrors}
-        displayFormError={displayFormError}
         serverError={serverError}
       />
       <FooterMenu />
