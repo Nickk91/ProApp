@@ -26,7 +26,7 @@ const GenericTaskInput = ({
         defaultValue={value}
       />
 
-      {!serverError && displayFormError && (
+      {!serverError && displayFormError && formError && (
         <S.errorText>{formError}</S.errorText>
       )}
     </>

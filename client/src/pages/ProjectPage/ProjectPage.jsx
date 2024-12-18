@@ -305,9 +305,12 @@ const ProjectPage = () => {
           <S.topDiv>
             <S.projectTitle>{project.projectName}</S.projectTitle>
             {authLevel === userAuthLevels.admin ? (
-              <S.userNameButton onClick={handleUser}>
-                <strong>{username}</strong>
-              </S.userNameButton>
+              <S.iconsWrap>
+                <S.userNameButton onClick={handleUser}>
+                  <strong>{username}</strong>
+                </S.userNameButton>
+                <S.trashIcon src={trash} onClick={() => openModal("project")} />
+              </S.iconsWrap>
             ) : (
               <S.trashIcon src={trash} onClick={() => openModal("project")} />
             )}

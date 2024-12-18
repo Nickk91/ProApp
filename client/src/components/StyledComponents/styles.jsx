@@ -210,7 +210,8 @@ export const errorText = styled.p`
   font-size: 15px;
   height: 27px;
   text-align: center;
-  padding-bottom: 20px;
+  padding-bottom: 35px;
+  box-sizing: border-box;
 `;
 export const page = styled.div`
   display: flex;

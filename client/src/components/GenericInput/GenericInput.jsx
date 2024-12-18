@@ -27,9 +27,7 @@ const GenericInput = ({
       />
 
       {!serverError && displayError && <S.errorText>{error}</S.errorText>}
-      {!serverError && displayFormError && (
-        <S.errorText>{formError}</S.errorText>
-      )}
+      {!serverError && formError && <S.errorText>{formError}</S.errorText>}
     </>
   );
 };
