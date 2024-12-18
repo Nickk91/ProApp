@@ -42,6 +42,7 @@ const GenericTaskForm = ({
     const description = formProps.description;
     console.log(name);
     console.log(description);
+    console.log(edit);
 
     const errors = validateTaskAdding({ name, description });
 
@@ -54,7 +55,6 @@ const GenericTaskForm = ({
     localStorage.setItem("taskStatus", formProps.taskStatus);
     onSubmit(e, formProps);
   };
-  console.log("GenericTaskForm formErrors", formErrors);
 
   return (
     <>

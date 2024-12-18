@@ -18,7 +18,6 @@ const EditTaskPage = () => {
   const [formErrors, setFormErrors] = useState(undefined);
   const [displayFormError, setDisplayFormError] = useState(false);
   const [serverError, setServerError] = useState(undefined);
-  const [typedInInput, setTypedInInput] = useState(false);
 
   const location = useLocation();
   const { taskId, taskName, taskDesc, taskStatus, edit } = location.state;
@@ -32,17 +31,15 @@ const EditTaskPage = () => {
     e.preventDefault();
     const formData = new FormData(e.target);
 
-    const name = formData.get("taskName");
-    const description = formData.get("taskDescription");
-    console.log("name:", name);
-    console.log("description:", description);
+    const name = formData.get("name");
+    const description = formData.get("description");
 
-    // const errors = validateTaskAdding({ name, description });
-    // if (Object.keys(errors).length > 0) {
-    //   setFormErrors(errors);
-    //   setDisplayFormError(true);
-    //   return;
-    // }
+    const errors = validateTaskAdding({ name, description });
+    if (Object.keys(errors).length > 0) {
+      setFormErrors(errors);
+      setDisplayFormError(true);
+      return;
+    }
 
     try {
       const selectedTaskStatus = localStorage.getItem("taskStatus");
