@@ -66,8 +66,6 @@ ProApp is a full-stack web application for managing tasks and projects efficient
  - Input sanitization with sanitize-html
 - Error Handling: express-async-handler
 
-
-
 **Deployment:** 
 - Frontend: Netlify
 - Backend: Render.com
@@ -80,5 +78,65 @@ ProApp is a full-stack web application for managing tasks and projects efficient
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/project-name.git
-   cd project-name
+   git clone https://github.com/Nickk91/ProApp
+   cd ProApp
+2. Install dependencies for both frontend and backend:
+   # Backend setup
+   cd pro-app-backend
+   npm install
+
+   # Frontend setup 
+   cd ../client
+   npm install
+
+3. Create a .env file in the root of the pro-app-backend folder and add the following variables:
+
+   # MongoDB Connection Strings
+   MONGO_URI=your_mongodb_connection_string_for_development
+   MONGO_URI_PROD=your_mongodb_connection_string_for_production
+
+   # Server Configuration
+   PORT=3000
+   ENV="development"
+   
+   # Authentication
+   ACCESS_TOKEN_SECRET=your_jwt_secret_key
+   # URLs
+   BACKEND_URL=your_backend_url_for_production
+   PRODUCTION_FRONT_URL=your_frontend_url_for_production
+   BASE_SERVER_URL=http://localhost
+   CLIENT_PORT=5173
+
+## **6. Usage**
+
+### **Run the App Locally**
+To run the app locally, open two terminals:
+
+#### **Frontend**
+1. Navigate to the frontend folder:
+   ```bash
+   cd client
+2. Start the development server:
+   npm run dev
+3. The console should display a message similar to the following:
+   VITE ready in [build time] ms
+
+    ➜  Local:   http://localhost:5173/
+    ➜  Network: use --host to expose
+    ➜  press h + enter to show help
+
+#### **Backend**
+1. Navigate to the backend folder
+   cd pro-app-backend
+2. Start the server with file watching:
+   node --watch server.js
+3. The console should display the following if the backend server is running:
+   Server is running on PORT 3000
+
+You can now access the app at http://localhost:5173/ on your browser.
+
+1. Visit the live demo: [Live Demo](https://proappdevenv.netlify.app/)
+2. To login as admin use the demo credentials: 
+    email: mrcoffee@gmail.com
+    password: secretPass30#
+2. Register for a new account or use the demo credentials:
