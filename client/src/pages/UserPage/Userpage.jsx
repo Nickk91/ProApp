@@ -28,7 +28,6 @@ const Userpage = () => {
   const [errorMessage, setErrorMessage] = useState(null);
 
   const { userId } = useParams();
-  console.log("userId:", userId);
   const authLevel = useSelector((state) => state.auth.user?.authLevel);
   const id = useSelector((state) => state.auth.user._id);
   const token = localStorage.getItem("token");

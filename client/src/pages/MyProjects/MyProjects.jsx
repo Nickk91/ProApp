@@ -17,7 +17,6 @@ const MyProjects = () => {
   const [errorMessage, setErrorMessage] = useState(null);
   const [userName, setUserName] = useState(null);
   const { userId } = useParams();
-  console.log("userId:", userId);
 
   const navigate = useNavigate();
 

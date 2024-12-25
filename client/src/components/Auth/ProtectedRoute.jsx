@@ -5,8 +5,6 @@ import Spinner from "../Spinner/Spinner";
 import "../../pages/style/pagestyle.css";
 
 const ProtectedRoute = ({ Page, typeOfUser }) => {
-  console.log("In ProtectedRoute:");
-
   const navigate = useNavigate();
   const [authLevel, setAuthLevel] = useState(null); // Null to represent loading state
   const [isLoading, setIsLoading] = useState(true);

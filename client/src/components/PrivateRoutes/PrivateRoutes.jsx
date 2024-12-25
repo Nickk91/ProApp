@@ -6,9 +6,6 @@ import Spinner from "../Spinner/Spinner";
 const PrivateRoutes = ({ authLevel }) => {
   const { isLoggedIn, user, loading } = useSelector((state) => state.auth);
 
-  // console.log("isLoggedIn:", isLoggedIn);
-  // console.log("userAuthLevel:", userAuthLevel);
-  // console.log("authLevel:", authLevel);
   if (loading) {
     return <Spinner />;
   }
