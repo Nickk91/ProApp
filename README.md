@@ -14,19 +14,14 @@ ProApp is a full-stack web application for managing tasks and projects efficient
 ## Features
 
 - **General User Features**
-  - **Account Management**:
+  - **Account Management**
     - Register with an email, password, and username
     - Secure login and logout using JWT
-    - View and edit user profile:
-      - Update avatar
-      - View personal details (ID, username, email)
-  - **Dashboard**:
-    - Manage personal projects and tasks:
-      - Create, update, and delete
-      - Search projects by name
-    - Visualize statistics with **2 pie charts**:
-      - Project statuses (Todo, In-Progress, Done)
-      - Task statuses
+    - View and edit user profile (update avatar, view personal details like ID, username, email)
+  - **Dashboard**
+    - Manage personal projects and tasks (create, update, delete)
+    - Search projects by name
+    - Visualize statistics with **2 pie charts** (project statuses: Todo, In-Progress, Done and task statuses)
     - Real-time updates for projects and tasks
   - Responsive design for mobile and desktop
   
