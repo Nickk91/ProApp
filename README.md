@@ -161,20 +161,55 @@ You can now access the app at http://localhost:5173/ on your browser.
 ### **Registering a New Account**
 
 1. Click on the Register button on the login page (you will be redirected there if logged out).
-2. Fill in the registration form:
-    - Step 1: Provide your email and create a password.
-       - Password requirements:
-          - 8–64 characters
-          - At least one uppercase letter
-          - At least one lowercase letter
-          -  At least one digit
-          - At least one special character (!@#$%^&*)
 
-    - Step 2: Choose a username.
-       - Username requirements
-          - 15 characters or fewer
-          - Only English letters, numbers, and underscores
+- **Login Screenshot**  
+  
+  ![Login](screenshots/login.png)
+
+2. Fill in the registration form:
+   - Step 1: Provide your email and create a password.
+     - Password requirements:
+       - 8–64 characters
+       - At least one lowercase letter
+       -  At least one digit
+       - At least one special character (!@#$%^&*)
+   
+   - **Register Screenshot**  
+     
+     ![Register](screenshots/register.png)
+
+   - Step 2: Choose a username.
+     - Username requirements:
+       - 15 characters or fewer
+       - Only English letters, numbers, and underscores
+
+   - **Signup Screenshot**  
+     
+     ![Signup](screenshots/signup.png)
+
 3. Click Next to complete your registration.
+
+4. If your registration was successful you will be redirected to a register success page.
+
+   ![Register Success](screenshots/register_success.png)
+
+5. After a 3 second countdown, you will be redirected to the login page.
+
+
+
+
+## API Routes 
+
+<!-- ## Screenshots
+
+### Login Screenshot
+![Login](screenshots/login.png) -->
+
+<!-- ### **Dashboard**
+![Dashboard](screenshots/dashboard.png)
+
+### **Admin Panel**
+![Admin Panel](screenshots/admin-panel.png) -->
 
 
 
