@@ -28,7 +28,7 @@ ProApp is a full-stack web application for managing tasks and projects efficient
 - **Admin Features**
   - **User Management**:
     - View all users in a sortable directory:
-      - Sort by username, total projects, or project statuses (Todo, In-Progress, Done)
+    - Sort by username, total projects, or project statuses (Todo, In-Progress, Done)
     - View user details (ID, username, email) and project statistics
     - Access individual user pages with detailed stats and **2 pie charts**
   - **Project and Task Management**:
@@ -155,26 +155,26 @@ You can now access the app at http://localhost:5173/ on your browser.
 
 ### **Registering a New Account**
 
-1. Click on the Register button on the login page (you will be redirected there if logged out).
+1. Click on the **Register** button on the login page (you will be redirected there if logged out).
 
-- **Login Screenshot**  
-  
-  ![Login](screenshots/login.png)
+   - **Login Screenshot**  
+     
+     ![Login](screenshots/login.png)
 
 2. Fill in the registration form:
-   - Step 1: Provide your email and create a password.
-     - Password requirements:
+   - **Step 1**: Provide your email and create a password.
+     - **Password requirements**:
        - 8–64 characters
        - At least one lowercase letter
-       -  At least one digit
+       - At least one digit
        - At least one special character (!@#$%^&*)
-   
+
    - **Register Screenshot**  
      
      ![Register](screenshots/register.png)
 
-   - Step 2: Choose a username.
-     - Username requirements:
+   - **Step 2**: Choose a username.
+     - **Username requirements**:
        - 15 characters or fewer
        - Only English letters, numbers, and underscores
 
@@ -182,13 +182,73 @@ You can now access the app at http://localhost:5173/ on your browser.
      
      ![Signup](screenshots/signup.png)
 
-3. Click Next to complete your registration.
+3. Click **Next** to complete your registration.
 
-4. If your registration was successful you will be redirected to a register success page.
+4. If your registration was successful, you will be redirected to a register success page.
 
    ![Register Success](screenshots/register_success.png)
 
-5. After a 3 second countdown, you will be redirected to the login page.
+5. After a 3-second countdown, you will be redirected to the login page.
+
+---
+
+### **Adding Your First Project**
+
+After logging in for the first time, you’ll have no projects assigned to your user.  
+You’ll be prompted to add your first project by clicking the **plus button** on the “no projects” page.
+
+After clicking the button, you’ll be navigated to the **Add Project** page, where you’ll need to fill in the following inputs:
+
+- **Project Name**  
+  - 30 characters or fewer  
+  - Only English letters, numbers, and underscores
+
+- **Project Description**  
+  - 120 characters or fewer  
+  - Only English letters, numbers, and underscores
+
+- **Project Image URL**
+  - Must be a valid URL
+
+After the project was added successfully you'll be navigated to the project page.
+
+
+### **Changing Your Project's Status**
+
+Inside your project page, beneath the project name, you’ll see a **status selector**. The default selection is **TODO**. By clicking on this selector, you can choose one of three different statuses:
+
+- **TODO**  
+- **IN PROGRESS**  
+- **DONE**
+
+---
+
+### **Adding Tasks To Your Project**
+
+Inside your project page, beneath the project image (bottom-right corner), you’ll see a **plus button**. By clicking this button, you’ll be redirected to the **Add Task** page, where you’ll need to fill in the following inputs:
+
+- **Task Name**  
+  - 30 characters or fewer  
+  - Only English letters, numbers, and underscores
+
+- **Task Description**  
+  - 120 characters or fewer  
+  - Only English letters, numbers, and underscores
+
+- **Task Status Selection**  
+  You must select one of three statuses:
+  - **TODO**  
+  - **IN PROGRESS**  
+  - **DONE**
+
+
+
+
+
+
+
+
+
 
 
 
