@@ -331,6 +331,34 @@ To search for a specific project, click the **Search Button** to open the **Sear
 
 ---
 
+### **User Page**
+By clicking the **User Button**, you’ll be navigated to your personal **User Page**:
+
+![User Page](screenshots/user_page.png)
+
+On this page, you’ll find:
+
+- Your **User Image**  
+- Your **User Details** (username, email, user ID)
+- A **Plus Button** to add a project
+- A **User Projects** button to navigate to the **Projects** page
+- A **User Projects Pie Chart** displaying the breakdown of project statuses (TODO, In-Progress, Done)
+- A **User Tasks Pie Chart** showing the breakdown of task statuses (TODO, In-Progress, Done)
+
+---
+
+#### **Change Your User Image**
+By clicking on your **User Image**, a modal will open asking you to enter the URL of your new image. Click **Accept** to confirm your choice.
+
+**Image Modal**:  
+![User Image Modal](screenshots/user_image_modal.png)
+
+**New User Image**:  
+![New User Image](screenshots/user_page_new_image.png)
+
+
+
+
 
 
 
