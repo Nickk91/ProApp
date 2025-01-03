@@ -195,7 +195,7 @@ You can now access the app at http://localhost:5173/ on your browser.
 ### **Adding Your First Project**
 
 After logging in for the first time, you’ll have no projects assigned to your user.  
-You’ll be prompted to add your first project by clicking the **plus button** on the “no projects” page.
+You’ll be prompted to add your first project by clicking the **Plus Button** on the “no projects” page.
 
 After clicking the button, you’ll be navigated to the **Add Project** page, where you’ll need to fill in the following inputs:
 
@@ -207,15 +207,16 @@ After clicking the button, you’ll be navigated to the **Add Project** page, wh
   - 120 characters or fewer  
   - Only English letters, numbers, and underscores
 
-- **Project Image URL**
+- **Project Image URL**  
   - Must be a valid URL
 
-After the project was added successfully you'll be navigated to the project page.
+After you successfully add the project, you’ll be taken to the project page.
 
+---
 
 ### **Changing Your Project's Status**
 
-Inside your project page, beneath the project name, you’ll see a **status selector**. The default selection is **TODO**. By clicking on this selector, you can choose one of three different statuses:
+Inside your project page, beneath the project name, you’ll see a **status selector**. The default status is **TODO**. By clicking this selector, you can choose one of three different statuses:
 
 - **TODO**  
 - **IN PROGRESS**  
@@ -225,7 +226,7 @@ Inside your project page, beneath the project name, you’ll see a **status sele
 
 ### **Adding Tasks To Your Project**
 
-Inside your project page, beneath the project image (bottom-right corner), you’ll see a **plus button**. By clicking this button, you’ll be redirected to the **Add Task** page, where you’ll need to fill in the following inputs:
+Inside your project page, beneath the project image (bottom-right corner), you’ll see a **plus button**. By clicking this button, you’ll be redirected to the **Add Task** page, where you must fill in the following inputs:
 
 - **Task Name**  
   - 30 characters or fewer  
@@ -236,10 +237,24 @@ Inside your project page, beneath the project image (bottom-right corner), you�
   - Only English letters, numbers, and underscores
 
 - **Task Status Selection**  
-  You must select one of three statuses:
+  You must choose one of three statuses:
   - **TODO**  
   - **IN PROGRESS**  
   - **DONE**
+
+After clicking **ADD TASK**, you’ll be navigated back to the project page, which will now display your newly added task at the bottom.
+
+#### **Task’s Expanded View**
+
+By default, tasks appear in a **non-expanded** view—showing only the task’s name and its current status:
+
+![Task View](screenshots/task_view.png)
+
+To view the **expanded** version (which also displays the task’s description), click the **Arrow Button** in the bottom-right corner of the task:
+
+![Task Expanded View](screenshots/task_expanded_view.png)
+
+
 
 
 

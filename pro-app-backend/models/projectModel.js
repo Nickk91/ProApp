@@ -47,7 +47,7 @@ const projectScheme = new mongoose.Schema({
       description: {
         type: String,
         maxlength: 120,
-        minlength: 4,
+        minlength: 1,
         required: true,
         default: "No Description Was added",
       },
