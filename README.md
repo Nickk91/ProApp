@@ -27,7 +27,7 @@ ProApp is a full-stack web application for managing tasks and projects efficient
   
 - **Admin Features**
   - **User Management**:
-    - View all users in a sortable directory:
+    - View all users in a sortable directory
     - Sort by username, total projects, or project statuses (Todo, In-Progress, Done)
     - View user details (ID, username, email) and project statistics
     - Access individual user pages with detailed stats and **2 pie charts**
@@ -40,33 +40,33 @@ ProApp is a full-stack web application for managing tasks and projects efficient
 ## Tech Stack
 
 **Frontend:**  
-- Framework/Library: React  
-- State Management: Redux Toolkit (@reduxjs/toolkit), React-Redux  
-- Routing: React Router DOM  
-- HTTP Requests: Axios  
-- Charts/Graphs: Recharts  
-- Styling: Styled Components  
-- SEO Management: React Helmet  
-- Icons: React Icons  
+- **Framework/Library**: React  
+- **State Management**: Redux Toolkit (@reduxjs/toolkit), React-Redux  
+- **Routing**: React Router DOM  
+- **HTTP Requests**: Axios  
+- **Charts/Graphs**: Recharts  
+- **Styling**: Styled Components  
+- **SEO Management**: React Helmet  
+- **Icons**: React Icons  
 
 **Backend:**  
-- Server Framework: Express  
-- Database: MongoDB (with Mongoose for object data modeling)  
-- Authentication: JSON Web Tokens (JWT), bcryptjs for password hashing  
-- Environment Variables: dotenv  
-- Security:
+- **Server Framework**: Express  
+- **Database**: MongoDB (with Mongoose for object data modeling)  
+- **Authentication**: JSON Web Tokens (JWT), bcryptjs for password hashing  
+- **Environment Variables**: dotenv  
+- **Security**:
   - CORS for cross-origin resource sharing
   - MongoDB data sanitization with express-mongo-sanitize and mongo-sanitize
   - Input sanitization with sanitize-html
-- Error Handling: express-async-handler
+- **Error Handling**: express-async-handler
 
 **Deployment:**  
-- Frontend: Netlify  
-- Backend: Render.com  
-- Module Bundler: Vite (Frontend)  
-- Linting: ESLint (with React and React Hooks plugins)  
-- React DOM  
-- Hot Reloading: Vite React Plugin  
+- **Frontend**: Netlify  
+- **Backend**: Render.com  
+- **Module Bundler**: Vite (Frontend)  
+- **Linting**: ESLint (with React and React Hooks plugins)  
+- **React DOM**  
+- **Hot Reloading**: Vite React Plugin  
 
 ---
 
@@ -111,7 +111,7 @@ npm install
    BASE_SERVER_URL=http://localhost
    CLIENT_PORT=5173
 
-## **6. Usage**
+## **Usage**
 
 ### **Run the App Locally**
 To run the app locally, open two terminals:
@@ -194,7 +194,7 @@ You can now access the app at http://localhost:5173/ on your browser.
 
 ### **Footer Menu**
 
-Once you’ve logged in, you’ll see a **Footer Menu** at the bottom of every page (except the login/register pages). The available buttons may vary depending on whether you’re a **regular user**:
+Once you’ve logged in, you’ll see a **Footer Menu** at the bottom of every page (except the login/register/logged-out pages). The available buttons may vary depending on whether you’re a **regular user**:
 
 ![Footer Menu](screenshots/footer_menu.png)
 
@@ -304,6 +304,35 @@ By default, tasks appear in a **non-expanded** view, showing only the task’s n
 To view the **expanded** version (which also displays the task’s description), click the **Arrow Button** at the bottom-right corner of the task:
 
 ![Task Expanded View](screenshots/task_expanded_view.png)
+
+---
+
+### **Search Projects**
+To search for a specific project, click the **Search Button** to open the **Search Page**.
+
+- **Regular User**:  
+  You can search for projects by their names.  
+  1. Enter the keyword(s) in the text input.
+  2. Click **Search**.
+  3. Matching projects will appear at the bottom of the page, if the project name includes your search term.
+
+  ![Search Page](screenshots/search_page.png)
+
+  ![Search Results](screenshots/search_page_results.png)
+
+- **Admin User**:  
+  In addition to searching by project name, you can also search by the **username** of the project owner.  
+  1. Click **USERNAME**.
+  2. Enter the keyword(s) in the text input.
+  3. Click **Search**.
+  4. Any project owned by a user whose username contains your search term will appear.
+
+  ![Search Page Admin](screenshots/search_page_admin.png)
+
+---
+
+
+
 
 
 
