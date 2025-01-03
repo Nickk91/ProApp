@@ -192,10 +192,43 @@ You can now access the app at http://localhost:5173/ on your browser.
 
 ---
 
+### **Footer Menu**
+
+Once you’ve logged in, you’ll see a **Footer Menu** at the bottom of every page (except the login/register pages). The available buttons may vary depending on whether you’re a **regular user**:
+
+![Footer Menu](screenshots/footer_menu.png)
+
+or an **admin**:
+
+![Footer Menu Admin](screenshots/footer_menu_admin.png)
+
+- **Home Button**  
+  Navigates to your **Projects** page.  
+  - If you have no projects yet, it navigates to the **No Projects** page.
+
+- **Search Button**  
+  Navigates to the **Search** page, where you can search your own projects by name.  
+  - **Admins** can also search by project owner’s username.
+
+- **Plus Button**  
+  Navigates to the **Add Project** page, allowing you to quickly create a new project.
+
+- **User Button**  
+  Navigates to your **User Page**, showing personal details and project/task stats.
+
+- **Users Button** *(Admin Only)*  
+  Navigates to the **Users Page**, where admins can view all users in a card-based layout, along with their stats.
+
+- **Logout Button**  
+  Logs you out of your account with one click.
+
+---
+
 ### **Adding Your First Project**
 
 After logging in for the first time, you’ll have no projects assigned to your user.  
 You’ll be prompted to add your first project by clicking the **Plus Button** on the “no projects” page.
+Also, you can add a project by clicking the the **Plus Button** on the **Footer Menu**.
 
 After clicking the button, you’ll be navigated to the **Add Project** page, where you’ll need to fill in the following inputs:
 
@@ -210,7 +243,7 @@ After clicking the button, you’ll be navigated to the **Add Project** page, wh
 - **Project Image URL**  
   - Must be a valid URL
 
-After you successfully add the project, you’ll be taken to the project page.
+After successfully adding the project, you’ll be taken to the project page.
 
 ---
 
@@ -224,9 +257,27 @@ Inside your project page, beneath the project name, you’ll see a **status sele
 
 ---
 
+### **Changing Your Project's Image**
+
+Inside your project page, click on the project’s image. A modal will open, asking you to enter the URL of your new image. Click **Accept** to confirm your choice.
+
+![Project Image Modal](screenshots/project_image_modal.png)
+
+---
+
+### **Deleting Your Project**
+
+In your project page (top-right corner), you’ll see a **Trash Icon**. Clicking it opens the **Delete Modal**, where you can confirm deletion of the project by clicking **YES**, or cancel by clicking **NO**.
+
+![Delete Project Modal](screenshots/delete_project.png)
+
+After deleting the project, you’ll be taken back to the **My Projects** page.
+
+---
+
 ### **Adding Tasks To Your Project**
 
-Inside your project page, beneath the project image (bottom-right corner), you’ll see a **plus button**. By clicking this button, you’ll be redirected to the **Add Task** page, where you must fill in the following inputs:
+Inside your project page, beneath the project image (bottom-right corner), you’ll see a **plus button**. Clicking this button redirects you to the **Add Task** page, where you must fill in the following inputs:
 
 - **Task Name**  
   - 30 characters or fewer  
@@ -242,17 +293,18 @@ Inside your project page, beneath the project image (bottom-right corner), you�
   - **IN PROGRESS**  
   - **DONE**
 
-After clicking **ADD TASK**, you’ll be navigated back to the project page, which will now display your newly added task at the bottom.
+After clicking **ADD TASK**, you’ll be taken back to the project page, which will now display your newly added task at the bottom.
 
 #### **Task’s Expanded View**
 
-By default, tasks appear in a **non-expanded** view—showing only the task’s name and its current status:
+By default, tasks appear in a **non-expanded** view, showing only the task’s name and current status:
 
 ![Task View](screenshots/task_view.png)
 
-To view the **expanded** version (which also displays the task’s description), click the **Arrow Button** in the bottom-right corner of the task:
+To view the **expanded** version (which also displays the task’s description), click the **Arrow Button** at the bottom-right corner of the task:
 
 ![Task Expanded View](screenshots/task_expanded_view.png)
+
 
 
 
