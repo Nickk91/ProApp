@@ -18,7 +18,7 @@ const UsersPage = () => {
   const [users, setUsers] = useState([]);
   const [projectsData, setProjectsData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [usersPerPage, setUsersPerPage] = useState(4);
+  const [usersPerPage, setUsersPerPage] = useState(3);
   const [errorMessage, setErrorMessage] = useState(null);
 
   const navigate = useNavigate();

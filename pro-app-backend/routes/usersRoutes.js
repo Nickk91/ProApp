@@ -17,16 +17,19 @@ const router = express.Router();
 //Route to get all users
 router.get("/", getAllUsers);
 
-//Route to check if user exists
+//Route to create a new account
 router.post("/register", createUser);
 
-//Route to create a new account
+//Route to check if user exists
 router.post("/userexist", userExist);
 
+//Route to create a new account
 router.post("/login", loginUser);
 
+//Route to fetch user data
 router.get("/current", validateToken, currentUser);
 
+//Route to update user image
 router.patch("/update-pic", validateToken, changeUserImg);
 
 router.post("/test-sanitize", (req, res) => {
