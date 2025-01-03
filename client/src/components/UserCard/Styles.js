@@ -78,7 +78,7 @@ export const projectTitle = styled.div`
 export const cardContainer = styled.div`
   margin-top: 50px;
   width: 300px;
-  height: 270px;
+  height: 210px;
   border: 1px solid black;
   border-radius: 10px;
   opacity: 0.97;

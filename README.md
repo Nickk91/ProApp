@@ -332,7 +332,7 @@ To search for a specific project, click the **Search Button** to open the **Sear
 ---
 
 ### **User Page**
-By clicking the **User Button**, you’ll be navigated to your personal **User Page**:
+By clicking the **User Button** on the **footer menu**, you’ll be navigated to your personal **User Page**:
 
 ![User Page](screenshots/user_page.png)
 
@@ -356,23 +356,34 @@ By clicking on your **User Image**, a modal will open asking you to enter the UR
 **New User Image**:  
 ![New User Image](screenshots/user_page_new_image.png)
 
+---
 
+### **Users Page** (Admin Feature)
+By clicking the **Users Button**, you’ll be taken to the **Users Page**:
 
+![Users Page](screenshots/users_page.png)
 
+At the top of the page, you’ll see a strip of **Sort Buttons**:
+- **Sort by Username**
+- **Sort by Project Quantity**
+- **Sort by Todo Project Quantity**
+- **Sort by In-Progress Project Quantity**
+- **Sort by Done Project Quantity**
 
+#### **Sort Buttons**
+![Sort Buttons](screenshots/sort_strip.png)
 
+Below this strip, you’ll find **User Cards** stacked vertically:
 
+![User Cards](screenshots/user_cards.png)
 
+#### **User Card**
+By clicking any **User Card**, you’ll be navigated to that user’s page.
 
+#### **Pagination Buttons**
+At the bottom of the page are **Pagination Buttons**, which let you navigate through additional user cards:
 
-
-
-
-
-
-
-
-
+![Pagination Buttons](screenshots/pagiation_buttons.png)
 
 
 
