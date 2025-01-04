@@ -7,7 +7,7 @@ ProApp is a full-stack web application for managing tasks and projects efficient
 - [Installation](#installation)
 - [Usage](#usage)
 - [API Routes](#api-routes)
-- [Contributing](#contributing)
+- [Acknowledgements](#contributing)
 - [License](#license)
 
 ## Features
@@ -388,45 +388,80 @@ At the bottom of the page are **Pagination Buttons**, which let you navigate thr
 
 ## **API Routes**
 
-### **User Routes**  
+### **User Routes**
 All user-related operations are prefixed with `/api/pro-app/users`.
 
-| **HTTP Method** | **Endpoint**                                      | **Description**                                                          | **Requires Auth**         |
-|-----------------|---------------------------------------------------|--------------------------------------------------------------------------|---------------------------|
-| **GET**         | `/api/pro-app/users`                              | Fetch all users                                                          | No                        |
-| **POST**        | `/api/pro-app/users/register`                     | Create a new user account                                                | No                        |
-| **POST**        | `/api/pro-app/users/userexist`                    | Check if a user already exists                                           | No                        |
-| **POST**        | `/api/pro-app/users/login`                        | Log in an existing user                                                  | No                        |
-| **GET**         | `/api/pro-app/users/current`                      | Fetch the currently logged-in user’s data                                | Yes (`validateToken`)     |
-| **PATCH**       | `/api/pro-app/users/update-pic`                   | Update the currently logged-in user’s profile image                      | Yes (`validateToken`)     |
-| **POST**        | `/api/pro-app/users/test-sanitize`                | Test endpoint for request sanitization (debugging)                       | No                        |
-| **GET**         | `/api/pro-app/users/search/getuserid/:userName`   | Find user(s) by `userName` and fetch associated user projects            | No (or Yes, if preferred) |
-| **GET**         | `/api/pro-app/users/:id`                          | Get a single user by ID                                                  | No (or Yes, if preferred) |
+#### **General User Routes**
+| **HTTP Method** | **Endpoint**                               | **Description**                                    | **Requires Auth**     |
+|-----------------|--------------------------------------------|----------------------------------------------------|-----------------------|
+| **POST**        | `/api/pro-app/users/register`              | Create a new user account                          | No                    |
+| **POST**        | `/api/pro-app/users/userexist`             | Check if a user already exists                     | No                    |
+| **POST**        | `/api/pro-app/users/login`                 | Log in an existing user                            | No                    |
+| **GET**         | `/api/pro-app/users/current`               | Fetch the currently logged-in user’s data          | Yes (`validateToken`) |
+| **PATCH**       | `/api/pro-app/users/update-pic`            | Update the currently logged-in user’s profile image| Yes (`validateToken`) |
+| **POST**        | `/api/pro-app/users/test-sanitize`         | Test endpoint for request sanitization (debugging) | No                    |
+| **GET**         | `/api/pro-app/users/search/getuserid/:userName` | Find user(s) by `userName` and fetch associated user projects | No (or Yes, if preferred) |
+| **GET**         | `/api/pro-app/users/:id`                    | Get a single user by ID                            | No (or Yes, if preferred) |
+
+#### **Admin User Routes**
+| **HTTP Method** | **Endpoint**                               | **Description**                                    | **Requires Auth**                          |
+|-----------------|--------------------------------------------|----------------------------------------------------|--------------------------------------------|
+| **GET**         | `/api/pro-app/users`                       | Fetch all users                                    | Yes (`validateToken`, `validateAdmin`)     |
+
+> **Notes:**
+> - `validateToken` indicates JWT authentication is required.
+> - `validateAdmin` indicates that only admin users can access that route.
+> - Adjust any route as **admin-only** if needed.
 
 ---
 
-### **Project Routes**  
+### **Project Routes**
 All project-related operations are prefixed with `/api/pro-app/projects`.
 
-| **HTTP Method** | **Endpoint**                                                       | **Description**                                                                    | **Requires Auth**         |
-|-----------------|--------------------------------------------------------------------|------------------------------------------------------------------------------------|---------------------------|
-| **DELETE**      | `/api/pro-app/projects/:id`                                       | Delete a project by its ID                                                        | Yes (`validateToken`)     |
-| **GET**         | `/api/pro-app/projects`                                           | Fetch all projects                                                                 | No                        |
-| **POST**        | `/api/pro-app/projects/addproject`                                | Create a new project (regular user)                                               | Yes (`validateToken`)     |
-| **POST**        | `/api/pro-app/projects/addprojectbyadmin`                         | Create a new project on behalf of a user (admin only)                              | Yes (`validateToken`)     |
-| **GET**         | `/api/pro-app/projects/user/:id`                                  | Fetch all projects for a specific user by user ID                                  | Yes (`validateToken`)     |
-| **GET**         | `/api/pro-app/projects/user`                                      | Fetch all projects for the currently logged-in user (if implemented)              | Yes (`validateToken`)     |
-| **GET**         | `/api/pro-app/projects/user/searchprojects`                        | Search user’s projects by user ID (variant)                                       | Yes (`validateToken`)     |
-| **POST**        | `/api/pro-app/projects/project/:id/addtask`                       | Create a new task under a specific project                                        | Yes (`validateToken`)     |
-| **PATCH**       | `/api/pro-app/projects/project/:id/edit-task`                     | Edit an existing task by task ID                                                  | Yes (`validateToken`)     |
-| **PATCH**       | `/api/pro-app/projects/project/:id/change-pic`                    | Change the project’s image                                                        | Yes (`validateToken`)     |
-| **GET**         | `/api/pro-app/projects/project/:id`                               | Fetch a single project by project ID                                              | Yes (`validateToken`)     |
-| **GET**         | `/api/pro-app/projects/project/user/:userIdsArray`                | Fetch a project by multiple user IDs (param-based)                                | No (or Yes, if preferred) |
-| **GET**         | `/api/pro-app/projects/project/projectname/:searchItem`           | Search projects by name                                                           | No (or Yes, if preferred) |
-| **GET**         | `/api/pro-app/projects/project/projectname-and-id/:searchItem/:userId` | Search a user’s projects by project name *and* user ID                        | No (or Yes, if preferred) |
-| **PATCH**       | `/api/pro-app/projects/:id/deletetask`                            | Delete a task by task ID                                                          | Yes (`validateToken`)     |
-| **PATCH**       | `/api/pro-app/projects/:id/taskstatus`                            | Update a task’s status by task ID                                                 | Yes (`validateToken`)     |
-| **PATCH**       | `/api/pro-app/projects/:id`                                       | Update a project’s status by project ID                                           | Yes (`validateToken`)     |
+#### **General Project Routes**
+| **HTTP Method** | **Endpoint**                                                 | **Description**                                    | **Requires Auth**     |
+|-----------------|--------------------------------------------------------------|----------------------------------------------------|-----------------------|
+| **DELETE**      | `/api/pro-app/projects/:id`                                  | Delete a project by its ID                         | Yes (`validateToken`) |
+| **GET**         | `/api/pro-app/projects`                                      | Fetch all projects                                  | No                    |
+| **POST**        | `/api/pro-app/projects/addproject`                           | Create a new project (regular user)                 | Yes (`validateToken`) |
+| **GET**         | `/api/pro-app/projects/user/:id`                             | Fetch all projects for a specific user by user ID    | Yes (`validateToken`) |
+| **GET**         | `/api/pro-app/projects/user`                                 | Fetch all projects for the currently logged-in user | Yes (`validateToken`) |
+| **GET**         | `/api/pro-app/projects/user/searchprojects`                  | Search user’s projects by user ID (variant)         | Yes (`validateToken`) |
+| **POST**        | `/api/pro-app/projects/project/:id/addtask`                  | Create a new task under a specific project          | Yes (`validateToken`) |
+| **PATCH**       | `/api/pro-app/projects/project/:id/edit-task`                | Edit an existing task by task ID                    | Yes (`validateToken`) |
+| **PATCH**       | `/api/pro-app/projects/project/:id/change-pic`               | Change the project’s image                          | Yes (`validateToken`) |
+| **GET**         | `/api/pro-app/projects/project/:id`                          | Fetch a single project by project ID                | Yes (`validateToken`) |
+| **GET**         | `/api/pro-app/projects/project/user/:userIdsArray`           | Fetch a project by multiple user IDs (param-based)   | No (or Yes, if preferred) |
+| **GET**         | `/api/pro-app/projects/project/projectname/:searchItem`      | Search projects by name                             | Yes (`validateToken`, `validateAdmin`)    |
+| **GET**         | `/api/pro-app/projects/project/projectname-and-id/:searchItem/:userId` | Search a user’s projects by project name *and* user ID | Yes (`validateToken`, `validateAdmin`)    |
+| **PATCH**       | `/api/pro-app/projects/:id/deletetask`                       | Delete a task by task ID                            | Yes (`validateToken`) |
+| **PATCH**       | `/api/pro-app/projects/:id/taskstatus`                       | Update a task’s status by task ID                   | Yes (`validateToken`) |
+| **PATCH**       | `/api/pro-app/projects/:id`                                  | Update a project’s status by project ID             | Yes (`validateToken`) |
+
+#### **Admin Project Routes**
+| **HTTP Method** | **Endpoint**                                                 | **Description**                                    | **Requires Auth**                          |
+|-----------------|--------------------------------------------------------------|----------------------------------------------------|--------------------------------------------|
+| **POST**        | `/api/pro-app/projects/addprojectbyadmin`                    | Create a new project on behalf of a user (admin only)| Yes (`validateToken`, `validateAdmin`)    |
+| **GET**         | `/api/pro-app/projects/project/projectname/:searchItem`      | Search projects by name                            | Yes (`validateToken`, `validateAdmin`)    |
+| **GET**         | `/api/pro-app/projects/project/projectname-and-id/:searchItem/:userId` | Search a user’s projects by project name *and* user ID | Yes (`validateToken`, `validateAdmin`)    |
+
+> **Notes:**
+> - Some routes are **admin-only** (e.g., `/addprojectbyadmin`).
+> - `validateToken` indicates JWT authentication is required.
+> - `validateAdmin` indicates that only admin users can access that route.
+> - Adjust your authentication and route access according to your app’s logic.
+
+---
+
+## **Acknowledgements**
+
+I would like to extend my heartfelt gratitude to the following individuals who contributed to the development of **ProApp**:
+
+- **Elad Harel** ([eladjmc](https://github.com/eladjmc)):  
+  My instructor at Apple Seeds Full Stack Bootcamp. Elad was instrumental in conceptualizing and designing the initial framework of ProApp. His guidance and early assistance with the code were invaluable during the initial phases of development.
+
+- **Michael Braginski**:  
+  A special thanks to Michael for dedicating his time to help me troubleshoot and resolve a persistent bug. His expertise and willingness to assist were greatly appreciated.
 
 ---
 

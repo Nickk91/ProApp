@@ -51,26 +51,6 @@ export const loginUser = async (req, res) => {
   }
 };
 
-// export const createUser = async (req, res) => {
-//   try {
-//     const saltRounds = 10;
-//     const hashedPassword = await bcrypt.hash(req.body.password, saltRounds);
-
-//     const user = await User.create({
-//       username: req.body.username,
-//       password: hashedPassword,
-//       email: req.body.email,
-//     });
-//     res
-//       .status(STATUS_CODE.CREATED)
-//       .send({ username: user.username, email: user.email, _id: user._id });
-//   } catch (error) {
-//     res
-//       .status(STATUS_CODE.INTERNAL_SERVER_ERROR)
-//       .json({ message: error.message });
-//   }
-// };
-
 export const createUser = async (req, res) => {
   try {
     const saltRounds = 10;
@@ -125,19 +105,6 @@ export const getAllUsers = async (req, res) => {
       .json({ error: "Internal Server Error FOR REALY BRUV" });
   }
 };
-
-// export const getAllUsers = async (req, res) => {
-//   try {
-//     const users = await User.find();
-
-//     res.send(users);
-//   } catch (error) {
-
-//     res
-//       .status(STATUS_CODE.INTERNAL_SERVER_ERROR)
-//       .json({ error: "Internal Server Error FOR REALY BRUV" });
-//   }
-// };
 
 export const getUserById = async (req, res) => {
   try {
