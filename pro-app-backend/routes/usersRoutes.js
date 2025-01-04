@@ -11,11 +11,12 @@ import {
 } from "../controllers/userController.js";
 import { getProjectByUserIds } from "../controllers/projectController.js";
 import { validateToken } from "../middleware/validateTokenHandler.js";
+import { validateAdmin } from "../middleware/validateAdmin.js";
 
 const router = express.Router();
 
-//Route to get all users
-router.get("/", getAllUsers);
+//Admin Route to get all users
+router.get("/", validateToken, validateAdmin, getAllUsers);
 
 //Route to create a new account
 router.post("/register", createUser);

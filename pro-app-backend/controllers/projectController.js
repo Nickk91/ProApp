@@ -103,6 +103,7 @@ export const getProjectsByProjectName = async (req, res) => {
 
 export const getUserProjectsByProjectNameByUserId = async (req, res) => {
   try {
+    console.log("BOOM CHAKA LAKA");
     const { searchItem, userId } = req.params;
 
     const projects = await Project.find({
