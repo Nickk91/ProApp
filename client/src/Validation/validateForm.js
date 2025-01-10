@@ -19,7 +19,7 @@ export default function validateForm(values) {
     errors.password = "Email can't be the same as the password.";
   } else if (!password_pattern.test(values.password)) {
     errors.password =
-      "Password must be 8-64 characters long and include at least one uppercase letter, one lowercase letter, one digit, and one special character (!@#$%^&*_-+=~`).";
+      "Password must be 8-64 characters, with at least one uppercase letter, one lowercase letter, one digit, and one special character (!@#$%^&*_-+=~`).";
   }
 
   return errors;
