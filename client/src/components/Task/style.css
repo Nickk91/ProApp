@@ -1,0 +1,48 @@
+.task-container {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  width: 100%; /* Ensure the container width is consistent */
+}
+
+.taskbox,
+.taskbox-expanded {
+  position: relative;
+  display: flex;
+  font-size: 13px;
+  font-weight: bold;
+  justify-content: space-between;
+  transition: all 0.3s ease;
+  padding-top: 5px;
+}
+
+.taskbox {
+  height: 50px;
+  align-items: center;
+}
+
+.taskbox-expanded {
+  height: 100px;
+  align-items: flex-end;
+}
+
+.description-hidden {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+}
+
+.description-shown {
+  position: absolute;
+  top: 0;
+  display: flex;
+  flex-direction: row;
+  max-width: 300px;
+  text-align: left;
+  color: #404040;
+  font-size: 15px;
+  margin-left: 6px;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}

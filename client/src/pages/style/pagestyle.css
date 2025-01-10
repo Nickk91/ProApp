@@ -1,0 +1,27 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  min-width: 300px;
+}
+
+.pagey {
+  display: flex;
+  flex-direction: column;
+  border: solid black 2px;
+  align-items: center;
+}
+
+.line {
+  width: 120px;
+  height: 5px;
+  background: black;
+  margin-top: 20px;
+  border-radius: 5px;
+}
+
+input::placeholder {
+  text-indent: 5px;
+  color: black;
+}

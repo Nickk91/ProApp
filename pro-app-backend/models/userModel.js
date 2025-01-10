@@ -1,10 +1,13 @@
+//userModel.js
 import mongoose from "mongoose";
 
 const userScheme = new mongoose.Schema({
   username: {
     type: String,
     required: true,
+    unique: true,
     minlength: 1,
+    maxlength: 15,
   },
   password: {
     type: String,
@@ -22,10 +25,25 @@ const userScheme = new mongoose.Schema({
       message: "Invalid email address",
     },
   },
-  isAdmin: {
-    type: Boolean,
-    required: true,
+  authLevel: {
+    type: Number,
+    default: 1,
   },
+  avatar: {
+    type: String,
+    required: true,
+    default:
+      "https://icons.veryicon.com/png/o/miscellaneous/standard/avatar-15.png",
+    validate: {
+      validator: function (v) {
+        return /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g.test(
+          v
+        );
+      },
+      message: "Invalid image address",
+    },
+  },
+  projects: [{ type: mongoose.Schema.Types.ObjectId, ref: "Project" }],
 });
 
 const User = mongoose.model("User", userScheme);

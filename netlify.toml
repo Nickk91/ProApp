@@ -1,0 +1,10 @@
+[[redirects]]
+  force = true
+  from = "/api/*"
+  to = "${BACKEND_URL}/:splat"
+  status = 200
+
+  [[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

@@ -2,35 +2,61 @@ import express from "express";
 import mongoose from "mongoose";
 import { errorHandler } from "./middleware/errorMiddleware.js";
 import usersRoutes from "./routes/usersRoutes.js";
+import projectsRoutes from "./routes/projectsRoutes.js";
 import cors from "cors";
 import dotenv from "dotenv";
+import mongoSanitize from "express-mongo-sanitize";
+import { sanitizeInput } from "./middleware/sanitizeHtmlMiddleware.js";
+import STATUS_CODE from "./constants/statusCodes.js";
+
 dotenv.config();
 
 const app = express();
 
-//cors middleware
-app.use(cors());
+// Middleware
+app.use(mongoSanitize());
+app.use(express.json()); // Ensure JSON body parsing is done before sanitization
+app.use(sanitizeInput); // Ensure this is applied before your routes
 
-//middleware for JSON parsing
+const mongoUri =
+  process.env.ENV === "production"
+    ? process.env.MONGO_URI_PROD
+    : process.env.MONGO_URI;
+const frontendUrl =
+  process.env.ENV === "production"
+    ? process.env.PRODUCTION_FRONT_URL
+    : `${process.env.BASE_SERVER_URL}:${process.env.CLIENT_PORT}`;
 
-app.use(express.json());
+// CORS configuration
+const corsOptions = {
+  origin: frontendUrl,
+  optionsSuccessStatus: STATUS_CODE.OK,
+};
+app.use(cors(corsOptions));
 
-//users routes
+// Projects routes
+app.use("/api/pro-app/projects", projectsRoutes);
 
-app.use("/api/pro-app", usersRoutes);
+// Users routes
+app.use("/api/pro-app/users", usersRoutes);
 
-//Error handling Middleware
+app.use("/authGood", (req, res, next) => {
+  res.send({ userLevel: 1 });
+});
 
+// Error handling middleware
 app.use(errorHandler);
 
-mongoose.connect(process.env.MONGO_URI).then(() => {
-  app.listen(process.env.PORT, () => {
-    if (process.env.ENV === "development") {
-      console.log(`LISTENING ON PORT ${process.env.PORT} in development`);
-    } else if (process.env.ENV === "production") {
-      console.log(`LISTENING ON PORT ${process.env.PORT} in production`);
-    } else {
-      console.log("Server is running on unknown environment");
-    }
+// MongoDB connection and server start
+mongoose
+  .connect(mongoUri)
+  .then(() => {
+    console.log("MongoDB connected successfully");
+    app.listen(process.env.PORT, () => {
+      console.log(`Server is running on PORT ${process.env.PORT}`);
+    });
+  })
+  .catch((err) => {
+    console.error("MongoDB connection failed:", err.message);
+    process.exit(1); // Exit with failure
   });
-});
