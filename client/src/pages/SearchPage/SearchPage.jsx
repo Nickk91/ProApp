@@ -33,7 +33,6 @@ const SearchPage = () => {
 
   const adminSearchByProjectName = async (searchItem, token) => {
     try {
-      console.log("CLACKK");
       setIsLoading(true);
       const response = await fetch(
         `${
@@ -65,7 +64,6 @@ const SearchPage = () => {
 
   const searchByProjectName = async (searchItem, userId, token) => {
     try {
-      console.log("CLICKK");
       setIsLoading(true);
 
       const response = await fetch(
