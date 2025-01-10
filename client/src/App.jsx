@@ -23,6 +23,7 @@ import ProtectedRoute from "./components/Auth/ProtectedRoute.jsx";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { initializeAuth, setLoading } from "./slices/authSlice.js";
+import NotFoundPage from "./pages/NotFoundPage/NotFoundPage.jsx";
 function App() {
   const dispatch = useDispatch();
 
@@ -148,6 +149,7 @@ function App() {
           element={<EditTaskPage />}
         />
         <Route path="/projects/search" element={<SearchPage />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </>
   );
