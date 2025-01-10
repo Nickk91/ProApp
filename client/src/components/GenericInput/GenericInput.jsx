@@ -9,7 +9,7 @@ const GenericInput = ({
   error,
   displayError,
   formError,
-  displayFormError,
+  // displayFormError,
   serverError,
   attributes = {},
   value,
