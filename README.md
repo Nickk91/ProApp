@@ -424,7 +424,6 @@ At the bottom of the page are **Pagination Buttons**, which let you navigate thr
 
 ![Pagination Buttons](screenshots/pagination_buttons.png)
 
-
 ---
 
 ## **API Routes**

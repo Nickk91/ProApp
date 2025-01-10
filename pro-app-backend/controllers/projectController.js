@@ -16,7 +16,6 @@ export const getProjectsByUserId = async (req, res) => {
   try {
     const { userId } = req.query;
 
-    console.log("userIdsArray:", userId);
     if (userId) {
       req.user._id = userId;
     }
@@ -33,8 +32,6 @@ export const getProjectByUserIds = async (req, res) => {
   //This controller is used to be able to search a project by its user id
   try {
     const userIdsArray = req.userIdsArray;
-
-    console.log("userIdsArray:", userIdsArray);
 
     const projects = await Project.find({
       user: { $in: userIdsArray },
@@ -103,7 +100,6 @@ export const getProjectsByProjectName = async (req, res) => {
 
 export const getUserProjectsByProjectNameByUserId = async (req, res) => {
   try {
-    console.log("BOOM CHAKA LAKA");
     const { searchItem, userId } = req.params;
 
     const projects = await Project.find({
