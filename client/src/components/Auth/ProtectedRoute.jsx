@@ -3,14 +3,30 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Spinner from "../Spinner/Spinner";
 import "../../pages/style/pagestyle.css";
+import { useDispatch } from "react-redux";
+import { jwtDecode } from "jwt-decode";
+import { handleLogout } from "../../utils/functions";
 
 const ProtectedRoute = ({ Page, typeOfUser }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [authLevel, setAuthLevel] = useState(null); // Null to represent loading state
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
+
+    try {
+      const decodedToken = jwtDecode(token);
+      const currentTime = Date.now() / 1000;
+
+      if (decodedToken.exp < currentTime) {
+        handleLogout(navigate, dispatch);
+      }
+    } catch (error) {
+      console.error("Invalid token:", error);
+      handleLogout(navigate, dispatch);
+    }
 
     const getUserAuth = async () => {
       try {

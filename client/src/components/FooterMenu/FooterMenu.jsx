@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../slices/authSlice.js";
 import { userAuthLevels } from "../../constants/userAuthLevels.js";
+import { handleLogout } from "../../utils/functions.js";
 
 const FooterMenu = () => {
   const navigate = useNavigate();
@@ -13,11 +14,7 @@ const FooterMenu = () => {
   const user = useSelector((state) => state.auth.user);
   const authLevel = user?.authLevel;
   const handleLogout = () => {
-    dispatch(logout());
-    localStorage.removeItem("user");
-    localStorage.removeItem("token");
-    localStorage.removeItem("TaskStatus");
-    navigate("/loggedout");
+    handleLogout(navigate, dispatch);
   };
 
   const handleAddProject = () => {
