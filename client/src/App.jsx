@@ -60,6 +60,16 @@ function App() {
         <Route
           element={<PrivateRoutes authLevel={userAuthLevels.regularUser} />}
         >
+          <Route
+            path="/noprojects"
+            element={
+              <>
+                <HomePage />
+                <FooterMenu />
+              </>
+            }
+          />
+          <Route path="/projects/search" element={<SearchPage />} />
           {/* FooterMenu rendered here for logged-in users */}
           <Route
             path="/"
@@ -70,6 +80,12 @@ function App() {
               </>
             }
           />
+
+          <Route
+            path="/projects/:projectId/edit-task/:taskId"
+            element={<EditTaskPage />}
+          />
+          <Route path="/projects/:projectId" element={<ProjectPage />} />
           <Route
             path="/addproject"
             element={
@@ -98,15 +114,7 @@ function App() {
             }
           />
         </Route>
-        <Route
-          path="/noprojects"
-          element={
-            <>
-              <HomePage />
-              <FooterMenu />
-            </>
-          }
-        />
+
         <Route
           path="/unauthorized"
           element={
@@ -142,13 +150,9 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/signup" element={<SignupPage />} />
-        <Route path="/projects/:projectId" element={<ProjectPage />} />
+
         <Route path="/registerSuccess" element={<RegisteredSuccessPage />} />
-        <Route
-          path="/projects/:projectId/edit-task/:taskId"
-          element={<EditTaskPage />}
-        />
-        <Route path="/projects/search" element={<SearchPage />} />
+
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </>
