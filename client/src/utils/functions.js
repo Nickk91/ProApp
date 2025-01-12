@@ -1,3 +1,5 @@
+import { logout } from "../slices/authSlice";
+
 export const countProjectByStatus = (projects, status) => {
   return projects.filter((project) => project.projectStatus === status).length;
 };
@@ -95,4 +97,12 @@ export const handleSortByProjectTodosQuantity = (
     (a, b) => b.todoProjects.length - a.todoProjects.length
   );
   return sortedUsers;
+};
+
+export const handleLogout = (navigate, dispatch) => {
+  if (dispatch) dispatch(logout());
+  localStorage.removeItem("user");
+  localStorage.removeItem("token");
+  localStorage.removeItem("TaskStatus");
+  navigate("/loggedout");
 };
