@@ -88,7 +88,8 @@ export const list = styled.ul`
   margin-top: 5px;
 `;
 export const h3 = styled.h3`
-  margin-top: 10px;
+  margin-top: 15px;
+  padding-top: 5px;
   margin-bottom: 25px;
   @media screen and (min-width: 620px) {
     margin-top: -3px;
@@ -116,6 +117,7 @@ export const miniWrap = styled.div`
 
 export const listItem = styled.li`
   margin-top: 5px;
+  padding-right: 10px;
 `;
 
 export const container = styled.div`
@@ -163,14 +165,17 @@ export const chartsContainer = styled.div`
 
 export const userDetailsContainer = styled.div`
   max-width: 794px;
+  display: flex;
+  padding-left: 15px;
+  flex-direction: column;
+
   @media screen and (min-width: 620px) {
-    display: flex;
+    flex-direction: row;
     margin-top: 20px;
   }
 `;
 
 export const space = styled.div`
-  /* height: 320px; */
   height: 50px;
   width: 200px;
 `;
@@ -230,7 +235,7 @@ export const userPorjectsBtn = styled.button`
   border: 3px solid black;
   z-index: 300;
   height: 50px;
-  width: 150px;
+  width: 170px;
   color: black;
   background-color: white;
   border-radius: 9px;

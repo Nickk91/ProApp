@@ -3,7 +3,6 @@ import { FiPlus } from "react-icons/fi";
 import * as S from "./Styled.js";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { logout } from "../../slices/authSlice.js";
 import { userAuthLevels } from "../../constants/userAuthLevels.js";
 import { handleLogout } from "../../utils/functions.js";
 
@@ -13,13 +12,6 @@ const FooterMenu = () => {
 
   const user = useSelector((state) => state.auth.user);
   const authLevel = user?.authLevel;
-  const handleLogout = () => {
-    handleLogout(navigate, dispatch);
-  };
-
-  const handleAddProject = () => {
-    navigate("/addproject");
-  };
 
   if (!user) {
     return null;
@@ -34,7 +26,7 @@ const FooterMenu = () => {
         <S.li>
           <S.SearchIcon onClick={() => navigate("/projects/search")} />
         </S.li>
-        <S.li onClick={handleAddProject}>
+        <S.li onClick={() => navigate("/addproject")}>
           <S.plus>
             <FiPlus />
           </S.plus>
@@ -48,7 +40,7 @@ const FooterMenu = () => {
           </S.li>
         )}
         <S.li>
-          <S.logoutIcon onClick={handleLogout} />
+          <S.logoutIcon onClick={() => handleLogout(navigate, dispatch)} />
         </S.li>
       </S.ul>
     </S.menu>

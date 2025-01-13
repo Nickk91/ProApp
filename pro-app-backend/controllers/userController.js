@@ -26,7 +26,7 @@ export const loginUser = async (req, res) => {
           },
         },
         process.env.ACCESS_TOKEN_SECRET,
-        { expiresIn: "1m" }
+        { expiresIn: "35m" }
       );
 
       return res.status(STATUS_CODE.OK).json({
