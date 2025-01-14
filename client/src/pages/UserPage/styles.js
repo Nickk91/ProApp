@@ -21,13 +21,11 @@ export const username = styled.div`
 
 export const UserImgWrapper = styled.div`
   position: relative;
-  display: inline-block; /* Ensure the tooltip is positioned relative to the image */
+  display: inline-block;
 
   /* Tooltip styles */
   &::after {
-    content: attr(
-      data-tooltip
-    ); /* Use the custom attribute for the tooltip text */
+    content: attr(data-tooltip);
     visibility: hidden;
     opacity: 0;
     background-color: gray;
@@ -36,10 +34,10 @@ export const UserImgWrapper = styled.div`
     padding: 5px;
     border-radius: 4px;
     position: absolute;
-    bottom: 120%; /* Position above the image */
+    bottom: 120%;
     left: 50%;
     transform: translateX(-50%);
-    white-space: nowrap; /* Prevents text wrapping */
+    white-space: nowrap;
     transition: opacity 0.3s ease-in-out;
     z-index: 10;
   }
@@ -101,6 +99,7 @@ export const h32 = styled.h3`
   margin-top: 10px;
   margin-bottom: 25px;
   margin-left: 40px;
+  padding-bottom: 15px;
   @media screen and (min-width: 620px) {
     margin-top: -3px;
     margin-bottom: 20px;
@@ -218,7 +217,7 @@ export const addProjectContainer = styled.div`
   justify-content: justify-content;
   max-width: 200px;
   gap: 10px;
-  margin-top: 4px;
+  padding-top: 5px;
   margin: 0 auto;
   transition: transform 0.2s;
 `;
