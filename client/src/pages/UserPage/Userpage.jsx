@@ -29,6 +29,9 @@ const Userpage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const ownershipExpression =
+    currentUserId === userId ? "My " : `${userData?.username}'s `;
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -157,7 +160,8 @@ const Userpage = () => {
                       <S.userPorjectsBtn
                         onClick={() => navigate(`/projects-of-user/${userId}`)}
                       >
-                        User's Projects
+                        {ownershipExpression.toUpperCase()}
+                        PROJECTS
                       </S.userPorjectsBtn>
                     )}
                   </S.actionsContainer>
@@ -166,7 +170,7 @@ const Userpage = () => {
                     {projects.length > 0 ? (
                       <>
                         <S.miniWrap>
-                          <S.h32>User Projects:</S.h32>
+                          <S.h32> Projects:</S.h32>
                           <PieChartComp
                             data={projectsCounts}
                             fill="#8884d8"
@@ -176,7 +180,7 @@ const Userpage = () => {
 
                         {taskCounts.some((obj) => obj.value > 0) && (
                           <S.miniWrap>
-                            <S.h32>User Tasks:</S.h32>
+                            <S.h32>Tasks:</S.h32>
                             <PieChartComp
                               data={taskCounts}
                               fill="#2bc5da"

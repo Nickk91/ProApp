@@ -13,7 +13,7 @@ const PieChartComp = ({ data, fill }) => {
             data={data}
             cx={200}
             cy={200}
-            outerRadius={80}
+            outerRadius={40}
             fill={fill}
             label={(entry) => (entry.value ? entry.label : "")}
             animation={true}

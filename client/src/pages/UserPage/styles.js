@@ -21,13 +21,11 @@ export const username = styled.div`
 
 export const UserImgWrapper = styled.div`
   position: relative;
-  display: inline-block; /* Ensure the tooltip is positioned relative to the image */
+  display: inline-block;
 
   /* Tooltip styles */
   &::after {
-    content: attr(
-      data-tooltip
-    ); /* Use the custom attribute for the tooltip text */
+    content: attr(data-tooltip);
     visibility: hidden;
     opacity: 0;
     background-color: gray;
@@ -36,10 +34,10 @@ export const UserImgWrapper = styled.div`
     padding: 5px;
     border-radius: 4px;
     position: absolute;
-    bottom: 120%; /* Position above the image */
+    bottom: 120%;
     left: 50%;
     transform: translateX(-50%);
-    white-space: nowrap; /* Prevents text wrapping */
+    white-space: nowrap;
     transition: opacity 0.3s ease-in-out;
     z-index: 10;
   }
@@ -88,7 +86,8 @@ export const list = styled.ul`
   margin-top: 5px;
 `;
 export const h3 = styled.h3`
-  margin-top: 10px;
+  margin-top: 15px;
+  padding-top: 5px;
   margin-bottom: 25px;
   @media screen and (min-width: 620px) {
     margin-top: -3px;
@@ -100,6 +99,7 @@ export const h32 = styled.h3`
   margin-top: 10px;
   margin-bottom: 25px;
   margin-left: 40px;
+  padding-bottom: 15px;
   @media screen and (min-width: 620px) {
     margin-top: -3px;
     margin-bottom: 20px;
@@ -116,6 +116,7 @@ export const miniWrap = styled.div`
 
 export const listItem = styled.li`
   margin-top: 5px;
+  padding-right: 10px;
 `;
 
 export const container = styled.div`
@@ -163,14 +164,17 @@ export const chartsContainer = styled.div`
 
 export const userDetailsContainer = styled.div`
   max-width: 794px;
+  display: flex;
+  padding-left: 15px;
+  flex-direction: column;
+
   @media screen and (min-width: 620px) {
-    display: flex;
+    flex-direction: row;
     margin-top: 20px;
   }
 `;
 
 export const space = styled.div`
-  /* height: 320px; */
   height: 50px;
   width: 200px;
 `;
@@ -213,7 +217,7 @@ export const addProjectContainer = styled.div`
   justify-content: justify-content;
   max-width: 200px;
   gap: 10px;
-  margin-top: 4px;
+  padding-top: 5px;
   margin: 0 auto;
   transition: transform 0.2s;
 `;
@@ -230,7 +234,7 @@ export const userPorjectsBtn = styled.button`
   border: 3px solid black;
   z-index: 300;
   height: 50px;
-  width: 150px;
+  width: 170px;
   color: black;
   background-color: white;
   border-radius: 9px;
