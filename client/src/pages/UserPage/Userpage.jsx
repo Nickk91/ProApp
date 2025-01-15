@@ -158,7 +158,13 @@ const Userpage = () => {
                     </S.addProjectContainer>
                     {projects.length > 0 && (
                       <S.userPorjectsBtn
-                        onClick={() => navigate(`/projects-of-user/${userId}`)}
+                        onClick={() =>
+                          navigate(
+                            currentUserId === userId
+                              ? "/"
+                              : `/projects-of-user/${userId}`
+                          )
+                        }
                       >
                         {ownershipExpression.toUpperCase()}
                         PROJECTS
